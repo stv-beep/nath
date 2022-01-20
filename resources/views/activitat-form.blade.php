@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=" str_replace('_', '-', app()->getLocale()) ">
+<!--html lang=" str_replace('_', '-', app()->getLocale()) "-->
 
 <head>
     <meta charset="utf-8">
@@ -22,11 +22,16 @@
         </div>
         @endif
 
-        <form action="" method="post" action=" action('FormValidtionController@createUserForm') ">
+        <form action="/guardar" method="POST">
 
             @csrf
 
             <div class="form-group">
+                <label>Treballador</label>
+                <input type="text" class="form-control" name="name" id="name">
+            </div>
+
+            <!--div class="form-group">
                 <label>Inici Jornada</label>
                 <input type="text" class="form-control" name="name" id="name">
             </div>
@@ -34,12 +39,7 @@
             <div class="form-group">
                 <label>Fi jornada</label>
                 <input type="email" class="form-control" name="email" id="email">
-            </div>
-
-            <div class="form-group">
-                <label>test</label>
-                <input type="test" class="form-control" name="test" id="test">
-            </div>
+            </div-->
 
             <input type="submit" name="send" value="Enviar" class="btn btn-dark btn-block">
         </form>

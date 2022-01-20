@@ -18,4 +18,5 @@ Route::get('/', function () {
 });
 
 Route::view("/inici-form","inici-form");
-Route::view("/inici-form/activitat-form","activitat-form");
+Route::view("/activitat-form","activitat-form");
+Route::post("/guardar","ProvaController@guardar");
