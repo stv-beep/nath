@@ -20,3 +20,6 @@ Route::get('/', function () {
 Route::view("/inici-form","inici-form");
 Route::view("/activitat-form","activitat-form");
 Route::post("/guardar","ProvaController@guardar");
+
+//https://blastcoding.com/creando-un-formulario-en-laravel/
+//https://www.zentica-global.com/es/zentica-blog/ver/como-crear-y-validar-un-formulario-en-laravel-8-6073a87660073
