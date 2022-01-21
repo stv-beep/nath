@@ -14,13 +14,13 @@
     <h2>Activitat del treballador</h2>
     <div class="container mt-5">
 
-        <form action="/create" method="get">
+        <form action="{{route('activitat-form.store')}}" method="post">
 
             @csrf
 
             <div class="form-group">
-                <label>Treballador</label>
-                <input type="text" class="form-control" name="name" id="name">
+                <label>Activitat</label>
+                <input type="text" class="form-control" name="input-treballador" id="input-treballador">
             </div>
 
             <!--div class="form-group">
@@ -33,8 +33,7 @@
                 <label>Fi jornada</label>
                 <input type="email" class="form-control" name="email" id="email">
             </div-->
-            <!--input type="" name="send" value="Inici Jornada" class="btn btn-dark btn-block"-->
-
+            <button class="btn btn-light btn-block">Inici Jornada</button>
             <input type="submit" name="send" value="Enviar" class="btn btn-dark btn-block">
         </form>
     </div>

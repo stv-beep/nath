@@ -24,8 +24,9 @@ Route::view("activitat-form","activitat-form");
 
 /*PROVES*/
 
-
 Route::get('activitat-form',[ActivitatController::class,'create']);
-//Route::get('activitat-form', 'ActivitatController@create');
+Route::post('activitat-form/store',[ActivitatController::class,'store'])->name('activitat-form.store');
+
+//Route::get('activitat-form', 'ActivitatController@store');
 //https://blastcoding.com/creando-un-formulario-en-laravel/
 //https://www.zentica-global.com/es/zentica-blog/ver/como-crear-y-validar-un-formulario-en-laravel-8-6073a87660073
