@@ -9,7 +9,7 @@ class ProvaController extends Controller
     function guardar(Request $request){
 
         $prova = new Prova;
-        $prova->vehiculo = $request->input("camp");
+        $prova->camp = $request->input("camp");
         $prova->save();
         $prova = Prova::all();
         return view("activitat-form");

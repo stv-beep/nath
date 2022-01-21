@@ -22,7 +22,7 @@
         </div>
         @endif
 
-        <form action="/guardar" method="POST">
+        <form action="/guardar" method="post">
 
             @csrf
 
