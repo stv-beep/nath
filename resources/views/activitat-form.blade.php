@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--html lang=" str_replace('_', '-', app()->getLocale()) "-->
 
 <head>
     <meta charset="utf-8">
@@ -15,14 +14,7 @@
     <h2>Activitat del treballador</h2>
     <div class="container mt-5">
 
-        <!-- Success message -->
-        @if(Session::has('success'))
-        <div class="alert alert-success">
-            Session::get('success')
-        </div>
-        @endif
-
-        <form action="/guardar" method="post">
+        <form action="/create" method="get">
 
             @csrf
 
@@ -35,11 +27,13 @@
                 <label>Inici Jornada</label>
                 <input type="text" class="form-control" name="name" id="name">
             </div>
+            
 
             <div class="form-group">
                 <label>Fi jornada</label>
                 <input type="email" class="form-control" name="email" id="email">
             </div-->
+            <!--input type="" name="send" value="Inici Jornada" class="btn btn-dark btn-block"-->
 
             <input type="submit" name="send" value="Enviar" class="btn btn-dark btn-block">
         </form>

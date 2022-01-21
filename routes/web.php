@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ActivitatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view("/inici-form","inici-form");
-Route::view("/activitat-form","activitat-form");
+Route::view("inici-form","inici-form");
+Route::view("activitat-form","activitat-form");
 
-Route::post('/guardar',[ProvaController::class, 'guardar']);
 
+/*PROVES*/
+
+
+Route::get('activitat-form',[ActivitatController::class,'create']);
+//Route::get('activitat-form', 'ActivitatController@create');
 //https://blastcoding.com/creando-un-formulario-en-laravel/
 //https://www.zentica-global.com/es/zentica-blog/ver/como-crear-y-validar-un-formulario-en-laravel-8-6073a87660073
