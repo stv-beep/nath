@@ -34,6 +34,7 @@
                 <input type="email" class="form-control" name="email" id="email">
             </div-->
             <button class="btn btn-light btn-block">Inici Jornada</button>
+            <button class="btn btn-light btn-block">Fi Jornada</button>
             <input type="submit" name="send" value="Enviar" class="btn btn-dark btn-block">
         </form>
     </div>
