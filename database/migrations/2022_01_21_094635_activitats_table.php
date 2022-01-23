@@ -16,25 +16,28 @@ class ActivitatsTable extends Migration
         /*ACTIVITATS es una prova*/
         Schema::create('activitats', function (Blueprint $table) {
             $table->id();
-            $table->string('camp');
+            $table->string('treballador');
+            $table->datetime('inici_jornada')->nullable();
+            $table->datetime('fi_jornada')->nullable();
+            $table->float('total')->nullable();
             $table->timestamps();
         });
 
 
-        Schema::create('treballador', function (Blueprint $table) {
+        /*Schema::create('treballador', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nom');
             $table->string('cognom');
-            $table->string('identificador');
+            $table->string('identificador')->unique();
         });
 
         Schema::create('activitat', function (Blueprint $table) {
             $table->integer('id_treballador')->unsigned();
-            $table->datetime('inici_jornada');
-            $table->datetime('fi_jornada');
-            $table->float('total');
+            $table->datetime('inici_jornada')->nullable();
+            $table->datetime('fi_jornada')->nullable();
+            $table->float('total')->nullable();
             $table->foreign('id_treballador')->references('id')->on('treballador');
-        });
+        });*/
     }
 
     /**
