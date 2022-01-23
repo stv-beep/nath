@@ -19,9 +19,17 @@ class ActivitatController extends Controller
         //$activitat->camp = $request->camp;
         /* $activitat-> inici_jornada = now();
         $activitat-> fi_jornada = now(); */
-       // $activitat-> total
+
         $activitat-> inici_jornada = $request->input("inici-jornada");
         $activitat-> fi_jornada = $request->input("final-jornada");
+
+        /*diferencia de hores*/
+        $carbon1 = new \Carbon\Carbon($request->input("inici-jornada"));
+        $carbon2 = new \Carbon\Carbon($request->input("final-jornada"));
+
+        $resta=$carbon1->diffInHours($carbon2);
+
+        $activitat->total = $resta;
         $activitat->save();
         $activitat = Activitat::all();
         return view("activitat-form");
