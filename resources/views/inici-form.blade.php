@@ -11,9 +11,9 @@
 </head>
 
 <body>
-    <h2>Inici de sessió</h2>
+    
     <div class="container mt-5">
-
+        <h2>Inici de sessió</h2>
         <form action="" method="post">
 
             @csrf
