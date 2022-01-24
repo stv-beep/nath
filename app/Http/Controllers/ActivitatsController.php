@@ -17,9 +17,10 @@ class ActivitatsController extends Controller
         $activitat = new Activitats();
         $activitat-> treballador = $request->input("input-treballador");
         //$activitat->camp = $request->camp;
-       
-        /* $activitat-> inici_jornada = now();
-        $activitat-> fi_jornada = now(); */
+       /*
+        $activitat-> inici_jornada = now();
+        $activitat-> fi_jornada = now();
+        */
         $activitat-> inici_jornada = $request->input("inici-jornada");
         $activitat-> fi_jornada = $request->input("final-jornada");
 

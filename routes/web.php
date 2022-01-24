@@ -28,6 +28,9 @@ Route::get('activitat-form',[ActivitatsController::class,'create']);
 Route::post('activitat-form/store',[ActivitatsController::class,'store'])->name('activitat-form.store');
 
 
+Route::view("activitats","activitats");
+
+
 //view inici sessio
 //post inici sessio
 //get crear activitat
