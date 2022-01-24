@@ -33,7 +33,12 @@ Route::post('activitat-form/store',[ActivitatsController::class,'store'])->name(
 //get crear activitat
 //post store activitat
 
+/**enllaços */
+/*
+https://www.oulub.com/es-ES/Laravel/authentication
+https://codea.app/cursos/laravel-pagina-web-administrable/login-laravel-100
+*/
 
-//Route::get('activitat-form', 'ActivitatController@store');
+
 //https://blastcoding.com/creando-un-formulario-en-laravel/
 //https://www.zentica-global.com/es/zentica-blog/ver/como-crear-y-validar-un-formulario-en-laravel-8-6073a87660073
