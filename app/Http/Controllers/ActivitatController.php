@@ -17,19 +17,20 @@ class ActivitatController extends Controller
         $activitat = new Activitat();
         $activitat-> treballador = $request->input("input-treballador");
         //$activitat->camp = $request->camp;
+       
         /* $activitat-> inici_jornada = now();
         $activitat-> fi_jornada = now(); */
-
         $activitat-> inici_jornada = $request->input("inici-jornada");
         $activitat-> fi_jornada = $request->input("final-jornada");
 
         /*diferencia de hores*/
-        $carbon1 = new \Carbon\Carbon($request->input("inici-jornada"));
-        $carbon2 = new \Carbon\Carbon($request->input("final-jornada"));
+        $inici = new \Carbon\Carbon($request->input("inici-jornada"));
+        $final = new \Carbon\Carbon($request->input("final-jornada"));
 
-        $resta=$carbon1->diffInHours($carbon2);
+        /*resto inici jornada i final en minuts*/
+        $resta=$inici->diffInMinutes($final);
 
-        $activitat->total = $resta;
+        $activitat->total = $resta/60;//convertixo a hores
         $activitat->save();
         $activitat = Activitat::all();
         return view("activitat-form");
