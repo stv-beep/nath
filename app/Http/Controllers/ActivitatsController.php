@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Activitat;
+use App\Models\Activitats;
 
-class ActivitatController extends Controller
+class ActivitatsController extends Controller
 {
 
     public function create(){
@@ -14,7 +14,7 @@ class ActivitatController extends Controller
 
 
     public function store(Request $request){
-        $activitat = new Activitat();
+        $activitat = new Activitats();
         $activitat-> treballador = $request->input("input-treballador");
         //$activitat->camp = $request->camp;
        
@@ -32,7 +32,7 @@ class ActivitatController extends Controller
 
         $activitat->total = $resta/60;//convertixo a hores
         $activitat->save();
-        $activitat = Activitat::all();
+        $activitat = Activitats::all();
         return view("activitat-form");
         //return $request->all();
     }

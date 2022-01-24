@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ActivitatController;
+use App\Http\Controllers\ActivitatsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +24,8 @@ Route::view("activitat-form","activitat-form");
 
 /*PROVES*/
 
-Route::get('activitat-form',[ActivitatController::class,'create']);
-Route::post('activitat-form/store',[ActivitatController::class,'store'])->name('activitat-form.store');
+Route::get('activitat-form',[ActivitatsController::class,'create']);
+Route::post('activitat-form/store',[ActivitatsController::class,'store'])->name('activitat-form.store');
 
 //Route::get('activitat-form', 'ActivitatController@store');
 //https://blastcoding.com/creando-un-formulario-en-laravel/
