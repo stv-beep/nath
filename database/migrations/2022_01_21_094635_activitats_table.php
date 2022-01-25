@@ -17,27 +17,14 @@ class ActivitatsTable extends Migration
         Schema::create('activitats', function (Blueprint $table) {
             $table->id();
             $table->string('treballador');
-            $table->datetime('inici_jornada')->nullable();
-            $table->datetime('fi_jornada')->nullable();
+            $table->float('total_cron')->nullable();
+            $table->string('inici_jornada')->nullable();//inici de la jornada
+            //$table->datetime('fi_mig_jornada')->nullable();//final primera meitat de jornada partida
+            //$table->datetime('inici_mig_jornada')->nullable();//inici de la segona meitat
+            $table->string('fi_jornada')->nullable();//final de la jornada
             $table->float('total')->nullable();
             $table->timestamps();
         });
-
-
-        /*Schema::create('treballador', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nom');
-            $table->string('cognom');
-            $table->string('identificador')->unique();
-        });
-
-        Schema::create('activitat', function (Blueprint $table) {
-            $table->integer('id_treballador')->unsigned();
-            $table->datetime('inici_jornada')->nullable();
-            $table->datetime('fi_jornada')->nullable();
-            $table->float('total')->nullable();
-            $table->foreign('id_treballador')->references('id')->on('treballador');
-        });*/
     }
 
     /**
