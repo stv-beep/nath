@@ -64,8 +64,8 @@
                             console.log(data);
                             $("#input-treballador").val();
                             $("#total_cron").val(h);
-                            $("#inici-jornada").val(startTime);
-                            $("#final-jornada").val(endTime);
+                            /* $("#inici-jornada").val(startTime);
+                            $("#final-jornada").val(endTime); */
                             
                         }
                     }
