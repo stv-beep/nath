@@ -48,7 +48,3 @@ https://codea.app/cursos/laravel-pagina-web-administrable/login-laravel-100
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    Benvingut {{$user->name}}!
+                    <br>
+                    id: {{$user->id}}
                 </div>
             </div>
         </div>
