@@ -13,14 +13,16 @@ class CreateActivitatTable extends Migration
      */
     public function up()
     {
-        Schema::create('activitat', function (Blueprint $table) {
+        Schema::create('activitats', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_treballador')->unsigned();
+            $table->float('total_cron')->nullable();
             $table->datetime('inici_jornada')->nullable();
             $table->datetime('fi_jornada')->nullable();
             $table->float('total')->nullable();
             $table->timestamps();
-            $table->foreign('id_treballador')->references('id')->on('treballador');
+
+            $table->unsignedBigInteger('id_treballador');
+            $table->foreign('id_treballador')->references('id')->on('users');
         });
     }
 
@@ -31,6 +33,6 @@ class CreateActivitatTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activitat');
+        Schema::dropIfExists('activitats');
     }
 }

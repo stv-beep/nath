@@ -4,10 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Activitat del treballador</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
 
 
 <!--altres-->
@@ -18,9 +14,16 @@
 
     <!--SCRIPT ALEIX-->   
     <script>
-        //https://stackoverflow.com/questions/41632942/how-to-measure-time-elapsed-on-javascript
-        //https://stackoverflow.com/questions/1210701/compute-elapsed-time/1210726
-        //https://ralzohairi.medium.com/displaying-dynamic-elapsed-time-in-javascript-260fa0e95049
+        /*
+        
+        
+        https://stackoverflow.com/questions/41632942/how-to-measure-time-elapsed-on-javascript
+        https://stackoverflow.com/questions/1210701/compute-elapsed-time/1210726
+        https://ralzohairi.medium.com/displaying-dynamic-elapsed-time-in-javascript-260fa0e95049
+        https://es.stackoverflow.com/questions/30957/c%C3%B3mo-registrar-la-fecha-actual-del-sistema-en-laravel-5 
+        
+
+        */
         
         var startTime, endTime, h;
 
@@ -111,42 +114,42 @@
 
 
 
-<body>
-    
-    <div class="container mt-5">
-    <h2>Activitat</h2>
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Dashboard') }}</div>
 
-    
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-        <form id="form-temps" action="{{route('activitat-form.store')}}" method="post">
+                    Benvingut {{$user->name}}!
+                    <br>
+                    id: {{$user->id}}
+                </div>
+                <form id="form-temps" action="{{route('activitat-form.store')}}" method="post">
 
-            @csrf
+                    @csrf        
+                    
+                    <input type="text" name="treballador" id="treballador">
+        
+                    <button type="button" class="btn btn-dark btn-block" onclick="start()">Començar a comptar</button>
+        
+                    <button type="button" class="btn btn-light btn-block" onclick="end()">Parar de comptar</button>
+        
+                    <input type="hidden" id="total_cron">
+                    <input type="hidden" id="inici-jornada">
+                    <input type="hidden" id="final-jornada">
+                    <button type="submit" id="send" value="Enviar" class="btn btn-dark btn-block">Enviar</button>   
+                </form>
 
-            <div class="form-group">
-                <label>Treballador</label>
-                <input type="text" class="form-control" name="input-treballador" id="input-treballador">
             </div>
-
-
-            <button type="button" class="btn btn-dark btn-block" onclick="start()">Començar a comptar</button>
-
-            <button type="button" class="btn btn-light btn-block" onclick="end()">Parar de comptar</button>
-
-            <input type="hidden" id="total_cron">
-            <input type="hidden" id="inici-jornada">
-            <input type="hidden" id="final-jornada">
-
-            <!--label>Inici Jornada</label>
-				<input type="datetime-local" id="inici-jornada" name="inici-jornada" class="btn btn-light btn-block" value="<?php echo date('Y-m-d\TH:i', strtotime("+ 1 hour"));?>">
-
-			<label>Fi Jornada</label>
-				<input type="datetime-local" id="final-jornada" name="final-jornada" class="btn btn-light btn-block" value="<?php echo date('Y-m-d\TH:i', strtotime("+ 1 hour"));?>"-->
-
-            <!--input type="button" id="send" value="Enviar" class="btn btn-dark btn-block" onclick="enviant();"-->
-            
-        </form>
-        <button type="button" id="send" value="Enviar" class="btn btn-dark btn-block" onclick="enviant();">Enviar</button>
+        </div>
     </div>
-</body>
-
-</html>
+</div>
+@endsection

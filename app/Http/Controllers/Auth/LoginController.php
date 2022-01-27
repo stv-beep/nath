@@ -21,6 +21,10 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
+
+
+    https://codeanddeploy.com/blog/laravel/laravel-8-authentication-login-and-registration-with-username-or-email#2oRdAiokNGwApUyVlE6pj2HA6
+    https://www.itsolutionstuff.com/post/laravel-6-auth-login-with-username-or-email-tutorialexample.html
     */
 
     use AuthenticatesUsers;

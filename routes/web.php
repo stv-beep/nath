@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ActivitatsController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ActivitatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,18 +18,6 @@ use App\Http\Controllers\ActivitatsController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::view("inici-form","inici-form");
-Route::view("activitat-form","activitat-form");
-
-
-/*PROVES*/
-
-Route::get('activitat-form',[ActivitatsController::class,'create']);
-Route::post('activitat-form',[ActivitatsController::class,'store'])->name('activitat-form.store');
-
-
-Route::view("activitats","activitats");
 
 
 //view inici sessio
@@ -47,4 +36,15 @@ https://codea.app/cursos/laravel-pagina-web-administrable/login-laravel-100
 //https://www.zentica-global.com/es/zentica-blog/ver/como-crear-y-validar-un-formulario-en-laravel-8-6073a87660073
 Auth::routes();
 
+/*HOME*/
+Route::view('/home','inici');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/*FORMULARI*/
+Route::get('/home/activitat',[App\Http\Controllers\ActivitatController::class,'create'])->name('activitat-form.store');
+Route::post('/home/activitat',[App\Http\Controllers\ActivitatController::class,'store'])->name('home.store');
+
+/*create task form*/
+//Route::get('projecte/tasques/crear',[TaskController::class, 'create'])->name('task.create');
+
+/*save task*/
+//Route::post('projecte/tasques/crear',[TaskController::class,'store'])->name('tasks.store');//receives form info
