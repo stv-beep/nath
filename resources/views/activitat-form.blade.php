@@ -16,6 +16,7 @@
     function start() {
     startTime = new Date();
     console.log(startTime);
+    $("#inici-jornada").val(startTime);
     return startTime;
     };
 
@@ -47,7 +48,7 @@
             console.log("cronn = "+cron);
         }
 
-    $("#inici-jornada").val(startTime);
+    
     $("#final-jornada").val(endTime);
 
 
@@ -110,19 +111,18 @@
 
                         @csrf        
                         
-                        <input type="text" name="treballador" id="treballador" value="{{$user->id}}">
-                        <br>
+                        usuari<input type="text" name="treballador" id="treballador" value="{{$user->id}}">
                         <br>
                         <div id="test">
-                            <input type="text" id="total_cron" name="total_cron"><br>
+                        hores<input type="text" id="total_cron" name="total_cron"><br>
                             </div>
-                            <input type="text" id="inici-jornada" name="inici-jornada">
+                        inici<input type="text" id="inici-jornada" name="inici-jornada">
                             <br>
-                            <input type="text" id="final-jornada" name="final-jornada">
+                        final<input type="text" id="final-jornada" name="final-jornada">
                             <br><br>
                         <button type="button" class="btn btn-outline-success" onclick="start()">Començar a comptar</button>
                       
-                        <button type="button" class="btn btn-xs btn-outline-success center" onclick="end()">Parar de comptar</button>
+                        <button type="button" class="btn btn-xs btn-outline-danger center" onclick="end()">Parar de comptar</button>
                         <br><br>
                         
                         <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  
