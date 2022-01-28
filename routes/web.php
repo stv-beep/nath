@@ -39,12 +39,17 @@ Auth::routes();
 /*HOME*/
 Route::view('/home','inici');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 /*FORMULARI*/
-Route::get('/home/activitat',[App\Http\Controllers\ActivitatController::class,'create'])->name('activitat-form.store');
-Route::post('/home/activitat',[App\Http\Controllers\ActivitatController::class,'store'])->name('home.store');
+Route::get('/activitat',[ActivitatController::class,'create'])->name('jornada.form');
+Route::post('/home',[ActivitatController::class,'store'])->name('jornada.store');
 
-/*create task form*/
-//Route::get('projecte/tasques/crear',[TaskController::class, 'create'])->name('task.create');
 
-/*save task*/
-//Route::post('projecte/tasques/crear',[TaskController::class,'store'])->name('tasks.store');//receives form info
+
+/* Route::get('/home/activitat/create', function () {
+    return "create";
+});  */
+
+Route::get('/home/activitat/{variable}', function ($variable) {
+    return "provant";
+});
