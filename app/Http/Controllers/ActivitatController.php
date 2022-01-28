@@ -17,8 +17,8 @@ class ActivitatController extends Controller
         $activitat = new Activitat();
         $activitat-> id_treballador = $request->input("treballador");
 
-        //$activitat-> total_cron = $request->input("total_cron");
-        $activitat-> inici_jornada = $request->input("inici-jornada");
+        $activitat-> total_cron = $request->input("total_cron");
+        /* $activitat-> inici_jornada = $request->input("inici-jornada");
 
         $activitat-> fi_jornada = $request->input("final-jornada");
 
@@ -32,7 +32,7 @@ class ActivitatController extends Controller
         
         $resta=$inici->diffInMinutes($final);//resto inici jornada i final en minuts
 
-        $activitat->total = $resta/60;//convertixo a hores
+        $activitat->total = $resta/60;//convertixo a hores */
         $activitat->save();
         $activitat = Activitat::all();
         $user = Auth::user();

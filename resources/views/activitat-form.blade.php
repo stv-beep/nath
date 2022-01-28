@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <!--SCRIPT ALEIX-->   
 <script>
     //https://stackoverflow.com/questions/41632942/how-to-measure-time-elapsed-on-javascript
@@ -14,6 +15,7 @@
 
     function start() {
     startTime = new Date();
+    console.log(startTime);
     return startTime;
     };
 
@@ -36,10 +38,55 @@
     console.log(startTime);
     console.log(endTime);
 
+    /*guardo HORES al input*/
+    $("#total_cron").val(h);
+        let cron = document.getElementById("total_cron").value;
+        if (cron.length < 0){
+            console.log("cron = "+cron);
+        } else {
+            console.log("cronn = "+cron);
+        }
+
+    $("#inici-jornada").val(startTime);
+    $("#final-jornada").val(endTime);
+
+
     return endTime;
     }
 
-    
+/* 
+    $(document).ready(function(){
+	$("#total_cron").keyup(function(){
+		var cron = $(this).val();
+		$("#test").html(cron);
+	    })
+    });
+ */
+/* 
+    function enviant(){
+    $('#send').click( function() {
+        alert('funco send');
+        console.log('funco send');
+        $.ajax(
+                {
+                    type: "POST",
+                    url: "{{route('jornada.store')}}",
+                    data:$('#form-temps').serialize(),
+                    success: function( data ) {
+                        console.log(data);
+                        $("#input-treballador").val();
+                        $("#total_cron").val();
+                        $("#inici-jornada").val();
+                        $("#final-jornada").val();
+                        //$("#test").load(location.href + " #test");
+                        
+                    }
+                }
+            )
+        }
+        ); 
+    }
+    */
 
 </script>
 
@@ -50,7 +97,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Jornada') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -64,16 +111,23 @@
                         @csrf        
                         
                         <input type="text" name="treballador" id="treballador" value="{{$user->id}}">
-            
-                        <!--button type="button" class="btn btn-dark btn-block" onclick="start()">Començar a comptar</button>
-            
-                        <button type="button" class="btn btn-light btn-block" onclick="end()">Parar de comptar</button-->
-            
-                        <input type="hidden" id="total_cron" name="total_cron"><br>
-                        <input type="datetime-local" id="inici-jornada" name="inici-jornada"><br>
-                        <input type="datetime-local" id="final-jornada" name="final-jornada"><br>
-                        <button type="submit" id="send" value="Enviar" class="btn btn-dark btn-block">Enviar</button>   
+                        <br>
+                        <br>
+                        <div id="test">
+                            <input type="text" id="total_cron" name="total_cron"><br>
+                            </div>
+                            <input type="text" id="inici-jornada" name="inici-jornada">
+                            <br>
+                            <input type="text" id="final-jornada" name="final-jornada">
+                            <br><br>
+                        <button type="button" class="btn btn-outline-success" onclick="start()">Començar a comptar</button>
+                      
+                        <button type="button" class="btn btn-xs btn-outline-success center" onclick="end()">Parar de comptar</button>
+                        <br><br>
+                        
+                        <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  
                     </form>
+                     
                 </div>
 
             </div>

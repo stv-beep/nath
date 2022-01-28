@@ -5,7 +5,7 @@
         $.ajax(
                 {
                     type: "POST",
-                    url: "{{route('wawa')}}",
+                    url: "{{route('jornada.store')}}",
                     data:$('#form-temps').serialize(),
                     success: function( data ) {
                         console.log(data);
@@ -30,7 +30,7 @@
 
 
             $.ajax({
-                url: "{{route('activitat-form.store')}}",
+                url: "{{route('jornada.store')}}",
                 type: "POST",
                 data:{
                     inici: inici,

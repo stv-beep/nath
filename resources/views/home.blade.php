@@ -19,8 +19,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                        {{route('jornada.form')}}<br>
-                        {{route('jornada.store')}}<br>
                     Benvingut {{$user->name}}!
                     <br>
                     ID: {{$user->id}}
