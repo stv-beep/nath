@@ -65,13 +65,13 @@
                         
                         <input type="text" name="treballador" id="treballador" value="{{$user->id}}">
             
-                        <button type="button" class="btn btn-dark btn-block" onclick="start()">Començar a comptar</button>
+                        <!--button type="button" class="btn btn-dark btn-block" onclick="start()">Començar a comptar</button>
             
-                        <button type="button" class="btn btn-light btn-block" onclick="end()">Parar de comptar</button>
+                        <button type="button" class="btn btn-light btn-block" onclick="end()">Parar de comptar</button-->
             
-                        <input type="hidden" id="total_cron">
-                        <input type="hidden" id="inici-jornada">
-                        <input type="hidden" id="final-jornada">
+                        <input type="hidden" id="total_cron" name="total_cron"><br>
+                        <input type="datetime-local" id="inici-jornada" name="inici-jornada"><br>
+                        <input type="datetime-local" id="final-jornada" name="final-jornada"><br>
                         <button type="submit" id="send" value="Enviar" class="btn btn-dark btn-block">Enviar</button>   
                     </form>
                 </div>

@@ -19,10 +19,9 @@ class CreateActivitatTable extends Migration
             $table->datetime('inici_jornada')->nullable();
             $table->datetime('fi_jornada')->nullable();
             $table->float('total')->nullable();
-            $table->timestamps();
-
             $table->unsignedBigInteger('id_treballador');
             $table->foreign('id_treballador')->references('id')->on('users');
+            $table->timestamps(); 
         });
     }
 
