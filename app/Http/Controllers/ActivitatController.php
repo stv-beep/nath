@@ -55,7 +55,8 @@ class ActivitatController extends Controller
                 'fiJornada' => $request->input('final-Jornada'),
             ]);
  */
-        $activitat = Activitat::find(3);
+        //$activitat = Activitat::find(3);
+        $activitat = Activitat::where(['jornada' => '2022-01-31', 'treballador' => '1'])->first();
         $activitat-> fiJornada = $request->input("final-jornada");
         $activitat-> update();
             
