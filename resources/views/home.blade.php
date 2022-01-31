@@ -22,6 +22,8 @@
                     Benvingut {{$user->name}}!
                     <br>
                     ID: {{$user->id}}
+                    <br>
+                    Codi/nom d'usuari: {{$user->username}}
                 </div>
                 <a href="{{ route('jornada.form') }}" class="btn btn-xs btn-info pull-right">Jornada del dia 
                     <?php                  

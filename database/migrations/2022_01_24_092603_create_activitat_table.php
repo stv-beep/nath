@@ -15,12 +15,13 @@ class CreateActivitatTable extends Migration
     {
         Schema::create('activitats', function (Blueprint $table) {
             $table->id();
-            $table->float('total_cron')->nullable();
-            $table->datetime('inici_jornada')->nullable();
-            $table->datetime('fi_jornada')->nullable();
+            $table->date('jornada');
+            $table->unsignedBigInteger('treballador');
+            $table->foreign('treballador')->references('id')->on('users');
+            $table->float('totalCron')->nullable();
+            $table->datetime('iniciJornada')->nullable();
+            $table->datetime('fiJornada')->nullable();
             $table->float('total')->nullable();
-            $table->unsignedBigInteger('id_treballador');
-            $table->foreign('id_treballador')->references('id')->on('users');
             $table->timestamps(); 
         });
     }

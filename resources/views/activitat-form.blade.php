@@ -14,14 +14,20 @@
     var startTime, endTime, h;
 
     function start() {
-    startTime = new Date();
-    console.log(startTime);
+    //startTime = new Date();
+    
+    startTime = moment().format('YYYY-MM-DD[T]HH:mm:ss');
+    console.log(moment().format(startTime));
+    /* $("#inici-jornada").val(startTime);
+    return startTime; */
     $("#inici-jornada").val(startTime);
+    console.log(startTime);
     return startTime;
     };
 
     function end() {
-    endTime = new Date();
+    //endTime = new Date();
+    endTime = moment().format('YYYY-MM-DD[T]HH:mm:ss');
     var timeDiff = endTime - startTime; //in ms
     // strip the ms
     timeDiff = timeDiff / 1000;
@@ -113,14 +119,26 @@
                         
                         usuari<input type="text" name="treballador" id="treballador" value="{{$user->id}}">
                         <br>
+                        inici<input type="text" id="inici-jornada" name="inici-jornada">
+                            <br><br>
+                        <button type="submit" class="btn btn-outline-success" onclick="start()">Començar a comptar</button>
+                      
+                        <br><br>
+                        
+                        <!--button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button-->  
+                    </form>
+
+                    <form id="form-final" action="{{route('jornada.update')}}" method="post">
+
+                        @csrf        
+                        @method('PATCH')                       
+                        usuari<input type="text" name="treballador" id="treballador" value="{{$user->id}}">
+                        <br>
                         <div id="test">
                         hores<input type="text" id="total_cron" name="total_cron"><br>
                             </div>
-                        inici<input type="text" id="inici-jornada" name="inici-jornada">
-                            <br>
                         final<input type="text" id="final-jornada" name="final-jornada">
                             <br><br>
-                        <button type="button" class="btn btn-outline-success" onclick="start()">Començar a comptar</button>
                       
                         <button type="button" class="btn btn-xs btn-outline-danger center" onclick="end()">Parar de comptar</button>
                         <br><br>

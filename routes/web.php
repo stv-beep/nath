@@ -44,6 +44,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/activitat',[ActivitatController::class,'create'])->name('jornada.form');
 Route::post('/home',[ActivitatController::class,'store'])->name('jornada.store');
 
+Route::patch('/home',[ActivitatController::class,'update'])->name('jornada.update');
 
 
 /* Route::get('/home/activitat/create', function () {
