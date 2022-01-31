@@ -58,6 +58,11 @@ class ActivitatController extends Controller
         //$activitat = Activitat::find(3);
         $activitat = Activitat::where(['jornada' => '2022-01-31', 'treballador' => '1'])->first();
         $activitat-> fiJornada = $request->input("final-jornada");
+        //$inici = new \Carbon\Carbon(iniciJornada);
+        $inici = new \Carbon\Carbon('2022-01-31 11:22:42');
+        $final = new \Carbon\Carbon($request->input("final-jornada"));
+        $resta=$inici->diffInMinutes($final);//resto inici jornada i final en minuts
+        $activitat->total = $resta/60;
         $activitat-> update();
             
         return view('home',compact('user'));
