@@ -22,8 +22,8 @@
     return startTime; */
     $("#inici-jornada").val(startTime);
     console.log(startTime);
-    
-        alert('funco send');
+        
+        //alert('funco send');
         console.log('funco send');
         $.ajax(
                 {
@@ -31,11 +31,11 @@
                     url: "{{route('jornada.store')}}",
                     data:$('#form-inici').serialize(),
                     success: function( data ) {
-                        console.log(data);
+                        //console.log(data);
                         $("#input-treballador").val();
                         //$("#total_cron").val();
                         $("#inici-jornada").val();
-                        alert('enviat');
+                        //alert('enviat');
                         window.location = "{{route('home')}}";
                     }
                 }
@@ -74,7 +74,22 @@
 
     
     $("#final-jornada").val(endTime);
-
+    
+    //console.log('funco send');
+        /* $.ajax(
+                {
+                    type: "POST",
+                    url: "{{route('jornada.store')}}",
+                    data:$('#form-final').serialize(),
+                    success: function( data ) {
+                        //console.log(data);
+                        $("#input-treballador").val();
+                        //$("#total_cron").val();
+                        $("#final-jornada").val();
+                        window.location = "{{route('home')}}";
+                    }
+                }
+            ) */
 
     return endTime;
     }
@@ -87,31 +102,6 @@
 	    })
     });
  */
-/* 
-    function enviant(){
-    $('#send').click( function() {
-        alert('funco send');
-        console.log('funco send');
-        $.ajax(
-                {
-                    type: "POST",
-                    url: "{{route('jornada.store')}}",
-                    data:$('#form-temps').serialize(),
-                    success: function( data ) {
-                        console.log(data);
-                        $("#input-treballador").val();
-                        $("#total_cron").val();
-                        $("#inici-jornada").val();
-                        $("#final-jornada").val();
-                        //$("#test").load(location.href + " #test");
-                        
-                    }
-                }
-            )
-        }
-        ); 
-    }
-    */
 
 </script>
 
@@ -137,13 +127,13 @@
 
                         @csrf        
                         
-                        usuari<input type="text" name="treballador" id="treballador" value="{{$user->id}}">
-                        <br>
-                        inici<input type="text" id="inici-jornada" name="inici-jornada">
-                            <br><br>
-                        <button type="button" class="btn btn-outline-success" onclick="start()">Començar a comptar</button>
+                        <input type="hidden" name="treballador" id="treballador" value="{{$user->id}}">
+                        
+                        <input type="hidden" id="inici-jornada" name="inici-jornada">
+                            
+                        <button id="send1" type="button" class="btn btn-xs btn-outline-success center" onclick="start()">Començar a comptar</button>
                       
-                        <br><br>
+                        
                         
                         <!--button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button-->  
                     </form>
@@ -154,16 +144,16 @@
 
                         @csrf        
                         @method('PATCH')                       
-                        usuari<input type="text" name="treballador" id="treballador" value="{{$user->id}}">
-                        <br>
-                        <div id="test">
-                        hores<input type="text" id="total_cron" name="total_cron"><br>
-                            </div>
-                        final<input type="text" id="final-jornada" name="final-jornada">
-                            <br><br>
+                        <input type="hidden" name="treballador" id="treballador" value="{{$user->id}}">
+                        
+  
+                        <input type="hidden" id="total_cron" name="total_cron"> 
+                          
+                        <input type="hidden" id="final-jornada" name="final-jornada">
+                            
                       
-                        <button type="button" class="btn btn-xs btn-outline-danger center" onclick="end()">Parar de comptar</button>
-                        <br><br>
+                        <button id="send2" type="button" class="btn btn-xs btn-outline-danger center" onclick="end()">Parar de comptar</button>
+                        
                         
                         <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  
                     </form>

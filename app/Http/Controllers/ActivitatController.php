@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent;
 use Carbon\Carbon;
+use \DateTime;
 
 class ActivitatController extends Controller
 {
@@ -45,29 +46,52 @@ class ActivitatController extends Controller
 } 
 
     public function update(Request $request){
+        //https://www.ironwoods.es/blog/laravel/eloquent-consultas-frecuentes
         $user = Auth::user();
 
             /* $activitat->update([
                 'fiJornada' => $request->input('final-Jornada'),
             ]); */
         //$activitat = Activitat::find(3);
-        //$activitat = Activitat::where(['jornada' => '2022-01-31', 'treballador' => '1'])->first();
-        $jornada = now();
-        $activitat = Activitat::where(['treballador' => $user->id])->latest()->first();
-        $activitat-> fiJornada = $request->input("final-jornada");
-        //$inici = new Carbon('2022-01-31 11:22:42');
-        /* $sql = 'SELECT iniciJornada FROM activitats WHERE jornada = "2022-01-31"';
-        $act = DB::select($sql); */
-        //$act = DB::table('activitats')->get('iniciJornada');
-        //act = [{"iniciJornada":"2022-01-31 11:22:42"}] es un array
+        //$activitat = Activitat::where(['jornada' => '2022-01-31', 'treballador' => '1'])->latest()->first();
+        $jornada = now();//"2022-02-01T09:08:09.674363Z"
+        $jorn = Carbon::parse($jornada)->setTimezone('Europe/Madrid')->format('Y-m-d');//2022-02-01
+        $final = Carbon::parse($jornada)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');//"2022-02-01T10:22:13.000000Z"
+        $activitat = Activitat::where(['jornada' => $jorn, 'treballador' => $user->id])->latest()->first();
+
         //carbon = "2022-01-31T11:34:39.000000Z"
-        $inici = new Carbon('2022-01-31 11:22:42');
-        $final2 = $request->input("final-jornada");
-        $final = new Carbon($request->input("final-jornada"));
-        $resta=$inici->diffInMinutes($final);//resto inici jornada i final en minuts
-        $activitat->total = $resta/60;
+        $activitat-> fiJornada = $request->input("final-jornada");
+        $fijorn = new Carbon($request->input("final-jornada"));
+
+        $activitat-> update();
+        $inici = Activitat::where(['jornada' => $jorn, 'treballador' => $user->id])
+        ->get('iniciJornada')->last();//{"iniciJornada":"2022-02-01 10:24:10"}
+        $fi = Activitat::where(['jornada' => $jorn, 'treballador' => $user->id])
+        ->get('fiJornada')->last();//{"fiJornada":"2022-02-01 11:55:45"}
+
+
+
+        $ix = substr($inici,17,19);//2022-02-01 12:45:18
+        $ik = strtotime($ix);
+        $inici2 = date('Y-m-d H:i:s', $ik);//2022-02-01 12:45:18
+
+
+        $fx = substr($fi,17,19);//2022-02-01 12:45:18 TENEN QUE SER NUMEROS DIFERENTS QUE LA PARAULA ES MES CURTA
+        $fj = strtotime($fx);
+        $fi2 = date('Y-m-d H:i:s', $fj);//2022-02-01 12:45:18
+
+
+        $i = strtotime(substr($inici,17,19));#1643715918
+        $f = strtotime(substr($fi,17,19));#{"fiJornada":"2022-02-01 11:55:45"}
+        $f0 = strtotime(substr($final,0));#{"fiJornada":"2022-02-01 11:55:45"}
+        /* $inici2 = date('Y-m-d H:i:s', $i);
+        $fi2 = date('Y-m-d H:i:s', $f0); */
+       /*  $inicidata = new \DateTime($i);
+        $inicidata->format('Y-m-d H:i:s'); */
+        //$interval = $inici2->diffInMinutes($fi2);
+
         $activitat-> update();
         //return view('home',compact('user'));    
-        return $jornada;
+        return $fi;
     }
 }
