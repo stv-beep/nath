@@ -22,7 +22,25 @@
     return startTime; */
     $("#inici-jornada").val(startTime);
     console.log(startTime);
-    return startTime;
+    
+        alert('funco send');
+        console.log('funco send');
+        $.ajax(
+                {
+                    type: "POST",
+                    url: "{{route('jornada.store')}}",
+                    data:$('#form-inici').serialize(),
+                    success: function( data ) {
+                        console.log(data);
+                        $("#input-treballador").val();
+                        //$("#total_cron").val();
+                        $("#inici-jornada").val();
+                        alert('enviat');
+                        window.location = "{{route('home')}}";
+                    }
+                }
+            )
+        return startTime;
     };
 
     function end() {
@@ -113,7 +131,9 @@
                         </div>
                     @endif
                     
-                    <form id="form-temps" action="{{route('jornada.store')}}" method="post">
+
+                    <!--FORM INICI JORNADA-->
+                    <form id="form-inici" action="{{route('jornada.store')}}" method="post">
 
                         @csrf        
                         
@@ -121,13 +141,15 @@
                         <br>
                         inici<input type="text" id="inici-jornada" name="inici-jornada">
                             <br><br>
-                        <button type="submit" class="btn btn-outline-success" onclick="start()">Començar a comptar</button>
+                        <button type="button" class="btn btn-outline-success" onclick="start()">Començar a comptar</button>
                       
                         <br><br>
                         
                         <!--button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button-->  
                     </form>
 
+
+                    <!--FORM FI JORNADA-->
                     <form id="form-final" action="{{route('jornada.update')}}" method="post">
 
                         @csrf        

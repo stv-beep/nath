@@ -45,14 +45,15 @@ class ActivitatController extends Controller
 } 
 
     public function update(Request $request){
-        $user = Auth::user();       
+        $user = Auth::user();
 
             /* $activitat->update([
                 'fiJornada' => $request->input('final-Jornada'),
             ]); */
         //$activitat = Activitat::find(3);
         //$activitat = Activitat::where(['jornada' => '2022-01-31', 'treballador' => '1'])->first();
-        $activitat = Activitat::where(['treballador' => $user->id])->first();
+        $jornada = now();
+        $activitat = Activitat::where(['treballador' => $user->id])->latest()->first();
         $activitat-> fiJornada = $request->input("final-jornada");
         //$inici = new Carbon('2022-01-31 11:22:42');
         /* $sql = 'SELECT iniciJornada FROM activitats WHERE jornada = "2022-01-31"';
@@ -66,7 +67,7 @@ class ActivitatController extends Controller
         $resta=$inici->diffInMinutes($final);//resto inici jornada i final en minuts
         $activitat->total = $resta/60;
         $activitat-> update();
-            
-        return view('home',compact('user'));
+        //return view('home',compact('user'));    
+        return $jornada;
     }
 }
