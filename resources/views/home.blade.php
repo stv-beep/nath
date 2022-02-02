@@ -25,12 +25,13 @@
                     <br>
                     Codi/nom d'usuari: {{$user->username}}
                 </div>
-                <a href="{{ route('jornada.form') }}" class="btn btn-xs btn-info pull-right">Jornada del dia 
+                <a href="{{ route('jornada.form') }}" class="btn btn-xs btn-info pull-right">
+                    <i class="far fa-calendar-check"></i> Jornada del dia 
                     <?php                  
                         $date = date('Y-m-d H:i:s');
                         $newDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
                         echo $newDate;
-                    ?>
+                    ?> <i class="fas fa-hourglass-half fa-spin"></i>
                 </a>
             </div>
         </div>

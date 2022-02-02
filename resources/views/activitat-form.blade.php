@@ -129,7 +129,7 @@
                         
                         <input type="hidden" id="inici-jornada" name="inici-jornada">
                             
-                        <button id="sendInici" type="button" class="btn btn-xs btn-outline-success center" onclick="start()">Començar a comptar</button>
+                        <button id="sendInici" type="button" class="btn btn-xs btn-outline-success center" onclick="start()"><i class="fas fa-hourglass-start"></i> Començar</button>
                       
                         
                         
@@ -150,12 +150,16 @@
                         <input type="hidden" id="final-jornada" name="final-jornada">
                             
                       
-                        <button id="sendFi" type="button" class="btn btn-xs btn-outline-danger center" onclick="end()">Parar de comptar</button>
+                        <button id="sendFi" type="button" class="btn btn-xs btn-outline-danger center" onclick="end()"><i class="fas fa-hourglass-end"></i> Parar</button>
                         
-                        
+                        <a href="{{route('home')}}"><i class="fas fa-history fa-lg formJornada" style="color: #51cf66;"></i></a>
                       {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                     </form>
+
+                    
+                    
                     </div>
+                    
                 </div>
 
             </div>

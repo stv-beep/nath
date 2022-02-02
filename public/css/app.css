@@ -11291,3 +11291,18 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+
+
+/* custom @AleixAlgueró */
+.forms {
+  display: flex;
+    justify-content: center;
+    align-content: space-around;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.formJornada{
+  margin: 10px;
+}
