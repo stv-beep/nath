@@ -46,11 +46,8 @@ Route::post('/home',[ActivitatController::class,'store'])->name('jornada.store')
 
 Route::patch('/home',[ActivitatController::class,'update'])->name('jornada.update');
 
-
-/* Route::get('/home/activitat/create', function () {
-    return "create";
-});  */
-
 Route::get('/home/activitat/{variable}', function ($variable) {
     return "provant";
 });
+
+/* Route::view('/inici-form', 'inici-form'); */

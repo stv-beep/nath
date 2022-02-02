@@ -25,7 +25,7 @@
                     <br>
                     Codi/nom d'usuari: {{$user->username}}
                 </div>
-                <a href="{{ route('jornada.form') }}" class="btn btn-xs btn-info pull-right">
+                <a href="{{ route('jornada.form') }}" class="btn btn-xs btn-primary pull-right">
                     <i class="far fa-calendar-check"></i> Jornada del dia 
                     <?php                  
                         $date = date('Y-m-d H:i:s');
