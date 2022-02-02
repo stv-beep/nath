@@ -120,7 +120,8 @@
                     
 
                     <!--FORM INICI JORNADA-->
-                    <form id="form-inici" action="{{route('jornada.store')}}" method="post">
+                <div class="forms">
+                    <form id="form-inici" class="formJornada" action="{{route('jornada.store')}}" method="post">
 
                         @csrf        
                         
@@ -137,7 +138,7 @@
 
 
                     <!--FORM FI JORNADA-->
-                    <form id="form-final" action="{{route('jornada.update')}}" method="post">
+                    <form id="form-final" class="formJornada" action="{{route('jornada.update')}}" method="post">
 
                         @csrf        
                         @method('PATCH')                       
@@ -154,7 +155,7 @@
                         
                       {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                     </form>
-                     
+                    </div>
                 </div>
 
             </div>
