@@ -18,29 +18,16 @@ class ActivitatController extends Controller
     }
 
     public function store(Request $request){
+        $user = Auth::user();
         $activitat = new Activitat();
-        $activitat-> treballador = $request->input("treballador");
-        //$activitat-> jornada = new \Carbon\Carbon(date('d-m-Y'));
+        /* $activitat-> treballador = $request->input("treballador"); */
+        $activitat-> treballador = $user->id;
         $activitat-> jornada = now();
-        //$activitat-> total_cron = $request->input("total_cron");
         $activitat-> iniciJornada = $request->input("inici-jornada");
 
-        //$activitat-> fiJornada = $request->input("final-jornada");
-
-        /*
-        $inici = new \Carbon\Carbon($request->input("inici-jornada"));//diferencia de hores
-
-        $final = new \Carbon\Carbon($request->input("final-jornada"));
-
-        
-
-        
-        $resta=$inici->diffInMinutes($final);//resto inici jornada i final en minuts
-
-        $activitat->total = $resta/60;//convertixo a hores */
         $activitat->save();
         $activitat = Activitat::all();
-        $user = Auth::user();
+        
         return view('home',compact('user'));
         //return $request->all();
 } 
@@ -71,27 +58,31 @@ class ActivitatController extends Controller
 
 
 
-        $ix = substr($inici,17,19);//2022-02-01 12:45:18
-        $ik = strtotime($ix);
+        $iniciString = substr($inici,17,19);//2022-02-01 12:45:18
+        $ik = strtotime($iniciString);
         $inici2 = date('Y-m-d H:i:s', $ik);//2022-02-01 12:45:18
 
 
-        $fx = substr($fi,17,19);//2022-02-01 12:45:18 TENEN QUE SER NUMEROS DIFERENTS QUE LA PARAULA ES MES CURTA
-        $fj = strtotime($fx);
+        $fiString = substr($fi,14,19);//2022-02-01 12:45:18
+        $fj = strtotime($fiString);
         $fi2 = date('Y-m-d H:i:s', $fj);//2022-02-01 12:45:18
 
 
         $i = strtotime(substr($inici,17,19));#1643715918
         $f = strtotime(substr($fi,17,19));#{"fiJornada":"2022-02-01 11:55:45"}
-        $f0 = strtotime(substr($final,0));#{"fiJornada":"2022-02-01 11:55:45"}
+        $f0 = strtotime(substr($final,0));#1643789914 aixo son segons desde inici unix
+        $resta = $f0 - $i; #resto la quantitat de segons que han passat des del inici del temps unix
+        $min = $resta/60;
+        $hores = $min/60;
         /* $inici2 = date('Y-m-d H:i:s', $i);
         $fi2 = date('Y-m-d H:i:s', $f0); */
-       /*  $inicidata = new \DateTime($i);
+        /* $inicidata = new \DateTime($i);
         $inicidata->format('Y-m-d H:i:s'); */
         //$interval = $inici2->diffInMinutes($fi2);
+        $activitat -> total = $hores;
 
         $activitat-> update();
-        //return view('home',compact('user'));    
-        return $fi;
+        return view('home',compact('user'));    
+        //return $hores;
     }
 }

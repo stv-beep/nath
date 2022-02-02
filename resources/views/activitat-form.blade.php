@@ -18,8 +18,7 @@
     
     startTime = moment().format('YYYY-MM-DD[T]HH:mm:ss');
     console.log(moment().format(startTime));
-    /* $("#inici-jornada").val(startTime);
-    return startTime; */
+
     $("#inici-jornada").val(startTime);
     console.log(startTime);
         
@@ -32,7 +31,6 @@
                     data:$('#form-inici').serialize(),
                     success: function( data ) {
                         //console.log(data);
-                        $("#input-treballador").val();
                         //$("#total_cron").val();
                         $("#inici-jornada").val();
                         //alert('enviat');
@@ -75,21 +73,20 @@
     
     $("#final-jornada").val(endTime);
     
-    //console.log('funco send');
-        /* $.ajax(
+    console.log('funco send');
+        $.ajax(
                 {
                     type: "POST",
                     url: "{{route('jornada.store')}}",
                     data:$('#form-final').serialize(),
                     success: function( data ) {
                         //console.log(data);
-                        $("#input-treballador").val();
                         //$("#total_cron").val();
                         $("#final-jornada").val();
                         window.location = "{{route('home')}}";
                     }
                 }
-            ) */
+        )
 
     return endTime;
     }
@@ -127,11 +124,11 @@
 
                         @csrf        
                         
-                        <input type="hidden" name="treballador" id="treballador" value="{{$user->id}}">
+                       {{--  <input type="hidden" name="treballador" id="treballador" value="{{$user->id}}"> --}}
                         
                         <input type="hidden" id="inici-jornada" name="inici-jornada">
                             
-                        <button id="send1" type="button" class="btn btn-xs btn-outline-success center" onclick="start()">Començar a comptar</button>
+                        <button id="sendInici" type="button" class="btn btn-xs btn-outline-success center" onclick="start()">Començar a comptar</button>
                       
                         
                         
@@ -144,7 +141,7 @@
 
                         @csrf        
                         @method('PATCH')                       
-                        <input type="hidden" name="treballador" id="treballador" value="{{$user->id}}">
+                        {{-- <input type="hidden" name="treballador" id="treballador" value="{{$user->id}}"> --}}
                         
   
                         <input type="hidden" id="total_cron" name="total_cron"> 
@@ -152,10 +149,10 @@
                         <input type="hidden" id="final-jornada" name="final-jornada">
                             
                       
-                        <button id="send2" type="button" class="btn btn-xs btn-outline-danger center" onclick="end()">Parar de comptar</button>
+                        <button id="sendFi" type="button" class="btn btn-xs btn-outline-danger center" onclick="end()">Parar de comptar</button>
                         
                         
-                        <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  
+                      {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                     </form>
                      
                 </div>
