@@ -58,7 +58,7 @@
     console.log(startTime);
     console.log(endTime);
 
-    /*guardo HORES al input*/
+    //guardo HORES al input
     $("#total_cron").val(h);
         let cron = document.getElementById("total_cron").value;
         if (cron.length < 0){
@@ -68,7 +68,7 @@
         }
 
     
-    $("#final-jornada").val(endTime);
+    //$("#final-jornada").val(endTime);
     
     console.log('funco send');
         $.ajax(

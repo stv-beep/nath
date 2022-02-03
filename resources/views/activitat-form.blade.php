@@ -28,7 +28,7 @@
                         
                        {{--  <input type="hidden" name="treballador" id="treballador" value="{{$user->id}}"> --}}
                         
-                        <input type="hidden" id="inici-jornada" name="inici-jornada">
+                      {{--   <input type="text" id="inici-jornada" name="inici-jornada"> --}}
                             
                         <button id="sendInici" type="button" class="btn btn-xs btn-outline-success center" onclick="start()"><i class="fas fa-hourglass-start"></i> Començar</button>
                       
@@ -48,7 +48,7 @@
   
                         <input type="hidden" id="total_cron" name="total_cron"> 
                           
-                        <input type="hidden" id="final-jornada" name="final-jornada">
+                        {{-- <input type="hidden" id="final-jornada" name="final-jornada"> --}}
                             
                       
                         <button id="sendFi" type="button" class="btn btn-xs btn-outline-danger center" onclick="end()"><i class="fas fa-hourglass-end"></i> Parar</button>
