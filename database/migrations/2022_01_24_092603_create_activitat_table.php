@@ -18,10 +18,10 @@ class CreateActivitatTable extends Migration
             $table->date('jornada');
             $table->unsignedBigInteger('treballador');
             $table->foreign('treballador')->references('id')->on('users');
-            $table->float('totalCron')->nullable();
+            $table->float('total')->nullable();
             $table->datetime('iniciJornada')->nullable();
             $table->datetime('fiJornada')->nullable();
-            $table->float('total')->nullable();
+            //$table->float('totalCron')->nullable();
             $table->timestamps(); 
         });
     }

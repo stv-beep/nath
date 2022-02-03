@@ -7,6 +7,7 @@
 
 
 @section('content')
+        
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -31,7 +32,7 @@
                         $date = date('Y-m-d H:i:s');
                         $newDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
                         echo $newDate;
-                    ?> <i class="fas fa-hourglass-half fa-spin"></i>
+                    ?>&nbsp;&nbsp;<i class="fas fa-hourglass-half fa-spin"></i>
                 </a>
             </div>
         </div>

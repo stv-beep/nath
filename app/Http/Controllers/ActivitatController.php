@@ -20,10 +20,11 @@ class ActivitatController extends Controller
     public function store(Request $request){
         $user = Auth::user();
         $activitat = new Activitat();
-        /* $activitat-> treballador = $request->input("treballador"); */
         $activitat-> treballador = $user->id;
         $activitat-> jornada = now();
-        $activitat-> iniciJornada = $request->input("inici-jornada");
+        $jornadaInici = now();
+        $activitat-> iniciJornada = Carbon::parse($jornadaInici)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
+        //$activitat-> iniciJornada = $request->input("inici-jornada");
 
         $activitat->save();
         $activitat = Activitat::all();

@@ -4,6 +4,37 @@
     //https://stackoverflow.com/questions/1210701/compute-elapsed-time/1210726
     //https://ralzohairi.medium.com/displaying-dynamic-elapsed-time-in-javascript-260fa0e95049
     
+    /* $(document).ready(function () {
+        $("#alert-success").removeClass("hidden");
+        //$("#alert-danger").removeClass("hidden");
+          $("#alert-success").hide();
+        //$("#alert-danger").hide();
+    }); */
+    
+   /*  $(document).ready(function () {
+        $("#alert-success").hide();
+        $("#alert-success")
+          .fadeTo(4000, 1000)
+          .slideUp(1000, function () {
+            $("#alert-success").slideUp(1000);
+          });
+      }); */
+     
+
+      
+
+    /* jQuery(function () { 
+          $("#alert-success").hide();
+          $("#alert-success")
+          .fadeTo(4000, 1000)
+          .slideUp(1000, function () {
+            $("#alert-success").slideUp(1000);
+          });
+    }); */
+
+    $("#alert-inici").hide();
+    $("#alert-final").hide();
+    
     var startTime, endTime, h;
 
     function start() {
@@ -12,7 +43,7 @@
     startTime = moment().format('YYYY-MM-DD[T]HH:mm:ss');
     console.log(moment().format(startTime));
 
-    $("#inici-jornada").val(startTime);
+    //$("#inici-jornada").val(startTime);
     console.log(startTime);
         
         //alert('funco send');
@@ -23,15 +54,22 @@
                     url: "/home",//"{{route('jornada.store')}}"
                     data:$('#form-inici').serialize(),
                     success: function( data ) {
+                        
                         //console.log(data);
                         //$("#total_cron").val();
-                        $("#inici-jornada").val();
+                        //$("#inici-jornada").val(startTime);
                         //alert('enviat');
-                        /* $(".altert-success").fadeIn(1000).delay(2000);
- 
-                        $(".altert-success").fadeOut(1000); */
- 
-                        window.location = "/home";//"{{route('home')}}"
+
+                        //window.location = "/home";//"{{route('home')}}"
+                        window.setTimeout(function(){
+                            window.location = "/home";
+                        }, 2000);
+                        $("#alert-inici")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-inici").slideUp(1000);
+                        });
+
                     }
                 }
             )
@@ -79,8 +117,16 @@
                     success: function( data ) {
                         //console.log(data);
                         //$("#total_cron").val();
-                        $("#final-jornada").val();
-                        window.location = "/home";//"{{route('home')}}"
+                        //$("#final-jornada").val();
+                        //window.location = "/home";//"{{route('home')}}"
+                        window.setTimeout(function(){
+                            window.location = "/home";
+                        }, 2000);
+                        $("#alert-final")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-final").slideUp(1000);
+                        });
                     }
                 }
         )
@@ -96,3 +142,4 @@
 	    })
     });
  */
+   
