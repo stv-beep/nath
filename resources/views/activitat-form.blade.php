@@ -28,7 +28,7 @@
                         
                        {{--  <input type="hidden" name="treballador" id="treballador" value="{{$user->id}}"> --}}
                         
-                      {{--   <input type="text" id="inici-jornada" name="inici-jornada"> --}}
+                       <input type="hidden" id="inici-jornada" name="inici-jornada">
                             
                         <button id="sendInici" type="button" class="btn btn-xs btn-outline-success center" onclick="start()"><i class="fas fa-hourglass-start"></i> Començar</button>
                       
