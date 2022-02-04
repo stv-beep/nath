@@ -3,37 +3,23 @@
     //https://stackoverflow.com/questions/41632942/how-to-measure-time-elapsed-on-javascript
     //https://stackoverflow.com/questions/1210701/compute-elapsed-time/1210726
     //https://ralzohairi.medium.com/displaying-dynamic-elapsed-time-in-javascript-260fa0e95049
-    
-    /* $(document).ready(function () {
-        $("#alert-success").removeClass("hidden");
-        //$("#alert-danger").removeClass("hidden");
-          $("#alert-success").hide();
-        //$("#alert-danger").hide();
-    }); */
-    
-   /*  $(document).ready(function () {
-        $("#alert-success").hide();
-        $("#alert-success")
-          .fadeTo(4000, 1000)
-          .slideUp(1000, function () {
-            $("#alert-success").slideUp(1000);
-          });
-      }); */
+
+    //https://gomakethings.com/how-to-show-and-hide-elements-with-vanilla-javascript/
      
+    $(document).ready(function () {
 
-      
+        $("#alert-success").removeClass("hidden");
+        $("#alert-danger").removeClass("hidden");
 
-    /* jQuery(function () { 
-          $("#alert-success").hide();
-          $("#alert-success")
-          .fadeTo(4000, 1000)
-          .slideUp(1000, function () {
-            $("#alert-success").slideUp(1000);
-          });
-    }); */
+        $("#alert-success").hide();
+        $("#alert-danger").hide();
+    });
 
-    $("#alert-inici").hide();
-    $("#alert-final").hide();
+
+   /*  jQuery(function () {
+
+    });  */
+
     
     var startTime, endTime, h;
 
@@ -64,12 +50,21 @@
                         window.setTimeout(function(){
                             window.location = "/home";
                         }, 2000);
-                        $("#alert-inici")
+                        $("#alert-missatge-inici").text("S'ha començat a comptar amb èxit.");
+                        $("#alert-success")
                         .fadeTo(4000, 1000)
                         .slideUp(1000, function () {
-                            $("#alert-inici").slideUp(1000);
+                            $("#alert-success").slideUp(1000);
                         });
 
+                    },
+                    error: function(xhr, textStatus, error){
+                        $("#alert-danger-missatge-inici").text("Ha hagut un error. Per favor, torna-ho a intentar.");
+                        $("#alert-danger")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-danger").slideUp(1000);
+                        });
                     }
                 }
             )
@@ -112,26 +107,37 @@
         $.ajax(
                 {
                     type: "POST",
-                    url: "/home",//"{{route('jornada.store')}}"
+                    url: "/activitat",//"{{route('jornada.store')}}"
                     data:$('#form-final').serialize(),
-                    success: function( data ) {
-                        //console.log(data);
+                    success: function( response ) {
+                        //console.log(response);
                         //$("#total_cron").val();
                         //$("#final-jornada").val();
-                        //window.location = "/home";//"{{route('home')}}"
-                        window.setTimeout(function(){
-                            window.location = "/home";
-                        }, 2000);
-                        $("#alert-final")
+                        //window.location = "/home";
+                        $("#alert-missatge-final").text("S'ha parat de comptar amb èxit");
+                        $("#alert-success")
                         .fadeTo(4000, 1000)
                         .slideUp(1000, function () {
-                            $("#alert-final").slideUp(1000);
+                            $("#alert-success").slideUp(1000);
+                        });
+                            window.setTimeout(function(){
+                                window.location = "/home";//"{{route('home')}}"
+                            }, 2000);
+                        
+                    },//si no s'ha trobat cap registre amb inici de jornada, retornara error amb alert
+                    error: function(xhr, textStatus, error){
+                        $("#alert-danger-missatge-final").text("No s'ha trobat cap inici de jornada coincident amb tu.");
+                        $("#alert-danger")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-danger").slideUp(1000);
                         });
                     }
+                    
                 }
-        )
-
-    return endTime;
+                
+        )        
+       
     }
 
 /* 
@@ -142,4 +148,3 @@
 	    })
     });
  */
-   

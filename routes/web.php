@@ -15,39 +15,41 @@ use App\Http\Controllers\ActivitatController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-//view inici sessio
-//post inici sessio
-//get crear activitat
-//post store activitat
-
-/**enllaços */
-/*
-https://www.oulub.com/es-ES/Laravel/authentication
-https://codea.app/cursos/laravel-pagina-web-administrable/login-laravel-100
-*/
-
-
-//https://blastcoding.com/creando-un-formulario-en-laravel/
-//https://www.zentica-global.com/es/zentica-blog/ver/como-crear-y-validar-un-formulario-en-laravel-8-6073a87660073
 Auth::routes();
 
+/* el home redirigeix al login si no s'està loguejat */
+Route::get('/',[ HomeController::class, 'index']);
 /*HOME*/
 Route::view('/home','inici');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /*FORMULARI*/
+//get crear activitat
 Route::get('/activitat',[ActivitatController::class,'create'])->name('jornada.form');
+//post store activitat
 Route::post('/home',[ActivitatController::class,'store'])->name('jornada.store');
 
-Route::patch('/home',[ActivitatController::class,'update'])->name('jornada.update');
+Route::patch('/activitat',[ActivitatController::class,'update'])->name('jornada.update');
 
-Route::get('/home/activitat/{variable}', function ($variable) {
-    return "provant";
-});
+/* Route::get('/', function () {
+
+    return view('welcome');
+    
+}); */
+
+/* Route::group(['middleware' => 'auth'], function(){
+
+
+}); */
+
+
+
+/* Route::get('/home/activitat/{variable}', function ($variable) {
+    return $variable;
+}); */
 
 /* Route::view('/inici-form', 'inici-form'); */
+/**enllaços */
+/*
+https://www.oulub.com/es-ES/Laravel/authentication
+*/

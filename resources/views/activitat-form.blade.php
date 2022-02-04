@@ -7,18 +7,18 @@
 
 @section('content')
 
-<div class='alert-position hidden alert alert-success' id='alert-inici' role='alert'>
-    S'ha <strong>començat</strong> a comptar satifactòriament&nbsp;
+<div class='alert-position hidden alert alert-success' id='alert-success' role='alert'>
+   <strong id="alert-missatge-inici"></strong>&nbsp;
+   <strong id="alert-missatge-final"></strong>&nbsp;
     <i class="fas fa-hourglass-half fa-spin"></i>
     </div>
 
-    <div class='alert-position hidden alert alert-success' id='alert-final' role='alert'>
-    S'ha <strong>parat</strong> de comptar satifactòriament&nbsp;
-    <i class="fas fa-hourglass-half fa-spin"></i>
+    <div class='alert-position hidden alert alert-danger' id='alert-danger' role='alert'>
+        <strong id="alert-danger-missatge-inici"></strong>&nbsp;
+        <strong id="alert-danger-missatge-final"></strong>&nbsp;
+        <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;
+        
     </div>
-   {{--  <div class='alert-position hidden alert alert-danger' id='alert-danger' role='alert'>
-    <strong id='alert-missatge'>Ha hagut un error.</strong> No s'ha començat a comptar satifactòriament. Torna-ho a intentar.
-    </div> --}}
 
 <div class="container">
     <div class="row justify-content-center">
@@ -67,10 +67,10 @@
                       
                         <button id="sendFi" type="button" class="btn btn-xs btn-outline-danger center" onclick="end()"><i class="fas fa-hourglass-end"></i> Acabar</button>
                         
-                        <a href="{{route('home')}}"><i class="fas fa-history fa-lg formJornada" style="color: #51cf66;"></i></a>
+                        
                       {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                     </form>
-
+                    <a href="{{route('home')}}"><i class="fas fa-history fa-lg formJornada" style="color: #51cf66;"></i></a>
                     
                     
                     </div>
