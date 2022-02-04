@@ -50,7 +50,7 @@
                         window.setTimeout(function(){
                             window.location = "/home";
                         }, 2000);
-                        $("#alert-missatge-inici").text("S'ha començat a comptar amb èxit.");
+                        $("#alert-missatge-inici").text("Jornada iniciada amb èxit");
                         $("#alert-success")
                         .fadeTo(4000, 1000)
                         .slideUp(1000, function () {
@@ -114,7 +114,7 @@
                         //$("#total_cron").val();
                         //$("#final-jornada").val();
                         //window.location = "/home";
-                        $("#alert-missatge-final").text("S'ha parat de comptar amb èxit");
+                        $("#alert-missatge-final").text("Jornada finalitzada amb èxit");
                         $("#alert-success")
                         .fadeTo(4000, 1000)
                         .slideUp(1000, function () {
