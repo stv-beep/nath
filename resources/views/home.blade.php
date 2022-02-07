@@ -5,7 +5,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
 @section('content')
         
 <div class="container">
@@ -20,13 +19,13 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    Benvingut {{$user->name}}!
+                    Benvingut {{$user->name}}
                    {{-- <br>
                     ID: {{$user->id}}
                     <br>
                     Codi/nom d'usuari: {{$user->username}} --}}
                 </div>
-                <a href="{{ route('jornada.form') }}" class="btn btn-xs btn-primary pull-right">
+                <a href="{{ route('jornada.form') }}" class="h-75 btn btn-primary center">
                     <i class="far fa-calendar-check"></i> Jornada del dia 
                     <?php                  
                         $date = date('Y-m-d H:i:s');

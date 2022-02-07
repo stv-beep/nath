@@ -45,20 +45,18 @@
                         //$("#total_cron").val();
                         //$("#inici-jornada").val(startTime);
                         //alert('enviat');
-
-                        //window.location = "/home";//"{{route('home')}}"
-                        window.setTimeout(function(){
-                            window.location = "/home";
-                        }, 2000);
                         
                         $("#alert-missatge-inici").text("Jornada iniciada amb èxit");
-                        init();
-                        cronometrar();
+                        init();//mostra el cronometre
+                        cronometrar();//inicia el cronometre
                         $("#alert-success")
                         .fadeTo(4000, 1000)
                         .slideUp(1000, function () {
                             $("#alert-success").slideUp(1000);
                         });
+                            window.setTimeout(function(){
+                                window.location = "/home";//"{{route('home')}}"
+                            }, 1500);
 
                     },
                     error: function(xhr, textStatus, error){
@@ -127,11 +125,11 @@
                         });
                             window.setTimeout(function(){
                                 window.location = "/home";//"{{route('home')}}"
-                            }, 2000);
+                            }, 1500);
                         
                     },//si no s'ha trobat cap registre amb inici de jornada, retornara error amb alert
                     error: function(xhr, textStatus, error){
-                        $("#alert-danger-missatge-final").text("No s'ha trobat cap inici de jornada coincident amb tu.");
+                        $("#alert-danger-missatge-final").text("No s'ha trobat cap inici de jornada coincident amb el teu registre.");
                         $(".cronometro").hide();
                         $("#alert-danger")
                         .fadeTo(4000, 1000)
