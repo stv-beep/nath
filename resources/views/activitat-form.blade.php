@@ -16,8 +16,7 @@
     <div class='alert-position hidden alert alert-danger' id='alert-danger' role='alert'>
         <strong id="alert-danger-missatge-inici"></strong>&nbsp;
         <strong id="alert-danger-missatge-final"></strong>&nbsp;
-        <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;
-        
+        <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;   
     </div>
 
 <div class="container">

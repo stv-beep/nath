@@ -21,10 +21,10 @@
                         </div>
                     @endif
                     Benvingut {{$user->name}}!
-                    <br>
+                   {{-- <br>
                     ID: {{$user->id}}
                     <br>
-                    Codi/nom d'usuari: {{$user->username}}
+                    Codi/nom d'usuari: {{$user->username}} --}}
                 </div>
                 <a href="{{ route('jornada.form') }}" class="btn btn-xs btn-primary pull-right">
                     <i class="far fa-calendar-check"></i> Jornada del dia 

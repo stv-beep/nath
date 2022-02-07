@@ -55,10 +55,10 @@ class ActivitatController extends Controller
         $fi = Activitat::where(['jornada' => $jorn, 'treballador' => $user->id])
         ->get('fiJornada')->last();//{"fiJornada":"2022-02-01 11:55:45"}
 
-        $i = strtotime($iniciFormat);//1643875668
-        $f = strtotime($finalFormat);//1643877132
+        $iniciSegs = strtotime($iniciFormat);//1643875668
+        $finalSegs = strtotime($finalFormat);//1643877132
         
-        $resta = $f - $i; #resto la quantitat de segons que han passat des del inici del temps unix
+        $resta = $finalSegs - $iniciSegs; #resto la quantitat de segons que han passat des del inici del temps unix
         $min = $resta/60;
         $hores = $min/60;
         $activitat -> total = $hores;

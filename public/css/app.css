@@ -11310,3 +11310,11 @@ textarea.form-control-lg {
 i.fas.fa-history.fa-lg.formJornada{
   line-height: 1.8em;
 }
+
+#alert-success{
+  display: none;
+}
+
+#alert-danger{
+  display: none;
+}
