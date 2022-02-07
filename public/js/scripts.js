@@ -6,14 +6,14 @@
 
     //https://gomakethings.com/how-to-show-and-hide-elements-with-vanilla-javascript/
      
-    $(document).ready(function () {
+    /* $(document).ready(function () {
 
         $("#alert-success").removeClass("hidden");
         $("#alert-danger").removeClass("hidden");
 
         $("#alert-success").hide();
         $("#alert-danger").hide();
-    });
+    }); */
 
 
    /*  jQuery(function () {
@@ -50,7 +50,10 @@
                         window.setTimeout(function(){
                             window.location = "/home";
                         }, 2000);
+                        
                         $("#alert-missatge-inici").text("Jornada iniciada amb èxit");
+                        init();
+                        cronometrar();
                         $("#alert-success")
                         .fadeTo(4000, 1000)
                         .slideUp(1000, function () {
@@ -60,6 +63,7 @@
                     },
                     error: function(xhr, textStatus, error){
                         $("#alert-danger-missatge-inici").text("Ha hagut un error. Per favor, torna-ho a intentar.");
+                        $(".cronometro").hide();
                         $("#alert-danger")
                         .fadeTo(4000, 1000)
                         .slideUp(1000, function () {
@@ -115,6 +119,7 @@
                         //$("#final-jornada").val();
                         //window.location = "/home";
                         $("#alert-missatge-final").text("Jornada finalitzada amb èxit");
+                        $(".cronometro").hide();
                         $("#alert-success")
                         .fadeTo(4000, 1000)
                         .slideUp(1000, function () {
@@ -127,6 +132,7 @@
                     },//si no s'ha trobat cap registre amb inici de jornada, retornara error amb alert
                     error: function(xhr, textStatus, error){
                         $("#alert-danger-missatge-final").text("No s'ha trobat cap inici de jornada coincident amb tu.");
+                        $(".cronometro").hide();
                         $("#alert-danger")
                         .fadeTo(4000, 1000)
                         .slideUp(1000, function () {
@@ -147,4 +153,47 @@
 		$("#test").html(cron);
 	    })
     });
+ */
+
+
+
+    //window.onload = init;
+    function init(){
+        /* document.querySelector(".start").addEventListener("click",cronometrar);
+        document.querySelector(".stop").addEventListener("click",parar);
+        document.querySelector(".reiniciar").addEventListener("click",reiniciar); */
+        h = 0;
+        m = 0;
+        s = 0;
+        document.getElementById("hms").innerHTML="00:00:00";
+    }         
+    function cronometrar(){
+        escriure();
+        id = setInterval(escriure,1000);
+       /*  document.querySelector(".start").removeEventListener("click",cronometrar); */
+    }
+    function escriure(){
+        var hAux, mAux, sAux;
+        s++;
+        if (s>59){m++;s=0;}
+        if (m>59){h++;m=0;}
+        if (h>24){h=0;}
+    
+        if (s<10){sAux="0"+s;}else{sAux=s;}
+        if (m<10){mAux="0"+m;}else{mAux=m;}
+        if (h<10){hAux="0"+h;}else{hAux=h;}
+    
+        document.getElementById("hms").innerHTML = hAux + ":" + mAux + ":" + sAux; 
+    }
+   /*  function parar(){
+        clearInterval(id);
+        document.querySelector(".start").addEventListener("click",cronometrar);
+    
+    }
+    function reiniciar(){
+        clearInterval(id);
+        document.getElementById("hms").innerHTML="00:00:00";
+        h=0;m=0;s=0;
+        document.querySelector(".start").addEventListener("click",cronometrar);
+    }
  */

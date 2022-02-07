@@ -34,6 +34,14 @@
                         echo $newDate;
                     ?>{{-- &nbsp;&nbsp;<i class="fas fa-hourglass-half fa-spin"></i> --}}
                 </a>
+
+                {{-- <ul>
+                    @foreach ($activitat as $a)
+                        
+                            {{$a->jornada}} | {{$a->treballador}} | {{$a->total}}
+                        
+                    @endforeach
+                </ul> --}}
             </div>
         </div>
     </div>

@@ -11318,3 +11318,7 @@ i.fas.fa-history.fa-lg.formJornada{
 #alert-danger{
   display: none;
 }
+
+#hms{
+   display: flex;
+  }

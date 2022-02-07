@@ -10,9 +10,13 @@
 <div class='alert-position hidden alert alert-success' id='alert-success' role='alert'>
    <strong id="alert-missatge-inici"></strong>&nbsp;
    <strong id="alert-missatge-final"></strong>&nbsp;
-    <i class="fas fa-hourglass-half fa-spin"></i>
+   <i class="fas fa-hourglass-half fa-spin"></i>
+   <div class="cronometro">
+    <div id="hms"></div>
+</div>
+        
     </div>
-
+    
     <div class='alert-position hidden alert alert-danger' id='alert-danger' role='alert'>
         <strong id="alert-danger-missatge-inici"></strong>&nbsp;
         <strong id="alert-danger-missatge-final"></strong>&nbsp;
