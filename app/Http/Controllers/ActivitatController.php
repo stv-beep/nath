@@ -29,7 +29,7 @@ class ActivitatController extends Controller
         $activitat->save();
         $activitat = Activitat::all();
         
-        return view('home',compact('user'));
+        return view('activitat-form',compact('user'));
         //return $request->all();
 } 
 
@@ -64,7 +64,7 @@ class ActivitatController extends Controller
         $activitat -> total = $hores;
         $activitat-> update();
         //return $hores;
-        return view('home',compact('user'));    
+        return view('activitat-form',compact('user'));    
 
 
         /* PROVES */

@@ -34,14 +34,22 @@
                         echo $newDate;
                     ?>{{-- &nbsp;&nbsp;<i class="fas fa-hourglass-half fa-spin"></i> --}}
                 </a>
-
-                {{-- <ul>
-                    @foreach ($activitat as $a)
-                        
-                            {{$a->jornada}} | {{$a->treballador}} | {{$a->total}}
-                        
-                    @endforeach
-                </ul> --}}
+                   
+                    
+                    <table id="jornades" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Dia</th>
+                            <th scope="col">Hores</th>
+                        </tr>
+                        </thead>
+                        @foreach ($activitat as $a)
+                        <tr>
+                            <td>{{$a->jornada}}</td>
+                            <td>{{$a->total}}</td>
+                        </tr>
+                        @endforeach
+                    </table>
             </div>
         </div>
     </div>
