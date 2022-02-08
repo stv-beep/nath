@@ -44,12 +44,12 @@ class ActivitatController extends Controller
         $jornada = now();//"2022-02-01T09:08:09.674363Z"
         $jorn = Carbon::parse($jornada)->setTimezone('Europe/Madrid')->format('Y-m-d');//2022-02-01
         $finalFormat = Carbon::parse($jornada)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');//2022-02-03 09:20:21
-        $activitat = Activitat::where(['jornada' => $jorn, 'treballador' => $user->id])->latest()->first();
+        $activitat = Activitat::where([/* 'jornada' => $jorn,  */'treballador' => $user->id])->latest()->first();
         $activitat-> fiJornada = $finalFormat;//guardo fiJornada a la BBDD
         //carbon = "2022-01-31T11:34:39.000000Z"
 
         $activitat-> update();
-        $inici = Activitat::where(['jornada' => $jorn, 'treballador' => $user->id])
+        $inici = Activitat::where([/* 'jornada' => $jorn,  */'treballador' => $user->id])
         ->get('iniciJornada')->last();//{"iniciJornada":"2022-02-01 10:24:10"}
         $iniciFormat = $inici->iniciJornada;//2022-02-03 09:07:48
         $fi = Activitat::where(['jornada' => $jorn, 'treballador' => $user->id])

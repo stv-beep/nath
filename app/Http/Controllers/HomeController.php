@@ -35,7 +35,7 @@ class HomeController extends Controller
 
         $jornada = now();//"2022-02-01T09:08:09.674363Z"
         $jorn = Carbon::parse($jornada)->setTimezone('Europe/Madrid')->format('Y-m-d');//2022-02-01
-        $activitat = Activitat::where(['treballador' => $user->id])->get();
+        $activitat = Activitat::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
         #return view('home', compact('user'));
         return view('home', compact('user','activitat'));
     }
