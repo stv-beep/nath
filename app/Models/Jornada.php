@@ -9,4 +9,5 @@ class Jornada extends Model
 {
     use HasFactory;
     protected $table = "jornades";
+    protected $guarded = [];
 }

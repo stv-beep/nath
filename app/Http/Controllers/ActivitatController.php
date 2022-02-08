@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent;
 use Carbon\Carbon;
 use \DateTime;
+use App\Models\Jornada;
+use App\Models\User;
 
 class ActivitatController extends Controller
 {
@@ -20,6 +22,18 @@ class ActivitatController extends Controller
     public function store(Request $request){
         $user = Auth::user();
         $activitat = new Activitat();
+
+        $d = now();
+        $diaFormat = Carbon::parse($d)->setTimezone('Europe/Madrid')->format('Y-m-d');
+
+        $novaJornada = Jornada::firstOrCreate(//busco el registre concret, i si no el troba, el creo
+            ['dia'=> $diaFormat, 'treballador'=> Auth::id() ]
+            /* ['dia'=> $diaFormat ], */
+            
+        );
+        
+        
+        
         $activitat-> treballador = $user->id;
         $activitat-> jornada = now();
         $jornadaInici = now();
@@ -63,7 +77,38 @@ class ActivitatController extends Controller
         $hores = $min/60;
         $activitat -> total = $hores;
         $activitat-> update();
-        //return $hores;
+
+
+        /*consultes per a sumar les hores de diferents torns: de la taula ACTIVITATS a la de JORNADES*/
+        
+        //tenim hores guardades 
+        $partides = Activitat::where(['jornada' => $jorn,'treballador' => $user->id])->orderBy('id','desc')->take(2)->get('total');
+        
+        //primera meitat
+        $h1 = $partides->first();
+        $h1 = $h1->total;
+        
+
+        $h2 = $partides->last();
+        $h2 = $h2->total;
+
+        $totalJornada = $h1 + $h2;
+
+        $novaJornada = Jornada::where(['dia' => $jorn, 'treballador' => $user->id])->latest()->first();
+        
+        $novaJornada-> treballador = $user->id;
+        $novaJornada-> dia = now();
+
+        $novaJornada -> total = $totalJornada;
+
+        $novaJornada-> update();
+        
+
+
+
+
+
+        /*  return $totalJornada; */
         return view('activitat-form',compact('user'));    
 
 

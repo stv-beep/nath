@@ -35,7 +35,7 @@
                 </a>
                    
                     
-                    <table id="jornades" class="table table-striped">
+                    <table id="activitats" class="table table-striped">
                         <thead>
                         <tr>
                             <th scope="col">Dia</th>
@@ -46,6 +46,23 @@
                         <tr>
                             <td>{{$a->jornada}}</td>
                             <td>{{$a->total}}</td>
+                        </tr>
+                        @endforeach
+                    </table>
+
+                    <p class="h4 center">Jornades</p>
+                    <br>
+                    <table id="jornades" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Dia</th>
+                            <th scope="col">Hores</th>
+                        </tr>
+                        </thead>
+                        @foreach ($dia as $d)
+                        <tr>
+                            <td>{{$d->dia}}</td>
+                            <td>{{$d->total}}</td>
                         </tr>
                         @endforeach
                     </table>
