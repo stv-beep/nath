@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ActivitatController;
+use App\Http\Controllers\PedidoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,13 +24,20 @@ Route::get('/',[ HomeController::class, 'index']);
 Route::view('/home','inici');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-/*FORMULARI*/
+/*JORNADA*/
 //get crear activitat
 Route::get('/activitat',[ActivitatController::class,'create'])->name('jornada.form');
 //post store activitat
 Route::post('/home',[ActivitatController::class,'store'])->name('jornada.store');
 
 Route::patch('/activitat',[ActivitatController::class,'update'])->name('jornada.update');
+
+/* PEDIDOS */
+Route::get('/pedidos', [PedidoController::class,'create'])->name('pedidos.form');
+
+
+
+
 
 /* Route::get('/', function () {
 

@@ -36,7 +36,7 @@
                 <br><br>
                 {{-- MENU --}}
                 <div class="options">
-                    <a href="" class="btn btn-info btn-lg option" >Pedidos</a>
+                    <a href="{{ route('pedidos.form') }}" class="btn btn-info btn-lg option" >Pedidos</a>
                     <a href="" class="btn btn-info btn-lg option" >Recepcions</a>
                     <a href="" class="btn btn-info btn-lg option" >Reoperacions</a>
                     <a href="" class="btn btn-info btn-lg option" >Inventari</a>
