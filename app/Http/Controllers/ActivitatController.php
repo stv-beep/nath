@@ -16,7 +16,7 @@ class ActivitatController extends Controller
 {
     public function create(){
         $user = Auth::user();
-        return view('activitat-form',compact('user'));
+        return view('jornada',compact('user'));
     }
 
     public function store(Request $request){
@@ -27,9 +27,7 @@ class ActivitatController extends Controller
         $diaFormat = Carbon::parse($d)->setTimezone('Europe/Madrid')->format('Y-m-d');
 
         $novaJornada = Jornada::firstOrCreate(//busco el registre concret, i si no el troba, el creo
-            ['dia'=> $diaFormat, 'treballador'=> Auth::id() ]
-            /* ['dia'=> $diaFormat ], */
-            
+            ['dia'=> $diaFormat, 'treballador'=> Auth::id() ]            
         );
         
         
@@ -43,7 +41,7 @@ class ActivitatController extends Controller
         $activitat->save();
         $activitat = Activitat::all();
         
-        return view('activitat-form',compact('user'));
+        return view('jornada',compact('user'));
         //return $request->all();
 } 
 
@@ -82,8 +80,12 @@ class ActivitatController extends Controller
         /*consultes per a sumar les hores de diferents torns: de la taula ACTIVITATS a la de JORNADES*/
         
         //tenim hores guardades 
+        $activitatID = Activitat::where(['jornada' => $jorn,'treballador' => $user->id])->orderBy('id','desc')->take(2)->get();
+        //$mida = sizeof($activitatID);
         $partides = Activitat::where(['jornada' => $jorn,'treballador' => $user->id])->orderBy('id','desc')->take(2)->get('total');
         
+
+
         //primera meitat
         $h1 = $partides->first();
         $h1 = $h1->total;
@@ -91,6 +93,23 @@ class ActivitatController extends Controller
 
         $h2 = $partides->last();
         $h2 = $h2->total;
+
+
+        //si hi ha dos hores que venen del mateix ID d'activitat, no les tindra que sumar
+        //o millor dit, si nomes troba una activitat, i per tant nomes un ID, no lo tindra que sumar dos vegades
+        if (sizeof($activitatID)<2){
+
+            $totalJornada = $h1;
+            $novaJornada = Jornada::where(['dia' => $jorn, 'treballador' => $user->id])->latest()->first();
+            $novaJornada-> treballador = $user->id;
+            $novaJornada-> dia = now();
+            $novaJornada -> total = $totalJornada;
+            $novaJornada-> update();
+            return view('jornada',compact('user'));
+
+        } else {
+
+        
 
         $totalJornada = $h1 + $h2;
 
@@ -102,14 +121,16 @@ class ActivitatController extends Controller
         $novaJornada -> total = $totalJornada;
 
         $novaJornada-> update();
+
+        return view('jornada',compact('user')); 
         
+        }
 
 
 
 
-
-        /*  return $totalJornada; */
-        return view('activitat-form',compact('user'));    
+        /*  return $mida; */
+           
 
 
         /* PROVES */

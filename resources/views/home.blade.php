@@ -31,12 +31,21 @@
                         $date = date('Y-m-d H:i:s');
                         $newDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
                         echo $newDate;
-                    ?>{{-- &nbsp;&nbsp;<i class="fas fa-hourglass-half fa-spin"></i> --}}
+                    ?>
                 </a>
-                   
-                    
-                    <table id="activitats" class="table table-striped">
-                        <thead>
+                <br><br>
+                {{-- MENU --}}
+                <div class="options">
+                    <a href="" class="btn btn-info btn-lg option" >Pedidos</a>
+                    <a href="" class="btn btn-info btn-lg option" >Recepcions</a>
+                    <a href="" class="btn btn-info btn-lg option" >Reoperacions</a>
+                    <a href="" class="btn btn-info btn-lg option" >Inventari</a>
+                </div>
+
+                {{-- TAULES --}}
+                <p class="h4 text-center" id="titol">Torns</p>
+                    <table id="activitats" class="table table-striped table-hover">
+                        <thead class="thead-dark">
                         <tr>
                             <th scope="col">Dia</th>
                             <th scope="col">Hores</th>
@@ -49,11 +58,11 @@
                         </tr>
                         @endforeach
                     </table>
-
-                    <p class="h4 center">Jornades</p>
+                    
+                    <p class="h4 text-center" id="titol">Jornades</p>
                     <br>
-                    <table id="jornades" class="table table-striped">
-                        <thead>
+                    <table id="jornades" class="table table-striped table-hover">
+                        <thead class="thead-dark">
                         <tr>
                             <th scope="col">Dia</th>
                             <th scope="col">Hores</th>
