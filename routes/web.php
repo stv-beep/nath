@@ -34,6 +34,8 @@ Route::patch('/activitat',[ActivitatController::class,'update'])->name('jornada.
 
 /* PEDIDOS */
 Route::get('/pedidos', [PedidoController::class,'create'])->name('pedidos.form');
+//post store pedido
+Route::post('/pedidos',[PedidoController::class,'store'])->name('pedidos.store');
 
 
 

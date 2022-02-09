@@ -38,7 +38,7 @@
                     @endif
                  
                     <div class="forms">
-                        <form id="form-inici" class="formJornada" action="" method="post">
+                        <form id="form-preparacio" class="formJornada" action="" method="post">
     
                             @csrf        
                             

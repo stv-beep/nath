@@ -43,7 +43,17 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+        $pedido = new Pedido();
+
+        $horaInici = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
+
+        $pedido-> treballador = $user->id;
+        $pedido-> iniciTasca = $horaInici;
+        $pedido-> tasca = 1;
+
+
+        return view('pedidos.pedidos',compact('user'));
     }
 
     /**
