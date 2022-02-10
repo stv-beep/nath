@@ -11332,32 +11332,14 @@ i.fas.fa-history.fa-lg.formJornada{
   color: white;
 }
 
-/* .boto{
-  
-  margin: 30;
-}
-
-.menu-principal{
-  display:flex;
-  padding: 30;
-  margin: 30;
-  justify-content: center;
-  align-content: space-around;
-  flex-wrap: nowrap;
-  flex-direction: row;
-}
-.interior-boto{
-  padding: 15;
-} */
 
 .options{
   justify-content: center;
-  margin-top: 75px;
-  /* display: grid; */
-  /* Cada quadre ocupa un minim de 250 px o fel 100% si no hi ha espai per un altre quadre || una pàgina té 12 columnes o fraccions*/
-  grid-template-columns: repeat(auto-fit, minmax(250px, 12fr));
-  gap: 15px;
+  margin-top: 25px;
   max-width: 1150px;
+  flex-wrap: wrap;
+  display: flex;
+  align-items: flex-start;
 }
 
 .option{

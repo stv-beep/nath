@@ -36,10 +36,10 @@
                 <br><br>
                 {{-- MENU --}}
                 <div class="options">
-                    <a href="{{ route('pedidos.form') }}" class="btn btn-info btn-lg option" >Pedidos</a>
-                    <a href="" class="btn btn-info btn-lg option" >Recepcions</a>
-                    <a href="" class="btn btn-info btn-lg option" >Reoperacions</a>
-                    <a href="" class="btn btn-info btn-lg option" >Inventari</a>
+                    <a href="{{ route('pedidos.form') }}" class="btn btn-dark btn-lg option" >Pedidos</a>
+                    <a href="" class="btn btn-dark btn-lg option" >Recepcions</a>
+                    <a href="" class="btn btn-dark btn-lg option" >Reoperacions</a>
+                    <a href="" class="btn btn-dark btn-lg option" >Inventari</a>
                 </div>
 
                 {{-- TAULES --}}

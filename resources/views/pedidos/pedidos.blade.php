@@ -9,7 +9,7 @@
 @section('content')
 
 <div class='alert-position hidden alert alert-success' id='alert-success' role='alert'>
-   <strong id="alert-missatge-inici"></strong>&nbsp;
+   <strong id="prepPedido-missatge-inici"></strong>&nbsp;
    <strong id="alert-missatge-final"></strong>&nbsp;
    <i class="fas fa-hourglass-half fa-spin"></i>
    <div class="cronometro">
@@ -38,7 +38,7 @@
                     @endif
                  
                     <div class="forms">
-                        <form id="form-preparacio" class="formJornada" action="" method="post">
+                        <form id="formPrepPedido" class="formJornada" action="{{route('pedidos.store')}}" method="post">
     
                             @csrf        
                             
@@ -46,11 +46,9 @@
                             
                            {{-- <input type="hidden" id="inici-jornada" name="inici-jornada"> --}}
                                 
-                            <button id="sendPreparacio" type="button" class="btn btn-xs btn-outline-success center" onclick="">Preparació</button>
-                          
+                            <button id="sendPrepPedido" type="button" class="btn btn-xs btn-outline-success center"{{--  onclick="startPrepPedido();" --}}>Preparació</button>
                             
-                            
-                            <!--button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button-->  
+                            <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  
                         </form>
     
     
@@ -67,7 +65,7 @@
                             {{-- <input type="hidden" id="final-jornada" name="final-jornada"> --}}
                                 
                           
-                            <button id="sendRevisar" type="button" class="btn btn-xs btn-outline-danger center" onclick="">Revisió</button>
+                            <button id="sendRevisarPedido" type="button" class="btn btn-xs btn-outline-danger center" onclick="">Revisió</button>
                             
                             
                           {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}

@@ -17,10 +17,14 @@ class CreatePedidosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('treballador')->nullable();
             $table->foreign('treballador')->references('id')->on('users');
+            $table->date('dia')->nullable();//jornada
             $table->unsignedBigInteger('tasca')->nullable();
+            $table->float('total')->nullable();
             $table->foreign('tasca')->references('id')->on('tasques');
             $table->datetime('iniciTasca')->nullable();
             $table->datetime('fiTasca')->nullable();
+            $table->unsignedBigInteger('jornada')->nullable();
+            $table->foreign('jornada')->references('id')->on('jornades');
             $table->timestamps();
         });
     }

@@ -144,17 +144,6 @@
        
     }
 
-/* 
-    $(document).ready(function(){
-	$("#total_cron").keyup(function(){
-		var cron = $(this).val();
-		$("#test").html(cron);
-	    })
-    });
- */
-
-
-
     //window.onload = init;
     function init(){
         /* document.querySelector(".start").addEventListener("click",cronometrar);
@@ -183,15 +172,45 @@
     
         document.getElementById("hms").innerHTML = hAux + ":" + mAux + ":" + sAux; 
     }
-   /*  function parar(){
-        clearInterval(id);
-        document.querySelector(".start").addEventListener("click",cronometrar);
+
+
+    function startPrepPedido() {
+        //startTime = new Date();
+       /*  
+        startTime = moment().format('YYYY-MM-DD[T]HH:mm:ss');
+        console.log(moment().format(startTime));
     
-    }
-    function reiniciar(){
-        clearInterval(id);
-        document.getElementById("hms").innerHTML="00:00:00";
-        h=0;m=0;s=0;
-        document.querySelector(".start").addEventListener("click",cronometrar);
-    }
- */
+        //$("#inici-jornada").val(startTime);
+        console.log(startTime); */
+            
+            //alert('funco send');
+            console.log('funco send');
+            $.ajax(
+                    {
+                        type: "POST",
+                        url: "/pedidos",//"{{route('pedidos.store')}}"
+                        data:$('#formPrepPedido').serialize(),
+                        success: function( data ) {
+                            
+                            //console.log(data);
+                            //$("#total_cron").val();
+                            //$("#inici-jornada").val(startTime);
+                            //alert('enviat');
+                            
+                            $("#prepPedido-missatge-inici").text("Fet");
+                          /*   init();//mostra el cronometre
+                            cronometrar();//inicia el cronometre */
+                            $("#alert-success")
+                            .fadeTo(4000, 1000)
+                            .slideUp(1000, function () {
+                                $("#alert-success").slideUp(1000);
+                            });
+                                window.setTimeout(function(){
+                                    window.location = "/pedidos";
+                                }, 1500);
+                               
+                        }
+                    }
+                )
+            //return startTime;
+        };
