@@ -46,9 +46,9 @@
                             
                            {{-- <input type="hidden" id="inici-jornada" name="inici-jornada"> --}}
                                 
-                            <button id="sendPrepPedido" type="button" class="btn btn-xs btn-outline-success center"{{--  onclick="startPrepPedido();" --}}>Preparació</button>
+                            <button id="sendPrepPedido" type="button" class="btn btn-xs btn-outline-success center" onclick="startPrepPedido();">Preparació</button>
                             
-                            <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  
+                            {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}  
                         </form>
     
     
@@ -110,30 +110,30 @@
                         
                         </div>
                     </div>
-                    </div>
-                    {{-- <table id="activitats" class="table table-striped table-hover">
+                    
+                    <table id="activitats" class="table table-striped table-hover">
                         <thead class="thead-dark">
                         <tr>
+                            <th scope="col">Tasca</th>
                             <th scope="col">Dia</th>
                             <th scope="col">Total</th>
                             <th scope="col">Inici tasca</th>
                             <th scope="col">Fi tasca</th>
-                            <th scope="col">Created</th>
-                            <th scope="col">Updated</th>
+
                         </tr>
                         </thead>
                         @foreach ($pedidos as $t)
                         <tr>
+                            <td>{{$t->tasca}}</td>
                             <td>{{$t->dia}}</td>
                             <td>{{$t->total}}</td>
                             <td>{{$t->iniciTasca}}</td>
                             <td>{{$t->fiTasca}}</td>
-                            <td>{{$t->created_at}}</td>
-                            <td>{{$t->updated_at}}</td>
+
                         </tr>
                         @endforeach
-                    </table> --}}
-                    
+                    </table>
+                </div> 
                 </div>
                 </div>
 

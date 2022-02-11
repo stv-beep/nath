@@ -207,7 +207,7 @@
                             });
                                 window.setTimeout(function(){
                                     window.location = "/pedidos";
-                                }, 500);
+                                }, 1500);
                                
                         }
                     }
