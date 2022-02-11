@@ -52,7 +52,7 @@
                         </form>
     
     
-                        <!--FORM FI JORNADA-->
+                        
                         <form id="form-final" class="formJornada" action="" method="post">
     
                             @csrf        
@@ -111,7 +111,28 @@
                         </div>
                     </div>
                     </div>
-
+                    {{-- <table id="activitats" class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Dia</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Inici tasca</th>
+                            <th scope="col">Fi tasca</th>
+                            <th scope="col">Created</th>
+                            <th scope="col">Updated</th>
+                        </tr>
+                        </thead>
+                        @foreach ($pedidos as $t)
+                        <tr>
+                            <td>{{$t->dia}}</td>
+                            <td>{{$t->total}}</td>
+                            <td>{{$t->iniciTasca}}</td>
+                            <td>{{$t->fiTasca}}</td>
+                            <td>{{$t->created_at}}</td>
+                            <td>{{$t->updated_at}}</td>
+                        </tr>
+                        @endforeach
+                    </table> --}}
                     
                 </div>
                 </div>

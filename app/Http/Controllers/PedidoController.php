@@ -21,7 +21,7 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        //
+       
     }
 
     /**
@@ -32,7 +32,9 @@ class PedidoController extends Controller
     public function create()
     {
         $user = Auth::user();
-        return view('pedidos.pedidos',compact('user'));
+
+        $pedidos = Pedido::where(['treballador' =>  Auth::id()])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
+        return view('pedidos.pedidos',compact('user','pedidos'));
     }
 
     /**
@@ -43,6 +45,7 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
+        $idTasca = 1;
         $user = Auth::user();
         //$pedido = new Pedido();
 
@@ -51,45 +54,64 @@ class PedidoController extends Controller
         $horaInici = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
         $horaFinal = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
 
-        
+        //Model::whereNotNull('sent_at')
+
         /*nou registre*/
-        $pedido = Pedido::firstOrCreate(//busco el registre concret, i si no el troba, el creo
+        /* $pedido1 = Pedido::firstOrCreate(//busco el registre concret, i si no el troba, el creo
             ['dia'=> $diaFormat, 'treballador'=> Auth::id(), 'tasca' => 1]
+        ); */
+
+        $pedido1 = Pedido::firstOrNew(
+            ['dia' => $diaFormat, 'treballador'=> Auth::id(), 'tasca' => 1],
+            ['iniciTasca' => $horaInici,'fiTasca' => $horaFinal]
         );
+        $pedido1->save();
 
-        $tasca = Pedido::where(['dia' => $diaFormat, 'treballador' => Auth::id()])->latest()->first();
-        //return $tasca;
-        if ($tasca->total == 0.00 || $tasca->total == null || $tasca->created_at == null || $tasca->created_at == $tasca->updated_at){//si no hi ha total o, inici = final
-            
+        //busco l'ultima tasca creada. Pot ser la de dalt o una ja feta
+        $tasca = Pedido::where(['treballador'=> Auth::id(), 'tasca' => 1])->latest('id')->first();
 
-            $pedido = Pedido::updateOrCreate(
-                ['dia'=> $diaFormat, 'treballador'=> Auth::id(),'tasca' => 1 ],
-                ['tasca' => 1, 'dia'=> $diaFormat, 'treballador'=> Auth::id(),'updated_at'=> $horaFinal]
+        
+        
+
+        if($tasca->iniciTasca == $tasca->fiTasca){//si es una tasca nomes començada
+            $pedidoUpdate = Pedido::updateOrCreate(
+                ['dia'=> $diaFormat, 'treballador'=> Auth::id(),'tasca' => 1, 'iniciTasca'=> $tasca->iniciTasca],
+                ['tasca' => 1, 'dia'=> $diaFormat, 'treballador'=> Auth::id(), 'fiTasca'=> Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s')]
             );
-
-            $tasca = Pedido::where(['dia' => $diaFormat, 'treballador' => Auth::id()])->latest()->first();
-            $iniciada = $tasca->created_at;
-            $acabada = $tasca->updated_at;
+            
+            $pedido = Pedido::where(['dia'=> $diaFormat, 'treballador'=> Auth::id(), 'tasca' => 1])->latest('id')->first();
+            /* $iniciada = $pedido->created_at;
+            $acabada = $pedido->updated_at; */
+            $iniciada = $pedido->iniciTasca;
+            $acabada = $pedido->fiTasca;
             $iniciSegs = strtotime($iniciada);
             $acabadaSegs = strtotime($acabada);
             $resta = $acabadaSegs - $iniciSegs;
             $min = $resta/60;
             $hores = $min/60;
             $pedido-> total = $min;
+            $pedido-> fiTasca = $horaFinal;
             $pedido->update();
-            
-            
-        } else { //si hi ha diferencia entre inici i final, i per tant, se te que crear un registre nou
-            
-            $pedido = new Pedido();
-            $diaFormat = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d');
-            $pedido->dia = $diaFormat;
-            $pedido-> treballador = $user->id;
-            $pedido-> tasca = 1;
-            $pedido->save();
+            //return $pedido;
+            echo 'if($iniciTasca == $finalTasca)';
+
+        } else {
+
+            $nouPedido = new Pedido();
+            $nouPedido->treballador=Auth::id();
+            $nouPedido->tasca=$idTasca;
+            $nouPedido->dia=$diaFormat;
+            $hour = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
+            $nouPedido-> iniciTasca = $hour;
+            $nouPedido-> fiTasca = $hour;
+            $nouPedido->save();
+            $nPedido = Pedido::where(['treballador'=> Auth::id(), 'tasca' => 1])->latest('id')->first();
+            echo 'else (inici != final)';
         }
-        
-        return view('pedidos.pedidos',compact('user'));
+
+
+        return view('pedidos.pedidos',compact('user'));      
+       
     }
 
     /**
