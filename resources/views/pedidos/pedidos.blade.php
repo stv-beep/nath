@@ -25,7 +25,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Pedidos') }} {{$user->id}}</div>
+                <div class="card-header">{{ __('Pedidos') }} de {{$user->name}}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -95,6 +95,17 @@
                                 
                           
                             <button id="sendSAF" type="button" class="btn btn-xs btn-outline-danger center" onclick="end()">SAF</button>
+                            
+                            
+                          {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
+                        </form>
+
+
+
+                        <form id="formStopPedidos" class="formJornada" action="" method="post">
+    
+                            @csrf                          
+                            <button id="sendStopPedidos" type="button" class="btn btn-xs btn-danger center" onclick="">Stop</button>
                             
                             
                           {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
