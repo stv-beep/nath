@@ -214,3 +214,30 @@
                 )
             //return startTime;
         };
+
+
+        function startRevPedido() {
+                console.log('funco send');
+                $.ajax(
+                        {
+                            type: "POST",
+                            url: "/pedidos/revisio",//"{{route('pedidos.store')}}"
+                            data:$('#formRevPedido').serialize(),
+                            success: function( data ) {
+                                
+                                $("#prepPedido-missatge-inici").text("Fet");
+                              /*   init();//mostra el cronometre
+                                cronometrar();//inicia el cronometre */
+                                $("#alert-success")
+                                .fadeTo(4000, 1000)
+                                .slideUp(1000, function () {
+                                    $("#alert-success").slideUp(1000);
+                                });
+                                    window.setTimeout(function(){
+                                        window.location = "/pedidos";
+                                    }, 1500);
+                                   
+                            }
+                        }
+                    )
+            };
