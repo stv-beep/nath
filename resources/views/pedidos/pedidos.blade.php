@@ -37,13 +37,8 @@
                     <div class="forms">
                         <form id="formPrepPedido" class="formJornada" action="{{route('pedidos.store')}}" method="post">
     
-                            @csrf        
-                            
-                           {{--  <input type="hidden" name="treballador" id="treballador" value="{{$user->id}}"> --}}
-                            
-                           {{-- <input type="hidden" id="inici-jornada" name="inici-jornada"> --}}
-                                
-                            <button id="sendPrepPedido" type="button" class="btn btn-xs btn-outline-success center" onclick="startPrepPedido();">Preparació</button>
+                            @csrf                                
+                            <button id="sendPrepPedido" type="button" class="btn btn-xs btn-success center" onclick="startPrepPedido();">Preparació</button>
                             
                             {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  --}} 
                         </form>
@@ -53,13 +48,7 @@
                         <form id="formRevPedido" class="formJornada" action="{{route('revPedidos.store')}}" method="post">
     
                             @csrf        
-
-                            {{-- <input type="hidden" name="treballador" id="treballador" value="{{$user->id}}"> --}}
-
-                            {{-- <input type="hidden" id="final-jornada" name="final-jornada"> --}}
-                                
-                          
-                            <button id="sendRevisarPedido" type="button" class="btn btn-info" onclick="startRevPedido();">Revisió</button>
+                            <button id="sendRevisarPedido" type="button" class="btn btn-success" onclick="startRevPedido();">Revisió</button>
                             
                             
                           {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
@@ -77,7 +66,7 @@
                             {{-- <input type="hidden" id="final-jornada" name="final-jornada"> --}}
                                 
                           
-                            <button id="sendExpedicions" type="button" class="btn btn-xs btn-outline-danger center" onclick="end()">Expedicions</button>
+                            <button id="sendExpedicions" type="button" class="btn btn-xs btn-success center" onclick="">Expedicions</button>
                             
                             
                           {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
@@ -94,7 +83,7 @@
                             {{-- <input type="hidden" id="final-jornada" name="final-jornada"> --}}
                                 
                           
-                            <button id="sendSAF" type="button" class="btn btn-xs btn-outline-danger center" onclick="end()">SAF</button>
+                            <button id="sendSAF" type="button" class="btn btn-xs btn-success center" onclick="">SAF</button>
                             
                             
                           {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
@@ -102,12 +91,10 @@
 
 
 
-                        <form id="formStopPedidos" class="formJornada" action="" method="post">
+                        <form id="formStopPedidos" class="formJornada" action="{{route('stop.pedidos')}}" method="post">
     
                             @csrf                          
-                            <button id="sendStopPedidos" type="button" class="btn btn-xs btn-danger center" onclick="">Stop</button>
-                            
-                            
+                            <button id="sendStopPedidos" type="button" class="btn btn-xs btn-danger center" onclick="stopPedidos();">Stop</button>
                           {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                         </form>
                         
@@ -130,7 +117,7 @@
                         {{-- degut a certs problemes amb els inner joins utilitzats per a aconseguir el nom de les tasques
                             m'he vist obligat a mostrar el nom per mitja de condicions --}}
                         @foreach ($pedidos as $t)
-                        <tr>
+                        <tr id="{{$t->id}}">
                             @if ($t->tasca == 1 )
                                 <td>{{$tasques[0]->tasca}}</td>
                              @elseif ($t->tasca == 2)
@@ -142,7 +129,11 @@
                             @endif                          
                             
                             <td>{{$t->dia}}</td>
-                            <td>{{$t->total}}</td>
+                            @if ($t->total == null || $t->total == 0)
+                                <td><i class="fas fa-hourglass-half fa-spin center"></i></td>
+                            @else
+                                <td>{{$t->total}}</td>
+                            @endif
                             <td>{{$t->iniciTasca}}</td>
                             <td>{{$t->fiTasca}}</td>
 

@@ -20,6 +20,30 @@
 
     });  */
 
+    /* comprovacio de tasques per a desabilitar botons */
+    window.onload = checkLastTask;
+    function checkLastTask(){
+            console.log("unga");
+            var primeraTascaLlista = document.getElementsByTagName("tr")[1];
+            var idTasca = document.getElementById(primeraTascaLlista);
+            //var totalTasca = document.getElementsByTagName("td")[2];
+            var totalTasca = document.getElementsByTagName("td")[2].innerHTML;//busco la columna de TOTAL de l'ultima tasca de la taula
+            if ((totalTasca.includes("hourglass"))){//<i class=\"fas fa-hourglass-half fa-spin center\"></i>
+                console.log("no esta acabat");
+                document.getElementById("sendPrepPedido").disabled = true;
+                document.getElementById("sendRevisarPedido").disabled = true;
+                document.getElementById("sendExpedicions").disabled = true;
+                document.getElementById("sendSAF").disabled = true;
+            } else {
+                console.log("ja esta acabat");
+                document.getElementById("sendPrepPedido").disabled = false;
+                document.getElementById("sendRevisarPedido").disabled = false;
+                document.getElementById("sendExpedicions").disabled = false;
+                document.getElementById("sendSAF").disabled = false;
+            }
+                    
+        }
+
     
     var startTime, endTime, h;
 
@@ -175,15 +199,6 @@
 
 
     function startPrepPedido() {
-        //startTime = new Date();
-       /*  
-        startTime = moment().format('YYYY-MM-DD[T]HH:mm:ss');
-        console.log(moment().format(startTime));
-    
-        //$("#inici-jornada").val(startTime);
-        console.log(startTime); */
-            
-            //alert('funco send');
             console.log('funco send');
             $.ajax(
                     {
@@ -191,12 +206,7 @@
                         url: "/pedidos",//"{{route('pedidos.store')}}"
                         data:$('#formPrepPedido').serialize(),
                         success: function( data ) {
-                            
-                            //console.log(data);
-                            //$("#total_cron").val();
-                            //$("#inici-jornada").val(startTime);
-                            //alert('enviat');
-                            
+                                                        
                             $("#prepPedido-missatge-inici").text("Fet");
                           /*   init();//mostra el cronometre
                             cronometrar();//inicia el cronometre */
@@ -205,23 +215,32 @@
                             .slideUp(1000, function () {
                                 $("#alert-success").slideUp(1000);
                             });
-                                window.setTimeout(function(){
+                            $("#activitats").load(" #activitats");
+                                /* window.setTimeout(function(){
                                     window.location = "/pedidos";
                                 }, 1500);
-                               
+                                 */
+                            /* comprovant si els botons estan disabled o no per a desabilitarlos o no */
+                            var revPedido = document.getElementById("sendRevisarPedido").disabled;
+                            var expedPedido = document.getElementById("sendExpedicions").disabled;
+                            var SAFPedido = document.getElementById("sendSAF").disabled;
+
+                                document.getElementById("sendRevisarPedido").disabled = !revPedido;
+                                document.getElementById("sendExpedicions").disabled = !expedPedido;
+                                document.getElementById("sendSAF").disabled = !SAFPedido;     
                         }
                     }
                 )
-            //return startTime;
+           
         };
 
 
-        function startRevPedido() {
+    function startRevPedido() {
                 console.log('funco send');
                 $.ajax(
-                        {
+                    {
                             type: "POST",
-                            url: "/pedidos/revisio",//"{{route('pedidos.store')}}"
+                            url: "/pedidos/revisio",
                             data:$('#formRevPedido').serialize(),
                             success: function( data ) {
                                 
@@ -233,11 +252,56 @@
                                 .slideUp(1000, function () {
                                     $("#alert-success").slideUp(1000);
                                 });
+                                $("#activitats").load(" #activitats");
+                                    /* window.setTimeout(function(){
+                                        window.location = "/pedidos";
+                                    }, 1500); */
+                            /* comprovant si els botons estan disabled o no per a desabilitarlos o no */
+                            var prepPedido = document.getElementById("sendPrepPedido").disabled;
+                            var expedPedido = document.getElementById("sendExpedicions").disabled;
+                            var SAFPedido = document.getElementById("sendSAF").disabled;
+
+                                document.getElementById("sendPrepPedido").disabled = !prepPedido;
+                                document.getElementById("sendExpedicions").disabled = !expedPedido;
+                                document.getElementById("sendSAF").disabled = !SAFPedido;
+                        }
+                    }
+                )
+    };
+
+    
+    function stopPedidos(){
+        console.log('funco send');
+                $.ajax(
+                    {
+                            type: "POST",
+                            url: "/pedidos/stop",
+                            data:$('#formStopPedidos').serialize(),
+                            success: function( data ) {
+                                
+                                $("#prepPedido-missatge-inici").text("S'ha parat amb èxit.");
+                              /*   init();//mostra el cronometre
+                                cronometrar();//inicia el cronometre */
+                                $("#alert-success")
+                                .fadeTo(4000, 1000)
+                                .slideUp(1000, function () {
+                                    $("#alert-success").slideUp(1000);
+                                });
+                                $("#activitats").load(" #activitats");
                                     window.setTimeout(function(){
                                         window.location = "/pedidos";
                                     }, 1500);
                                    
+                            },//si no s'ha trobat cap registre, retornara error amb alert
+                            error: function(xhr, textStatus, error){
+                                $("#alert-danger-missatge-final").text("No es pot parar la tasca perquè no se n'ha trobat cap.");
+                                $(".cronometro").hide();
+                                $("#alert-danger")
+                                .fadeTo(4000, 1000)
+                                .slideUp(1000, function () {
+                                    $("#alert-danger").slideUp(1000);
+                                });
                             }
-                        }
-                    )
-            };
+                    }
+                )
+    };

@@ -38,6 +38,10 @@ Route::get('/pedidos', [PedidoController::class,'create'])->name('pedidos.form')
 Route::post('/pedidos',[PedidoController::class,'store'])->name('pedidos.store');
 //store Revisio pedido
 Route::post('/pedidos/revisio',[PedidoController::class,'storeRevPedido'])->name('revPedidos.store');
+//stop pedidos
+Route::post('/pedidos/stop',[PedidoController::class,'stopPedidos'])->name('stop.pedidos');
+//check pedidos
+//Route::post('/pedidos/check',[PedidoController::class,'stopPedidos'])->name('check.tasques');
 
 
 

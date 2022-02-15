@@ -1,46 +1,66 @@
-/* .container {
-    max-width: 500px;
-    margin: 50px auto;
-    text-align: left;
-    font-family: sans-serif;
-}
+/* custom @AleixAlgueró */
+.forms {
+    display: flex;
+      justify-content: center;
+      align-content: space-around;
+      flex-wrap: nowrap;
+      flex-direction: row;
+  }
+  
+  .formJornada{
+    margin: 10px;
+  }
+  
+  i.fas.fa-history.fa-lg.formJornada{
+    line-height: 1.8em;
+  }
+  
+  #alert-success{
+    display: none;
+  }
+  
+  #alert-danger{
+    display: none;
+  }
+  
+  #hms{
+     display: flex;
+    }
+  
+  #titol{
+    margin: 30;
+  }
+  
+  .thead-dark{
+    background-color: #212529;
+    color: white;
+  }
+  
+  
+  .options{
+    justify-content: center;
+    margin-top: 25px;
+    max-width: 1150px;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .option{
+    margin:20px;
+    height: 60px;
+    min-width: 250px;
+    max-width: 100%;
+    border-radius: 10px;
+    font-size: 25px;
+    border: none;
     
-
-
-form {
-    border: 1px solid #1A33FF;
-    background: #ecf5fc;
-    padding: 40px 50px 45px;
-}
-    
-
-
-.form-control:focus {
-    border-color: #000;
-    box-shadow: none;
-}
-    
-
-
-label {
-    font-weight: 600;
-}
-    
-
-
-.error {
-    color: red;
-    font-weight: 400;
-    display: block;
-    padding: 6px 0;
-    font-size: 14px;
-}
-    
-
-
-.form-control.error {
-    border-color: red;
-    padding: .375rem .75rem;
-}
-    
- */
+  }
+  
+  /* .box {
+    justify-content: center;
+    display: grid;
+    grid-template-columns:  1fr 1fr;
+    grid-template-rows:  1fr 1fr;
+    gap: 10px 20px;
+  } */
