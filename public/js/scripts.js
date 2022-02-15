@@ -27,7 +27,7 @@
             var primeraTascaLlista = document.getElementsByTagName("tr")[1];
             var idTasca = document.getElementById(primeraTascaLlista);
             //var totalTasca = document.getElementsByTagName("td")[2];
-            var totalTasca = document.getElementsByTagName("td")[2].innerHTML;//busco la columna de TOTAL de l'ultima tasca de la taula
+            var totalTasca = document.getElementsByTagName("td")[1].innerHTML;//busco la columna de TOTAL de l'ultima tasca de la taula
             if ((totalTasca.includes("hourglass"))){//<i class=\"fas fa-hourglass-half fa-spin center\"></i>
                 console.log("no esta acabat");
                 document.getElementById("sendPrepPedido").disabled = true;

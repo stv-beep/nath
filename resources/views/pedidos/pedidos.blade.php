@@ -34,71 +34,52 @@
                         </div>
                     @endif
                  
-                    <div class="forms">
-                        <form id="formPrepPedido" class="formJornada" action="{{route('pedidos.store')}}" method="post">
-    
-                            @csrf                                
-                            <button id="sendPrepPedido" type="button" class="btn btn-xs btn-success center" onclick="startPrepPedido();">Preparació</button>
-                            
-                            {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  --}} 
-                        </form>
-    
-    
+                    <div class="grid-container">
                         
-                        <form id="formRevPedido" class="formJornada" action="{{route('revPedidos.store')}}" method="post">
+                            <div class="item1">{{-- canviar el div pel boto directament
+                                https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_layout_named --}}
+                                <form id="formPrepPedido" action="{{route('pedidos.store')}}" method="post">
     
-                            @csrf        
-                            <button id="sendRevisarPedido" type="button" class="btn btn-success" onclick="startRevPedido();">Revisió</button>
-                            
-                            
-                          {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
-                        </form>
-
-                        <form id="form-final" class="formJornada" action="" method="post">
-    
-                            @csrf        
-                            @method('PATCH')                       
-                            {{-- <input type="hidden" name="treballador" id="treballador" value="{{$user->id}}"> --}}
-                            
-      
-                            
-                              
-                            {{-- <input type="hidden" id="final-jornada" name="final-jornada"> --}}
+                                @csrf                                
+                                <button id="sendPrepPedido" type="button" class="btn btn-lg btn-success" onclick="startPrepPedido();">Preparació</button>
                                 
-                          
-                            <button id="sendExpedicions" type="button" class="btn btn-xs btn-success center" onclick="">Expedicions</button>
-                            
-                            
-                          {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
-                        </form>
-                        <form id="form-final" class="formJornada" action="" method="post">
+                                {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  --}} 
+                                </form>
+                            </div>
+                            <div class="item2">
+                                <form id="formRevPedido" action="{{route('revPedidos.store')}}" method="post">
     
-                            @csrf        
-                            @method('PATCH')                       
-                            {{-- <input type="hidden" name="treballador" id="treballador" value="{{$user->id}}"> --}}
-                            
-      
-                            
-                              
-                            {{-- <input type="hidden" id="final-jornada" name="final-jornada"> --}}
-                                
-                          
-                            <button id="sendSAF" type="button" class="btn btn-xs btn-success center" onclick="">SAF</button>
-                            
-                            
-                          {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
-                        </form>
-
-
-
-                        <form id="formStopPedidos" class="formJornada" action="{{route('stop.pedidos')}}" method="post">
+                                    @csrf        
+                                    <button id="sendRevisarPedido" type="button" class="btn btn-lg btn-success" onclick="startRevPedido();">Revisió</button>
+                                    
+                                    
+                                  {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
+                                </form>
+                            </div>
+                            <div class="item3">
+                                <form id="form-final" action="" method="post">
+                                    @csrf        
+                                    <button id="sendExpedicions" type="button" class="btn btn-lg btn-success" onclick="">Expedicions</button>
+                                  {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
+                                </form>
+                            </div>  
+                            <div class="item4">
+                                <form id="form-final" action="" method="post">
+                                    @csrf
+                                    <button id="sendSAF" type="button" class="btn btn-lg btn-success" onclick="">SAF</button>
+                                    {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
+                                </form>
+                            </div>
+                            <div class="item5">
+                                <form id="formStopPedidos" action="{{route('stop.pedidos')}}" method="post">
     
-                            @csrf                          
-                            <button id="sendStopPedidos" type="button" class="btn btn-xs btn-danger center" onclick="stopPedidos();">Stop</button>
-                          {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
-                        </form>
-                        
-                        
+                                    @csrf                          
+                                    <button id="sendStopPedidos" type="button" class="btn btn-lg btn-danger" onclick="stopPedidos();">Stop</button>
+                                  {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
+                                </form>
+                            </div>
+                          </div>
+                          <div>
                         
                         </div>
                     </div>
@@ -107,7 +88,6 @@
                         <thead class="thead-dark">
                         <tr>
                             <th scope="col">Tasca</th>
-                            <th scope="col">Dia</th>
                             <th scope="col">Total</th>
                             <th scope="col">Inici tasca</th>
                             <th scope="col">Fi tasca</th>
@@ -128,11 +108,10 @@
                                 <td>{{$tasques[3]->tasca}}</td>
                             @endif                          
                             
-                            <td>{{$t->dia}}</td>
                             @if ($t->total == null || $t->total == 0)
                                 <td><i class="fas fa-hourglass-half fa-spin center"></i></td>
                             @else
-                                <td>{{$t->total}}</td>
+                                <td><b>{{$t->total}}</b></td>
                             @endif
                             <td>{{$t->iniciTasca}}</td>
                             <td>{{$t->fiTasca}}</td>
