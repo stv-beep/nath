@@ -270,7 +270,7 @@
                                    
                             },//si no s'ha trobat cap registre, retornara error amb alert
                             error: function(xhr, textStatus, error){
-                                $("#alert-danger-missatge-final").text("No es pot parar la tasca perquè no se n'ha trobat cap.");
+                                $("#alert-danger-missatge-final").text("No hi ha cap tasca per a parar.");
                                 $(".cronometro").hide();
                                 $("#alert-danger")
                                 .fadeTo(4000, 1000)

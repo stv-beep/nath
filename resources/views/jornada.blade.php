@@ -43,7 +43,7 @@
                         
                        {{-- <input type="hidden" id="inici-jornada" name="inici-jornada"> --}}
                             
-                        <button id="sendInici" type="button" class="btn btn-xs btn-outline-success center" onclick="start()"><i class="fas fa-hourglass-start"></i> Començar</button>
+                        <button id="sendInici" type="button" class="btn btn-xs btn-outline-success center" onclick="start()"><i class="fas fa-hourglass-start"></i> Iniciar</button>
                       
                         
                         
@@ -64,7 +64,7 @@
                         {{-- <input type="hidden" id="final-jornada" name="final-jornada"> --}}
                             
                       
-                        <button id="sendFi" type="button" class="btn btn-xs btn-outline-danger center" onclick="end()"><i class="fas fa-hourglass-end"></i> Acabar</button>
+                        <button id="sendFi" type="button" class="btn btn-xs btn-outline-danger center" onclick="end()"><i class="fas fa-hourglass-end"></i> Stop</button>
                         
                         
                       {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
