@@ -1,9 +1,10 @@
 @extends('layouts.app')
 <!--altres-->
 
-
 @section('title', 'Pedidos')
+
 @section('content')
+<script src="{{ asset('js/Pedidos.js') }}" defer></script>
 
 <div class='alert-position hidden alert alert-success' id='alert-success' role='alert'>
    <strong id="prepPedido-missatge-inici"></strong>&nbsp;
@@ -41,7 +42,7 @@
                                 <form id="formPrepPedido" action="{{route('pedidos.store')}}" method="post">
     
                                 @csrf                                
-                                <button id="sendPrepPedido" type="button" class="btn btn-lg btn-success" onclick="startPrepPedido();">Preparació</button>
+                                <button id="sendPrepPedido" type="button" class="opcio btn btn-lg btn-success" onclick="startPrepPedido();">Preparació</button>
                                 
                                 {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  --}} 
                                 </form>
@@ -50,7 +51,7 @@
                                 <form id="formRevPedido" action="{{route('revPedidos.store')}}" method="post">
     
                                     @csrf        
-                                    <button id="sendRevisarPedido" type="button" class="btn btn-lg btn-success" onclick="startRevPedido();">Revisió</button>
+                                    <button id="sendRevisarPedido" type="button" class="opcio btn btn-lg btn-success" onclick="startRevPedido();">Revisió</button>
                                     
                                     
                                   {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
@@ -59,14 +60,14 @@
                             <div class="item3">
                                 <form id="form-final" action="" method="post">
                                     @csrf        
-                                    <button id="sendExpedicions" type="button" class="btn btn-lg btn-success" onclick="">Expedicions</button>
+                                    <button id="sendExpedicions" type="button" class="opcio btn btn-lg btn-success" onclick="">Expedicions</button>
                                   {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                                 </form>
                             </div>  
                             <div class="item4">
                                 <form id="form-final" action="" method="post">
                                     @csrf
-                                    <button id="sendSAF" type="button" class="btn btn-lg btn-success" onclick="">SAF</button>
+                                    <button id="sendSAF" type="button" class="opcio btn btn-lg btn-success" onclick="">SAF</button>
                                     {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                                 </form>
                             </div>
@@ -74,7 +75,7 @@
                                 <form id="formStopPedidos" action="{{route('stop.pedidos')}}" method="post">
     
                                     @csrf                          
-                                    <button id="sendStopPedidos" type="button" class="btn btn-lg btn-danger" onclick="stopPedidos();">Stop</button>
+                                    <button id="sendStopPedidos" type="button" class="opcio btn btn-lg btn-danger" onclick="stopPedidos();">Stop</button>
                                   {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                                 </form>
                             </div>

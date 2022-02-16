@@ -30,11 +30,11 @@
                 </a>
                 <br><br>
                 {{-- MENU --}}
-                <div class="options">
-                    <a href="{{ route('pedidos.form') }}" class="btn btn-dark btn-lg option" >Pedidos</a>
-                    <a href="" class="btn btn-dark btn-lg option" >Recepcions</a>
-                    <a href="" class="btn btn-dark btn-lg option" >Reoperacions</a>
-                    <a href="" class="btn btn-dark btn-lg option" >Inventari</a>
+                <div class="grid-container-home">
+                    <a href="{{ route('pedidos.form') }}" class="item1 btn btn-dark btn-lg" >Pedidos</a>
+                    <a href="" class="item2 btn btn-dark btn-lg" >Recepcions</a>
+                    <a href="" class="item3 btn btn-dark btn-lg" >Reoperacions</a>
+                    <a href="" class="item4 btn btn-dark btn-lg" >Inventari</a>
                 </div>
 
                 {{-- TAULES --}}
