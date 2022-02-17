@@ -70,7 +70,9 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             //'password' => Hash::make($data['password']),
-            'password' => $data['password'],
+            //'password' => $data['password'],
+            //si nomes es necessita un codi per al login, poso la mateixa password a tots i que entrin amb el codi
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ]);
     }
 }
