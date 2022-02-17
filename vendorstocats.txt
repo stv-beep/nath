@@ -1,0 +1,31 @@
+/* arxius importants sent tocats pa login o altres*/
+
+vendor\laravel\framework\src\Illuminate\Auth\EloquentUserProvider.php:159
+
+
+
+vendor\laravel\ui\auth-backend\AuthenticatesUsers.php:73:157
+
+ //'password' => 'required|string',
+
+vendor\laravel\ui\tests\AuthBackend\AuthenticatesUsersTest.php:41:59:85:96
+
+'username' =>$user->username,
+           /*  'email' => $user->email,
+            'password' => 'password', */
+
+
+/* 'email' => [
+                'These credentials do not match our records.', */
+            'username' => [
+                'These credentials do not match our records.',
+
+
+
+vendor\laravel\ui\auth-backend\RegistersUsers.php:36
+
+/* esta linia per a redirigir al home i no al login */
+        //$this->guard()->login($user);
+
+
+app\Http\Requests\LoginRequest.php
