@@ -16,6 +16,7 @@ use App\Http\Controllers\PedidoController;
 |
 */
 
+Route::post('logged_in', [LoginController::class, 'authenticate']);
 Auth::routes();
 
 /* el home redirigeix al login si no s'està loguejat */

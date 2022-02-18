@@ -25,7 +25,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'username' => 'required',
-            'password' => 'required'
+            //'password' => 'required'
         ];
     }
 
@@ -46,11 +46,11 @@ class LoginRequest extends FormRequest
         if ($this->isEmail($username)) {
             return [
                 'email' => $username,
-                'password' => $this->get('password')
+                //'password' => $this->get('password')
             ];
         }
 
-        return $this->only('username', 'password');
+        return $this->only('username'/* , 'password' */);
     }
 
     /**
@@ -66,7 +66,7 @@ class LoginRequest extends FormRequest
 
         return ! $factory->make(
             ['username' => $param],
-            ['username' => 'email']
+            //['username' => 'email']
         )->fails();
     }
 }

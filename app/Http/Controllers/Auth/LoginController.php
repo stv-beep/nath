@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 /* use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth; */
@@ -44,17 +46,17 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function username()
+    /* public function username()
     {
     return 'username';
     }
-    /* public function login(LoginRequest $request)
+    public function login(LoginRequest $request)
     {   
         $input = $request->all();
   
         $this->validate($request, [
             'username' => 'required',
-            //'password' => 'required',
+            'password' => 'required',
         ]);
   
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
@@ -67,4 +69,28 @@ class LoginController extends Controller
         }
           
     } */
+
+    /* versio aleix */
+    public function username()
+    {
+    return 'username';
+    }
+
+    public function authenticate(Request $request){
+        // Retrive Input
+        $credentials = $request->only('username');
+
+        if (Auth::attempt($credentials)) {
+            // if success login
+
+            return redirect()->route('home');
+
+            //return redirect()->intended('/details');
+        } else {
+        // if failed login
+        return redirect()->route('login')->with('error','Email-Address And Password Are Wrong.');
+        }
+    }
+
+
 }
