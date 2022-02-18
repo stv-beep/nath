@@ -183,7 +183,7 @@
                         data:$('#formPrepPedido').serialize(),
                         success: function( data ) {
                                                         
-                            $("#prepPedido-missatge-inici").text("Fet");
+                            $("#prepPedido-missatge-inici").text("Preparació pedido");
                           /*   init();//mostra el cronometre
                             cronometrar();//inicia el cronometre */
                             $("#alert-success")
@@ -220,7 +220,7 @@
                             data:$('#formRevPedido').serialize(),
                             success: function( data ) {
                                 
-                                $("#prepPedido-missatge-inici").text("Fet");
+                                $("#prepPedido-missatge-inici").text("Revisió pedido");
                               /*   init();//mostra el cronometre
                                 cronometrar();//inicia el cronometre */
                                 $("#alert-success")

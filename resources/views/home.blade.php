@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card shadow-lg">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
@@ -31,10 +31,10 @@
                 <br><br>
                 {{-- MENU --}}
                 <div class="grid-container-home">
-                    <a href="{{ route('pedidos.form') }}" class="item1 btn btn-dark btn-lg" >Pedidos</a>
-                    <a href="" class="item2 btn btn-dark btn-lg" >Recepcions</a>
-                    <a href="" class="item3 btn btn-dark btn-lg" >Reoperacions</a>
-                    <a href="" class="item4 btn btn-dark btn-lg" >Inventari</a>
+                    <a href="{{ route('pedidos.form') }}" class="item1 btn btn-orange btn-lg" >Pedidos</a>
+                    <a href="" class="item2 btn btn-orange btn-lg" >Recepcions</a>
+                    <a href="" class="item3 btn btn-orange btn-lg" >Reoperacions</a>
+                    <a href="" class="item4 btn btn-orange btn-lg" >Inventari</a>
                 </div>
 
                 {{-- TAULES --}}
