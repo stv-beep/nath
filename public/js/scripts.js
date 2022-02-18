@@ -245,6 +245,74 @@
                 )
     };
 
+    function startExpedPedido() {
+        console.log('funco send');
+        $.ajax(
+            {
+                    type: "POST",
+                    url: "/pedidos/expedicio",
+                    data:$('#formExpedPedido').serialize(),
+                    success: function( data ) {
+                        
+                        $("#prepPedido-missatge-inici").text("Expedició pedido");
+                      /*   init();//mostra el cronometre
+                        cronometrar();//inicia el cronometre */
+                        $("#alert-success")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-success").slideUp(1000);
+                        });
+                        $("#activitats").load(" #activitats");
+                            /* window.setTimeout(function(){
+                                window.location = "/pedidos";
+                            }, 1500); */
+                    /* comprovant si els botons estan disabled o no per a desabilitarlos o no */
+                    var prepPedido = document.getElementById("sendPrepPedido").disabled;
+                    var revPedido = document.getElementById("sendRevisarPedido").disabled;
+                    var SAFPedido = document.getElementById("sendSAF").disabled;
+
+                        document.getElementById("sendPrepPedido").disabled = !prepPedido;
+                        document.getElementById("sendRevisarPedido").disabled = !revPedido;
+                        document.getElementById("sendSAF").disabled = !SAFPedido;
+                }
+            }
+        )
+    };
+
+    function startSAFPedido() {
+        console.log('funco send');
+        $.ajax(
+            {
+                    type: "POST",
+                    url: "/pedidos/saf",
+                    data:$('#formSAFPedido').serialize(),
+                    success: function( data ) {
+                        
+                        $("#prepPedido-missatge-inici").text("SAF");
+                      /*   init();//mostra el cronometre
+                        cronometrar();//inicia el cronometre */
+                        $("#alert-success")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-success").slideUp(1000);
+                        });
+                        $("#activitats").load(" #activitats");
+                            /* window.setTimeout(function(){
+                                window.location = "/pedidos";
+                            }, 1500); */
+                    /* comprovant si els botons estan disabled o no per a desabilitarlos o no */
+                    var prepPedido = document.getElementById("sendPrepPedido").disabled;
+                    var revPedido = document.getElementById("sendRevisarPedido").disabled;
+                    var expedPedido = document.getElementById("sendExpedicions").disabled;
+
+                        document.getElementById("sendPrepPedido").disabled = !prepPedido;
+                        document.getElementById("sendRevisarPedido").disabled = !revPedido;
+                        document.getElementById("sendExpedicions").disabled = !expedPedido;
+                }
+            }
+        )
+    };
+
     
     function stopPedidos(){
         console.log('funco send');
@@ -255,6 +323,7 @@
                             data:$('#formStopPedidos').serialize(),
                             success: function( data ) {
                                 
+                                if (document.getElementsByTagName("td")[1].innerHTML.includes("hourglass")){
                                 $("#prepPedido-missatge-inici").text("S'ha parat amb èxit.");
                               /*   init();//mostra el cronometre
                                 cronometrar();//inicia el cronometre */
@@ -267,7 +336,15 @@
                                     window.setTimeout(function(){
                                         window.location = "/pedidos";
                                     }, 1500);
-                                   
+                                } else {
+                                    $("#alert-danger-missatge-final").text("No hi ha cap tasca per a parar.");
+                                    $(".cronometro").hide();
+                                    $("#alert-danger")
+                                    .fadeTo(4000, 1000)
+                                    .slideUp(1000, function () {
+                                        $("#alert-danger").slideUp(1000);
+                                    });
+                                }
                             },//si no s'ha trobat cap registre, retornara error amb alert
                             error: function(xhr, textStatus, error){
                                 $("#alert-danger-missatge-final").text("No hi ha cap tasca per a parar.");

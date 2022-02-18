@@ -16,6 +16,7 @@ use App\Http\Controllers\PedidoController;
 |
 */
 
+/* metode del controlador creat manualment */
 Route::post('logged_in', [LoginController::class, 'authenticate']);
 Auth::routes();
 
@@ -30,7 +31,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/activitat',[ActivitatController::class,'create'])->name('jornada.form');
 //post store activitat
 Route::post('/home',[ActivitatController::class,'store'])->name('jornada.store');
-
+//tancar jornada
 Route::patch('/activitat',[ActivitatController::class,'update'])->name('jornada.update');
 
 /* PEDIDOS */
@@ -41,32 +42,12 @@ Route::post('/pedidos',[PedidoController::class,'store'])->name('pedidos.store')
 Route::post('/pedidos/revisio',[PedidoController::class,'storeRevPedido'])->name('revPedidos.store');
 //stop pedidos
 Route::post('/pedidos/stop',[PedidoController::class,'stopPedidos'])->name('stop.pedidos');
-//check pedidos
-//Route::post('/pedidos/check',[PedidoController::class,'stopPedidos'])->name('check.tasques');
+//store expedicio pedidos
+Route::post('/pedidos/expedicio',[PedidoController::class,'storeExpedPedido'])->name('expedPedidos.store');
+//store saf pedidos
+Route::post('/pedidos/saf',[PedidoController::class,'storeSAFPedido'])->name('safPedidos.store');
 
 
 
 
-
-/* Route::get('/', function () {
-
-    return view('welcome');
-    
-}); */
-
-/* Route::group(['middleware' => 'auth'], function(){
-
-
-}); */
-
-
-
-/* Route::get('/home/activitat/{variable}', function ($variable) {
-    return $variable;
-}); */
-
-/* Route::view('/inici-form', 'inici-form'); */
-/**enllaços */
-/*
-https://www.oulub.com/es-ES/Laravel/authentication
-*/
+//https://www.youtube.com/watch?v=eRYz62Cx0Wg&ab_channel=Inform%C3%A1ticaDP

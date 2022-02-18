@@ -37,8 +37,7 @@
                  
                     <div class="grid-container">
                         
-                            <div class="item1">{{-- canviar el div pel boto directament
-                                https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_layout_named --}}
+                            <div class="item1">
                                 <form id="formPrepPedido" action="{{route('pedidos.store')}}" method="post">
     
                                 @csrf                                
@@ -58,16 +57,16 @@
                                 </form>
                             </div>
                             <div class="item3">
-                                <form id="form-final" action="" method="post">
+                                <form id="formExpedPedido" action="{{route('expedPedidos.store')}}" method="post">
                                     @csrf        
-                                    <button id="sendExpedicions" type="button" class="opcio btn btn-lg btn-success ped" onclick="">Expedicions</button>
+                                    <button id="sendExpedicions" type="button" class="opcio btn btn-lg btn-success ped" onclick="startExpedPedido();">Expedicions</button>
                                   {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                                 </form>
                             </div>  
                             <div class="item4">
-                                <form id="form-final" action="" method="post">
+                                <form id="formSAFPedido" action="{{route('safPedidos.store')}}" method="post">
                                     @csrf
-                                    <button id="sendSAF" type="button" class="opcio btn btn-lg btn-success ped" onclick="">SAF</button>
+                                    <button id="sendSAF" type="button" class="opcio btn btn-lg btn-success ped" onclick="startSAFPedido();">SAF</button>
                                     {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                                 </form>
                             </div>
