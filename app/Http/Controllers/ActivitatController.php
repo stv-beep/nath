@@ -16,34 +16,40 @@ class ActivitatController extends Controller
 {
     public function create(){
         $user = Auth::user();
-        return view('jornada',compact('user'));
+        $tornTreb = Activitat::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
+        $dia = Jornada::where(['treballador' => $user->id])->orderBy('id','desc')->take(5)->get();
+        return view('jornada', compact('user','tornTreb','dia'));
     }
 
     public function store(Request $request){
         $user = Auth::user();
-        $activitat = new Activitat();
+        
 
         $d = now();
         $diaFormat = Carbon::parse($d)->setTimezone('Europe/Madrid')->format('Y-m-d');
 
-        $novaJornada = Jornada::firstOrCreate(//busco el registre concret, i si no el troba, el creo
-            ['dia'=> $diaFormat, 'treballador'=> Auth::id() ]            
-        );
-        
-        
-        
-        $activitat-> treballador = $user->id;
-        $activitat-> jornada = now();
-        $jornadaInici = now();
-        $activitat-> iniciJornada = Carbon::parse($jornadaInici)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
-        //$activitat-> iniciJornada = $request->input("inici-jornada");
+        $torn = Activitat::where(['treballador' => Auth::id()])->latest()->first();
 
-        $activitat->save();
-        $activitat = Activitat::all();
-        
-        return view('jornada',compact('user'));
-        //return $request->all();
-} 
+        $activitat = new Activitat();
+
+            $activitat-> treballador = $user->id;
+            $activitat-> jornada = now();
+            $jornadaInici = now();
+            $activitat-> iniciJornada = Carbon::parse($jornadaInici)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
+            //$activitat-> iniciJornada = $request->input("inici-jornada");
+
+            $activitat->save();
+            $activitat = Activitat::all();
+            
+            $novaJornada = Jornada::firstOrCreate(//busco el registre concret, i si no el troba, el creo
+                ['dia'=> $diaFormat, 'treballador'=> Auth::id()]
+            );
+            
+
+        $tornTreb = Activitat::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
+        $dia = Jornada::where(['treballador' => $user->id])->orderBy('id','desc')->take(5)->get();
+        return view('jornada', compact('user','tornTreb','dia'));
+    } 
 
     public function update(Request $request){
         //https://www.ironwoods.es/blog/laravel/eloquent-consultas-frecuentes
@@ -105,7 +111,7 @@ class ActivitatController extends Controller
             $novaJornada-> dia = now();
             $novaJornada -> total = $totalJornada;
             $novaJornada-> update();
-            return view('jornada',compact('user'));
+            
 
         } else {
 
@@ -122,11 +128,12 @@ class ActivitatController extends Controller
 
         $novaJornada-> update();
 
-        return view('jornada',compact('user')); 
+      
         
         }
 
-
+        $tornTreb = Activitat::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
+        return view('jornada', compact('user','tornTreb'));
 
 
         /*  return $mida; */

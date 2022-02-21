@@ -2,6 +2,7 @@
 
 @section('title', 'Activitat')
 @section('content')
+<script src="{{ asset('js/Jornades.js') }}" defer></script>
 
 <div class='alert-position hidden alert alert-success' id='alert-success' role='alert'>
    <strong id="alert-missatge-inici"></strong>&nbsp;
@@ -23,7 +24,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg">
-                <div class="card-header">{{ __('Jornada') }}</div>
+                <div class="card-header">{{ __('Jornada') }} de {{$user->name}}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -37,16 +38,10 @@
                 <div class="forms">
                     <form id="form-inici" class="formJornada" action="{{route('jornada.store')}}" method="post">
 
-                        @csrf        
-                        
-                       {{--  <input type="hidden" name="treballador" id="treballador" value="{{$user->id}}"> --}}
-                        
-                       {{-- <input type="hidden" id="inici-jornada" name="inici-jornada"> --}}
+                        @csrf
                             
-                        <button id="sendInici" type="button" class="btn btn-xs btn-outline-success center" onclick="start()"><i class="fas fa-hourglass-start"></i> Iniciar</button>
-                      
-                        
-                        
+                        <button id="sendInici" type="button" class="btn btn-lg btn-outline-success center" onclick="start()"><i class="fas fa-hourglass-start"></i> Iniciar</button>
+ 
                         <!--button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button-->  
                     </form>
 
@@ -55,16 +50,9 @@
                     <form id="form-final" class="formJornada" action="{{route('jornada.update')}}" method="post">
 
                         @csrf        
-                        @method('PATCH')                       
-                        {{-- <input type="hidden" name="treballador" id="treballador" value="{{$user->id}}"> --}}
-                        
-  
-                        <input type="hidden" id="total_cron" name="total_cron"> 
-                          
-                        {{-- <input type="hidden" id="final-jornada" name="final-jornada"> --}}
-                            
+                        @method('PATCH')
                       
-                        <button id="sendFi" type="button" class="btn btn-xs btn-outline-danger center" onclick="end()"><i class="fas fa-hourglass-end"></i> Stop</button>
+                        <button id="sendFi" type="button" class="btn btn-lg btn-outline-danger center" onclick="end()"><i class="fas fa-hourglass-end"></i> Stop</button>
                         
                         
                       {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
@@ -74,6 +62,21 @@
                     
                     </div>
                 </div>
+                <p class="h4 text-center" id="titol">Torns</p>
+                    <table id="activitats" class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Dia</th>
+                            <th scope="col">Hores</th>
+                        </tr>
+                        </thead>
+                        @foreach ($tornTreb as $a)
+                        <tr>
+                            <td>{{$a->jornada}}</td>
+                            <td>{{$a->total}}</td>
+                        </tr>
+                        @endforeach
+                    </table>
                 </div>
 
             </div>

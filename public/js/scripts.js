@@ -40,6 +40,7 @@
                     url: "/home",//"{{route('jornada.store')}}"
                     data:$('#form-inici').serialize(),
                     success: function( data ) {
+                        document.getElementById("sendInici").disabled = true;
                         
                         //console.log(data);
                         //$("#total_cron").val();
@@ -75,7 +76,7 @@
 
     function end() {
     //endTime = new Date();
-    endTime = moment().format('YYYY-MM-DD[T]HH:mm:ss');
+    /* endTime = moment().format('YYYY-MM-DD[T]HH:mm:ss');
     var timeDiff = endTime - startTime; //in ms
     // strip the ms
     timeDiff = timeDiff / 1000;
@@ -101,7 +102,7 @@
         } else {
             console.log("cronn = "+cron);
         }
-
+ */
     
     //$("#final-jornada").val(endTime);
     
