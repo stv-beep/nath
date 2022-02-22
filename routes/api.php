@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ActivitatController;
+use App\Http\Controllers\PedidoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-/* metode del controlador creat manualment */
-Route::post('logged_in', [App\Http\Controllers\Auth\LoginController::class, 'authenticate']);
+//metode del controlador creat manualment
+Route::post('logged_in', [LoginController::class, 'authenticate']);
 Auth::routes();
 
 //el home redirigeix al login si no s'està loguejat
@@ -30,11 +33,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //JORNADA
 //get crear activitat
-Route::get('/activitat',[ActivitatController::class,'create'])->name('jornada.form');
+Route::get('/jornada',[ActivitatController::class,'create'])->name('jornada.form');
 //post store activitat
 Route::post('/home',[ActivitatController::class,'store'])->name('jornada.store');
 //tancar jornada
-Route::patch('/activitat',[ActivitatController::class,'update'])->name('jornada.update');
+Route::patch('/jornada',[ActivitatController::class,'update'])->name('jornada.update');
 
 //PEDIDOS
 Route::get('/pedidos', [PedidoController::class,'create'])->name('pedidos.form');

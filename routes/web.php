@@ -28,11 +28,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //JORNADA
 //get crear activitat
-Route::get('/activitat',[ActivitatController::class,'create'])->name('jornada.form');
+Route::get('/jornada',[ActivitatController::class,'create'])->name('jornada.form');
 //post store activitat
 Route::post('/home',[ActivitatController::class,'store'])->name('jornada.store');
 //tancar jornada
-Route::patch('/activitat',[ActivitatController::class,'update'])->name('jornada.update');
+Route::patch('/jornada',[ActivitatController::class,'update'])->name('jornada.update');
 
 //PEDIDOS
 Route::get('/pedidos', [PedidoController::class,'create'])->name('pedidos.form');

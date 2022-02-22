@@ -110,7 +110,7 @@
         $.ajax(
                 {
                     type: "POST",
-                    url: "/activitat",//"{{route('jornada.store')}}"
+                    url: "/jornada",//"{{route('jornada.store')}}"
                     data:$('#form-final').serialize(),
                     success: function( response ) {
                         //console.log(response);
