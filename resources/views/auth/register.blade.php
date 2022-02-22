@@ -55,6 +55,22 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="torn" class="col-md-4 col-form-label text-md-end">{{ __('Torn') }}</label>
+                            <div class="col-md-6">
+                            <input type="radio" id="torn" name="torn" value="1">
+                            <label for="torn">Jornada intensiva</label><br>
+                            <input type="radio" id="torn" name="torn" value="2">
+                            <label for="torn">Jornada partida</label><br>
+                            </div>
+                            {{-- <div class="col-md-6">
+                                <input id="torn" type="number" class="form-control" name="torn" required min="1" max="2">
+                                <small id="usernameHelp" class="form-text text-muted">1 - Jornada intensiva</small><br>
+                                <small id="usernameHelp" class="form-text text-muted">2 - Jornada partida</small>
+                            </div> --}}
+                        </div>
+                        
+
+                        <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

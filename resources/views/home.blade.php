@@ -15,12 +15,21 @@
                         </div>
                     @endif
                     Benvingut {{$user->name}}
-                   {{-- <br>
+                    {{-- <br>
                     ID: {{$user->id}}
                     <br>
                     Codi/nom d'usuari: {{$user->username}} --}}
+                    <br>
+                    Tipus de jornada: 
+                    @if ($user->torn == 1)
+                        {{$torns[0]->torn}}
+                    @else
+                        {{$torns[1]->torn}}
+                    @endif
+                    
+
                 </div>
-                <a href="{{ route('jornada.form') }}" class="h-75 btn btn-primary center">
+                <a href="{{ route('jornada.form') }}" class="btn btn-primary center btn-lg">
                     <i class="far fa-calendar-check"></i> Jornada del dia 
                     <?php                  
                         $date = date('Y-m-d H:i:s');

@@ -16,17 +16,17 @@ use App\Http\Controllers\PedidoController;
 |
 */
 
-/* metode del controlador creat manualment */
+//metode del controlador creat manualment
 Route::post('logged_in', [LoginController::class, 'authenticate']);
 Auth::routes();
 
-/* el home redirigeix al login si no s'està loguejat */
+//el home redirigeix al login si no s'està loguejat
 Route::get('/',[ HomeController::class, 'index']);
-/*HOME*/
+//HOME
 Route::view('/home','inici');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-/*JORNADA*/
+//JORNADA
 //get crear activitat
 Route::get('/activitat',[ActivitatController::class,'create'])->name('jornada.form');
 //post store activitat
@@ -34,7 +34,7 @@ Route::post('/home',[ActivitatController::class,'store'])->name('jornada.store')
 //tancar jornada
 Route::patch('/activitat',[ActivitatController::class,'update'])->name('jornada.update');
 
-/* PEDIDOS */
+//PEDIDOS
 Route::get('/pedidos', [PedidoController::class,'create'])->name('pedidos.form');
 //post store preparacio pedido
 Route::post('/pedidos',[PedidoController::class,'store'])->name('pedidos.store');

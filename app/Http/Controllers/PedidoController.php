@@ -36,6 +36,7 @@ class PedidoController extends Controller
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
         $pedidos = Pedido::where(['treballador' =>  Auth::id()])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
         return view('pedidos.pedidos',compact('user','pedidos','tasques'));
+        //return response()->json($pedidos, 200);
     }
 
     /**

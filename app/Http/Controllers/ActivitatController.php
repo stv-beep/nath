@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent;
 use Carbon\Carbon;
 use \DateTime;
 use App\Models\Jornada;
+use App\Models\Torn;
 use App\Models\User;
 
 class ActivitatController extends Controller
@@ -41,11 +42,17 @@ class ActivitatController extends Controller
             $activitat->save();
             $activitat = Activitat::all();
             
-            $novaJornada = Jornada::firstOrCreate(//busco el registre concret, i si no el troba, el creo
-                ['dia'=> $diaFormat, 'treballador'=> Auth::id()]
-            );
-            
-
+             
+            if ($user->torn == 1) {
+                $novaJornada = new Jornada();
+                $novaJornada->dia = $diaFormat;
+                $novaJornada-> treballador = Auth::id();
+                $novaJornada->save();
+            } else {
+                $novaJornada = Jornada::firstOrCreate(//busco el registre concret, i si no el troba, el creo
+                    ['dia'=> $diaFormat, 'treballador'=> Auth::id()]
+                );
+            }
         $tornTreb = Activitat::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
         $dia = Jornada::where(['treballador' => $user->id])->orderBy('id','desc')->take(5)->get();
         return view('jornada', compact('user','tornTreb','dia'));
@@ -67,7 +74,7 @@ class ActivitatController extends Controller
         //carbon = "2022-01-31T11:34:39.000000Z"
 
         $activitat-> update();
-        $inici = Activitat::where([/* 'jornada' => $jorn,  */'treballador' => $user->id])
+        $inici = Activitat::where(['treballador' => $user->id])
         ->get('iniciJornada')->last();//{"iniciJornada":"2022-02-01 10:24:10"}
         $iniciFormat = $inici->iniciJornada;//2022-02-03 09:07:48
         $fi = Activitat::where(['jornada' => $jorn, 'treballador' => $user->id])
@@ -79,57 +86,66 @@ class ActivitatController extends Controller
         $resta = $finalSegs - $iniciSegs; #resto la quantitat de segons que han passat des del inici del temps unix
         $min = $resta/60;
         $hores = $min/60;
-        $activitat -> total = $hores;
+        $activitat -> total = $min;
         $activitat-> update();
 
 
-        /*consultes per a sumar les hores de diferents torns: de la taula ACTIVITATS a la de JORNADES*/
         
+        /*consultes per a sumar les hores de diferents torns: de la taula ACTIVITATS a la de JORNADES*/
+        if ($user->torn == 2){//jornada partida
         //tenim hores guardades 
-        $activitatID = Activitat::where(['jornada' => $jorn,'treballador' => $user->id])->orderBy('id','desc')->take(2)->get();
+        $activitatID = Activitat::where([/* 'jornada' => $jorn, */'treballador' => $user->id])->orderBy('id','desc')->take(2)->get();
         //$mida = sizeof($activitatID);
-        $partides = Activitat::where(['jornada' => $jorn,'treballador' => $user->id])->orderBy('id','desc')->take(2)->get('total');
+        $turnos = Activitat::where([/* 'jornada' => $jorn, */'treballador' => $user->id])->orderBy('id','desc')->take(2)->get('total');
         
 
 
         //primera meitat
-        $h1 = $partides->first();
+        $h1 = $turnos->first();
         $h1 = $h1->total;
         
 
-        $h2 = $partides->last();
+        $h2 = $turnos->last();
         $h2 = $h2->total;
 
 
         //si hi ha dos hores que venen del mateix ID d'activitat, no les tindra que sumar
         //o millor dit, si nomes troba una activitat, i per tant nomes un ID, no lo tindra que sumar dos vegades
-        if (sizeof($activitatID)<2){
+            if (sizeof($activitatID)<2){
 
-            $totalJornada = $h1;
-            $novaJornada = Jornada::where(['dia' => $jorn, 'treballador' => $user->id])->latest()->first();
-            $novaJornada-> treballador = $user->id;
-            $novaJornada-> dia = now();
-            $novaJornada -> total = $totalJornada;
-            $novaJornada-> update();
+                $totalJornada = $h1;
+                $novaJornada = Jornada::where([/* 'dia' => $jorn,  */'treballador' => $user->id])->latest()->first();
+                $novaJornada-> treballador = $user->id;
+                $novaJornada-> dia = now();
+                $novaJornada -> total = $totalJornada;
+                $novaJornada-> update();
+                
+
+            } else {
+
             
 
-        } else {
+            $totalJornada = $h1 + $h2;
+
+            $novaJornada = Jornada::where([/* 'dia' => $jorn, */ 'treballador' => $user->id])->latest()->first();
+            
+            $novaJornada-> treballador = $user->id;
+            $novaJornada-> dia = now();
+
+            $novaJornada -> total = $totalJornada;
+
+            $novaJornada-> update();
 
         
-
-        $totalJornada = $h1 + $h2;
-
-        $novaJornada = Jornada::where(['dia' => $jorn, 'treballador' => $user->id])->latest()->first();
-        
-        $novaJornada-> treballador = $user->id;
-        $novaJornada-> dia = now();
-
-        $novaJornada -> total = $totalJornada;
-
-        $novaJornada-> update();
-
-      
-        
+            
+            }
+        } else {//jornada intensiva
+            $intensiva = Activitat::where(['treballador' => $user->id])->latest()->first();
+            $intensiva -> total = $min;
+            $intensiva-> update();
+            $JornadaTotal = Jornada::where(['treballador' => $user->id])->latest()->first();
+            $JornadaTotal->total = $min;
+            $JornadaTotal->update();
         }
 
         $tornTreb = Activitat::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims

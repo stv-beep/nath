@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 use \App\Models\User;
 use \App\Models\Tasca;
+use \App\Models\Torn;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        $torn = new Torn();
+        $torn->torn = 'Jornada intensiva';
+        $torn->save();
+        $torn = new Torn();
+        $torn->torn = 'Jornada partida';
+        $torn->save();
+
          User::factory(3)->create();
          
          /* tasques, no fa falta factory */
@@ -29,5 +38,6 @@ class DatabaseSeeder extends Seeder
          $tasca = new Tasca();
          $tasca->tasca ='SAF';
          $tasca->save();
+
     }
 }
