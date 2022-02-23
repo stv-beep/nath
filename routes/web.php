@@ -17,20 +17,20 @@ use App\Http\Controllers\PedidoController;
 */
 
 //metode del controlador creat manualment
-Route::post('logged_in', [LoginController::class, 'authenticate']);
-Auth::routes();
+//Route::post('logged_in', [LoginController::class, 'authenticate']);//login
+Auth::routes();#https://linuxhint.com/laravel-new-authroutes/
 
 //el home redirigeix al login si no s'està loguejat
 Route::get('/',[ HomeController::class, 'index']);
 //HOME
-Route::view('/home','inici');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::view('/home','inici');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 //JORNADA
 //get crear activitat
 Route::get('/jornada',[ActivitatController::class,'create'])->name('jornada.form');
 //post store activitat
-Route::post('/home',[ActivitatController::class,'store'])->name('jornada.store');
+Route::post('/jornada',[ActivitatController::class,'store'])->name('jornada.store');
 //tancar jornada
 Route::patch('/jornada',[ActivitatController::class,'update'])->name('jornada.update');
 
@@ -47,6 +47,8 @@ Route::post('/pedidos/expedicio',[PedidoController::class,'storeExpedPedido'])->
 //store saf pedidos
 Route::post('/pedidos/saf',[PedidoController::class,'storeSAFPedido'])->name('safPedidos.store');
 
+//test
+Route::get('/pedidos/test',[PedidoController::class,'checkTasques'])->name('check.pedidos');
 
 
 

@@ -1,14 +1,16 @@
 /* comprovacio de torns per a desabilitar botons */
 window.onload = checkLastTorn;
-var inic = document.getElementById("sendInici").disabled = true;
-var f = document.getElementById("sendFi").disabled = true;
+let inic = document.getElementById("sendInici");
+let f = document.getElementById("sendFi");
+inic.disabled = true;
+f.disabled = true;
 
 function checkLastTorn(){
     if (document.getElementsByTagName('td')[1] == undefined){
-        document.getElementById("sendInici").disabled = !inic;
+        inic.disabled = !inic;
     } else if (document.getElementsByTagName('td')[1].innerHTML == ""){//si no s'ha acabat el torn (i no hi ha total)
-        document.getElementById("sendFi").disabled = !f;
+        f.disabled = !f;
     } else if (document.getElementsByTagName('td')[1].innerText.length > 0) {
-        document.getElementById("sendInici").disabled = !inic;
+        inic.disabled = !inic;
     }
 }

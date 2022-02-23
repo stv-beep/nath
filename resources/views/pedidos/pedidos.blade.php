@@ -70,17 +70,21 @@
                                     {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                                 </form>
                             </div>
-                            <div class="item5">
+                            {{-- <div class="item5">
                                 <form id="formStopPedidos" action="{{route('stop.pedidos')}}" method="post">
     
                                     @csrf                          
                                     <button id="sendStopPedidos" type="button" class="opcio btn btn-lg btn-danger" onclick="stopPedidos();">Stop</button>
-                                  {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                                 </form>
-                            </div>
+                            </div> --}}
                           </div>
                           <div>
-                        
+                            {{-- <form id="test" action="{{route('check.pedidos')}}" method="get">
+    
+                                @csrf                          
+                                <button id="btntest" type="button" class="btn btn-danger" onclick="checkLastTask();">test</button>
+                              <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">teste</button>
+                            </form> --}}
                         </div>
                     </div>
                     

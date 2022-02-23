@@ -17,9 +17,20 @@ class ActivitatController extends Controller
 {
     public function create(){
         $user = Auth::user();
-        $tornTreb = Activitat::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
-        $dia = Jornada::where(['treballador' => $user->id])->orderBy('id','desc')->take(5)->get();
+        $tornTreb = Activitat::where(['treballador' => Auth::id()])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
+        $dia = Jornada::where(['treballador' => Auth::id()])->orderBy('id','desc')->take(5)->get();
         return view('jornada', compact('user','tornTreb','dia'));
+        
+        /* jaseando */
+        $id = 4;
+        $torns = Activitat::where(['treballador' => $id])->orderBy('id','desc')->take(10)->get();
+        $users = User::findOrFail($id);
+        return response()->json([
+            'msg2' => 'USUARI:', 
+            $users,
+            'msg' => 'mostrant torns', 
+            $torns,
+        ]);
     }
 
     public function store(Request $request){

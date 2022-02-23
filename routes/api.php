@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ActivitatController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +37,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //get crear activitat
 Route::get('/jornada',[ActivitatController::class,'create'])->name('jornada.form');
 //post store activitat
-Route::post('/home',[ActivitatController::class,'store'])->name('jornada.store');
+Route::post('/jornada',[ActivitatController::class,'store'])->name('jornada.store');
 //tancar jornada
 Route::patch('/jornada',[ActivitatController::class,'update'])->name('jornada.update');
 

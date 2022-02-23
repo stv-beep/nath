@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Controllers\Auth\LoginController;
 
 class LoginRequest extends FormRequest
 {
@@ -25,7 +26,6 @@ class LoginRequest extends FormRequest
     {
         return [
             'username' => 'required',
-            //'password' => 'required'
         ];
     }
 
@@ -43,14 +43,7 @@ class LoginRequest extends FormRequest
         // we have to check if user has entered one or another
         $username = $this->get('username');
 
-        if ($this->isEmail($username)) {
-            return [
-                'email' => $username,
-                //'password' => $this->get('password')
-            ];
-        }
-
-        return $this->only('username'/* , 'password' */);
+        return $this->only('username');
     }
 
     /**
@@ -60,13 +53,12 @@ class LoginRequest extends FormRequest
      * @return bool
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    private function isEmail($param)
+    /* private function isEmail($param)
     {
         $factory = $this->container->make(ValidationFactory::class);
 
         return ! $factory->make(
             ['username' => $param],
-            //['username' => 'email']
         )->fails();
-    }
+    } */
 }

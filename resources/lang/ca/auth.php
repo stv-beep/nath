@@ -12,7 +12,8 @@
 */
 
 return [
-    'failed'   => 'Aquestes credencials no concorden amb els nostres registres.',
+    //'failed'   => 'Aquestes credencials no concorden amb els nostres registres.',
+    'failed'   => 'Codi d\'usuari incorrecte.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Ha superat el nombre màxim d\'intents d\'accés. Si us plau, torni a intentar-ho en :seconds segons.',
     'username' => "Codi d'usuari incorrecte.",

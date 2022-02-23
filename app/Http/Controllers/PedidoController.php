@@ -424,12 +424,27 @@ class PedidoController extends Controller
         return view('pedidos.pedidos',compact('user','pedidos','tasques'));
     }
 
-    /* public function checkTasques(Request $request){
+    /**
+     * busca si hi ha una tasca inacabada
+     * 
+     * @param Request $request
+     * 
+     * @return response
+     */
+    public function checkTasques(Request $request){
         $user = Auth::user();
-        $tascaComprovacio = Pedido::where(['treballador'=> Auth::id(), 'inciTasca','=','fiTasca'])->latest('updated_at')->first();
-        echo $tascaComprovacio->tasca;
-        return $tascaComprovacio->tasca;
+        $tascaComprovacio = Pedido::where(['treballador'=> Auth::id(), 'iniciTasca' => 'fiTasca'])->latest('updated_at')->first();
+        $taskCheck = Pedido::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
+        //return $taskCheck->tasca;
+        
+        //return $tascaComprovacio->tasca;
+        if (!($taskCheck == null)){
+            return response()->json($taskCheck->tasca, 200);
+        } else {
+            return response()->json(0, 200);
+            
+        }
 
-    } */
+    }
 
 }

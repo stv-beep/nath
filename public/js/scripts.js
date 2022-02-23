@@ -37,7 +37,7 @@
         $.ajax(
                 {
                     type: "POST",
-                    url: "/home",//"{{route('jornada.store')}}"
+                    url: "/jornada",//"{{route('jornada.store')}}"
                     data:$('#form-inici').serialize(),
                     success: function( data ) {
                         document.getElementById("sendInici").disabled = true;
@@ -174,6 +174,7 @@
         document.getElementById("hms").innerHTML = hAux + ":" + mAux + ":" + sAux; 
     }
 
+    /* PEDIDOS */
 
     function startPrepPedido() {
             console.log('funco send');
@@ -197,7 +198,8 @@
                                     window.location = "/pedidos";
                                 }, 1500);
                                  */
-                            /* comprovant si els botons estan disabled o no per a desabilitarlos o no */
+                            /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
+                            prepPedidoCheck.classList.toggle('btn-danger');
                             var revPedido = document.getElementById("sendRevisarPedido").disabled;
                             var expedPedido = document.getElementById("sendExpedicions").disabled;
                             var SAFPedido = document.getElementById("sendSAF").disabled;
@@ -233,7 +235,8 @@
                                     /* window.setTimeout(function(){
                                         window.location = "/pedidos";
                                     }, 1500); */
-                            /* comprovant si els botons estan disabled o no per a desabilitarlos o no */
+                            /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
+                            revPedidoCheck.classList.toggle('btn-danger');
                             var prepPedido = document.getElementById("sendPrepPedido").disabled;
                             var expedPedido = document.getElementById("sendExpedicions").disabled;
                             var SAFPedido = document.getElementById("sendSAF").disabled;
@@ -267,7 +270,8 @@
                             /* window.setTimeout(function(){
                                 window.location = "/pedidos";
                             }, 1500); */
-                    /* comprovant si els botons estan disabled o no per a desabilitarlos o no */
+                    /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
+                    expedPedidoCheck.classList.toggle('btn-danger');
                     var prepPedido = document.getElementById("sendPrepPedido").disabled;
                     var revPedido = document.getElementById("sendRevisarPedido").disabled;
                     var SAFPedido = document.getElementById("sendSAF").disabled;
@@ -301,7 +305,8 @@
                             /* window.setTimeout(function(){
                                 window.location = "/pedidos";
                             }, 1500); */
-                    /* comprovant si els botons estan disabled o no per a desabilitarlos o no */
+                    /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
+                    SAFPedidoCheck.classList.toggle('btn-danger');
                     var prepPedido = document.getElementById("sendPrepPedido").disabled;
                     var revPedido = document.getElementById("sendRevisarPedido").disabled;
                     var expedPedido = document.getElementById("sendExpedicions").disabled;
