@@ -26,7 +26,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg">
-                <div class="card-header">{{ __('Pedidos') }} de {{$user->name}}</div>
+                <div class="card-header">{{ __('Pedidos') }} de {{$user->name}}
+                    <a id="icona" href="{{route('home')}}"><i class="fas fa-arrow-alt-circle-left fa-lg" style="color: #51cf66;"></i></a>
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -41,7 +43,7 @@
                                 <form id="formPrepPedido" action="{{route('pedidos.store')}}" method="post">
     
                                 @csrf                                
-                                <button id="sendPrepPedido" type="button" class="opcio btn btn-lg btn-success ped" onclick="startPrepPedido();">Preparació</button>
+                                <button id="Pedido1" type="button" class="opcio btn btn-lg btn-success ped" onclick="startPrepPedido();">Preparació</button>
                                 
                                 {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  --}} 
                                 </form>
@@ -50,7 +52,7 @@
                                 <form id="formRevPedido" action="{{route('revPedidos.store')}}" method="post">
     
                                     @csrf        
-                                    <button id="sendRevisarPedido" type="button" class="opcio btn btn-lg btn-success ped" onclick="startRevPedido();">Revisió</button>
+                                    <button id="Pedido2" type="button" class="opcio btn btn-lg btn-success ped" onclick="startRevPedido();">Revisió</button>
                                     
                                     
                                   {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
@@ -59,17 +61,18 @@
                             <div class="item3">
                                 <form id="formExpedPedido" action="{{route('expedPedidos.store')}}" method="post">
                                     @csrf        
-                                    <button id="sendExpedicions" type="button" class="opcio btn btn-lg btn-success ped" onclick="startExpedPedido();">Expedicions</button>
+                                    <button id="Pedido3" type="button" class="opcio btn btn-lg btn-success ped" onclick="startExpedPedido();">Expedicions</button>
                                   {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                                 </form>
                             </div>  
                             <div class="item4">
                                 <form id="formSAFPedido" action="{{route('safPedidos.store')}}" method="post">
                                     @csrf
-                                    <button id="sendSAF" type="button" class="opcio btn btn-lg btn-success ped" onclick="startSAFPedido();">SAF</button>
+                                    <button id="Pedido4" type="button" class="opcio btn btn-lg btn-success ped" onclick="startSAFPedido();">SAF</button>
                                     {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                                 </form>
                             </div>
+                            
                             {{-- <div class="item5">
                                 <form id="formStopPedidos" action="{{route('stop.pedidos')}}" method="post">
     
@@ -78,13 +81,9 @@
                                 </form>
                             </div> --}}
                           </div>
+                          
                           <div>
-                            {{-- <form id="test" action="{{route('check.pedidos')}}" method="get">
-    
-                                @csrf                          
-                                <button id="btntest" type="button" class="btn btn-danger" onclick="checkLastTask();">test</button>
-                              <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">teste</button>
-                            </form> --}}
+                            
                         </div>
                     </div>
                     

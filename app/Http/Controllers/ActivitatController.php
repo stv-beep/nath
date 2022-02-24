@@ -160,11 +160,7 @@ class ActivitatController extends Controller
         }
 
         $tornTreb = Activitat::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
-        return view('jornada', compact('user','tornTreb'));
-
-
-        /*  return $mida; */
-           
+        return view('jornada', compact('user','tornTreb'));          
 
 
         /* PROVES */
@@ -191,5 +187,17 @@ class ActivitatController extends Controller
         $inicidata->format('Y-m-d H:i:s'); */
         //$interval = $inici2->diffInMinutes($fi2);      
        
+    }
+
+    public function checkTorn(Request $request){
+        $user = Auth::user();
+        $tornComprovacio = Activitat::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
+
+        if (!($tornComprovacio == null)){
+            return response()->json(true, 200);
+        } else {
+            return response()->json(false, 200);
+            
+        }
     }
 }

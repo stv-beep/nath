@@ -2,7 +2,7 @@
 
 @section('title', 'Activitat')
 @section('content')
-<script src="{{ asset('js/Jornades.js') }}" defer></script>
+<script src="{{ asset('js/Jornada.js') }}" defer></script>
 
 <div class='alert-position hidden alert alert-success' id='alert-success' role='alert'>
    <strong id="alert-missatge-inici"></strong>&nbsp;
@@ -24,7 +24,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg">
-                <div class="card-header">{{ __('Jornada') }} de {{$user->name}}</div>
+                <div class="card-header">{{ __('Jornada') }} de {{$user->name}} 
+                    <a id="icona" href="{{route('home')}}"><i class="far fa-arrow-alt-circle-left fa-lg" style="color: #51cf66;"></i></a>
+                </div>   
 
                 <div class="card-body">
                     @if (session('status'))
@@ -57,7 +59,6 @@
                         
                       {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                     </form>
-                    <a href="{{route('home')}}"><i class="fas fa-history fa-lg formJornada" style="color: #51cf66;"></i></a>
                     
                     
                     </div>

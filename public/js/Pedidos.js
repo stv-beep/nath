@@ -1,10 +1,10 @@
 /* comprovacio de tasques per a desabilitar botons */
 window.onload = checkLastTask;
 
-    let prepPedidoCheck = document.getElementById("sendPrepPedido");
-    let revPedidoCheck = document.getElementById("sendRevisarPedido");
-    let expedPedidoCheck = document.getElementById("sendExpedicions");
-    let SAFPedidoCheck = document.getElementById("sendSAF");
+    var prepPedidoCheck = document.getElementById("Pedido1");
+    var revPedidoCheck = document.getElementById("Pedido2");
+    var expedPedidoCheck = document.getElementById("Pedido3");
+    var SAFPedidoCheck = document.getElementById("Pedido4");
     prepPedidoCheck.disabled = true;
     revPedidoCheck.disabled = true;
     expedPedidoCheck.disabled = true;
@@ -15,12 +15,24 @@ window.onload = checkLastTask;
         $.ajax(
             {
                 type: "GET",
-                url: "/pedidos/test",
+                url: "/pedidos/check",
                 success: function(response){
-                  //alert(response); //response es la id de la tasca
                   console.log("tasca: "+response);
+                  
+                  if (response != 0){//si la tasca NO esta acabada
+                    document.getElementById("Pedido"+response).disabled = false;
+                    document.getElementById("Pedido"+response).classList.toggle('btn-danger');
+                  } else {//si la tasca esta acabada i per tant, torna 0
+                    prepPedidoCheck.disabled = false;
+                    revPedidoCheck.disabled = false;
+                    expedPedidoCheck.disabled = false;
+                    SAFPedidoCheck.disabled = false;
+                  }
+                  
 
-                  if (response == 1){
+                  /* no era la millor forma pero no m'avergonyeixo */
+
+                  /* if (response == 1){
                     prepPedidoCheck.disabled = !prepPedidoCheck;
                     prepPedidoCheck.classList.toggle('btn-danger');
                   } else if (response == 2){
@@ -37,14 +49,19 @@ window.onload = checkLastTask;
                     revPedidoCheck.disabled = !revPedidoCheck;
                     expedPedidoCheck.disabled = !expedPedidoCheck;
                     SAFPedidoCheck.disabled = !SAFPedidoCheck;
-                  }
+                  } */
 
-                }
+                },
+                error: function(xhr, textStatus, error){
+                  $("#alert-danger-missatge-final").text("Sembla que ha hagut un error. Per favor, recarrega la pàgina.");
+                  $("#alert-danger")
+                  .fadeTo(4000, 1000)
+                  .slideUp(1000, function () {
+                      $("#alert-danger").slideUp(1000);
+                  });
+              }
             });
-       
-        
-
-                    
+              
     };
 
 /* function checkLastTask(){

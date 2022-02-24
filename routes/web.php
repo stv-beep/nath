@@ -46,10 +46,12 @@ Route::post('/pedidos/stop',[PedidoController::class,'stopPedidos'])->name('stop
 Route::post('/pedidos/expedicio',[PedidoController::class,'storeExpedPedido'])->name('expedPedidos.store');
 //store saf pedidos
 Route::post('/pedidos/saf',[PedidoController::class,'storeSAFPedido'])->name('safPedidos.store');
-
-//test
-Route::get('/pedidos/test',[PedidoController::class,'checkTasques'])->name('check.pedidos');
-
+//check tasques pedidos
+Route::get('/pedidos/check',[PedidoController::class,'checkTasques'])->name('check.pedidos');
+//check torns
+Route::get('/jornada/check',[ActivitatController::class,'checkTorn'])->name('check.torns');
+//llistar totes les tasques disponibles
+Route::get('/tasques',[PedidoController::class, 'getTasques'])->name('get.tasques');
 
 
 //https://www.youtube.com/watch?v=eRYz62Cx0Wg&ab_channel=Inform%C3%A1ticaDP

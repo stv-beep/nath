@@ -200,13 +200,13 @@
                                  */
                             /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                             prepPedidoCheck.classList.toggle('btn-danger');
-                            var revPedido = document.getElementById("sendRevisarPedido").disabled;
-                            var expedPedido = document.getElementById("sendExpedicions").disabled;
-                            var SAFPedido = document.getElementById("sendSAF").disabled;
+                            var revPedido = document.getElementById("Pedido2").disabled;
+                            var expedPedido = document.getElementById("Pedido3").disabled;
+                            var SAFPedido = document.getElementById("Pedido4").disabled;
 
-                                document.getElementById("sendRevisarPedido").disabled = !revPedido;
-                                document.getElementById("sendExpedicions").disabled = !expedPedido;
-                                document.getElementById("sendSAF").disabled = !SAFPedido;     
+                                document.getElementById("Pedido2").disabled = !revPedido;
+                                document.getElementById("Pedido3").disabled = !expedPedido;
+                                document.getElementById("Pedido4").disabled = !SAFPedido;     
                         }
                     }
                 )
@@ -237,13 +237,13 @@
                                     }, 1500); */
                             /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                             revPedidoCheck.classList.toggle('btn-danger');
-                            var prepPedido = document.getElementById("sendPrepPedido").disabled;
-                            var expedPedido = document.getElementById("sendExpedicions").disabled;
-                            var SAFPedido = document.getElementById("sendSAF").disabled;
+                            var prepPedido = document.getElementById("Pedido1").disabled;
+                            var expedPedido = document.getElementById("Pedido3").disabled;
+                            var SAFPedido = document.getElementById("Pedido4").disabled;
 
-                                document.getElementById("sendPrepPedido").disabled = !prepPedido;
-                                document.getElementById("sendExpedicions").disabled = !expedPedido;
-                                document.getElementById("sendSAF").disabled = !SAFPedido;
+                                document.getElementById("Pedido1").disabled = !prepPedido;
+                                document.getElementById("Pedido3").disabled = !expedPedido;
+                                document.getElementById("Pedido4").disabled = !SAFPedido;
                         }
                     }
                 )
@@ -272,13 +272,13 @@
                             }, 1500); */
                     /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                     expedPedidoCheck.classList.toggle('btn-danger');
-                    var prepPedido = document.getElementById("sendPrepPedido").disabled;
-                    var revPedido = document.getElementById("sendRevisarPedido").disabled;
-                    var SAFPedido = document.getElementById("sendSAF").disabled;
+                    var prepPedido = document.getElementById("Pedido1").disabled;
+                    var revPedido = document.getElementById("Pedido2").disabled;
+                    var SAFPedido = document.getElementById("Pedido4").disabled;
 
-                        document.getElementById("sendPrepPedido").disabled = !prepPedido;
-                        document.getElementById("sendRevisarPedido").disabled = !revPedido;
-                        document.getElementById("sendSAF").disabled = !SAFPedido;
+                        document.getElementById("Pedido1").disabled = !prepPedido;
+                        document.getElementById("Pedido2").disabled = !revPedido;
+                        document.getElementById("Pedido4").disabled = !SAFPedido;
                 }
             }
         )
@@ -307,13 +307,13 @@
                             }, 1500); */
                     /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                     SAFPedidoCheck.classList.toggle('btn-danger');
-                    var prepPedido = document.getElementById("sendPrepPedido").disabled;
-                    var revPedido = document.getElementById("sendRevisarPedido").disabled;
-                    var expedPedido = document.getElementById("sendExpedicions").disabled;
+                    var prepPedido = document.getElementById("Pedido1").disabled;
+                    var revPedido = document.getElementById("Pedido2").disabled;
+                    var expedPedido = document.getElementById("Pedido3").disabled;
 
-                        document.getElementById("sendPrepPedido").disabled = !prepPedido;
-                        document.getElementById("sendRevisarPedido").disabled = !revPedido;
-                        document.getElementById("sendExpedicions").disabled = !expedPedido;
+                        document.getElementById("Pedido1").disabled = !prepPedido;
+                        document.getElementById("Pedido2").disabled = !revPedido;
+                        document.getElementById("Pedido3").disabled = !expedPedido;
                 }
             }
         )
