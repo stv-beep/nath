@@ -113,6 +113,16 @@
                     url: "/jornada",//"{{route('jornada.store')}}"
                     data:$('#form-final').serialize(),
                     success: function( response ) {
+
+                        if (response == false) {
+                            $("#alert-danger-missatge-final").text("Tens una tasca pendent de ser acabada.");
+                            $(".cronometro").hide();
+                            $("#alert-danger")
+                            .fadeTo(4000, 1000)
+                            .slideUp(1000, function () {
+                                $("#alert-danger").slideUp(1000);
+                            });
+                        } else {
                         //console.log(response);
                         //$("#total_cron").val();
                         //$("#final-jornada").val();
@@ -127,7 +137,7 @@
                             window.setTimeout(function(){
                                 window.location = "/home";//"{{route('home')}}"
                             }, 1500);
-                        
+                        }
                     },//si no s'ha trobat cap registre amb inici de jornada, retornara error amb alert
                     error: function(xhr, textStatus, error){
                         $("#alert-danger-missatge-final").text("No s'ha trobat cap inici de jornada coincident amb el teu registre.");
@@ -183,7 +193,17 @@
                         type: "POST",
                         url: "/pedidos",//"{{route('pedidos.store')}}"
                         data:$('#formPrepPedido').serialize(),
-                        success: function( data ) {
+                        success: function( response ) {
+
+                            if (response == false){
+                                $("#alert-danger-missatge-final").text("No pots inciar una tasca si no has començat la jornada.");
+                                        $(".cronometro").hide();
+                                        $("#alert-danger")
+                                        .fadeTo(4000, 1000)
+                                        .slideUp(1000, function () {
+                                            $("#alert-danger").slideUp(1000);
+                                        });
+                            } else {
                                                         
                             $("#prepPedido-missatge-inici").text("Preparació pedido");
                           /*   init();//mostra el cronometre
@@ -209,6 +229,7 @@
                                 document.getElementById("Pedido4").disabled = !SAFPedido;     
                         }
                     }
+                    }
                 )
            
         };
@@ -221,7 +242,17 @@
                             type: "POST",
                             url: "/pedidos/revisio",
                             data:$('#formRevPedido').serialize(),
-                            success: function( data ) {
+                            success: function( response ) {
+
+                                if (response == false){
+                                    $("#alert-danger-missatge-final").text("No pots inciar una tasca si no has començat la jornada.");
+                                            $(".cronometro").hide();
+                                            $("#alert-danger")
+                                            .fadeTo(4000, 1000)
+                                            .slideUp(1000, function () {
+                                                $("#alert-danger").slideUp(1000);
+                                            });
+                                } else {
                                 
                                 $("#prepPedido-missatge-inici").text("Revisió pedido");
                               /*   init();//mostra el cronometre
@@ -246,6 +277,7 @@
                                 document.getElementById("Pedido4").disabled = !SAFPedido;
                         }
                     }
+                    }
                 )
     };
 
@@ -256,7 +288,16 @@
                     type: "POST",
                     url: "/pedidos/expedicio",
                     data:$('#formExpedPedido').serialize(),
-                    success: function( data ) {
+                    success: function( response ) {
+                        if (response == false){
+                            $("#alert-danger-missatge-final").text("No pots inciar una tasca si no has començat la jornada.");
+                                    $(".cronometro").hide();
+                                    $("#alert-danger")
+                                    .fadeTo(4000, 1000)
+                                    .slideUp(1000, function () {
+                                        $("#alert-danger").slideUp(1000);
+                                    });
+                        } else {
                         
                         $("#prepPedido-missatge-inici").text("Expedició pedido");
                       /*   init();//mostra el cronometre
@@ -279,6 +320,7 @@
                         document.getElementById("Pedido1").disabled = !prepPedido;
                         document.getElementById("Pedido2").disabled = !revPedido;
                         document.getElementById("Pedido4").disabled = !SAFPedido;
+                    }
                 }
             }
         )
@@ -291,11 +333,20 @@
                     type: "POST",
                     url: "/pedidos/saf",
                     data:$('#formSAFPedido').serialize(),
-                    success: function( data ) {
-                        
+                    success: function( response ) {
+                        if (response == false){
+                            $("#alert-danger-missatge-final").text("No pots inciar una tasca si no has començat la jornada.");
+                                    $(".cronometro").hide();
+                                    $("#alert-danger")
+                                    .fadeTo(4000, 1000)
+                                    .slideUp(1000, function () {
+                                        $("#alert-danger").slideUp(1000);
+                                    });
+                        } else {
+
+
                         $("#prepPedido-missatge-inici").text("SAF");
-                      /*   init();//mostra el cronometre
-                        cronometrar();//inicia el cronometre */
+
                         $("#alert-success")
                         .fadeTo(4000, 1000)
                         .slideUp(1000, function () {
@@ -314,6 +365,7 @@
                         document.getElementById("Pedido1").disabled = !prepPedido;
                         document.getElementById("Pedido2").disabled = !revPedido;
                         document.getElementById("Pedido3").disabled = !expedPedido;
+                    }
                 }
             }
         )

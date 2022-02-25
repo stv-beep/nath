@@ -12,6 +12,7 @@ use \DateTime;
 use App\Models\Jornada;
 use App\Models\User;
 use App\Models\Tasca;
+use App\Models\Activitat;
 
 class PedidoController extends Controller
 {
@@ -33,10 +34,18 @@ class PedidoController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
-        $pedidos = Pedido::where(['treballador' =>  Auth::id()])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
-        return view('pedidos.pedidos',compact('user','pedidos','tasques'));
+        
 
+        /* SELECT * FROM `pedidos` 
+        INNER JOIN tasques ON pedidos.tasca = tasques.id
+        WHERE treballador = 4; */
+
+        //inner join solucionat
+        $tasques = Pedido::join('tasques','pedidos.tasca', '=','tasques.id')
+                ->where(['treballador' =>  Auth::id()])
+                ->orderBy('pedidos.id','desc')->take(10)->get();
+
+        return view('pedidos.pedidos',compact('user','tasques'));
 
         /* jaseando */
         $tot = Pedido::all();
@@ -51,10 +60,15 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
+        
+        $user = Auth::user();
+        //comprovacio de si la jornada esta iniciada
+        $tornComprovacio = Activitat::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
+        if (!($tornComprovacio == null)){//si la jornada no esta acabada
+
         $nomTasca = Tasca::where(['tasca' => 'Preparació pedido'])->get();
 
         $idTasca = $nomTasca[0]->id;//Preparació pedido
-        $user = Auth::user();
 
         $diaFormat = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d');
 
@@ -131,16 +145,24 @@ class PedidoController extends Controller
         ->where(['treballador' =>  Auth::id()])->orderBy('pedidos.id','desc')->take(10)->get();//agafo els 10 ultims
 
         return view('pedidos.pedidos',compact('user','pedidos','tasques'));
+        } else {//si la jornada no esta iniciada torno false
+            return response()->json(false, 200);
+            
+        }
           
     }
 
 
     public function storeRevPedido(Request $request){
 
+        $user = Auth::user();
+        //comprovacio de si la jornada esta iniciada
+        $tornComprovacio = Activitat::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
+        if (!($tornComprovacio == null)){//si la jornada no esta acabada
+
         $nomTasca = Tasca::where(['tasca' => 'Revisió pedido'])->get();
 
         $idTasca = $nomTasca[0]->id;//revisio pedido
-        $user = Auth::user();
 
         $diaFormat = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d');
 
@@ -219,15 +241,23 @@ class PedidoController extends Controller
         $pedidos = Pedido::join('tasques','pedidos.tasca', '=', 'tasques.id')
         ->where(['treballador' =>  Auth::id()])->orderBy('pedidos.id','desc')->take(10)->get();//agafo els 10 ultims
         return view('pedidos.pedidos',compact('user','pedidos','tasques'));
+        } else {//si la jornada no esta iniciada torno false
+            return response()->json(false, 200);
+            
+        }
 
     }
 
     public function storeExpedPedido(Request $request){
 
+        $user = Auth::user();
+        //comprovacio de si la jornada esta iniciada
+        $tornComprovacio = Activitat::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
+        if (!($tornComprovacio == null)){//si la jornada no esta acabada
+
         $nomTasca = Tasca::where(['tasca' => 'Expedició'])->get();
 
         $idTasca = $nomTasca[0]->id;//Expedició
-        $user = Auth::user();
 
         $diaFormat = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d');
 
@@ -284,14 +314,23 @@ class PedidoController extends Controller
         $pedidos = Pedido::join('tasques','pedidos.tasca', '=', 'tasques.id')
         ->where(['treballador' =>  Auth::id()])->orderBy('pedidos.id','desc')->take(10)->get();//agafo els 10 ultims
         return view('pedidos.pedidos',compact('user','pedidos','tasques'));
+        } else {//si la jornada no esta iniciada torno false
+            return response()->json(false, 200);
+            
+        }
     }
 
     public function storeSAFPedido(Request $request){
+        
+        $user = Auth::user();
+        //comprovacio de si la jornada esta iniciada
+        $tornComprovacio = Activitat::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
+        if (!($tornComprovacio == null)){//si la jornada no esta acabada
 
         $nomTasca = Tasca::where(['tasca' => 'SAF'])->get();
 
         $idTasca = $nomTasca[0]->id;//saf pedido
-        $user = Auth::user();
+        
 
         $diaFormat = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d');
 
@@ -348,6 +387,11 @@ class PedidoController extends Controller
         $pedidos = Pedido::join('tasques','pedidos.tasca', '=', 'tasques.id')
         ->where(['treballador' =>  Auth::id()])->orderBy('pedidos.id','desc')->take(10)->get();//agafo els 10 ultims
         return view('pedidos.pedidos',compact('user','pedidos','tasques'));
+
+        } else {//si la jornada no esta iniciada torno false
+            return response()->json(false, 200);
+            
+        }
     }
 
 
@@ -398,6 +442,7 @@ class PedidoController extends Controller
     }
 
 
+    /* ara mateix ja no s'esta utilitzant degut a que les tasques es poden parar per elles mateixes */
     public function stopPedidos(Request $request){
         $user = Auth::user();
         $horaFinal = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
@@ -433,18 +478,21 @@ class PedidoController extends Controller
      */
     public function checkTasques(Request $request){
         $user = Auth::user();
-        $taskCheck = Pedido::whereIn('total', [null, 0.00])->where(['treballador'=> Auth::id()])->latest('updated_at')->first();
-        
-        if (!($taskCheck == null)){
-            return response()->json($taskCheck->tasca, 200);
-        } else {
+        //tasca where no hi ha total i per tant no esta acabada
+        //$taskCheck = Pedido::whereIn('total', [null, 0.00])->where(['treballador'=> Auth::id()])->latest('updated_at')->first();
+
+        $taskCheck = Pedido::where(['treballador'=> Auth::id()])->latest('updated_at')->first();
+        //si no hi ha tasca ó ja esta acabada
+        if ($taskCheck == null || $taskCheck->total > 0){
             return response()->json(0, 200);
-            
+        } else {
+            return response()->json($taskCheck->tasca,200);
         }
 
     }
 
 
+    /* accio inutil ara mateix */
     public function getTasques(Request $request){
 
         $tasks = Tasca::select('id','tasca')->get();

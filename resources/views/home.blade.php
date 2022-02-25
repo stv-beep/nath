@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Dashboard') }} </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -58,13 +58,16 @@
                         @foreach ($activitat as $a)
                         <tr>
                             <td>{{$a->jornada}}</td>
+                            @if ($a->total == null || $a->total == 0)
+                            <td>&nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i></td>
+                            @else
                             <td>{{$a->total}}</td>
+                            @endif
                         </tr>
                         @endforeach
                     </table>
                     
                     <p class="h4 text-center" id="titol">Jornades</p>
-                    <br>
                     <table id="jornades" class="table table-striped table-hover">
                         <thead class="thead-dark">
                         <tr>
@@ -75,7 +78,37 @@
                         @foreach ($dia as $d)
                         <tr>
                             <td>{{$d->dia}}</td>
+                            @if ($d->total == null || $d->total == 0)
+                            <td>&nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i></td>
+                            @else
                             <td>{{$d->total}}</td>
+                            @endif
+                        </tr>
+                        @endforeach
+                    </table>
+                    
+                    <p class="h4 text-center" id="titol">Tasques</p>
+                    <table id="activitats" class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Tasca</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Inici tasca</th>
+                            <th scope="col">Fi tasca</th>
+
+                        </tr>
+                        </thead>
+                        {{-- inner join solucionat --}}
+                        @foreach ($tasques as $t)
+                        <tr>
+                                <td>{{$t->tasca}}</td>
+                                    @if ($t->total == null || $t->total == 0)
+                                    <td>&nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i></td>
+                                    @else
+                                    <td><b>{{$t->total}}</b></td>
+                                    @endif
+                            <td>{{$t->iniciTasca}}</td>
+                            <td>{{$t->fiTasca}}</td>
                         </tr>
                         @endforeach
                     </table>

@@ -15,9 +15,10 @@
     </div>
     
     <div class='alert-position hidden alert alert-danger' id='alert-danger' role='alert'>
+        <i class="fas fa-exclamation-triangle"></i>
         <strong id="alert-danger-missatge-inici"></strong>&nbsp;
         <strong id="alert-danger-missatge-final"></strong>&nbsp;
-        <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;   
+        &nbsp;&nbsp;   
     </div>
 
 <div class="container">
@@ -74,7 +75,11 @@
                         @foreach ($tornTreb as $a)
                         <tr>
                             <td>{{$a->jornada}}</td>
+                            @if ($a->total == null || $a->total == 0)
+                            <td>&nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i></td>
+                            @else
                             <td>{{$a->total}}</td>
+                            @endif
                         </tr>
                         @endforeach
                     </table>

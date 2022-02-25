@@ -17,9 +17,9 @@
     </div>
     
     <div class='alert-position hidden alert alert-danger' id='alert-danger' role='alert'>
+        <i class="fas fa-exclamation-triangle"></i>
         <strong id="alert-danger-missatge-inici"></strong>&nbsp;
-        <strong id="alert-danger-missatge-final"></strong>&nbsp;
-        <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;   
+        <strong id="alert-danger-missatge-final"></strong>&nbsp;   
     </div>
 
 <div class="container">
@@ -97,30 +97,19 @@
 
                         </tr>
                         </thead>
-                        {{-- degut a certs problemes amb els inner joins utilitzats per a aconseguir el nom de les tasques
-                            m'he vist obligat a mostrar el nom per mitja de condicions --}}
-                        @foreach ($pedidos as $t)
-                        <tr id="{{$t->id}}">
-                            @if ($t->tasca == 1 )
-                                <td>{{$tasques[0]->tasca}}</td>
-                             @elseif ($t->tasca == 2)
-                                <td>{{$tasques[1]->tasca}}</td>
-                             @elseif ($t->tasca == 3)
-                                <td>{{$tasques[2]->tasca}}</td>
-                             @elseif ($t->tasca == 4)
-                                <td>{{$tasques[3]->tasca}}</td>
-                            @endif                          
-                            
-                            @if ($t->total == null || $t->total == 0)
-                                <td><i class="fas fa-hourglass-half fa-spin"></i></td>
-                            @else
-                                <td><b>{{$t->total}}</b></td>
-                            @endif
+                            {{-- inner join solucionat --}}
+                            @foreach ($tasques as $t)
+                            <tr>
+                                <td>{{$t->tasca}}</td>
+                                    @if ($t->total == null || $t->total == 0)
+                                    <td>&nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i></td>
+                                    @else
+                                    <td><b>{{$t->total}}</b></td>
+                                    @endif
                             <td>{{$t->iniciTasca}}</td>
                             <td>{{$t->fiTasca}}</td>
-
-                        </tr>
-                        @endforeach
+                            </tr>
+                            @endforeach
                     </table>
                     
                 </div> 

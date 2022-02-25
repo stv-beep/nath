@@ -12,6 +12,7 @@ use \DateTime;
 use App\Models\Jornada;
 use App\Models\Torn;
 use App\Models\User;
+use App\Models\Pedido;
 
 class ActivitatController extends Controller
 {
@@ -35,8 +36,7 @@ class ActivitatController extends Controller
 
     public function store(Request $request){
         $user = Auth::user();
-        
-
+       
         $d = now();
         $diaFormat = Carbon::parse($d)->setTimezone('Europe/Madrid')->format('Y-m-d');
 
@@ -67,11 +67,16 @@ class ActivitatController extends Controller
         $tornTreb = Activitat::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
         $dia = Jornada::where(['treballador' => $user->id])->orderBy('id','desc')->take(5)->get();
         return view('jornada', compact('user','tornTreb','dia'));
+        
     } 
 
     public function update(Request $request){
         //https://www.ironwoods.es/blog/laravel/eloquent-consultas-frecuentes
         $user = Auth::user();
+        //comprovacio de si hi ha alguna tasca inacabada i per tant, no es pot acabar la jornada
+        $checkTask = Pedido::where(['treballador'=> Auth::id()])->latest('updated_at')->first();
+        if ($checkTask == null || $checkTask->total > 0){
+
 
             /* $activitat->update([
                 'fiJornada' => $request->input('final-Jornada'),
@@ -104,24 +109,24 @@ class ActivitatController extends Controller
         
         /*consultes per a sumar les hores de diferents torns: de la taula ACTIVITATS a la de JORNADES*/
         if ($user->torn == 2){//jornada partida
-        //tenim hores guardades 
-        $activitatID = Activitat::where([/* 'jornada' => $jorn, */'treballador' => $user->id])->orderBy('id','desc')->take(2)->get();
-        //$mida = sizeof($activitatID);
-        $turnos = Activitat::where([/* 'jornada' => $jorn, */'treballador' => $user->id])->orderBy('id','desc')->take(2)->get('total');
-        
+            //tenim hores guardades 
+            $activitatID = Activitat::where([/* 'jornada' => $jorn, */'treballador' => $user->id])->orderBy('id','desc')->take(2)->get();
+            //$mida = sizeof($activitatID);
+            $turnos = Activitat::where([/* 'jornada' => $jorn, */'treballador' => $user->id])->orderBy('id','desc')->take(2)->get('total');
+            
 
 
-        //primera meitat
-        $h1 = $turnos->first();
-        $h1 = $h1->total;
-        
+            //primera meitat
+            $h1 = $turnos->first();
+            $h1 = $h1->total;
+            
 
-        $h2 = $turnos->last();
-        $h2 = $h2->total;
+            $h2 = $turnos->last();
+            $h2 = $h2->total;
 
 
-        //si hi ha dos hores que venen del mateix ID d'activitat, no les tindra que sumar
-        //o millor dit, si nomes troba una activitat, i per tant nomes un ID, no lo tindra que sumar dos vegades
+            //si hi ha dos hores que venen del mateix ID d'activitat, no les tindra que sumar
+            //o millor dit, si nomes troba una activitat, i per tant nomes un ID, no lo tindra que sumar dos vegades
             if (sizeof($activitatID)<2){
 
                 $totalJornada = $h1;
@@ -160,8 +165,11 @@ class ActivitatController extends Controller
         }
 
         $tornTreb = Activitat::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
-        return view('jornada', compact('user','tornTreb'));          
+        return view('jornada', compact('user','tornTreb'));    
 
+        } else {
+            return response()->json(false,200);
+        }
 
         /* PROVES */
 
@@ -191,9 +199,10 @@ class ActivitatController extends Controller
 
     public function checkTorn(Request $request){
         $user = Auth::user();
+        //torn sense acabar
         $tornComprovacio = Activitat::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
 
-        if (!($tornComprovacio == null)){
+        if (!($tornComprovacio == null)){//si la jornada no esta acabada
             return response()->json(true, 200);
         } else {
             return response()->json(false, 200);

@@ -91,6 +91,9 @@
         <main class="py-4">
             @yield('content')
         </main>
+        {{-- <footer class="card-footer">
+            <em>Aleix Algueró, 2022</em>
+        </footer> --}}
     </div>
 </body>
 </html>

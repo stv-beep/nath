@@ -59,23 +59,25 @@ window.onload = checkLastTask;
                   .slideUp(1000, function () {
                       $("#alert-danger").slideUp(1000);
                   });
-              }
+                }
             });
               
-    };
-
-/* function checkLastTask(){
-    if (document.getElementsByTagName('td').length == 0){
-        prepPedidoCheck.disabled = !prepPedidoCheck;
-        revPedidoCheck.disabled = !revPedidoCheck;
-        expedPedidoCheck.disabled = !expedPedidoCheck;
-        SAFPedidoCheck.disabled = !SAFPedidoCheck;
-    } else if (!document.getElementsByTagName("td")[1].innerHTML.includes("hourglass")){
-        //<i class=\"fas fa-hourglass-half fa-spin center\"></i>
-        console.log("ja esta acabat");
-        prepPedidoCheck.disabled = !prepPedidoCheck;
-        revPedidoCheck.disabled = !revPedidoCheck;
-        expedPedidoCheck.disabled = !expedPedidoCheck;
-        SAFPedidoCheck.disabled = !SAFPedidoCheck;
     }
-} */
+
+    /* aixo si que no era la millor forma pero no m'avergonyeixo */
+
+    /* function checkLastTask(){
+        if (document.getElementsByTagName('td').length == 0){
+            prepPedidoCheck.disabled = !prepPedidoCheck;
+            revPedidoCheck.disabled = !revPedidoCheck;
+            expedPedidoCheck.disabled = !expedPedidoCheck;
+            SAFPedidoCheck.disabled = !SAFPedidoCheck;
+        } else if (!document.getElementsByTagName("td")[1].innerHTML.includes("hourglass")){
+            //<i class=\"fas fa-hourglass-half fa-spin center\"></i>
+            console.log("ja esta acabat");
+            prepPedidoCheck.disabled = !prepPedidoCheck;
+            revPedidoCheck.disabled = !revPedidoCheck;
+            expedPedidoCheck.disabled = !expedPedidoCheck;
+            SAFPedidoCheck.disabled = !SAFPedidoCheck;
+        }
+    } */
