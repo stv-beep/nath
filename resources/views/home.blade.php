@@ -16,16 +16,12 @@
                     @endif
                     Benvingut {{$user->name}}
                     {{-- <br>
-                    ID: {{$user->id}}
-                    <br>
-                    Codi/nom d'usuari: {{$user->username}} --}}
-                    <br>
-                    Tipus de jornada: 
-                    @if ($user->torn == 1)
-                        {{$torns[0]->torn}}
+                    Magatzem: 
+                    @if ($user->magatzem == true)
+                        Sí
                     @else
-                        {{$torns[1]->torn}}
-                    @endif
+                        No
+                    @endif --}}
                     
 
                 </div>
@@ -33,18 +29,21 @@
                     <i class="far fa-calendar-check"></i> Jornada del dia 
                     <?php                  
                         $date = date('Y-m-d H:i:s');
-                        $newDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d-m-Y');
+                        $newDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y');
                         echo $newDate;
                     ?>
                 </a>
                 <br><br>
-                {{-- MENU --}}
+                @if ($user->magatzem == true)
+                        {{-- MENU --}}
                 <div class="grid-container-home">
                     <a href="{{ route('pedidos.form') }}" class="item1 btn btn-info btn-lg" >Pedidos</a>
                     <a href="" class="item2 btn btn-info btn-lg" >Recepcions</a>
                     <a href="" class="item3 btn btn-info btn-lg" >Reoperacions</a>
                     <a href="" class="item4 btn btn-info btn-lg" >Inventari</a>
-                </div>
+                </div>                        
+                    @endif
+                
 
                 {{-- TAULES --}}
                 <p class="h4 text-center" id="titol">Torns</p>
@@ -57,7 +56,7 @@
                         </thead>
                         @foreach ($activitat as $a)
                         <tr>
-                            <td>{{$a->jornada}}</td>
+                            <td>{{ date('d/m/Y', strtotime($a->jornada)) }}</td>
                             @if ($a->total == null || $a->total == 0)
                             <td>&nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i></td>
                             @else
@@ -77,7 +76,7 @@
                         </thead>
                         @foreach ($dia as $d)
                         <tr>
-                            <td>{{$d->dia}}</td>
+                            <td>{{ date('d/m/Y', strtotime($d->dia)) }}</td>
                             @if ($d->total == null || $d->total == 0)
                             <td>&nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i></td>
                             @else
@@ -86,13 +85,15 @@
                         </tr>
                         @endforeach
                     </table>
-                    
+
+                    @if ($user->magatzem == true)
+                    {{-- tasques --}}
                     <p class="h4 text-center" id="titol">Tasques</p>
                     <table id="activitats" class="table table-striped table-hover">
                         <thead class="thead-dark">
                         <tr>
                             <th scope="col">Tasca</th>
-                            <th scope="col">Total</th>
+                            <th scope="col">Total (min)</th>
                             <th scope="col">Inici tasca</th>
                             <th scope="col">Fi tasca</th>
 
@@ -107,11 +108,12 @@
                                     @else
                                     <td><b>{{$t->total}}</b></td>
                                     @endif
-                            <td>{{$t->iniciTasca}}</td>
-                            <td>{{$t->fiTasca}}</td>
+                            <td>{{ date('d/m/Y H:i', strtotime($t->iniciTasca)) }}</td>
+                            <td>{{ date('d/m/Y H:i', strtotime($t->fiTasca)) }}</td>
                         </tr>
                         @endforeach
                     </table>
+                    @endif
             </div>
         </div>
     </div>

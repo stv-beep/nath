@@ -17,8 +17,10 @@ function checkLastTorn(){
               //false = torn acabat
               if (response == true) {
                 f.disabled = !response;
+                document.getElementById("sendInici").classList.toggle('btn-outline-success');
               } else {
                 inic.disabled = response;
+                document.getElementById("sendFi").classList.toggle('btn-outline-danger');
               }
 
             },
@@ -27,7 +29,7 @@ function checkLastTorn(){
               $("#alert-danger")
               .fadeTo(4000, 1000)
               .slideUp(1000, function () {
-                  $("#alert-danger").slideUp(1000);
+                  $("#alert-danger").slideUp(2500);
               });
           }
         });

@@ -15,14 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-        $torn = new Torn();
-        $torn->torn = 'Jornada intensiva';
-        $torn->save();
-        $torn = new Torn();
-        $torn->torn = 'Jornada partida';
-        $torn->save();
-
          User::factory(3)->create();
          
          /* tasques, no fa falta factory */

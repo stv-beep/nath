@@ -43,7 +43,7 @@
 
                         @csrf
                             
-                        <button id="sendInici" type="button" class="btn btn-lg btn-outline-success center" onclick="start()"><i class="fas fa-hourglass-start"></i> Iniciar</button>
+                        <button id="sendInici" type="button" class="btn btn-lg btn-success center" onclick="start()"><i class="fas fa-hourglass-start"></i> Iniciar</button>
  
                         <!--button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button-->  
                     </form>
@@ -55,7 +55,7 @@
                         @csrf        
                         @method('PATCH')
                       
-                        <button id="sendFi" type="button" class="btn btn-lg btn-outline-danger center" onclick="end()"><i class="fas fa-hourglass-end"></i> Stop</button>
+                        <button id="sendFi" type="button" class="btn btn-lg btn-danger center" onclick="end()"><i class="fas fa-hourglass-end"></i> Stop</button>
                         
                         
                       {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
@@ -74,7 +74,7 @@
                         </thead>
                         @foreach ($tornTreb as $a)
                         <tr>
-                            <td>{{$a->jornada}}</td>
+                            <td>{{ date('d/m/Y', strtotime($a->jornada)) }}</td>
                             @if ($a->total == null || $a->total == 0)
                             <td>&nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i></td>
                             @else

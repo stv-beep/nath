@@ -22,6 +22,15 @@
         <strong id="alert-danger-missatge-final"></strong>&nbsp;   
     </div>
 
+    {{-- condicio per a mostrar tasques si ets de magatzem o no --}}
+    @if ($user->magatzem == false)
+    <div class='alert-position alert alert-danger' role='alert'>
+        <i class="fas fa-exclamation-triangle"></i>
+        <strong>No tens tasques de magatzem.</strong>&nbsp;
+        <a id="icona" href="{{route('home')}}"><i class="fas fa-arrow-alt-circle-left fa-lg" style="color: #51cf66;"></i></a>   
+    </div>
+    @else
+    
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -91,7 +100,7 @@
                         <thead class="thead-dark">
                         <tr>
                             <th scope="col">Tasca</th>
-                            <th scope="col">Total</th>
+                            <th scope="col">Total (min)</th>
                             <th scope="col">Inici tasca</th>
                             <th scope="col">Fi tasca</th>
 
@@ -106,8 +115,8 @@
                                     @else
                                     <td><b>{{$t->total}}</b></td>
                                     @endif
-                            <td>{{$t->iniciTasca}}</td>
-                            <td>{{$t->fiTasca}}</td>
+                                    <td>{{ date('d/m/Y H:i:s', strtotime($t->iniciTasca)) }}</td>
+                                    <td>{{ date('d/m/Y H:i:s', strtotime($t->fiTasca)) }}</td>
                             </tr>
                             @endforeach
                     </table>
@@ -120,4 +129,5 @@
         </div>
     </div>
 </div>
+@endif {{-- if magatzem --}}
 @endsection

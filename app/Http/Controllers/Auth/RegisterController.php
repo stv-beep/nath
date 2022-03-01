@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:50', 'unique:users'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'torn' => ['required', 'integer', 'max:255'],
+            'magatzem' => ['required', 'integer', 'max:255'],
             'password' => ['required', 'string', 'min:3', 'confirmed'],
         ]);
     }
@@ -70,7 +70,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'name' => $data['name'],
             'email' => $data['email'],
-            'torn' => $data['torn'],
+            'magatzem' => $data['magatzem'],
             //'password' => Hash::make($data['password']),
             //'password' => $data['password'],
             //si nomes es necessita un codi per al login, poso la mateixa password a tots i que entrin amb el codi

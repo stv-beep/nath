@@ -26,11 +26,11 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="username" class="col-md-4 col-form-label text-md-end">{{ __("Nom d'usuari") }}</label>
+                            <label for="username" class="col-md-4 col-form-label text-md-end">{{ __("Codi d'usuari") }}</label>
 
                             <div class="col-md-6">
                                 <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
-                                <small id="usernameHelp" class="form-text text-muted">Amb aquest usuari iniciaràs sessió.</small>
+                                <small id="usernameHelp" class="form-text text-muted">Amb aquest codi iniciaràs sessió.</small>
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -55,12 +55,12 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="torn" class="col-md-4 col-form-label text-md-end">{{ __('Torn') }}</label>
+                            <label for="magatzem" class="col-md-4 col-form-label text-md-end">{{ __('Magatzem') }}</label>
                                 <div class="col-md-6">
-                                    <input type="radio" id="torn" name="torn" value="1">
-                                    <label for="torn">Jornada intensiva</label><br>
-                                    <input type="radio" id="torn" name="torn" value="2">
-                                    <label for="torn">Jornada partida</label><br>
+                                    <input type="radio" id="magatzem" name="magatzem" value="1">
+                                    <label for="magatzem">Sí</label><br>
+                                    <input type="radio" id="magatzem" name="magatzem" value="0">
+                                    <label for="magatzem">No</label><br>
                                 </div>
                         </div>
 
