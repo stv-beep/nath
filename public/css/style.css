@@ -149,3 +149,10 @@ button.close {
 a.close.disabled {
   pointer-events: none;
 }
+
+/* destacant l'ultima jornada a la taula */
+#jornades tr:first-child td {
+  background-color: lightcyan;
+  color:#000;
+  font-weight: bold;
+}

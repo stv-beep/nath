@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ActivitatController;
 use App\Http\Controllers\PedidoController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +18,9 @@ use App\Http\Controllers\PedidoController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/* Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+}); */
 //metode del controlador creat manualment
 //Route::post('logged_in', [LoginController::class, 'authenticate']);//login
 Auth::routes();#https://linuxhint.com/laravel-new-authroutes/
