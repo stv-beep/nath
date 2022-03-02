@@ -32,7 +32,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-light shadow-lg">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
+                <a id="nom-app" class="navbar-brand" href="{{ url('/home') }}">
                     App Nath 
                     {{-- {{ config('app.name') }} --}}
                 </a>
@@ -63,7 +63,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle btn btn-outline-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="user-nav nav-link dropdown-toggle btn btn-outline-orange" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <i class="fas fa-user-tie"></i>
                                 </a>
 

@@ -99,6 +99,10 @@
   background-color: #fcad05;
   border-color: #ff9c05;
 }
+.btn-outline-orange {
+  color: #ff9c05;
+  border-color: #f19100;
+}
 .btn-orange:hover {
   color: #212529;
   background-color: #ff9c05;
@@ -108,7 +112,7 @@
   color: #212529;
   background-color: #ef9500;
   border-color: #1a1e21;
-  box-shadow: 0 0 0 0.25rem rgba(66, 70, 73, 0.5);
+  box-shadow: 0 0 0 0.25rem rgba(201, 175, 136, 0.712);
 }
 
 #icona{
@@ -155,4 +159,13 @@ a.close.disabled {
   background-color: lightcyan;
   color:#000;
   font-weight: bold;
+}
+
+.user-nav:hover{
+  color:#fff;
+  background-color: rgb(255, 239, 168);
+}
+
+#nom-app:hover{
+  color:#efaf00;
 }

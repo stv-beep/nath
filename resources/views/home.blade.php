@@ -26,7 +26,7 @@
 
                 </div>
                 <a href="{{ route('jornada.form') }}" class="btn btn-primary center btn-lg">
-                    <i class="far fa-calendar-check"></i> Jornada del dia 
+                    <i class="far fa-calendar-alt"></i>&nbsp; Jornada del dia 
                     <?php                  
                         $date = date('Y-m-d H:i:s');
                         $newDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y');
