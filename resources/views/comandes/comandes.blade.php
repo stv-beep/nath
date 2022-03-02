@@ -1,10 +1,10 @@
 @extends('layouts.app')
 <!--altres-->
 
-@section('title', 'Pedidos')
+@section('title', 'Comandes')
 
 @section('content')
-<script src="{{ asset('js/Pedidos.js') }}" defer></script>
+<script src="{{ asset('js/Comandes.js') }}" defer></script>
 
 <div class='alert-position hidden alert alert-success' id='alert-success' role='alert'>
    <strong id="prepPedido-missatge-inici"></strong>&nbsp;
@@ -35,7 +35,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg">
-                <div class="card-header">{{ __('Pedidos') }} de {{$user->name}}
+                <div class="card-header">{{ __('Comandes') }} de {{$user->name}}
                     <a id="icona" href="{{route('home')}}"><i class="fas fa-arrow-alt-circle-left fa-lg" style="color: #51cf66;"></i></a>
                 </div>
 

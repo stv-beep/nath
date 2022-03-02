@@ -191,7 +191,7 @@
             $.ajax(
                     {
                         type: "POST",
-                        url: "/pedidos",//"{{route('pedidos.store')}}"
+                        url: "/comandes",//"{{route('pedidos.store')}}"
                         data:$('#formPrepPedido').serialize(),
                         success: function( response ) {
 
@@ -205,7 +205,7 @@
                                         });
                             } else {
                                                         
-                            $("#prepPedido-missatge-inici").text("Preparació pedido");
+                            $("#prepPedido-missatge-inici").text("Preparació comanda");
                           /*   init();//mostra el cronometre
                             cronometrar();//inicia el cronometre */
                             $("#alert-success")
@@ -215,7 +215,7 @@
                             });
                             $("#activitats").load(" #activitats");
                                 /* window.setTimeout(function(){
-                                    window.location = "/pedidos";
+                                    window.location = "/comandes";
                                 }, 1500);
                                  */
                             /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
@@ -240,7 +240,7 @@
                 $.ajax(
                     {
                             type: "POST",
-                            url: "/pedidos/revisio",
+                            url: "/comandes/revisio",
                             data:$('#formRevPedido').serialize(),
                             success: function( response ) {
 
@@ -254,7 +254,7 @@
                                             });
                                 } else {
                                 
-                                $("#prepPedido-missatge-inici").text("Revisió pedido");
+                                $("#prepPedido-missatge-inici").text("Revisió comanda");
                               /*   init();//mostra el cronometre
                                 cronometrar();//inicia el cronometre */
                                 $("#alert-success")
@@ -264,7 +264,7 @@
                                 });
                                 $("#activitats").load(" #activitats");
                                     /* window.setTimeout(function(){
-                                        window.location = "/pedidos";
+                                        window.location = "/comandes";
                                     }, 1500); */
                             /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                             revPedidoCheck.classList.toggle('btn-danger');
@@ -286,7 +286,7 @@
         $.ajax(
             {
                     type: "POST",
-                    url: "/pedidos/expedicio",
+                    url: "/comandes/expedicio",
                     data:$('#formExpedPedido').serialize(),
                     success: function( response ) {
                         if (response == false){
@@ -299,7 +299,7 @@
                                     });
                         } else {
                         
-                        $("#prepPedido-missatge-inici").text("Expedició pedido");
+                        $("#prepPedido-missatge-inici").text("Expedició comanda");
                       /*   init();//mostra el cronometre
                         cronometrar();//inicia el cronometre */
                         $("#alert-success")
@@ -309,7 +309,7 @@
                         });
                         $("#activitats").load(" #activitats");
                             /* window.setTimeout(function(){
-                                window.location = "/pedidos";
+                                window.location = "/comandes";
                             }, 1500); */
                     /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                     expedPedidoCheck.classList.toggle('btn-danger');
@@ -331,7 +331,7 @@
         $.ajax(
             {
                     type: "POST",
-                    url: "/pedidos/saf",
+                    url: "/comandes/saf",
                     data:$('#formSAFPedido').serialize(),
                     success: function( response ) {
                         if (response == false){
@@ -354,7 +354,7 @@
                         });
                         $("#activitats").load(" #activitats");
                             /* window.setTimeout(function(){
-                                window.location = "/pedidos";
+                                window.location = "/comandes";
                             }, 1500); */
                     /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                     SAFPedidoCheck.classList.toggle('btn-danger');
@@ -377,7 +377,7 @@
                 $.ajax(
                     {
                             type: "POST",
-                            url: "/pedidos/stop",
+                            url: "/comandes/stop",
                             data:$('#formStopPedidos').serialize(),
                             success: function( data ) {
                                 
@@ -392,7 +392,7 @@
                                 });
                                 $("#activitats").load(" #activitats");
                                     window.setTimeout(function(){
-                                        window.location = "/pedidos";
+                                        window.location = "/comandes";
                                     }, 1500);
                                 } else {
                                     $("#alert-danger-missatge-final").text("No hi ha cap tasca per a parar.");

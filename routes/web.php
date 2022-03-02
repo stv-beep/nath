@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ActivitatController;
-use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\TornController;
+use App\Http\Controllers\ComandaController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -33,30 +33,30 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 //JORNADA
 //get crear activitat
-Route::get('/jornada',[ActivitatController::class,'create'])->name('jornada.form');
+Route::get('/jornada',[TornController::class,'create'])->name('jornada.form');
 //post store activitat
-Route::post('/jornada',[ActivitatController::class,'store'])->name('jornada.store');
+Route::post('/jornada',[TornController::class,'store'])->name('jornada.store');
 //tancar jornada
-Route::patch('/jornada',[ActivitatController::class,'update'])->name('jornada.update');
+Route::patch('/jornada',[TornController::class,'update'])->name('jornada.update');
 
 //PEDIDOS
-Route::get('/pedidos', [PedidoController::class,'create'])->name('pedidos.form');
+Route::get('/comandes', [ComandaController::class,'create'])->name('pedidos.form');
 //post store preparacio pedido
-Route::post('/pedidos',[PedidoController::class,'store'])->name('pedidos.store');
+Route::post('/comandes',[ComandaController::class,'store'])->name('pedidos.store');
 //store Revisio pedido
-Route::post('/pedidos/revisio',[PedidoController::class,'storeRevPedido'])->name('revPedidos.store');
+Route::post('/comandes/revisio',[ComandaController::class,'storeRevPedido'])->name('revPedidos.store');
 //stop pedidos
-Route::post('/pedidos/stop',[PedidoController::class,'stopPedidos'])->name('stop.pedidos');
+Route::post('/comandes/stop',[ComandaController::class,'stopPedidos'])->name('stop.pedidos');
 //store expedicio pedidos
-Route::post('/pedidos/expedicio',[PedidoController::class,'storeExpedPedido'])->name('expedPedidos.store');
+Route::post('/comandes/expedicio',[ComandaController::class,'storeExpedPedido'])->name('expedPedidos.store');
 //store saf pedidos
-Route::post('/pedidos/saf',[PedidoController::class,'storeSAFPedido'])->name('safPedidos.store');
+Route::post('/comandes/saf',[ComandaController::class,'storeSAFPedido'])->name('safPedidos.store');
 //check tasques pedidos
-Route::get('/pedidos/check',[PedidoController::class,'checkTasques'])->name('check.pedidos');
+Route::get('/comandes/check',[ComandaController::class,'checkTasques'])->name('check.pedidos');
 //check torns
-Route::get('/jornada/check',[ActivitatController::class,'checkTorn'])->name('check.torns');
+Route::get('/jornada/check',[TornController::class,'checkTorn'])->name('check.torns');
 //llistar totes les tasques disponibles
-Route::get('/tasques',[PedidoController::class, 'getTasques'])->name('get.tasques');
+Route::get('/tasques',[ComandaController::class, 'getTasques'])->name('get.tasques');
 
 
 //https://www.youtube.com/watch?v=eRYz62Cx0Wg&ab_channel=Inform%C3%A1ticaDP

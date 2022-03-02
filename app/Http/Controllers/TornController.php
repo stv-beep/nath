@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Activitat;
+use App\Models\Torn;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent;
@@ -11,19 +11,19 @@ use Carbon\Carbon;
 use \DateTime;
 use App\Models\Jornada;
 use App\Models\User;
-use App\Models\Pedido;
+use App\Models\Comanda;
 
-class ActivitatController extends Controller
+class TornController extends Controller
 {
     public function create(){
         $user = Auth::user();
-        $tornTreb = Activitat::where(['treballador' => Auth::id()])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
+        $tornTreb = Torn::where(['treballador' => Auth::id()])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
         $dia = Jornada::where(['treballador' => Auth::id()])->orderBy('id','desc')->take(5)->get();
         return view('jornada', compact('user','tornTreb','dia'));
         
         /* jaseando */
         $id = 4;
-        $torns = Activitat::where(['treballador' => $id])->orderBy('id','desc')->take(10)->get();
+        $torns = Torn::where(['treballador' => $id])->orderBy('id','desc')->take(10)->get();
         $users = User::findOrFail($id);
         return response()->json([
             'msg2' => 'USUARI:', 
@@ -39,9 +39,9 @@ class ActivitatController extends Controller
         $d = now();
         $diaFormat = Carbon::parse($d)->setTimezone('Europe/Madrid')->format('Y-m-d');
 
-        $torn = Activitat::where(['treballador' => Auth::id()])->latest()->first();
+        $torn = Torn::where(['treballador' => Auth::id()])->latest()->first();
 
-        $activitat = new Activitat();
+        $activitat = new Torn();
 
             $activitat-> treballador = $user->id;
             $activitat-> jornada = now();
@@ -49,13 +49,13 @@ class ActivitatController extends Controller
             $activitat-> iniciJornada = Carbon::parse($jornadaInici)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
 
             $activitat->save();
-            $activitat = Activitat::all();
+            $activitat = Torn::all();
              
             $novaJornada = Jornada::firstOrCreate(//busco el registre concret, i si no el troba, el creo
                 ['dia'=> $diaFormat, 'treballador'=> Auth::id()]
             );
 
-        $tornTreb = Activitat::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
+        $tornTreb = Torn::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
         $dia = Jornada::where(['treballador' => $user->id])->orderBy('id','desc')->take(5)->get();
         return view('jornada', compact('user','tornTreb','dia'));
         
@@ -64,26 +64,26 @@ class ActivitatController extends Controller
     public function update(Request $request){
         $user = Auth::user();
         //comprovacio de si hi ha alguna tasca inacabada i per tant, no es pot acabar la jornada
-        $checkTask = Pedido::where(['treballador'=> Auth::id()])->latest('updated_at')->first();
+        $checkTask = Comanda::where(['treballador'=> Auth::id()])->latest('updated_at')->first();
         if ($checkTask == null || $checkTask->total > 0){
 
 
             /* $activitat->update([
                 'fiJornada' => $request->input('final-Jornada'),
             ]); */
-            //$activitat = Activitat::find(3);
+            //$activitat = Torn::find(3);
             $jornada = now();//"2022-02-01T09:08:09.674363Z"
             $jorn = Carbon::parse($jornada)->setTimezone('Europe/Madrid')->format('Y-m-d');//2022-02-01
             $finalFormat = Carbon::parse($jornada)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');//2022-02-03 09:20:21
-            $activitat = Activitat::where([/* 'jornada' => $jorn,  */'treballador' => $user->id])->latest()->first();
+            $activitat = Torn::where([/* 'jornada' => $jorn,  */'treballador' => $user->id])->latest()->first();
             $activitat-> fiJornada = $finalFormat;//guardo fiJornada a la BBDD
             //carbon = "2022-01-31T11:34:39.000000Z"
 
             $activitat-> update();
-            $inici = Activitat::where(['treballador' => $user->id])
+            $inici = Torn::where(['treballador' => $user->id])
             ->get('iniciJornada')->last();//{"iniciJornada":"2022-02-01 10:24:10"}
             $iniciFormat = $inici->iniciJornada;//2022-02-03 09:07:48
-            $fi = Activitat::where(['jornada' => $jorn, 'treballador' => $user->id])
+            $fi = Torn::where(['jornada' => $jorn, 'treballador' => $user->id])
             ->get('fiJornada')->last();//{"fiJornada":"2022-02-01 11:55:45"}
 
             $iniciSegs = strtotime($iniciFormat);//1643875668
@@ -97,7 +97,7 @@ class ActivitatController extends Controller
 
 
             /*consultes per a sumar les hores de diferents torns: de la taula ACTIVITATS a la de JORNADES*/
-            $turnos = Activitat::where(['jornada' => $jorn,'treballador' => Auth::id()])->orderBy('id','desc')->get('total');
+            $turnos = Torn::where(['jornada' => $jorn,'treballador' => Auth::id()])->orderBy('id','desc')->get('total');
 
             //suma de tots els torns de dia X
             $n = count($turnos);
@@ -114,7 +114,7 @@ class ActivitatController extends Controller
                 $novaJornada -> total = $totalJornada;
                 $novaJornada-> update();
 
-        $tornTreb = Activitat::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
+        $tornTreb = Torn::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
         return view('jornada', compact('user','tornTreb'));    
 
         } else {
@@ -151,7 +151,7 @@ class ActivitatController extends Controller
     public function checkTorn(Request $request){
         $user = Auth::user();
         //torn sense acabar
-        $tornComprovacio = Activitat::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
+        $tornComprovacio = Torn::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
 
         if (!($tornComprovacio == null)){//si la jornada no esta acabada
             return response()->json(true, 200);

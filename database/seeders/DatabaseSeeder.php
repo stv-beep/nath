@@ -19,10 +19,10 @@ class DatabaseSeeder extends Seeder
          
          /* tasques, no fa falta factory */
          $tasca = new Tasca();
-         $tasca->tasca ='Preparació pedido';
+         $tasca->tasca ='Preparació comanda';
          $tasca->save();
          $tasca = new Tasca();
-         $tasca->tasca ='Revisió pedido';
+         $tasca->tasca ='Revisió comanda';
          $tasca->save();
          $tasca = new Tasca();
          $tasca->tasca ='Expedició';

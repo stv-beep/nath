@@ -19,8 +19,6 @@ class CreateJornadesTable extends Migration
             $table->unsignedBigInteger('treballador')->nullable();
             $table->foreign('treballador')->references('id')->on('users');
             $table->float('total')->nullable();
-            $table->unsignedBigInteger('id_activitat')->nullable();
-            $table->foreign('id_activitat')->references('id')->on('activitats');
             $table->timestamps();
         });
     }

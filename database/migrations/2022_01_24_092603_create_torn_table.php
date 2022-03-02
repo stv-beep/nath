@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateActivitatTable extends Migration
+class CreateTornTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateActivitatTable extends Migration
      */
     public function up()
     {
-        Schema::create('activitats', function (Blueprint $table) {
+        Schema::create('torns', function (Blueprint $table) {
             $table->id();
             $table->date('jornada');
             $table->unsignedBigInteger('treballador');
@@ -21,7 +21,6 @@ class CreateActivitatTable extends Migration
             $table->float('total')->nullable();
             $table->datetime('iniciJornada')->nullable();
             $table->datetime('fiJornada')->nullable();
-            //$table->float('totalCron')->nullable();
             $table->timestamps(); 
         });
     }
@@ -33,6 +32,6 @@ class CreateActivitatTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activitats');
+        Schema::dropIfExists('torns');
     }
 }

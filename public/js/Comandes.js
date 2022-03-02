@@ -15,7 +15,7 @@ window.onload = checkLastTask;
         $.ajax(
             {
                 type: "GET",
-                url: "/pedidos/check",
+                url: "/comandes/check",
                 success: function(response){
                   console.log("tasca: "+response);
                   

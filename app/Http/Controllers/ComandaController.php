@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pedido;
+use App\Models\Comanda;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent;
@@ -12,9 +12,9 @@ use \DateTime;
 use App\Models\Jornada;
 use App\Models\User;
 use App\Models\Tasca;
-use App\Models\Activitat;
+use App\Models\Torn;
 
-class PedidoController extends Controller
+class ComandaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,19 +36,19 @@ class PedidoController extends Controller
         $user = Auth::user();
         
 
-        /* SELECT * FROM `pedidos` 
-        INNER JOIN tasques ON pedidos.tasca = tasques.id
+        /* SELECT * FROM `comandes` 
+        INNER JOIN tasques ON comandes.tasca = tasques.id
         WHERE treballador = 4; */
 
         //inner join solucionat
-        $tasques = Pedido::join('tasques','pedidos.tasca', '=','tasques.id')
+        $tasques = Comanda::join('tasques','comandes.tasca', '=','tasques.id')
                 ->where(['treballador' =>  Auth::id()])
-                ->orderBy('pedidos.id','desc')->take(10)->get();
+                ->orderBy('comandes.id','desc')->take(10)->get();
 
-        return view('pedidos.pedidos',compact('user','tasques'));
+        return view('comandes.comandes',compact('user','tasques'));
 
         /* jaseando */
-        $tot = Pedido::all();
+        $tot = Comanda::all();
         return response()->json($tot, 200);
     }
 
@@ -63,10 +63,10 @@ class PedidoController extends Controller
         
         $user = Auth::user();
         //comprovacio de si la jornada esta iniciada
-        $tornComprovacio = Activitat::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
+        $tornComprovacio = Torn::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
         if (!($tornComprovacio == null)){//si la jornada no esta acabada
 
-        $nomTasca = Tasca::where(['tasca' => 'Preparació pedido'])->get();
+        $nomTasca = Tasca::where(['tasca' => 'Preparació comanda'])->get();
 
         $idTasca = $nomTasca[0]->id;//Preparació pedido
 
@@ -77,17 +77,17 @@ class PedidoController extends Controller
         //Model::whereNotNull('sent_at')
         
 
-        //$tascaComprovacio = Pedido::where(['treballador'=> Auth::id()])->latest('updated_at')->first();
+        //$tascaComprovacio = Comanda::where(['treballador'=> Auth::id()])->latest('updated_at')->first();
         //if ($tascaComprovacio == null){
             /*nou registre*/
-            $pedido1 = Pedido::firstOrNew(
+            $pedido1 = Comanda::firstOrNew(
                 [/* 'dia' => $diaFormat,  */'treballador'=> Auth::id()],
                 ['iniciTasca' => $horaInici,'fiTasca' => $horaFinal, 'tasca' => $idTasca]
             );
             $pedido1->save();
         //} else {
         
-        /* $tascaUltima = Pedido::where(['treballador'=> Auth::id()])->latest('id')->first();
+        /* $tascaUltima = Comanda::where(['treballador'=> Auth::id()])->latest('id')->first();
         $tascaUltima->fiTasca = $horaFinal;
             $iniciSegs = strtotime($tascaUltima->iniciTasca);
             $acabadaSegs = strtotime($tascaUltima->fiTasca);
@@ -99,15 +99,15 @@ class PedidoController extends Controller
             $tascaUltima->update(); */
 
         //busco l'ultima tasca del treballador creada. Pot ser la de dalt o una ja feta
-        $ultimaTasca = Pedido::where(['treballador'=> Auth::id()])->latest('id')->first();
+        $ultimaTasca = Comanda::where(['treballador'=> Auth::id()])->latest('id')->first();
 
         if($ultimaTasca->iniciTasca == $ultimaTasca->fiTasca){//si es una tasca nomes començada
-            $pedidoUpdate = Pedido::updateOrCreate(
+            $pedidoUpdate = Comanda::updateOrCreate(
                 [/* 'dia'=> $diaFormat,  */'treballador'=> Auth::id(),'tasca' => $idTasca, 'iniciTasca'=> $ultimaTasca->iniciTasca],
                 ['tasca' => $idTasca, 'dia'=> $diaFormat, 'treballador'=> Auth::id(), 'fiTasca'=> Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s')]
             );
             
-            $pedido = Pedido::where(['dia'=> $diaFormat, 'treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
+            $pedido = Comanda::where(['dia'=> $diaFormat, 'treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
             /* $iniciada = $pedido->created_at;
             $acabada = $pedido->updated_at; */
             $iniciada = $pedido->iniciTasca;
@@ -125,7 +125,7 @@ class PedidoController extends Controller
 
         } else {
 
-            $nouPedido = new Pedido();
+            $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
@@ -133,18 +133,18 @@ class PedidoController extends Controller
             $nouPedido-> iniciTasca = $hour;
             $nouPedido-> fiTasca = $hour;
             $nouPedido->save();
-            $nPedido = Pedido::where(['treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
+            $nPedido = Comanda::where(['treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
             echo 'tasca començada';
         }
         //}
 
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
-        /* SELECT * FROM `pedidos` INNER JOIN tasques ON pedidos.tasca = tasques.id
-        where pedidos.id = 127 */
-        $pedidos = Pedido::join('tasques','pedidos.tasca', '=', 'tasques.id')
-        ->where(['treballador' =>  Auth::id()])->orderBy('pedidos.id','desc')->take(10)->get();//agafo els 10 ultims
+        /* SELECT * FROM `pedidos` INNER JOIN tasques ON comandes.tasca = tasques.id
+        where comandes.id = 127 */
+        $pedidos = Comanda::join('tasques','comandes.tasca', '=', 'tasques.id')
+        ->where(['treballador' =>  Auth::id()])->orderBy('comandes.id','desc')->take(10)->get();//agafo els 10 ultims
 
-        return view('pedidos.pedidos',compact('user','pedidos','tasques'));
+        return view('comandes.comandes',compact('user','pedidos','tasques'));
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
             
@@ -157,10 +157,10 @@ class PedidoController extends Controller
 
         $user = Auth::user();
         //comprovacio de si la jornada esta iniciada
-        $tornComprovacio = Activitat::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
+        $tornComprovacio = Torn::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
         if (!($tornComprovacio == null)){//si la jornada no esta acabada
 
-        $nomTasca = Tasca::where(['tasca' => 'Revisió pedido'])->get();
+        $nomTasca = Tasca::where(['tasca' => 'Revisió comanda'])->get();
 
         $idTasca = $nomTasca[0]->id;//revisio pedido
 
@@ -169,17 +169,17 @@ class PedidoController extends Controller
         $horaInici = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
         $horaFinal = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
 
-        //$tascaComprovacio = Pedido::where(['treballador'=> Auth::id()])->latest('updated_at')->first();
+        //$tascaComprovacio = Comanda::where(['treballador'=> Auth::id()])->latest('updated_at')->first();
         //if ($tascaComprovacio == null){
             /*nou registre*/
-            $revPedido = Pedido::firstOrNew(
+            $revPedido = Comanda::firstOrNew(
                 ['dia' => $diaFormat, 'treballador'=> Auth::id()],
                 ['iniciTasca' => $horaInici,'fiTasca' => $horaFinal, 'tasca' => $idTasca]
             );
             $revPedido->save();
         //} else {
         
-        /* $tascaUltima = Pedido::where(['treballador'=> Auth::id()])->latest('id')->first();
+        /* $tascaUltima = Comanda::where(['treballador'=> Auth::id()])->latest('id')->first();
         $tascaUltima->fiTasca = $horaFinal;
             $iniciSegs = strtotime($tascaUltima->iniciTasca);
             $acabadaSegs = strtotime($tascaUltima->fiTasca);
@@ -191,22 +191,22 @@ class PedidoController extends Controller
             $tascaUltima->update(); */
 
         /*nou registre*/
-        /* $revPedido = Pedido::firstOrNew(
+        /* $revPedido = Comanda::firstOrNew(
             ['dia' => $diaFormat, 'treballador'=> Auth::id()],
             ['iniciTasca' => $horaInici,'fiTasca' => $horaFinal, 'tasca' => $idTasca]
         );
         $revPedido->save();
  */
         //busco l'ultima tasca creada. Pot ser la de dalt o una ja feta
-        $ultimaTasca = Pedido::where(['treballador'=> Auth::id()])->latest('id')->first();
+        $ultimaTasca = Comanda::where(['treballador'=> Auth::id()])->latest('id')->first();
 
         if($ultimaTasca->iniciTasca == $ultimaTasca->fiTasca){//si es una tasca nomes començada
-            $pedidoUpdate = Pedido::updateOrCreate(
+            $pedidoUpdate = Comanda::updateOrCreate(
                 ['dia'=> $diaFormat, 'treballador'=> Auth::id(),'tasca' => $idTasca, 'iniciTasca'=> $ultimaTasca->iniciTasca],
                 ['tasca' => $idTasca, 'dia'=> $diaFormat, 'treballador'=> Auth::id(), 'fiTasca'=> Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s')]
             );
             
-            $pedido = Pedido::where(['dia'=> $diaFormat, 'treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
+            $pedido = Comanda::where(['dia'=> $diaFormat, 'treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
             /* $iniciada = $pedido->created_at;
             $acabada = $pedido->updated_at; */
             $iniciada = $pedido->iniciTasca;
@@ -224,7 +224,7 @@ class PedidoController extends Controller
 
         } else {
 
-            $nouPedido = new Pedido();
+            $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
@@ -232,15 +232,15 @@ class PedidoController extends Controller
             $nouPedido-> iniciTasca = $hour;
             $nouPedido-> fiTasca = $hour;
             $nouPedido->save();
-            $nPedido = Pedido::where(['treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
+            $nPedido = Comanda::where(['treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
             echo 'tasca començada';
         }
         //}
 
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
-        $pedidos = Pedido::join('tasques','pedidos.tasca', '=', 'tasques.id')
-        ->where(['treballador' =>  Auth::id()])->orderBy('pedidos.id','desc')->take(10)->get();//agafo els 10 ultims
-        return view('pedidos.pedidos',compact('user','pedidos','tasques'));
+        $pedidos = Comanda::join('tasques','comandes.tasca', '=', 'tasques.id')
+        ->where(['treballador' =>  Auth::id()])->orderBy('comandes.id','desc')->take(10)->get();//agafo els 10 ultims
+        return view('comandes.comandes',compact('user','pedidos','tasques'));
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
             
@@ -252,7 +252,7 @@ class PedidoController extends Controller
 
         $user = Auth::user();
         //comprovacio de si la jornada esta iniciada
-        $tornComprovacio = Activitat::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
+        $tornComprovacio = Torn::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
         if (!($tornComprovacio == null)){//si la jornada no esta acabada
 
         $nomTasca = Tasca::where(['tasca' => 'Expedició'])->get();
@@ -266,22 +266,22 @@ class PedidoController extends Controller
 
        
             /*nou registre*/
-            $revPedido = Pedido::firstOrNew(
+            $revPedido = Comanda::firstOrNew(
                 ['dia' => $diaFormat, 'treballador'=> Auth::id()],
                 ['iniciTasca' => $horaInici,'fiTasca' => $horaFinal, 'tasca' => $idTasca]
             );
             $revPedido->save();
 
             //busco l'ultima tasca creada. Pot ser la de dalt o una ja feta
-        $ultimaTasca = Pedido::where(['treballador'=> Auth::id()])->latest('id')->first();
+        $ultimaTasca = Comanda::where(['treballador'=> Auth::id()])->latest('id')->first();
 
         if($ultimaTasca->iniciTasca == $ultimaTasca->fiTasca){//si es una tasca nomes començada
-            $pedidoUpdate = Pedido::updateOrCreate(
+            $pedidoUpdate = Comanda::updateOrCreate(
                 ['dia'=> $diaFormat, 'treballador'=> Auth::id(),'tasca' => $idTasca, 'iniciTasca'=> $ultimaTasca->iniciTasca],
                 ['tasca' => $idTasca, 'dia'=> $diaFormat, 'treballador'=> Auth::id(), 'fiTasca'=> Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s')]
             );
             
-            $pedido = Pedido::where(['dia'=> $diaFormat, 'treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
+            $pedido = Comanda::where(['dia'=> $diaFormat, 'treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
 
             $iniciada = $pedido->iniciTasca;
             $acabada = $pedido->fiTasca;
@@ -298,7 +298,7 @@ class PedidoController extends Controller
 
         } else {
 
-            $nouPedido = new Pedido();
+            $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
@@ -306,14 +306,14 @@ class PedidoController extends Controller
             $nouPedido-> iniciTasca = $hour;
             $nouPedido-> fiTasca = $hour;
             $nouPedido->save();
-            $nPedido = Pedido::where(['treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
+            $nPedido = Comanda::where(['treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
             echo 'tasca començada';
         }
 
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
-        $pedidos = Pedido::join('tasques','pedidos.tasca', '=', 'tasques.id')
-        ->where(['treballador' =>  Auth::id()])->orderBy('pedidos.id','desc')->take(10)->get();//agafo els 10 ultims
-        return view('pedidos.pedidos',compact('user','pedidos','tasques'));
+        $pedidos = Comanda::join('tasques','comandes.tasca', '=', 'tasques.id')
+        ->where(['treballador' =>  Auth::id()])->orderBy('comandes.id','desc')->take(10)->get();//agafo els 10 ultims
+        return view('comandes.comandes',compact('user','pedidos','tasques'));
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
             
@@ -324,7 +324,7 @@ class PedidoController extends Controller
         
         $user = Auth::user();
         //comprovacio de si la jornada esta iniciada
-        $tornComprovacio = Activitat::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
+        $tornComprovacio = Torn::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
         if (!($tornComprovacio == null)){//si la jornada no esta acabada
 
         $nomTasca = Tasca::where(['tasca' => 'SAF'])->get();
@@ -339,22 +339,22 @@ class PedidoController extends Controller
 
        
             /*nou registre*/
-            $revPedido = Pedido::firstOrNew(
+            $revPedido = Comanda::firstOrNew(
                 ['dia' => $diaFormat, 'treballador'=> Auth::id()],
                 ['iniciTasca' => $horaInici,'fiTasca' => $horaFinal, 'tasca' => $idTasca]
             );
             $revPedido->save();
 
             //busco l'ultima tasca creada. Pot ser la de dalt o una ja feta
-        $ultimaTasca = Pedido::where(['treballador'=> Auth::id()])->latest('id')->first();
+        $ultimaTasca = Comanda::where(['treballador'=> Auth::id()])->latest('id')->first();
 
         if($ultimaTasca->iniciTasca == $ultimaTasca->fiTasca){//si es una tasca nomes començada
-            $pedidoUpdate = Pedido::updateOrCreate(
+            $pedidoUpdate = Comanda::updateOrCreate(
                 ['dia'=> $diaFormat, 'treballador'=> Auth::id(),'tasca' => $idTasca, 'iniciTasca'=> $ultimaTasca->iniciTasca],
                 ['tasca' => $idTasca, 'dia'=> $diaFormat, 'treballador'=> Auth::id(), 'fiTasca'=> Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s')]
             );
             
-            $pedido = Pedido::where(['dia'=> $diaFormat, 'treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
+            $pedido = Comanda::where(['dia'=> $diaFormat, 'treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
 
             $iniciada = $pedido->iniciTasca;
             $acabada = $pedido->fiTasca;
@@ -371,7 +371,7 @@ class PedidoController extends Controller
 
         } else {
 
-            $nouPedido = new Pedido();
+            $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
@@ -379,14 +379,14 @@ class PedidoController extends Controller
             $nouPedido-> iniciTasca = $hour;
             $nouPedido-> fiTasca = $hour;
             $nouPedido->save();
-            $nPedido = Pedido::where(['treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
+            $nPedido = Comanda::where(['treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
             echo 'tasca començada';
         }
 
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
-        $pedidos = Pedido::join('tasques','pedidos.tasca', '=', 'tasques.id')
-        ->where(['treballador' =>  Auth::id()])->orderBy('pedidos.id','desc')->take(10)->get();//agafo els 10 ultims
-        return view('pedidos.pedidos',compact('user','pedidos','tasques'));
+        $pedidos = Comanda::join('tasques','comandes.tasca', '=', 'tasques.id')
+        ->where(['treballador' =>  Auth::id()])->orderBy('comandes.id','desc')->take(10)->get();//agafo els 10 ultims
+        return view('comandes.comandes',compact('user','pedidos','tasques'));
 
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
@@ -447,7 +447,7 @@ class PedidoController extends Controller
         $user = Auth::user();
         $horaFinal = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
         /* s'hauria de parar totes les tasques, pero millor començar per la ultima */
-        $tascaUltima = Pedido::where(['treballador'=> Auth::id()])->latest('id')->first();
+        $tascaUltima = Comanda::where(['treballador'=> Auth::id()])->latest('id')->first();
         if ($tascaUltima->iniciTasca == $tascaUltima->fiTasca){
         $tascaUltima->fiTasca = $horaFinal;
             $iniciSegs = strtotime($tascaUltima->iniciTasca);
@@ -461,12 +461,12 @@ class PedidoController extends Controller
         }
 
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
-        /* SELECT * FROM `pedidos` INNER JOIN tasques ON pedidos.tasca = tasques.id
-        where pedidos.id = 127 */
-        $pedidos = Pedido::join('tasques','pedidos.tasca', '=', 'tasques.id')
-        ->where(['treballador' =>  Auth::id()])->orderBy('pedidos.id','desc')->take(10)->get();//agafo els 10 ultims
+        /* SELECT * FROM `pedidos` INNER JOIN tasques ON comandes.tasca = tasques.id
+        where comandes.id = 127 */
+        $pedidos = Comanda::join('tasques','comandes.tasca', '=', 'tasques.id')
+        ->where(['treballador' =>  Auth::id()])->orderBy('comandes.id','desc')->take(10)->get();//agafo els 10 ultims
     
-        return view('pedidos.pedidos',compact('user','pedidos','tasques'));
+        return view('comandes.comandes',compact('user','pedidos','tasques'));
     }
 
     /**
@@ -479,9 +479,9 @@ class PedidoController extends Controller
     public function checkTasques(Request $request){
         $user = Auth::user();
         //tasca where no hi ha total i per tant no esta acabada
-        //$taskCheck = Pedido::whereIn('total', [null, 0.00])->where(['treballador'=> Auth::id()])->latest('updated_at')->first();
+        //$taskCheck = Comanda::whereIn('total', [null, 0.00])->where(['treballador'=> Auth::id()])->latest('updated_at')->first();
 
-        $taskCheck = Pedido::where(['treballador'=> Auth::id()])->latest('updated_at')->first();
+        $taskCheck = Comanda::where(['treballador'=> Auth::id()])->latest('updated_at')->first();
         //si no hi ha tasca ó ja esta acabada
         if ($taskCheck == null || $taskCheck->total > 0){
             return response()->json(0, 200);
