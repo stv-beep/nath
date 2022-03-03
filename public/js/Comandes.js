@@ -53,7 +53,7 @@ window.onload = checkLastTask;
 
                 },
                 error: function(xhr, textStatus, error){
-                  $("#alert-danger-missatge-final").text("Sembla que ha hagut un error. Per favor, recarrega la pàgina.");
+                  $("#alert-danger-message-final").text("Sembla que ha hagut un error. Per favor, recarrega la pàgina.");
                   $("#alert-danger")
                   .fadeTo(4000, 1000)
                   .slideUp(1000, function () {
@@ -72,8 +72,8 @@ window.onload = checkLastTask;
             revPedidoCheck.disabled = !revPedidoCheck;
             expedPedidoCheck.disabled = !expedPedidoCheck;
             SAFPedidoCheck.disabled = !SAFPedidoCheck;
-        } else if (!document.getElementsByTagName("td")[1].innerHTML.includes("hourglass")){
-            //<i class=\"fas fa-hourglass-half fa-spin center\"></i>
+        } else if (!document.getElementsByTagName("td")[1].innerHTML.includes("circle-notch")){
+            //<i class="fas fa-solid fa-circle-notch fa-spin"></i>
             console.log("ja esta acabat");
             prepPedidoCheck.disabled = !prepPedidoCheck;
             revPedidoCheck.disabled = !revPedidoCheck;

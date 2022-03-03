@@ -37,7 +37,7 @@
                 @if ($user->magatzem == true)
                         {{-- MENU --}}
                 <div class="grid-container-home">
-                    <a href="{{ route('pedidos.form') }}" class="item1 btn btn-info btn-lg">Comandes</a>
+                    <a href="{{ route('comandes.form') }}" class="item1 btn btn-info btn-lg">Comandes</a>
                     <a href="" class="item2 btn btn-info btn-lg disabled">Recepcions</a>
                     <a href="" class="item3 btn btn-info btn-lg disabled">Reoperacions</a>
                     <a href="" class="item4 btn btn-info btn-lg disabled">Inventari</a>
@@ -51,7 +51,7 @@
                         <thead class="thead-dark">
                         <tr>
                             <th scope="col">Dia</th>
-                            <th scope="col">Hores</th>
+                            <th scope="col">Total (min)</th>
                         </tr>
                         </thead>
                         @foreach ($activitat as $a)
@@ -71,7 +71,7 @@
                         <thead class="thead-dark">
                         <tr>
                             <th scope="col">Dia</th>
-                            <th scope="col">Hores</th>
+                            <th scope="col">Total (min)</th>
                         </tr>
                         </thead>
                         @foreach ($dia as $d)

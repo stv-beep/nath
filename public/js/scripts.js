@@ -27,13 +27,12 @@
     //startTime = new Date();
     
     startTime = moment().format('YYYY-MM-DD[T]HH:mm:ss');
-    console.log(moment().format(startTime));
+    //console.log(moment().format(startTime));
 
     //$("#inici-jornada").val(startTime);
-    console.log(startTime);
+    //console.log(startTime);
         
-        //alert('funco send');
-        console.log('funco send');
+    console.log('sending...');
         $.ajax(
                 {
                     type: "POST",
@@ -47,7 +46,7 @@
                         //$("#inici-jornada").val(startTime);
                         //alert('enviat');
                         
-                        $("#alert-missatge-inici").text("Jornada iniciada amb èxit");
+                        $("#alert-message-inici").text("Jornada iniciada amb èxit");
                         init();//mostra el cronometre
                         cronometrar();//inicia el cronometre
                         $("#alert-success")
@@ -61,7 +60,7 @@
 
                     },
                     error: function(xhr, textStatus, error){
-                        $("#alert-danger-missatge-inici").text("Ha hagut un error. Per favor, torna-ho a intentar.");
+                        $("#alert-danger-message-inici").text("Ha hagut un error. Per favor, torna-ho a intentar.");
                         $(".cronometro").hide();
                         $("#alert-danger")
                         .fadeTo(4000, 1000)
@@ -106,7 +105,7 @@
     
     //$("#final-jornada").val(endTime);
     
-    console.log('funco send');
+    console.log('sending...');
         $.ajax(
                 {
                     type: "POST",
@@ -115,7 +114,7 @@
                     success: function( response ) {
 
                         if (response == false) {
-                            $("#alert-danger-missatge-final").text("Tens una tasca pendent de ser acabada.");
+                            $("#alert-danger-message-final").text("Tens una tasca pendent de ser acabada.");
                             $(".cronometro").hide();
                             $("#alert-danger")
                             .fadeTo(4000, 1000)
@@ -127,7 +126,7 @@
                         //$("#total_cron").val();
                         //$("#final-jornada").val();
                         //window.location = "/home";
-                        $("#alert-missatge-final").text("Jornada finalitzada amb èxit");
+                        $("#alert-message-final").text("Jornada finalitzada amb èxit");
                         $(".cronometro").hide();
                         $("#alert-success")
                         .fadeTo(4000, 1000)
@@ -140,7 +139,7 @@
                         }
                     },//si no s'ha trobat cap registre amb inici de jornada, retornara error amb alert
                     error: function(xhr, textStatus, error){
-                        $("#alert-danger-missatge-final").text("No s'ha trobat cap inici de jornada coincident amb el teu registre.");
+                        $("#alert-danger-message-final").text("No s'ha trobat cap inici de jornada coincident amb el teu registre.");
                         $(".cronometro").hide();
                         $("#alert-danger")
                         .fadeTo(4000, 1000)
@@ -184,19 +183,19 @@
         document.getElementById("hms").innerHTML = hAux + ":" + mAux + ":" + sAux; 
     }
 
-    /* PEDIDOS */
+    /* COMANDES */
 
-    function startPrepPedido() {
-            console.log('funco send');
+    function startPrepComanda() {
+            console.log('sending...');
             $.ajax(
                     {
                         type: "POST",
-                        url: "/comandes",//"{{route('pedidos.store')}}"
-                        data:$('#formPrepPedido').serialize(),
+                        url: "/comandes",//"{{route('comandes.store')}}"
+                        data:$('#formPrepComanda').serialize(),
                         success: function( response ) {
 
                             if (response == false){
-                                $("#alert-danger-missatge-final").text("No pots inciar una tasca si no has començat la jornada.");
+                                $("#alert-danger-message-final").text("No pots inciar una tasca si no has començat la jornada.");
                                         $(".cronometro").hide();
                                         $("#alert-danger")
                                         .fadeTo(4000, 1000)
@@ -205,7 +204,7 @@
                                         });
                             } else {
                                                         
-                            $("#prepPedido-missatge-inici").text("Preparació comanda");
+                            $("#task-message-inici").text("Preparació comanda");
                           /*   init();//mostra el cronometre
                             cronometrar();//inicia el cronometre */
                             $("#alert-success")
@@ -235,17 +234,17 @@
         };
 
 
-    function startRevPedido() {
-                console.log('funco send');
+    function startRevComanda() {
+                console.log('sending...');
                 $.ajax(
                     {
                             type: "POST",
                             url: "/comandes/revisio",
-                            data:$('#formRevPedido').serialize(),
+                            data:$('#formRevComanda').serialize(),
                             success: function( response ) {
 
                                 if (response == false){
-                                    $("#alert-danger-missatge-final").text("No pots inciar una tasca si no has començat la jornada.");
+                                    $("#alert-danger-message-final").text("No pots inciar una tasca si no has començat la jornada.");
                                             $(".cronometro").hide();
                                             $("#alert-danger")
                                             .fadeTo(4000, 1000)
@@ -254,7 +253,7 @@
                                             });
                                 } else {
                                 
-                                $("#prepPedido-missatge-inici").text("Revisió comanda");
+                                $("#task-message-inici").text("Revisió comanda");
                               /*   init();//mostra el cronometre
                                 cronometrar();//inicia el cronometre */
                                 $("#alert-success")
@@ -281,16 +280,16 @@
                 )
     };
 
-    function startExpedPedido() {
-        console.log('funco send');
+    function startExpedComanda() {
+        console.log('sending...');
         $.ajax(
             {
                     type: "POST",
                     url: "/comandes/expedicio",
-                    data:$('#formExpedPedido').serialize(),
+                    data:$('#formExpedComanda').serialize(),
                     success: function( response ) {
                         if (response == false){
-                            $("#alert-danger-missatge-final").text("No pots inciar una tasca si no has començat la jornada.");
+                            $("#alert-danger-message-final").text("No pots inciar una tasca si no has començat la jornada.");
                                     $(".cronometro").hide();
                                     $("#alert-danger")
                                     .fadeTo(4000, 1000)
@@ -299,7 +298,7 @@
                                     });
                         } else {
                         
-                        $("#prepPedido-missatge-inici").text("Expedició comanda");
+                        $("#task-message-inici").text("Expedició comanda");
                       /*   init();//mostra el cronometre
                         cronometrar();//inicia el cronometre */
                         $("#alert-success")
@@ -326,16 +325,16 @@
         )
     };
 
-    function startSAFPedido() {
-        console.log('funco send');
+    function startSAFComanda() {
+        console.log('sending...');
         $.ajax(
             {
                     type: "POST",
                     url: "/comandes/saf",
-                    data:$('#formSAFPedido').serialize(),
+                    data:$('#formSAFComanda').serialize(),
                     success: function( response ) {
                         if (response == false){
-                            $("#alert-danger-missatge-final").text("No pots inciar una tasca si no has començat la jornada.");
+                            $("#alert-danger-message-final").text("No pots inciar una tasca si no has començat la jornada.");
                                     $(".cronometro").hide();
                                     $("#alert-danger")
                                     .fadeTo(4000, 1000)
@@ -343,10 +342,7 @@
                                         $("#alert-danger").slideUp(1000);
                                     });
                         } else {
-
-
-                        $("#prepPedido-missatge-inici").text("SAF");
-
+                        $("#task-message-inici").text("SAF");
                         $("#alert-success")
                         .fadeTo(4000, 1000)
                         .slideUp(1000, function () {
@@ -356,33 +352,37 @@
                             /* window.setTimeout(function(){
                                 window.location = "/comandes";
                             }, 1500); */
-                    /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
-                    SAFPedidoCheck.classList.toggle('btn-danger');
-                    var prepPedido = document.getElementById("Pedido1").disabled;
-                    var revPedido = document.getElementById("Pedido2").disabled;
-                    var expedPedido = document.getElementById("Pedido3").disabled;
+                        /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
+                        SAFPedidoCheck.classList.toggle('btn-danger');
+                        var prepPedido = document.getElementById("Pedido1").disabled;
+                        var revPedido = document.getElementById("Pedido2").disabled;
+                        var expedPedido = document.getElementById("Pedido3").disabled;
 
-                        document.getElementById("Pedido1").disabled = !prepPedido;
-                        document.getElementById("Pedido2").disabled = !revPedido;
-                        document.getElementById("Pedido3").disabled = !expedPedido;
-                    }
+                            document.getElementById("Pedido1").disabled = !prepPedido;
+                            document.getElementById("Pedido2").disabled = !revPedido;
+                            document.getElementById("Pedido3").disabled = !expedPedido;
+                        }
                 }
             }
         )
     };
 
-    
-    function stopPedidos(){
-        console.log('funco send');
+    /**
+     * funcio que no s'esta utilitzant ara mateix 
+     * ja que les tasques es paren amb el mateix boto
+     * @return [type]
+     */
+    function stopComandes(){
+        console.log('sending...');
                 $.ajax(
                     {
                             type: "POST",
                             url: "/comandes/stop",
-                            data:$('#formStopPedidos').serialize(),
+                            data:$('#formStopComandes').serialize(),
                             success: function( data ) {
                                 
-                                if (document.getElementsByTagName("td")[1].innerHTML.includes("hourglass")){
-                                $("#prepPedido-missatge-inici").text("S'ha parat amb èxit.");
+                                if (document.getElementsByTagName("td")[1].innerHTML.includes("circle-notch")){
+                                $("#task-message-inici").text("S'ha parat amb èxit.");
                               /*   init();//mostra el cronometre
                                 cronometrar();//inicia el cronometre */
                                 $("#alert-success")
@@ -395,7 +395,7 @@
                                         window.location = "/comandes";
                                     }, 1500);
                                 } else {
-                                    $("#alert-danger-missatge-final").text("No hi ha cap tasca per a parar.");
+                                    $("#alert-danger-message-final").text("No hi ha cap tasca per a parar.");
                                     $(".cronometro").hide();
                                     $("#alert-danger")
                                     .fadeTo(4000, 1000)
@@ -405,7 +405,7 @@
                                 }
                             },//si no s'ha trobat cap registre, retornara error amb alert
                             error: function(xhr, textStatus, error){
-                                $("#alert-danger-missatge-final").text("No hi ha cap tasca per a parar.");
+                                $("#alert-danger-message-final").text("No hi ha cap tasca per a parar.");
                                 $(".cronometro").hide();
                                 $("#alert-danger")
                                 .fadeTo(4000, 1000)

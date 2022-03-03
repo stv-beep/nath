@@ -11,8 +11,6 @@ function checkLastTorn(){
             type: "GET",
             url: "/jornada/check",
             success: function(response){
-              //alert(response); //response es la id de la tasca
-              console.log("torn: "+response);
               //true = torn NO acabat
               //false = torn acabat
               if (response == true) {
@@ -25,7 +23,7 @@ function checkLastTorn(){
 
             },
             error: function(xhr, textStatus, error){
-              $("#alert-danger-missatge-final").text("Sembla que ha hagut un error. Per favor, recarrega la pàgina.");
+              $("#alert-danger-message-final").text("Sembla que ha hagut un error. Per favor, recarrega la pàgina.");
               $("#alert-danger")
               .fadeTo(4000, 1000)
               .slideUp(1000, function () {

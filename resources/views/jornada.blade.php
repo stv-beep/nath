@@ -5,8 +5,8 @@
 <script src="{{ asset('js/Jornada.js') }}" defer></script>
 
 <div class='alert-position hidden alert alert-success' id='alert-success' role='alert'>
-   <strong id="alert-missatge-inici"></strong>&nbsp;
-   <strong id="alert-missatge-final"></strong>&nbsp;
+   <strong id="alert-message-inici"></strong>&nbsp;
+   <strong id="alert-message-final"></strong>&nbsp;
    <i class="fas fa-hourglass-half fa-spin"></i>
    <div class="cronometro">
     <div id="hms"></div>
@@ -16,8 +16,8 @@
     
     <div class='alert-position hidden alert alert-danger' id='alert-danger' role='alert'>
         <i class="fas fa-exclamation-triangle"></i>
-        <strong id="alert-danger-missatge-inici"></strong>&nbsp;
-        <strong id="alert-danger-missatge-final"></strong>&nbsp;
+        <strong id="alert-danger-message-inici"></strong>&nbsp;
+        <strong id="alert-danger-message-final"></strong>&nbsp;
         &nbsp;&nbsp;   
     </div>
 
@@ -69,7 +69,7 @@
                         <thead class="thead-dark">
                         <tr>
                             <th scope="col">Dia</th>
-                            <th scope="col">Hores</th>
+                            <th scope="col">Total (min)</th>
                         </tr>
                         </thead>
                         @foreach ($tornTreb as $a)

@@ -40,19 +40,19 @@ Route::post('/jornada',[TornController::class,'store'])->name('jornada.store');
 Route::patch('/jornada',[TornController::class,'update'])->name('jornada.update');
 
 //PEDIDOS
-Route::get('/comandes', [ComandaController::class,'create'])->name('pedidos.form');
+Route::get('/comandes', [ComandaController::class,'create'])->name('comandes.form');
 //post store preparacio pedido
-Route::post('/comandes',[ComandaController::class,'store'])->name('pedidos.store');
+Route::post('/comandes',[ComandaController::class,'store'])->name('comandes.store');
 //store Revisio pedido
-Route::post('/comandes/revisio',[ComandaController::class,'storeRevPedido'])->name('revPedidos.store');
+Route::post('/comandes/revisio',[ComandaController::class,'storeRevPedido'])->name('revComandes.store');
 //stop pedidos
 Route::post('/comandes/stop',[ComandaController::class,'stopPedidos'])->name('stop.pedidos');
 //store expedicio pedidos
-Route::post('/comandes/expedicio',[ComandaController::class,'storeExpedPedido'])->name('expedPedidos.store');
+Route::post('/comandes/expedicio',[ComandaController::class,'storeExpedPedido'])->name('expedComandes.store');
 //store saf pedidos
-Route::post('/comandes/saf',[ComandaController::class,'storeSAFPedido'])->name('safPedidos.store');
+Route::post('/comandes/saf',[ComandaController::class,'storeSAFPedido'])->name('safComandes.store');
 //check tasques pedidos
-Route::get('/comandes/check',[ComandaController::class,'checkTasques'])->name('check.pedidos');
+Route::get('/comandes/check',[ComandaController::class,'checkTasques'])->name('check.comandes');
 //check torns
 Route::get('/jornada/check',[TornController::class,'checkTorn'])->name('check.torns');
 //llistar totes les tasques disponibles
