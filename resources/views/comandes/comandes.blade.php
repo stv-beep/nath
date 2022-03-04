@@ -26,7 +26,7 @@
     @if ($user->magatzem == false)
     <div class='alert-position alert alert-warning' role='alert'>
         <i class="fas fa-exclamation-triangle"></i>
-        <strong>No tens tasques de magatzem.</strong>&nbsp;
+        <strong>{{ __('messages.You don\'t have any stock task.') }}</strong>&nbsp;
         <a id="icona" href="{{route('home')}}"><i class="fas fa-arrow-alt-circle-left fa-lg" style="color: #51cf66;"></i></a>   
     </div>
     @else
@@ -35,7 +35,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg">
-                <div class="card-header">{{ __('Comandes') }} de {{$user->name}}
+                <div class="card-header">{{ __('messages.Orders from') }} {{$user->name}}
                     <a id="icona" href="{{route('home')}}"><i class="fas fa-arrow-alt-circle-left fa-lg" style="color: #51cf66;"></i></a>
                 </div>
 
@@ -52,7 +52,7 @@
                                 <form id="formPrepComanda" action="{{route('comandes.store')}}" method="post">
     
                                 @csrf                                
-                                <button id="Pedido1" type="button" class="opcio btn btn-lg btn-success ped" onclick="startPrepComanda();">Preparació</button>
+                                <button id="Pedido1" type="button" class="opcio btn btn-lg btn-success ped" onclick="startPrepComanda();">{{ __('messages.Preparation') }}</button>
                                 
                                 {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  --}} 
                                 </form>
@@ -61,7 +61,7 @@
                                 <form id="formRevComanda" action="{{route('revComandes.store')}}" method="post">
     
                                     @csrf        
-                                    <button id="Pedido2" type="button" class="opcio btn btn-lg btn-success ped" onclick="startRevComanda();">Revisió</button>
+                                    <button id="Pedido2" type="button" class="opcio btn btn-lg btn-success ped" onclick="startRevComanda();">{{ __('messages.Review') }}</button>
                                     
                                     
                                   {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
@@ -70,7 +70,7 @@
                             <div class="item3">
                                 <form id="formExpedComanda" action="{{route('expedComandes.store')}}" method="post">
                                     @csrf        
-                                    <button id="Pedido3" type="button" class="opcio btn btn-lg btn-success ped" onclick="startExpedComanda();">Expedicions</button>
+                                    <button id="Pedido3" type="button" class="opcio btn btn-lg btn-success ped" onclick="startExpedComanda();">{{ __('messages.Expedition') }}</button>
                                   {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                                 </form>
                             </div>  
@@ -99,19 +99,20 @@
                     <table id="activitats" class="table table-striped table-hover">
                         <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Tasca</th>
+                            <th scope="col">{{ __('messages.Task') }}</th>
                             <th scope="col">Total (min)</th>
-                            <th scope="col">Inici tasca</th>
-                            <th scope="col">Fi tasca</th>
+                            <th scope="col">{{ __('messages.Task start') }}</th>
+                            <th scope="col">{{ __('messages.Task end') }}</th>
 
                         </tr>
                         </thead>
                             {{-- inner join solucionat --}}
                             @foreach ($tasques as $t)
                             <tr>
-                                <td>{{$t->tasca}}</td>
+                                @php($tasca = $t->tasca)
+                                <td>{{ __("messages.$tasca") }}</td>
                                     @if ($t->total == null || $t->total < 0.01)
-                                    <td>&nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i></td>
+                                    <td><div class="loadersmall"></div></td>
                                     @else
                                     <td><b>{{$t->total}}</b></td>
                                     @endif

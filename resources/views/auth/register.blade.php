@@ -5,14 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('messages.Register') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nom i cognoms') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('messages.Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,11 +26,11 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="username" class="col-md-4 col-form-label text-md-end">{{ __("Codi d'usuari") }}</label>
+                            <label for="username" class="col-md-4 col-form-label text-md-end">{{ __("messages.Username") }}</label>
 
                             <div class="col-md-6">
                                 <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
-                                <small id="usernameHelp" class="form-text text-muted">Amb aquest codi iniciaràs sessió.</small>
+                                <small id="usernameHelp" class="form-text text-muted">{{ __("messages.UserCode") }}</small>
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -55,10 +55,10 @@
                         </div> --}}
 
                         <div class="row mb-3">
-                            <label for="magatzem" class="col-md-4 col-form-label text-md-end">{{ __('Magatzem') }}</label>
+                            <label for="magatzem" class="col-md-4 col-form-label text-md-end">{{ __('messages.Warehouse') }}</label>
                                 <div class="col-md-6">
                                     <input type="radio" id="magatzem" name="magatzem" value="1">
-                                    <label for="magatzem">Sí</label><br>
+                                    <label for="magatzem">{{ __('messages.Yes') }}</label><br>
                                     <input type="radio" id="magatzem" name="magatzem" value="0">
                                     <label for="magatzem">No</label><br>
                                 </div>
@@ -89,7 +89,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('messages.Register') }}
                                 </button>
                             </div>
                         </div>

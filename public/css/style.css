@@ -169,3 +169,36 @@ a.close.disabled {
 #nom-app:hover{
   color:#efaf00;
 }
+
+.idioma:hover{
+  background-color:#ffd76a;
+}
+
+
+
+/* spinner */
+.loadersmall {
+  border: 3px solid #bbbbbb;
+  -webkit-animation: spin 1.5s linear infinite;
+  animation: spin 1.5s linear infinite;
+  border-top: 3px solid #555;
+  border-radius: 50%;
+  width: 17px;
+  height: 17px;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.td-spinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,6 +1,6 @@
 {   
-    "name": "nath-fitxatges",
-    "version": "0.8.2",
+    "name": "nath",
+    "version": "0.8.3",
     "private": true,
     "scripts": {
         "dev": "npm run development",

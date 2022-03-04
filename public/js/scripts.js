@@ -1,52 +1,21 @@
-/* SCRIPT ALEIX  */  
-
-    //https://stackoverflow.com/questions/41632942/how-to-measure-time-elapsed-on-javascript
-    //https://stackoverflow.com/questions/1210701/compute-elapsed-time/1210726
-    //https://ralzohairi.medium.com/displaying-dynamic-elapsed-time-in-javascript-260fa0e95049
-
-    //https://gomakethings.com/how-to-show-and-hide-elements-with-vanilla-javascript/
+/* SCRIPTS D'ENVIAMENT DE PETICIONS AJAX  */  
      
-    /* $(document).ready(function () {
+    /* message variables */
+    let msgIniciJornada, msgFinalJornada, msgPrepComanda, msgRevComanda, msgExpedComanda, tascaNoAcabada, 
+    jornadaNoIniciada, msgError, noJornada;
 
-        $("#alert-success").removeClass("hidden");
-        $("#alert-danger").removeClass("hidden");
-
-        $("#alert-success").hide();
-        $("#alert-danger").hide();
-    }); */
-
-
-   /*  jQuery(function () {
-
-    });  */
-
-
-    var startTime, endTime, h;
-
+    /* funcions de jornada */
     function start() {
-    //startTime = new Date();
-    
-    startTime = moment().format('YYYY-MM-DD[T]HH:mm:ss');
-    //console.log(moment().format(startTime));
-
-    //$("#inici-jornada").val(startTime);
-    //console.log(startTime);
-        
-    console.log('sending...');
+        translateAlerts();
+        console.log('sending...');
         $.ajax(
                 {
                     type: "POST",
                     url: "/jornada",//"{{route('jornada.store')}}"
                     data:$('#form-inici').serialize(),
                     success: function( data ) {
-                        document.getElementById("sendInici").disabled = true;
-                        
-                        //console.log(data);
-                        //$("#total_cron").val();
-                        //$("#inici-jornada").val(startTime);
-                        //alert('enviat');
-                        
-                        $("#alert-message-inici").text("Jornada iniciada amb èxit");
+                        document.getElementById("sendInici").disabled = true;                        
+                        $("#alert-message-inici").text(msgIniciJornada);
                         init();//mostra el cronometre
                         cronometrar();//inicia el cronometre
                         $("#alert-success")
@@ -57,10 +26,9 @@
                             window.setTimeout(function(){
                                 window.location = "/home";//"{{route('home')}}"
                             }, 1500);
-
                     },
                     error: function(xhr, textStatus, error){
-                        $("#alert-danger-message-inici").text("Ha hagut un error. Per favor, torna-ho a intentar.");
+                        $("#alert-danger-message-inici").text(msgError);
                         $(".cronometro").hide();
                         $("#alert-danger")
                         .fadeTo(4000, 1000)
@@ -70,42 +38,11 @@
                     }
                 }
             )
-        return startTime;
     };
 
     function end() {
-    //endTime = new Date();
-    /* endTime = moment().format('YYYY-MM-DD[T]HH:mm:ss');
-    var timeDiff = endTime - startTime; //in ms
-    // strip the ms
-    timeDiff = timeDiff / 1000;
-
-
-    // get seconds 
-    var segons = Math.round(timeDiff);
-    var minuts = segons/60;
-    var min = Math.round((minuts + Number.EPSILON) * 100) / 100;
-    var hores = minuts/60;
-    h = Math.round((hores + Number.EPSILON) * 100) / 100;
-    console.log(segons + " segons");
-    console.log(min + " minuts");
-    console.log(h + " hores")
-    console.log(startTime);
-    console.log(endTime);
-
-    //guardo HORES al input
-    $("#total_cron").val(h);
-        let cron = document.getElementById("total_cron").value;
-        if (cron.length < 0){
-            console.log("cron = "+cron);
-        } else {
-            console.log("cronn = "+cron);
-        }
- */
-    
-    //$("#final-jornada").val(endTime);
-    
-    console.log('sending...');
+        translateAlerts();    
+        console.log('sending...');
         $.ajax(
                 {
                     type: "POST",
@@ -113,8 +50,8 @@
                     data:$('#form-final').serialize(),
                     success: function( response ) {
 
-                        if (response == false) {
-                            $("#alert-danger-message-final").text("Tens una tasca pendent de ser acabada.");
+                        if (response == false) {//unfinished task
+                            $("#alert-danger-message-final").text(tascaNoAcabada);
                             $(".cronometro").hide();
                             $("#alert-danger")
                             .fadeTo(4000, 1000)
@@ -122,24 +59,21 @@
                                 $("#alert-danger").slideUp(1000);
                             });
                         } else {
-                        //console.log(response);
-                        //$("#total_cron").val();
-                        //$("#final-jornada").val();
-                        //window.location = "/home";
-                        $("#alert-message-final").text("Jornada finalitzada amb èxit");
-                        $(".cronometro").hide();
-                        $("#alert-success")
-                        .fadeTo(4000, 1000)
-                        .slideUp(1000, function () {
-                            $("#alert-success").slideUp(1000);
-                        });
-                            window.setTimeout(function(){
-                                window.location = "/home";//"{{route('home')}}"
-                            }, 1500);
+                        
+                            $("#alert-message-final").text(msgFinalJornada);
+                            $(".cronometro").hide();
+                            $("#alert-success")
+                            .fadeTo(4000, 1000)
+                            .slideUp(1000, function () {
+                                $("#alert-success").slideUp(1000);
+                            });
+                                window.setTimeout(function(){
+                                    window.location = "/home";//"{{route('home')}}"
+                                }, 1500);
                         }
                     },//si no s'ha trobat cap registre amb inici de jornada, retornara error amb alert
                     error: function(xhr, textStatus, error){
-                        $("#alert-danger-message-final").text("No s'ha trobat cap inici de jornada coincident amb el teu registre.");
+                        $("#alert-danger-message-final").text(noJornada);
                         $(".cronometro").hide();
                         $("#alert-danger")
                         .fadeTo(4000, 1000)
@@ -183,9 +117,9 @@
         document.getElementById("hms").innerHTML = hAux + ":" + mAux + ":" + sAux; 
     }
 
-    /* COMANDES */
-
+    /* funcions de COMANDES */
     function startPrepComanda() {
+        translateAlerts();
             console.log('sending...');
             $.ajax(
                     {
@@ -195,7 +129,8 @@
                         success: function( response ) {
 
                             if (response == false){
-                                $("#alert-danger-message-final").text("No pots inciar una tasca si no has començat la jornada.");
+                                
+                                $("#alert-danger-message-final").text(jornadaNoIniciada);
                                         $(".cronometro").hide();
                                         $("#alert-danger")
                                         .fadeTo(4000, 1000)
@@ -204,9 +139,7 @@
                                         });
                             } else {
                                                         
-                            $("#task-message-inici").text("Preparació comanda");
-                          /*   init();//mostra el cronometre
-                            cronometrar();//inicia el cronometre */
+                            $("#task-message-inici").text(msgPrepComanda);
                             $("#alert-success")
                             .fadeTo(4000, 1000)
                             .slideUp(1000, function () {
@@ -235,6 +168,7 @@
 
 
     function startRevComanda() {
+        translateAlerts();
                 console.log('sending...');
                 $.ajax(
                     {
@@ -244,7 +178,7 @@
                             success: function( response ) {
 
                                 if (response == false){
-                                    $("#alert-danger-message-final").text("No pots inciar una tasca si no has començat la jornada.");
+                                    $("#alert-danger-message-final").text(jornadaNoIniciada);
                                             $(".cronometro").hide();
                                             $("#alert-danger")
                                             .fadeTo(4000, 1000)
@@ -253,9 +187,7 @@
                                             });
                                 } else {
                                 
-                                $("#task-message-inici").text("Revisió comanda");
-                              /*   init();//mostra el cronometre
-                                cronometrar();//inicia el cronometre */
+                                $("#task-message-inici").text(msgRevComanda);
                                 $("#alert-success")
                                 .fadeTo(4000, 1000)
                                 .slideUp(1000, function () {
@@ -281,6 +213,7 @@
     };
 
     function startExpedComanda() {
+        translateAlerts();
         console.log('sending...');
         $.ajax(
             {
@@ -289,7 +222,7 @@
                     data:$('#formExpedComanda').serialize(),
                     success: function( response ) {
                         if (response == false){
-                            $("#alert-danger-message-final").text("No pots inciar una tasca si no has començat la jornada.");
+                            $("#alert-danger-message-final").text(jornadaNoIniciada);
                                     $(".cronometro").hide();
                                     $("#alert-danger")
                                     .fadeTo(4000, 1000)
@@ -298,9 +231,7 @@
                                     });
                         } else {
                         
-                        $("#task-message-inici").text("Expedició comanda");
-                      /*   init();//mostra el cronometre
-                        cronometrar();//inicia el cronometre */
+                        $("#task-message-inici").text(msgExpedComanda);
                         $("#alert-success")
                         .fadeTo(4000, 1000)
                         .slideUp(1000, function () {
@@ -326,6 +257,7 @@
     };
 
     function startSAFComanda() {
+        translateAlerts();
         console.log('sending...');
         $.ajax(
             {
@@ -334,7 +266,7 @@
                     data:$('#formSAFComanda').serialize(),
                     success: function( response ) {
                         if (response == false){
-                            $("#alert-danger-message-final").text("No pots inciar una tasca si no has començat la jornada.");
+                            $("#alert-danger-message-final").text(jornadaNoIniciada);
                                     $(".cronometro").hide();
                                     $("#alert-danger")
                                     .fadeTo(4000, 1000)
@@ -368,8 +300,9 @@
     };
 
     /**
-     * funcio que no s'esta utilitzant ara mateix 
-     * ja que les tasques es paren amb el mateix boto
+     * funcio que NO S'ESTA UTILITZANT ara mateix 
+     * ja que les tasques es paren amb el mateix boto,
+     * de moment la deixo per si de cas es necessita en un futur
      * @return [type]
      */
     function stopComandes(){
@@ -383,8 +316,6 @@
                                 
                                 if (document.getElementsByTagName("td")[1].innerHTML.includes("circle-notch")){
                                 $("#task-message-inici").text("S'ha parat amb èxit.");
-                              /*   init();//mostra el cronometre
-                                cronometrar();//inicia el cronometre */
                                 $("#alert-success")
                                 .fadeTo(4000, 1000)
                                 .slideUp(1000, function () {

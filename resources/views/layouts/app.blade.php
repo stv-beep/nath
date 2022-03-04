@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{{url('favicon.ico')}}"/>
     <meta name="author" content="Aleix J. Algueró">
+    
+    {{-- saving user's language in js --}}
+    <script>
+        var locale = '{{ config('app.locale') }}';
+    </script>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -13,6 +18,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/Translate.js') }}" defer></script>
     <script src="{{ asset('js/scripts.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -53,14 +59,24 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar sessió') }}</a>
+                                    <a class="nav-link user-nav btn" href="{{ route('login') }}">{{ __('messages.Login') }}</a>{{-- Iniciar sessió --}}
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar-se') }}</a>
+                                    <a class="nav-link user-nav btn" href="{{ route('register') }}">{{ __('messages.Register') }}</a>{{-- Registrar-s --}}
                                 </li>
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="user-nav nav-link dropdown-toggle btn" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ __("messages.Choose a language") }} <i class="fas fa-language"></i>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{route('set_language', ['ca'])}}">{{ __("messages.Catalan") }}</a> 
+                                        <a class="dropdown-item" href="{{route('set_language', ['es'])}}">{{ __("messages.Spanish") }}</a>
+                                        <a class="dropdown-item" href="{{route('set_language', ['en'])}}">{{ __("messages.English") }}</a> 
+                                    </div>
+                                </li> 
                             @endif
                         @else
                             <li class="nav-item dropdown">
@@ -75,7 +91,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('messages.Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -83,6 +99,17 @@
                                     </form>
                                 </div>
                             </li>
+                            &nbsp;
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="user-nav nav-link dropdown-toggle btn" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ __("messages.Choose a language") }} <i class="fas fa-language"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item idioma" href="{{route('set_language', ['ca'])}}">{{ __("messages.Catalan") }}</a> 
+                                    <a class="dropdown-item idioma" href="{{route('set_language', ['es'])}}">{{ __("messages.Spanish") }}</a>
+                                    <a class="dropdown-item idioma" href="{{route('set_language', ['en'])}}">{{ __("messages.English") }}</a> 
+                                </div>
+                            </li>    
                         @endguest
                     </ul>
                 </div>

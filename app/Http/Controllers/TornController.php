@@ -96,7 +96,7 @@ class TornController extends Controller
             $activitat-> update();
 
 
-            /*consultes per a sumar les hores de diferents torns: de la taula ACTIVITATS a la de JORNADES*/
+            /*consultes per a sumar les hores de diferents torns: de la taula TORNS a la de JORNADES*/
             $turnos = Torn::where(['jornada' => $jorn,'treballador' => Auth::id()])->orderBy('id','desc')->get('total');
 
             //suma de tots els torns de dia X

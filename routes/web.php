@@ -58,5 +58,7 @@ Route::get('/jornada/check',[TornController::class,'checkTorn'])->name('check.to
 //llistar totes les tasques disponibles
 Route::get('/tasques',[ComandaController::class, 'getTasques'])->name('get.tasques');
 
+Route::get('/set_language/{lang}', [App\Http\Controllers\Controller::class, 'set_language'])->name('set_language');
+App::setLocale("es");
 
 //https://www.youtube.com/watch?v=eRYz62Cx0Wg&ab_channel=Inform%C3%A1ticaDP

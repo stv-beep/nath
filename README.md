@@ -1,3 +1,77 @@
+# Aplicació per a fitxatges Nath v0.8.3
+### Autor
+#### Aleix Algueró, 2022
+
+## Sobre l'aplicació
+
+És una aplicació per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació.
+Ara mateix, en versió [0.8.3], sembla que té una certa estabilitat.
+
+### Development setup
+##### Compte amb això ja que l'aplicació està desenvolupada en Laravel 8
+#### A dins del directori del projecte
+```
+composer install
+```
+```
+cp .env.example .env
+```
+```
+php artisan key:generate
+```
+```
+php artisan serve
+```
+```
+Comprovar fitxer 'vendorstocats.txt' ja que per al login sense contrasenya s'han tingut que manipular alguns arxius allí indicats.
+```
+
+### Deploy setup
+- [Documentation](https://platzi.com/tutoriales/2182-intro-laravel/9744-como-desplegar-una-app-hecha-en-laravel)
+- [Apache deploy Documentation](https://help.clouding.io/hc/es/articles/4406607535634-C%C3%B3mo-Desplegar-Laravel-8-con-Apache-y-Let-s-Encrypt-SSL-en-Ubuntu-20-04)
+- [Official Documentation](https://laravel.com/docs/8.x/deployment)
+#### Al fitxer .env
+```
+APP_ENV=production
+APP_DEBUG=false
+```
+#### Al directori
+```
+npm run production
+composer dumpautoload
+```
+```
+Comprimir App
+```
+```
+Descomprimir l'app al sistema d'arxius del servidor
+```
+```
+php artisan serve
+```
+```
+Moure els arxius de la carpeta 'public' a la 'public_html' i borrar la 'public' buida
+```
+#### Al /public_html/index.php afegir
+```
+$app->bind('path.public', function() {
+    return __DIR__;
+});
+```
+#### Crear la base de dades
+
+### Errors i bugs (versió 0.8.3)
+- L'error principal és el canvi de dia mentre hi ha un torn obert (corrent el temps).
+Quan s'acaba el torn, es compta com si la jornada sencera fos del dia en que s'acaba el torn, i, per tant, només se suma al temps de jornada total el temps del segon dia.
+- Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.
+- Probablement, si d'alguna forma es desactiva 'la desactivació dels botons' és possible que es puguen iniciar varies tasques alhora i que el programa perdi la seva funcionalitat de sèrie.
+
+
+
+
+
+# Readme de Laravel
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">

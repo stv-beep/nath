@@ -25,7 +25,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg">
-                <div class="card-header">{{ __('Jornada') }} de {{$user->name}} 
+                <div class="card-header">{{ __('messages.Working day of') }} {{$user->name}} 
                     <a id="icona" href="{{route('home')}}"><i class="far fa-arrow-alt-circle-left fa-lg" style="color: #51cf66;"></i></a>
                 </div>   
 
@@ -43,7 +43,7 @@
 
                         @csrf
                             
-                        <button id="sendInici" type="button" class="btn btn-lg btn-success center" onclick="start()"><i class="fas fa-hourglass-start"></i> Iniciar</button>
+                        <button id="sendInici" type="button" class="btn btn-lg btn-success center" onclick="start()"><i class="fas fa-hourglass-start"></i> {{ __('messages.Start') }}</button>
  
                         <!--button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button-->  
                     </form>
@@ -64,11 +64,11 @@
                     
                     </div>
                 </div>
-                <p class="h4 text-center" id="titol">Torns</p>
+                <p class="h4 text-center" id="titol">{{ __('messages.Shifts') }}</p>
                     <table id="activitats" class="table table-striped table-hover">
                         <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Dia</th>
+                            <th scope="col">{{ __('messages.Day') }}</th>
                             <th scope="col">Total (min)</th>
                         </tr>
                         </thead>
@@ -76,7 +76,7 @@
                         <tr>
                             <td>{{ date('d/m/Y', strtotime($a->jornada)) }}</td>
                             @if ($a->total == null || $a->total == 0)
-                            <td>&nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i></td>
+                            <td><div class="loadersmall"></div></td>
                             @else
                             <td>{{$a->total}}</td>
                             @endif

@@ -6,6 +6,7 @@ inic.disabled = true;
 f.disabled = true;
 
 function checkLastTorn(){
+  translateAlerts();
     $.ajax(
         {
             type: "GET",
@@ -23,7 +24,7 @@ function checkLastTorn(){
 
             },
             error: function(xhr, textStatus, error){
-              $("#alert-danger-message-final").text("Sembla que ha hagut un error. Per favor, recarrega la pàgina.");
+              $("#alert-danger-message-final").text(msgError);
               $("#alert-danger")
               .fadeTo(4000, 1000)
               .slideUp(1000, function () {

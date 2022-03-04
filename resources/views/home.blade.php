@@ -14,7 +14,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    Benvingut {{$user->name}}
+                    {{ __('messages.Welcome') }} {{$user->name}}
                     {{-- <br>
                     Magatzem: 
                     @if ($user->magatzem == true)
@@ -26,7 +26,7 @@
 
                 </div>
                 <a href="{{ route('jornada.form') }}" class="btn btn-primary center btn-lg">
-                    <i class="far fa-calendar-alt"></i>&nbsp; Jornada del dia 
+                    <i class="far fa-calendar-alt"></i>&nbsp; {{ __('messages.Working day') }} 
                     <?php                  
                         $date = date('Y-m-d H:i:s');
                         $newDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y');
@@ -37,20 +37,20 @@
                 @if ($user->magatzem == true)
                         {{-- MENU --}}
                 <div class="grid-container-home">
-                    <a href="{{ route('comandes.form') }}" class="item1 btn btn-info btn-lg">Comandes</a>
-                    <a href="" class="item2 btn btn-info btn-lg disabled">Recepcions</a>
-                    <a href="" class="item3 btn btn-info btn-lg disabled">Reoperacions</a>
-                    <a href="" class="item4 btn btn-info btn-lg disabled">Inventari</a>
+                    <a href="{{ route('comandes.form') }}" class="item1 btn btn-info btn-lg">{{ __('messages.Orders') }}</a>
+                    <a href="" class="item2 btn btn-info btn-lg disabled">{{ __('messages.Receptions') }}</a>
+                    <a href="" class="item3 btn btn-info btn-lg disabled">{{ __('messages.Reoperations') }}</a>
+                    <a href="" class="item4 btn btn-info btn-lg disabled">{{ __('messages.Inventory') }}</a>
                 </div>                        
                     @endif
                 
 
                 {{-- TAULES --}}
-                <p class="h4 text-center" id="titol">Torns</p>
+                <p class="h4 text-center" id="titol">{{ __('messages.Shifts') }}</p>
                     <table id="activitats" class="table table-striped table-hover">
                         <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Dia</th>
+                            <th scope="col">{{ __('messages.Day') }}</th>
                             <th scope="col">Total (min)</th>
                         </tr>
                         </thead>
@@ -58,7 +58,7 @@
                         <tr>
                             <td>{{ date('d/m/Y', strtotime($a->jornada)) }}</td>
                             @if ($a->total == null || $a->total == 0)
-                            <td>&nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i></td>
+                            <td><div class="loadersmall"></div>{{-- &nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i> --}}</td>
                             @else
                             <td>{{$a->total}}</td>
                             @endif
@@ -66,11 +66,11 @@
                         @endforeach
                     </table>
                     
-                    <p class="h4 text-center" id="titol">Jornades</p>
+                    <p class="h4 text-center" id="titol">{{ __('messages.Working days') }}</p>
                     <table id="jornades" class="table table-striped table-hover">
                         <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Dia</th>
+                            <th scope="col">{{ __('messages.Day') }}</th>
                             <th scope="col">Total (min)</th>
                         </tr>
                         </thead>
@@ -78,7 +78,7 @@
                         <tr>
                             <td>{{ date('d/m/Y', strtotime($d->dia)) }}</td>
                             @if ($d->total == null || $d->total == 0)
-                            <td>&nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i></td>
+                            <td><div class="loadersmall"></div></td>
                             @else
                             <td>{{$d->total}}</td>
                             @endif
@@ -88,23 +88,24 @@
 
                     @if ($user->magatzem == true)
                     {{-- tasques --}}
-                    <p class="h4 text-center" id="titol">Tasques</p>
+                    <p class="h4 text-center" id="titol">{{ __('messages.Tasks') }}</p>
                     <table id="activitats" class="table table-striped table-hover">
                         <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Tasca</th>
+                            <th scope="col">{{ __('messages.Task') }}</th>
                             <th scope="col">Total (min)</th>
-                            <th scope="col">Inici tasca</th>
-                            <th scope="col">Fi tasca</th>
+                            <th scope="col">{{ __('messages.Task start') }}</th>
+                            <th scope="col">{{ __('messages.Task end') }}</th>
 
                         </tr>
                         </thead>
                         {{-- inner join solucionat --}}
                         @foreach ($tasques as $t)
                         <tr>
-                                <td>{{$t->tasca}}</td>
+                            @php($tasca = $t->tasca)
+                                <td>{{ __("messages.$tasca") }}</td>
                                     @if ($t->total == null || $t->total == 0)
-                                    <td>&nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i></td>
+                                    <td><div class="loadersmall"></div></td>
                                     @else
                                     <td><b>{{$t->total}}</b></td>
                                     @endif

@@ -12,12 +12,13 @@ window.onload = checkLastTask;
 
 
     function checkLastTask(){
+      translateAlerts();
         $.ajax(
             {
                 type: "GET",
                 url: "/comandes/check",
                 success: function(response){
-                  console.log("tasca: "+response);
+                  //console.log("tasca: "+response);
                   
                   if (response != 0){//si la tasca NO esta acabada
                     document.getElementById("Pedido"+response).disabled = false;
@@ -53,7 +54,7 @@ window.onload = checkLastTask;
 
                 },
                 error: function(xhr, textStatus, error){
-                  $("#alert-danger-message-final").text("Sembla que ha hagut un error. Per favor, recarrega la pàgina.");
+                  $("#alert-danger-message-final").text(msgError);
                   $("#alert-danger")
                   .fadeTo(4000, 1000)
                   .slideUp(1000, function () {
