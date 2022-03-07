@@ -25,15 +25,15 @@ function translateAlerts(){
         noJornada = "No se ha encontrado ningún inicio de jornada coincidente con tu registro.";
 
     } else if (locale == 'en'){
-        msgIniciJornada = "Working day started succesfully";
-        msgFinalJornada = "Working day finished succesfully";
+        msgIniciJornada = "Work day started succesfully";
+        msgFinalJornada = "Work day finished succesfully";
         msgPrepComanda = "Order preparation";
         msgRevComanda = "Order review";
         msgExpedComanda = "Order expedition";
         tascaNoAcabada = "You have an unfinished task.";
         jornadaNoIniciada = "You can not start a task if you did not started the shift.";
         msgError = "An error occurred, try again."
-        noJornada = "There isn't any current working day matching with you.";
+        noJornada = "Currently there isn't any work day matching with you.";
 
     }
 

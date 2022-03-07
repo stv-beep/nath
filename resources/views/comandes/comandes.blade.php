@@ -52,7 +52,7 @@
                                 <form id="formPrepComanda" action="{{route('comandes.store')}}" method="post">
     
                                 @csrf                                
-                                <button id="Pedido1" type="button" class="opcio btn btn-lg btn-success ped" onclick="startPrepComanda();">{{ __('messages.Preparation') }}</button>
+                                <button id="Order1" type="button" class="opcio btn btn-lg btn-success ped" onclick="startPrepComanda();">{{ __('messages.Preparation') }}</button>
                                 
                                 {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  --}} 
                                 </form>
@@ -61,7 +61,7 @@
                                 <form id="formRevComanda" action="{{route('revComandes.store')}}" method="post">
     
                                     @csrf        
-                                    <button id="Pedido2" type="button" class="opcio btn btn-lg btn-success ped" onclick="startRevComanda();">{{ __('messages.Review') }}</button>
+                                    <button id="Order2" type="button" class="opcio btn btn-lg btn-success ped" onclick="startRevComanda();">{{ __('messages.Review') }}</button>
                                     
                                     
                                   {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
@@ -70,14 +70,14 @@
                             <div class="item3">
                                 <form id="formExpedComanda" action="{{route('expedComandes.store')}}" method="post">
                                     @csrf        
-                                    <button id="Pedido3" type="button" class="opcio btn btn-lg btn-success ped" onclick="startExpedComanda();">{{ __('messages.Expedition') }}</button>
+                                    <button id="Order3" type="button" class="opcio btn btn-lg btn-success ped" onclick="startExpedComanda();">{{ __('messages.Expedition') }}</button>
                                   {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                                 </form>
                             </div>  
                             <div class="item4">
                                 <form id="formSAFComanda" action="{{route('safComandes.store')}}" method="post">
                                     @csrf
-                                    <button id="Pedido4" type="button" class="opcio btn btn-lg btn-success ped" onclick="startSAFComanda();">SAF</button>
+                                    <button id="Order4" type="button" class="opcio btn btn-lg btn-success ped" onclick="startSAFComanda();">SAF</button>
                                     {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                                 </form>
                             </div>

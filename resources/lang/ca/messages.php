@@ -27,7 +27,7 @@ return [
     'Working day of' => "Jornada de",
     'Start' => "Iniciar",
     /* pedidos */
-    'You don\'t have any stock task.' => 'No tienes tasques de magatzem.',
+    'You don\'t have any stock task.' => 'No tens tasques de magatzem.',
     'Orders from' => "Comandes de",
     'Preparation' => "Preparació",
     'Review' => "Revisió",

@@ -11,20 +11,20 @@ return [
     'Username' => "Username",
     /* Home */
     'Welcome' => "Welcome",
-    'Working day' => "Working day",
+    'Working day' => "Work day",
     'Orders' => "Orders",
     'Receptions' => "Receptions",
     'Reoperations' => "Reoperations",
     'Inventory' => "Inventory",
     "Shifts" => "Shifts",
-    'Working days' => "Working days",
+    'Working days' => "Work days",
     'Tasks' => "Tasks",
     'Day' => "Day",
     'Task' => "Task",
     'Task start' => "Task start",
     'Task end' => "Task end",
     /* Jornada */
-    'Working day of' => "Working day of",
+    'Working day of' => "Work day of",
     'Start' => "Start",
     /* pedidos */
     'You don\'t have any stock task.' => 'You don\'t have any stock task.', //'No tens tasques de magatzem.'

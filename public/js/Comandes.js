@@ -1,10 +1,10 @@
 /* comprovacio de tasques per a desabilitar botons */
 window.onload = checkLastTask;
 
-    var prepPedidoCheck = document.getElementById("Pedido1");
-    var revPedidoCheck = document.getElementById("Pedido2");
-    var expedPedidoCheck = document.getElementById("Pedido3");
-    var SAFPedidoCheck = document.getElementById("Pedido4");
+    var prepPedidoCheck = document.getElementById("Order1");
+    var revPedidoCheck = document.getElementById("Order2");
+    var expedPedidoCheck = document.getElementById("Order3");
+    var SAFPedidoCheck = document.getElementById("Order4");
     prepPedidoCheck.disabled = true;
     revPedidoCheck.disabled = true;
     expedPedidoCheck.disabled = true;
@@ -21,8 +21,8 @@ window.onload = checkLastTask;
                   //console.log("tasca: "+response);
                   
                   if (response != 0){//si la tasca NO esta acabada
-                    document.getElementById("Pedido"+response).disabled = false;
-                    document.getElementById("Pedido"+response).classList.toggle('btn-danger');
+                    document.getElementById("Order"+response).disabled = false;
+                    document.getElementById("Order"+response).classList.toggle('btn-danger');
                   } else {//si la tasca esta acabada i per tant, torna 0
                     prepPedidoCheck.disabled = false;
                     revPedidoCheck.disabled = false;
