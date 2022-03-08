@@ -46,8 +46,8 @@ class TornController extends Controller
             $activitat-> treballador = $user->id;
             $activitat-> jornada = now();
             $jornadaInici = now();
-            $activitat-> iniciJornada = Carbon::parse($jornadaInici)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
-
+            $activitat-> iniciTorn = Carbon::parse($jornadaInici)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
+            $activitat-> hostname=gethostname();//getting the hostname of the client
             $activitat->save();
             $activitat = Torn::all();
              
@@ -69,22 +69,22 @@ class TornController extends Controller
 
 
             /* $activitat->update([
-                'fiJornada' => $request->input('final-Jornada'),
+                'fiTorn' => $request->input('final-Jornada'),
             ]); */
             //$activitat = Torn::find(3);
             $jornada = now();//"2022-02-01T09:08:09.674363Z"
             $jorn = Carbon::parse($jornada)->setTimezone('Europe/Madrid')->format('Y-m-d');//2022-02-01
             $finalFormat = Carbon::parse($jornada)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');//2022-02-03 09:20:21
             $activitat = Torn::where([/* 'jornada' => $jorn,  */'treballador' => $user->id])->latest()->first();
-            $activitat-> fiJornada = $finalFormat;//guardo fiJornada a la BBDD
+            $activitat-> fiTorn = $finalFormat;//guardo fiTorn a la BBDD
             //carbon = "2022-01-31T11:34:39.000000Z"
-
+            $activitat-> hostname=gethostname();//getting the hostname of the client
             $activitat-> update();
             $inici = Torn::where(['treballador' => $user->id])
-            ->get('iniciJornada')->last();//{"iniciJornada":"2022-02-01 10:24:10"}
-            $iniciFormat = $inici->iniciJornada;//2022-02-03 09:07:48
+            ->get('iniciTorn')->last();//{"iniciTorn":"2022-02-01 10:24:10"}
+            $iniciFormat = $inici->iniciTorn;//2022-02-03 09:07:48
             $fi = Torn::where(['jornada' => $jorn, 'treballador' => $user->id])
-            ->get('fiJornada')->last();//{"fiJornada":"2022-02-01 11:55:45"}
+            ->get('fiTorn')->last();//{"fiTorn":"2022-02-01 11:55:45"}
 
             $iniciSegs = strtotime($iniciFormat);//1643875668
             $finalSegs = strtotime($finalFormat);//1643877132
@@ -93,6 +93,7 @@ class TornController extends Controller
             $min = $resta/60;
             $hores = $min/60;
             $activitat -> total = $min;
+            $activitat-> hostname=gethostname();
             $activitat-> update();
 
 
@@ -124,7 +125,7 @@ class TornController extends Controller
 
         /* PROVES */
 
-        //$fi2 = $fi->fiJornada;
+        //$fi2 = $fi->fiTorn;
 /* 
         $iniciString = substr($inici,17,19);//2022-02-01 12:45:18
         $ik = strtotime($iniciString); */
@@ -135,7 +136,7 @@ class TornController extends Controller
         $fi2 = date('Y-m-d H:i:s', $fj);//2022-02-01 12:45:18 */
 
        /*  $i = strtotime(substr($inici,17,19));#1643715918
-        $f = strtotime(substr($fi,17,19));#{"fiJornada":"2022-02-01 11:55:45"}
+        $f = strtotime(substr($fi,17,19));#{"fiTorn":"2022-02-01 11:55:45"}
         $f0 = strtotime(substr($final,0));#1643789914 aixo son segons desde inici unix */
      /* $resta = $inici2 - $final; #resto la quantitat de segons que han passat des del inici del temps unix
         $min = $resta/60;

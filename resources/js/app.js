@@ -32,4 +32,4 @@ const app = new Vue({
     el: '#app',
 });
 var moment = require('moment');
-console.log(moment().format());
+//console.log(moment().format());

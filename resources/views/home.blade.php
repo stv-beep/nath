@@ -16,13 +16,9 @@
                     @endif
                     {{ __('messages.Welcome') }} {{$user->name}}
                     {{-- <br>
-                    Magatzem: 
-                    @if ($user->magatzem == true)
-                        Sí
-                    @else
-                        No
-                    @endif --}}
-                    
+                    Connected from: 
+                    {{$host = gethostname()}}
+                    {{$hostip = gethostbyname($host)}} --}}
 
                 </div>
                 <a href="{{ route('jornada.form') }}" class="btn btn-primary center btn-lg">

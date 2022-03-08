@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTasquesTable extends Migration
+class CreateTasquesTipusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateTasquesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasques', function (Blueprint $table) {
+        Schema::create('tasks_type', function (Blueprint $table) {
             $table->id();
-            $table->string('tasca');
-            $table->unsignedBigInteger('tipusTasca')->nullable();
-            $table->foreign('tipusTasca')->references('id')->on('tasks_type');
+            $table->string('tipus');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateTasquesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasques');
+        Schema::dropIfExists('tasks_type');
     }
 }

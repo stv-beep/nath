@@ -13,6 +13,7 @@ use App\Models\Jornada;
 use App\Models\User;
 use App\Models\Tasca;
 use App\Models\Torn;
+use App\Models\TaskType;
 
 class ComandaController extends Controller
 {
@@ -35,10 +36,9 @@ class ComandaController extends Controller
     {
         $user = Auth::user();
         
-
-        /* SELECT * FROM `comandes` 
-        INNER JOIN tasques ON comandes.tasca = tasques.id
-        WHERE treballador = 4; */
+        /* task type */
+        $tipus = TaskType::where(['tipus' => 'Pedidos'])->get();
+        $tipus = $tipus[0]->id;
 
         //inner join solucionat
         $tasques = Comanda::join('tasques','comandes.tasca', '=','tasques.id')
@@ -60,7 +60,10 @@ class ComandaController extends Controller
      */
     public function store(Request $request)
     {
-        
+        /* task type */
+        $tipus = TaskType::where(['tipus' => 'Pedidos'])->get();
+        $tipus = $tipus[0]->id;
+
         $user = Auth::user();
         //comprovacio de si la jornada esta iniciada
         $tornComprovacio = Torn::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
@@ -119,6 +122,8 @@ class ComandaController extends Controller
             $hores = $min/60;
             $pedido-> total = $min;
             $pedido-> fiTasca = $horaFinal;
+            $pedido->tipusTasca=$tipus;//task type
+            $pedido->hostname=gethostname();//getting the hostname of the client
             $pedido->update();
             //return $pedido;
             echo 'tasca acabada';
@@ -127,6 +132,8 @@ class ComandaController extends Controller
 
             $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
+            $nouPedido->tipusTasca=$tipus;//task type
+            $nouPedido->hostname=gethostname();
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
             $hour = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
@@ -154,7 +161,9 @@ class ComandaController extends Controller
 
 
     public function storeRevPedido(Request $request){
-
+        /* task type */
+        $tipus = TaskType::where(['tipus' => 'Pedidos'])->get();
+        $tipus = $tipus[0]->id;
         $user = Auth::user();
         //comprovacio de si la jornada esta iniciada
         $tornComprovacio = Torn::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
@@ -211,6 +220,7 @@ class ComandaController extends Controller
             $acabada = $pedido->updated_at; */
             $iniciada = $pedido->iniciTasca;
             $acabada = $pedido->fiTasca;
+            $pedido->tipusTasca=$tipus;//task type
             $iniciSegs = strtotime($iniciada);
             $acabadaSegs = strtotime($acabada);
             $resta = $acabadaSegs - $iniciSegs;
@@ -218,6 +228,7 @@ class ComandaController extends Controller
             $hores = $min/60;
             $pedido-> total = $min;
             $pedido-> fiTasca = $horaFinal;
+            $pedido->hostname=gethostname();
             $pedido->update();
             //return $pedido;
             echo 'tasca acabada';
@@ -226,6 +237,8 @@ class ComandaController extends Controller
 
             $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
+            $nouPedido->tipusTasca=$tipus;//task type
+            $nouPedido->hostname=gethostname();
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
             $hour = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
@@ -249,7 +262,9 @@ class ComandaController extends Controller
     }
 
     public function storeExpedPedido(Request $request){
-
+        /* task type */
+        $tipus = TaskType::where(['tipus' => 'Pedidos'])->get();
+        $tipus = $tipus[0]->id;
         $user = Auth::user();
         //comprovacio de si la jornada esta iniciada
         $tornComprovacio = Torn::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
@@ -285,6 +300,7 @@ class ComandaController extends Controller
 
             $iniciada = $pedido->iniciTasca;
             $acabada = $pedido->fiTasca;
+            $pedido->tipusTasca=$tipus;//task type
             $iniciSegs = strtotime($iniciada);
             $acabadaSegs = strtotime($acabada);
             $resta = $acabadaSegs - $iniciSegs;
@@ -292,6 +308,7 @@ class ComandaController extends Controller
             $hores = $min/60;
             $pedido-> total = $min;
             $pedido-> fiTasca = $horaFinal;
+            $pedido->hostname=gethostname();
             $pedido->update();
             //return $pedido;
             echo 'tasca acabada';
@@ -300,6 +317,8 @@ class ComandaController extends Controller
 
             $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
+            $nouPedido->tipusTasca=$tipus;//task type
+            $nouPedido->hostname=gethostname();
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
             $hour = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
@@ -321,7 +340,9 @@ class ComandaController extends Controller
     }
 
     public function storeSAFPedido(Request $request){
-        
+        /* task type */
+        $tipus = TaskType::where(['tipus' => 'Pedidos'])->get();
+        $tipus = $tipus[0]->id;
         $user = Auth::user();
         //comprovacio de si la jornada esta iniciada
         $tornComprovacio = Torn::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
@@ -358,6 +379,7 @@ class ComandaController extends Controller
 
             $iniciada = $pedido->iniciTasca;
             $acabada = $pedido->fiTasca;
+            $pedido->tipusTasca=$tipus;//task type
             $iniciSegs = strtotime($iniciada);
             $acabadaSegs = strtotime($acabada);
             $resta = $acabadaSegs - $iniciSegs;
@@ -365,6 +387,7 @@ class ComandaController extends Controller
             $hores = $min/60;
             $pedido-> total = $min;
             $pedido-> fiTasca = $horaFinal;
+            $pedido->hostname=gethostname();
             $pedido->update();
             //return $pedido;
             echo 'tasca acabada';
@@ -373,6 +396,8 @@ class ComandaController extends Controller
 
             $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
+            $nouPedido->tipusTasca=$tipus;//task type
+            $nouPedido->hostname=gethostname();
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
             $hour = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');

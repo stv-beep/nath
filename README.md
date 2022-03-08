@@ -1,11 +1,11 @@
-# Aplicació per a fitxatges Nath v0.8.3
+# Aplicació per a fitxatges Nath v0.8.4
 ### Autor
 #### Aleix Algueró, 2022
 
 ## Sobre l'aplicació
 
 És una aplicació per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació.
-Ara mateix, en versió 0.8.3, sembla que té una certa estabilitat.
+Ara mateix, en versió 0.8.4, sembla que té una certa estabilitat.
 
 ### Development setup
 ##### Compte amb això ja que l'aplicació està desenvolupada en Laravel 8
@@ -38,6 +38,7 @@ php artisan serve --host=<ip del servidor> --port=8000
 ```
 
 ##### Per a desplegar-lo serà millor mirar documentació
+- [Documentació útil] (https://www.nigmacode.com/laravel/subir-proyecto-laravel-a-hosting)
 - [Documentation](https://platzi.com/tutoriales/2182-intro-laravel/9744-como-desplegar-una-app-hecha-en-laravel)
 - [Apache deploy Documentation](https://help.clouding.io/hc/es/articles/4406607535634-C%C3%B3mo-Desplegar-Laravel-8-con-Apache-y-Let-s-Encrypt-SSL-en-Ubuntu-20-04)
 - [Official Documentation](https://laravel.com/docs/8.x/deployment)
@@ -68,7 +69,7 @@ $app->bind('path.public', function() {
 ```
 #### Crear la base de dades
 
-### Errors i bugs (versió 0.8.3)
+### Errors i bugs (versió 0.8.4)
 - L'error principal és el canvi de dia mentre hi ha un torn obert (corrent el temps).
 Quan s'acaba el torn, es compta com si la jornada sencera fos del dia en que s'acaba el torn, i, per tant, només se suma al temps de jornada total el temps del segon dia.
 - Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.

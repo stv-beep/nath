@@ -19,8 +19,9 @@ class CreateTornTable extends Migration
             $table->unsignedBigInteger('treballador');
             $table->foreign('treballador')->references('id')->on('users');
             $table->float('total')->nullable();
-            $table->datetime('iniciJornada')->nullable();
-            $table->datetime('fiJornada')->nullable();
+            $table->string('hostname')->nullable();
+            $table->datetime('iniciTorn')->nullable();
+            $table->datetime('fiTorn')->nullable();
             $table->timestamps(); 
         });
     }
