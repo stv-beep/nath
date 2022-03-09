@@ -47,7 +47,7 @@ class TornController extends Controller
             $activitat-> jornada = now();
             $jornadaInici = now();
             $activitat-> iniciTorn = Carbon::parse($jornadaInici)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
-            $activitat-> hostname=gethostname();//getting the hostname of the client
+            $activitat-> hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);//getting the hostname of the client
             $activitat->save();
             $activitat = Torn::all();
              
@@ -78,7 +78,6 @@ class TornController extends Controller
             $activitat = Torn::where([/* 'jornada' => $jorn,  */'treballador' => $user->id])->latest()->first();
             $activitat-> fiTorn = $finalFormat;//guardo fiTorn a la BBDD
             //carbon = "2022-01-31T11:34:39.000000Z"
-            $activitat-> hostname=gethostname();//getting the hostname of the client
             $activitat-> update();
             $inici = Torn::where(['treballador' => $user->id])
             ->get('iniciTorn')->last();//{"iniciTorn":"2022-02-01 10:24:10"}
@@ -93,7 +92,7 @@ class TornController extends Controller
             $min = $resta/60;
             $hores = $min/60;
             $activitat -> total = $min;
-            $activitat-> hostname=gethostname();
+            $activitat-> hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);//getting the hostname of the client
             $activitat-> update();
 
 
@@ -112,7 +111,7 @@ class TornController extends Controller
                 $novaJornada = Jornada::where(['treballador' => $user->id])->latest()->first();
                 $novaJornada-> treballador = $user->id;
                 $novaJornada-> dia = now();
-                $novaJornada -> total = $totalJornada;
+                $novaJornada -> total = $totalJornada/60;
                 $novaJornada-> update();
 
         $tornTreb = Torn::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims

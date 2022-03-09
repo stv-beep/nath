@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg">
-                <div class="card-header">{{ __('Dashboard') }} </div>
+                <div class="card-header">{{ __('Reports') }} </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -15,26 +15,7 @@
                         </div>
                     @endif
                     {{ __('messages.Welcome') }} {{$user->name}}
-                    {{-- <br>
-                    Connected from: 
-                    {{$host = gethostname()}}
-                    {{$hostip = gethostbyname($host)}} --}}
                     
-
-                    {{-- proves --}}
-                    {{--  {{$_SERVER['REMOTE_HOST']}} --}}{{-- hostname --}}
-                    {{-- {{$_SERVER['REMOTE_ADDR']}} --}}{{-- ip? --}}
-                    
-                    {{-- {{gethostbyaddr($_SERVER['REMOTE_ADDR'])}} --}}
-
-                    {{-- {{$clientIP = $_SERVER['HTTP_CLIENT_IP'] 
-                    ?? $_SERVER["HTTP_CF_CONNECTING_IP"] # when behind cloudflare
-                    ?? $_SERVER['HTTP_X_FORWARDED'] 
-                    ?? $_SERVER['HTTP_X_FORWARDED_FOR'] 
-                    ?? $_SERVER['HTTP_FORWARDED'] 
-                    ?? $_SERVER['HTTP_FORWARDED_FOR'] 
-                    ?? $_SERVER['REMOTE_ADDR'] 
-                    }} --}}
 
 
                 </div>

@@ -123,17 +123,17 @@ class ComandaController extends Controller
             $pedido-> total = $min;
             $pedido-> fiTasca = $horaFinal;
             $pedido->tipusTasca=$tipus;//task type
-            $pedido->hostname=gethostname();//getting the hostname of the client
+            $pedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);//getting the hostname of the client
             $pedido->update();
             //return $pedido;
-            echo 'tasca acabada';
+            //echo 'tasca acabada';
 
         } else {
 
             $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
             $nouPedido->tipusTasca=$tipus;//task type
-            $nouPedido->hostname=gethostname();
+            $nouPedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
             $hour = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
@@ -141,7 +141,7 @@ class ComandaController extends Controller
             $nouPedido-> fiTasca = $hour;
             $nouPedido->save();
             $nPedido = Comanda::where(['treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
-            echo 'tasca començada';
+            //echo 'tasca començada';
         }
         //}
 
@@ -228,17 +228,17 @@ class ComandaController extends Controller
             $hores = $min/60;
             $pedido-> total = $min;
             $pedido-> fiTasca = $horaFinal;
-            $pedido->hostname=gethostname();
+            $pedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);
             $pedido->update();
             //return $pedido;
-            echo 'tasca acabada';
+            //echo 'tasca acabada';
 
         } else {
 
             $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
             $nouPedido->tipusTasca=$tipus;//task type
-            $nouPedido->hostname=gethostname();
+            $nouPedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
             $hour = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
@@ -246,7 +246,7 @@ class ComandaController extends Controller
             $nouPedido-> fiTasca = $hour;
             $nouPedido->save();
             $nPedido = Comanda::where(['treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
-            echo 'tasca començada';
+            //echo 'tasca començada';
         }
         //}
 
@@ -308,17 +308,17 @@ class ComandaController extends Controller
             $hores = $min/60;
             $pedido-> total = $min;
             $pedido-> fiTasca = $horaFinal;
-            $pedido->hostname=gethostname();
+            $pedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);
             $pedido->update();
             //return $pedido;
-            echo 'tasca acabada';
+            //echo 'tasca acabada';
 
         } else {
 
             $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
             $nouPedido->tipusTasca=$tipus;//task type
-            $nouPedido->hostname=gethostname();
+            $nouPedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
             $hour = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
@@ -326,7 +326,7 @@ class ComandaController extends Controller
             $nouPedido-> fiTasca = $hour;
             $nouPedido->save();
             $nPedido = Comanda::where(['treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
-            echo 'tasca començada';
+            //echo 'tasca començada';
         }
 
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
@@ -387,17 +387,17 @@ class ComandaController extends Controller
             $hores = $min/60;
             $pedido-> total = $min;
             $pedido-> fiTasca = $horaFinal;
-            $pedido->hostname=gethostname();
+            $pedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);
             $pedido->update();
             //return $pedido;
-            echo 'tasca acabada';
+            //echo 'tasca acabada';
 
         } else {
 
             $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
             $nouPedido->tipusTasca=$tipus;//task type
-            $nouPedido->hostname=gethostname();
+            $nouPedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
             $hour = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
@@ -405,7 +405,7 @@ class ComandaController extends Controller
             $nouPedido-> fiTasca = $hour;
             $nouPedido->save();
             $nPedido = Comanda::where(['treballador'=> Auth::id(), 'tasca' => $idTasca])->latest('id')->first();
-            echo 'tasca començada';
+            //echo 'tasca començada';
         }
 
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
