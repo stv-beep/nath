@@ -111,7 +111,7 @@ class TornController extends Controller
                 $novaJornada = Jornada::where(['treballador' => $user->id])->latest()->first();
                 $novaJornada-> treballador = $user->id;
                 $novaJornada-> dia = now();
-                $novaJornada -> total = $totalJornada/60;
+                $novaJornada -> total = $totalJornada;// /60
                 $novaJornada-> update();
 
         $tornTreb = Torn::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims

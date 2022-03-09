@@ -40,6 +40,8 @@ return [
     'UserCode' => "You will login with this code.",
     'Yes' => 'Yes',
 
+    /* Reports */
+    'Worker'=> "Worker",
 
     'Preparació comanda' => 'Order preparation',
     'Revisió comanda' => 'Order review',

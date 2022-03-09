@@ -7,6 +7,7 @@ use App\Http\Controllers\ComandaController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ReportsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,9 @@ Route::get('/tasques',[ComandaController::class, 'getTasques'])->name('get.tasqu
 
 //RECEPCIONS
 //Route::get('/recepcions',[]);
+
+//REPORTS ADMIN
+Route::get('/reports',[ReportsController::class, 'index'])->name('admin.reports');
 
 Route::get('/set_language/{lang}', [App\Http\Controllers\Controller::class, 'set_language'])->name('set_language');
 App::setLocale("es");

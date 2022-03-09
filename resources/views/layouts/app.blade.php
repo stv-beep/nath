@@ -88,11 +88,11 @@
                                     <a class="dropdown-item" href="{{ route('home') }}">
                                         {{ __('Home') }}
                                     </a>
-                                    {{-- @if ($user->administrador == true)
-                                    <a class="dropdown-item" href="{{ route('home') }}">
+                                    @if ($user->administrador == true)
+                                    <a class="dropdown-item" href="{{ route('admin.reports') }}">
                                         {{ __('Reports') }}
                                     </a>
-                                    @endif --}}
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

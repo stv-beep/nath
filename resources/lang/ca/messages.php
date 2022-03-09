@@ -45,6 +45,9 @@ return [
     'UserCode' => "Amb aquest codi iniciaràs sessió.",
     'Yes' => 'Sí',
 
+    /* Reports */
+    'Worker'=> "Treballador",
+
 
     /* alerts */
     'Working day started' => "Jornada inciada amb èxit",

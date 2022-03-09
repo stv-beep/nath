@@ -84,7 +84,7 @@
                         <thead class="thead-dark">
                         <tr>
                             <th scope="col">{{ __('messages.Day') }}</th>
-                            <th scope="col">Total (h)</th>
+                            <th scope="col">Total (min)</th>
                         </tr>
                         </thead>
                         @foreach ($dia as $d)

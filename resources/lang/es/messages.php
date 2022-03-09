@@ -40,6 +40,10 @@ return [
     'UserCode' => "Con este código iniciarás sessión.",
     'Yes' => 'Sí',
 
+
+    /* Reports */
+    'Worker'=> "Trabajador",
+
     'Preparació comanda' => 'Preparación pedido',
     'Revisió comanda' => 'Revisión pedido',
     'Expedició' => 'Expedición',
