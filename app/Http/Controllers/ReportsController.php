@@ -33,4 +33,25 @@ class ReportsController extends Controller
 
         return view('admin.reports',compact('user','dia'));
     }
+
+    public function twoDateQuery(Request $request){
+        //SELECT * FROM `jornades` WHERE dia BETWEEN '2022-02-01' AND '2022-03-05' AND treballador=3;
+        $treballador= $request->worker;
+        $data1 = $request->dia1;
+        $data2 = $request->dia2;
+        $date1 = Carbon::parse($data1)->format('Y-m-d');
+        $date2 = Carbon::parse($data2)->format('Y-m-d');
+        //$query = Jornada::where(['treballador' => $treballador])->whereBetween('dia',[$date1, $date2])->get();
+        $totals = Jornada::where(['treballador' => $treballador])->whereBetween('dia',[$date1, $date2])->get('total');
+
+        $nomTreb = User::where(['id'=>$treballador])->get('name');
+        $name = $nomTreb[0]->name;
+
+        $n = count($totals);
+            $suma = 0;
+            for ($i = 0; $i < $n; $i++){
+                $suma += $totals[$i]->total;
+            }
+        return response()->json([$name, $suma]);
+    }
 }

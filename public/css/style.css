@@ -202,3 +202,16 @@ a.close.disabled {
   justify-content: center;
   align-items: center;
 }
+
+#versionText{
+  font-size: 10px;
+}
+
+.searchDT{
+  border: 1px solid #aaa;
+  border-radius:3px;
+}
+
+.searchDT:hover {
+  border-color: #212529;
+}

@@ -1,11 +1,9 @@
-# Aplicació per a fitxatges Nath v0.8.5
-### Autor
+# Aplicació per a fitxatges Nath v0.8.6
 #### Aleix Algueró, 2022
-
 ## Sobre l'aplicació
 
-És una aplicació per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació.
-Ara mateix, en versió 0.8.5, sembla que té una certa estabilitat.
+És una aplicació per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació. I l'administrador podrà llistar totes les jornades de tothom i fer consultes des d'una taula dinàmica.
+Ara mateix, en versió 0.8.6, sembla que té una certa estabilitat.
 
 ### Development setup
 ##### Compte amb això ja que l'aplicació està desenvolupada en Laravel 8
@@ -69,7 +67,7 @@ $app->bind('path.public', function() {
 ```
 #### Crear la base de dades
 
-### Errors i bugs (versió 0.8.5)
+### Errors i bugs (versió 0.8.6)
 - L'error principal és el canvi de dia mentre hi ha un torn obert (corrent el temps).
 Quan s'acaba el torn, es compta com si la jornada sencera fos del dia en que s'acaba el torn, i, per tant, només se suma al temps de jornada total el temps del segon dia.
 - Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.

@@ -12,7 +12,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-lg-12">
             <div class="card shadow-lg">
                 <div class="card-header">{{ __('Reports') }} </div>
 
@@ -22,16 +22,39 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    
+                    <div class="btn btn-dark">Total: <span id="total"></span></div>
+                    <div class="btn btn-dark">Total: <span id="total2DateQuery"></span></div>
+                    <br>
+                    <div class="row mb-3">
+                        <form id="reportQuery1" action="{{route('admin.query')}}" method="POST">
+                            @csrf
+                            Consulta:
+                            <div class="col-md-6">
+                                <label>{{ __('messages.Worker') }}</label>
+                                <input id="worker" type="text">
+                            </div>
+                            <div class="col-md-6">
+                                <label>{{ __('messages.Day') }} 1</label>
+                                <input id="reportDate1" type="date">
+                            </div>
+                            <div class="col-md-6">
+                                <label>{{ __('messages.Day') }} 2</label>
+                                <input id="reportDate2" type="date">
+                            </div>
+                                <button type="button" class="btn btn-outline-dark" onclick="twoDateQuery()">Consultar</button>
+                            </form>
 
-                    Total: <span id="total"></span>
+                    </div>
                     <p class="h4 text-center" id="titol">{{ __('messages.Working days') }}</p>
-                    <table id="reports" class="display">
+                    <table id="reports" class="display compact hover row-border">
                         <thead class="thead-dark">
                         <tr>
                             <th>#</th>{{-- numeracio --}}
                             <th scope="col">{{ __('messages.Worker') }}</th>
                             <th scope="col">{{ __('messages.Day') }}</th>
                             <th scope="col">Total (min)</th>
+                            <th scope="col">ID</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -41,9 +64,10 @@
                             <td>{{$d->name}}</td>{{-- worker name --}}
                             <td>{{ date('d/m/Y', strtotime($d->dia)) }}</td>
                             @if ($d->total == null || $d->total == 0)
-                            <td><div class="loadersmall"></div></td>
+                            <td>0</td>
                             @else
                             <td>{{$d->total}}</td>
+                            <td>{{$d->treballador}}</td>
                             @endif
                         </tr>
                         @endforeach
@@ -54,14 +78,9 @@
                                 <th scope="col">{{ __('messages.Worker') }}</th>
                                 <th scope="col">{{ __('messages.Day') }}</th>
                                 <th scope="col">Total (min)</th>
+                                <th scope="col">ID</th>
                             </tr>
                         </tfoot>
-                        {{-- <tfoot>
-                            <tr>
-                                <th colspan="2" style="text-align:right">Total:</th>
-                                <th id="totalfoot"></th>
-                            </tr>
-                        </tfoot> --}}
                     </table>
 
                 </div>
