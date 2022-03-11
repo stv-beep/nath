@@ -64,6 +64,7 @@
                     
                     </div>
                 </div>
+                <hr>
                 <p class="h4 text-center" id="titol">{{ __('messages.Shifts') }}</p>
                     <table id="activitats" class="table table-striped table-hover">
                         <thead class="thead-dark">

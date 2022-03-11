@@ -5,10 +5,16 @@ $(document).ready(function() {
     } );
     var table = $('#reports').DataTable( {
         responsive: true,
-        "lengthMenu": [[10, 25, 50, 100, 300, 500, -1], [10, 25, 50, 100, 300, 500, "All"]],
+        "lengthMenu": [[10, 25, 50, 100, 300, 500, 1000, -1], [10, 25, 50, 100, 300, 500, 1000, "All"]],
         "paging": true,
         select: true,
         stateSave: true,
+        'processing': true,
+        'language': {
+            'loadingRecords': '&nbsp;',
+            'processing': '<div class="loadersmall"></div>'
+        },
+        zeroRecords: "Cargando...",
         responsive: true,
         "pagingType": "full_numbers",
         "order": [[ 2, "desc" ]],//ordeno per dia
@@ -53,7 +59,7 @@ $(document).ready(function() {
  
             // Update total
             $('#total').html($( api.column( 3 ).footer() ).html(
-                pageTotal.toFixed(2)+' hores'/*  +' ('+ total.toFixed(2) +' total)' */
+                pageTotal.toFixed(2)+' h'
             ));  
         }
         
@@ -63,15 +69,24 @@ $(document).ready(function() {
             cell.innerHTML = i+1;
         } );
     } ).draw();
+
+
+    $('#btn-reload').on('click', function(){
+        $("#reports").load(" #reports");
+    });
+
+
 } );
 
 
 //https://datatables.net/examples/advanced_init/footer_callback.html
 //http://live.datatables.net/segeriwe/368/edit
 
+var msgErrorQuery1;
 
 
 function twoDateQuery(){
+    translateAlertsQuery();
     $.ajaxSetup({
         headers:
         { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
@@ -90,11 +105,30 @@ function twoDateQuery(){
                 dia2 : data2,
              },
             success: function( response ) {
-                console.log('ajax');
                 console.log(response);
-                //alert("suma= "+response);
-                $('#total2DateQuery').html(response+' hores');
+                $('#total2DateQuery').html(
+                    worker+': '+ response[0]+
+                    '<br>Total: '+response[1]+' '+hours);
+            },
+            error: function(xhr, textStatus, error){
+                $("#alert-danger-message-inici").text(msgErrorQuery1);
+                $("#alert-danger")
+                .fadeTo(4000, 1000)
+                .slideUp(1000, function () {
+                    $("#alert-danger").slideUp(1000);
+                });
             }
         });
 
+}
+
+
+
+/* modal */
+function modalForQuery(){
+    $('#modalQuery').modal('show'); 
+
+    $("#closeModal").on('click',function(){
+        $('#modalQuery').modal('hide');
+        });
 }

@@ -1,3 +1,23 @@
+/* GEOLOCATION */
+window.onload = getLocation;
+    var coord;
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else { 
+                console.log('geolocation not supported')
+            }
+        }
+
+        function showPosition(position) {
+            //x.innerHTML = position.coords.latitude +" "+ position.coords.longitude;
+            coord = position.coords.latitude +" "+ position.coords.longitude;
+            console.log(coord);
+            return coord;
+        }
+
+       
+
 /* SCRIPTS D'ENVIAMENT DE PETICIONS AJAX  */  
      
     /* message variables */
@@ -346,4 +366,4 @@
                             }
                     }
                 )
-    };
+    };         

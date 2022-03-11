@@ -1,20 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap.min.css" integrity="sha512-BMbq2It2D3J17/C7aRklzOODG1IQ3+MHw3ifzBHMBwGO/0yUqYmsStgBjI0z5EYlaDEFnvYV7gNYdD3vFLRKsA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
 <script src="{{ asset('js/Reports.js') }}" defer></script>
+<script src="{{ asset('js/Translate.js') }}" defer></script>
 
 <script src="https://cdn.datatables.net/plug-ins/1.10.19/api/sum().js"></script>
-
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card shadow-lg">
-                <div class="card-header">{{ __('Reports') }} </div>
+                <div class="card-header">{{ __('Reports') }} 
+                    <a id="icona" href="{{route('home')}}"><i class="fas fa-arrow-alt-circle-left fa-lg" style="color: #51cf66;"></i></a>
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -23,33 +25,53 @@
                         </div>
                     @endif
                     
-                    <div class="btn btn-dark">Total: <span id="total"></span></div>
-                    <div class="btn btn-dark">Total: <span id="total2DateQuery"></span></div>
-                    <br>
-                    <div class="row mb-3">
-                        <form id="reportQuery1" action="{{route('admin.query')}}" method="POST">
-                            @csrf
-                            Consulta:
-                            <div class="col-md-6">
-                                <label>{{ __('messages.Worker') }}</label>
-                                <input id="worker" type="text">
-                            </div>
-                            <div class="col-md-6">
-                                <label>{{ __('messages.Day') }} 1</label>
-                                <input id="reportDate1" type="date">
-                            </div>
-                            <div class="col-md-6">
-                                <label>{{ __('messages.Day') }} 2</label>
-                                <input id="reportDate2" type="date">
-                            </div>
-                                <button type="button" class="btn btn-outline-dark" onclick="twoDateQuery()">Consultar</button>
-                            </form>
+                    <div class="btn btn-dark noClicable">Total: <span id="total"></span></div>
+                    <button type="button" class="btn btn-info" onclick="modalForQuery();">{{ __('messages.Exact query') }}</button>
 
-                    </div>
+                    <br>
+                    <div class="modal" id="modalQuery">
+                        <div class='alert-position hidden alert alert-danger' id='alert-danger' role='alert'>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong id="alert-danger-message-inici"></strong>&nbsp;
+                            &nbsp;&nbsp;   
+                        </div>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    {{ __('messages.Exact query') }} 
+                                    <button id="closeModal" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                            <form id="reportQuery1" action="{{route('admin.query')}}" method="POST">
+                            @csrf
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Worker') }}</label>
+                                <div class="col-md-6"><input id="worker" class="form-control" type="text" autofocus>
+                            </div></div>
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Day') }} 1</label>
+                                <div class="col-md-6"><input id="reportDate1" class="form-control" type="date" autofocus>
+                            </div></div>
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Day') }} 2</label>
+                                <div class="col-md-6"><input id="reportDate2" class="form-control" type="date" autofocus>
+                            </div></div></div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-dark" onclick="twoDateQuery()">Consultar</button>
+                            </div>
+                            </form>
+                            <div class="btn btn-dark noClicable"><h4><span id="total2DateQuery"></span></h4></div>
+
+                    </div></div></div>
+                    <hr>
+                    {{-- <button type="button" id="btn-reload">Reload</button> --}}
                     <p class="h4 text-center" id="titol">{{ __('messages.Working days') }}</p>
-                    <table id="reports" class="display compact hover row-border">
+                    {{-- DATATABLE --}}
+                    <table id="reports" class="display compact hover row-border responsive nowrap" style="width:100%">
                         <thead class="thead-dark">
-                        <tr>
+                        <tr style="text-align: center">
                             <th>#</th>{{-- numeracio --}}
                             <th scope="col">{{ __('messages.Worker') }}</th>
                             <th scope="col">{{ __('messages.Day') }}</th>
@@ -59,21 +81,22 @@
                         </thead>
                         <tbody>
                         @foreach ($dia as $d)
-                        <tr>
+                        <tr style="text-align: center">
                             <td></td>{{-- numeracio --}}
                             <td>{{$d->name}}</td>{{-- worker name --}}
-                            <td>{{ date('d/m/Y', strtotime($d->dia)) }}</td>
+                            <td>{{$d->dia}}{{-- {{ date('d/m/Y', strtotime($d->dia)) }} --}}</td>
                             @if ($d->total == null || $d->total == 0)
                             <td>0</td>
                             @else
                             <td>{{$d->total}}</td>
-                            <td>{{$d->treballador}}</td>
                             @endif
+                            <td>{{$d->treballador}}</td>
+                            
                         </tr>
                         @endforeach
                         </tbody>
                         <tfoot>
-                            <tr>
+                            <tr style="text-align: center">
                                 <td></td>{{-- numeracio --}}
                                 <th scope="col">{{ __('messages.Worker') }}</th>
                                 <th scope="col">{{ __('messages.Day') }}</th>

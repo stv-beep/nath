@@ -47,6 +47,7 @@ return [
 
     /* Reports */
     'Worker'=> "Treballador",
+    'Exact query' => "Consulta exacta entre dates",
 
 
     /* alerts */

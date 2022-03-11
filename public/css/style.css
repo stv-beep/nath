@@ -215,3 +215,7 @@ a.close.disabled {
 .searchDT:hover {
   border-color: #212529;
 }
+
+.noClicable{
+  pointer-events: none;
+}

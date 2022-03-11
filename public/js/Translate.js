@@ -38,3 +38,19 @@ function translateAlerts(){
     }
 
 }
+
+function translateAlertsQuery(){
+    if (locale == 'ca'){
+        msgErrorQuery1 = 'Sembla que hi ha un error a la consulta'
+        worker = 'Treballador'
+        hours = 'hores'
+    } else if (locale == 'es'){
+        msgErrorQuery1 = 'Parece que hay un error en la consulta'
+        worker = 'Trabajador'
+        hours = 'horas'
+    } else if (locale == 'en'){
+        msgErrorQuery1 = 'It seems there is an error in the query'
+        worker = 'Worker'
+        hours = 'hours'
+    }
+}

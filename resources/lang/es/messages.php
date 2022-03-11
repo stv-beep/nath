@@ -43,6 +43,7 @@ return [
 
     /* Reports */
     'Worker'=> "Trabajador",
+    'Exact query' => "Consulta exacta entre fechas",
 
     'Preparació comanda' => 'Preparación pedido',
     'Revisió comanda' => 'Revisión pedido',

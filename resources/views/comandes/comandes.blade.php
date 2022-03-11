@@ -95,7 +95,7 @@
                             
                         </div>
                     </div>
-                    
+                    <hr>
                     <table id="activitats" class="table table-striped table-hover">
                         <thead class="thead-dark">
                         <tr>

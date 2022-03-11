@@ -40,7 +40,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-light shadow-lg">
             <div class="container">
                 <a id="nom-app" class="navbar-brand" href="{{ url('/home') }}">
-                    App Nath <small id="versionText">v0.8.6</small>
+                    App Nath <small id="versionText">v0.8.7</small>
                     {{-- {{ config('app.name') }} --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

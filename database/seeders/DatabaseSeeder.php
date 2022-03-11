@@ -5,6 +5,7 @@ use \App\Models\User;
 use \App\Models\Tasca;
 use \App\Models\Torn;
 use \App\Models\TaskType;
+use \App\Models\Jornada;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         User::factory(3)->create();
+         User::factory(200)->create();
 
          //task type
          $tasktype = new TaskType();
@@ -58,6 +59,8 @@ class DatabaseSeeder extends Seeder
          $tasca->tasca ='Recepcio2';
          $tasca->tipusTasca = 2;
          $tasca->save();
+
+         Jornada::factory(1000)->create();
 
     }
 }
