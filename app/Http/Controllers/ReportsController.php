@@ -25,13 +25,19 @@ class ReportsController extends Controller
     public function index()
     {
         $user = Auth::user();
+        
+        if ($user->administrador == true){
+            return view('admin.reports',compact('user'));
+        }   
+    }
+
+    public function show(){
+        $user = Auth::user();
         //buscant les jornades amb els noms dels treballadors
         if ($user->administrador == true){
-            $dia = Jornada::join('users','jornades.treballador','=','users.id')->orderBy('jornades.id','desc')->get();
-        }   
-
-
-        return view('admin.reports',compact('user','dia'));
+            $dia = Jornada::join('users','jornades.treballador','=','users.id')->get();
+        }
+        return response()->json($dia);
     }
 
     public function twoDateQuery(Request $request){

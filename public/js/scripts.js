@@ -1,6 +1,9 @@
 /* GEOLOCATION */
-window.onload = getLocation;
-    var coord;
+/* window.onload = getLocation;
+    
+the onload is in Jornada.js   
+} */
+
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
@@ -10,8 +13,8 @@ window.onload = getLocation;
         }
 
         function showPosition(position) {
-            //x.innerHTML = position.coords.latitude +" "+ position.coords.longitude;
-            coord = position.coords.latitude +" "+ position.coords.longitude;
+            const coord = position.coords.latitude +" "+ position.coords.longitude;
+            document.getElementById('x').value = coord;
             console.log(coord);
             return coord;
         }
@@ -27,12 +30,17 @@ window.onload = getLocation;
     /* funcions de jornada */
     function start() {
         translateAlerts();
+        var xy = document.getElementById('x').value;
+        $.ajaxSetup({
+            headers:
+            { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+        });
         console.log('sending...');
         $.ajax(
                 {
                     type: "POST",
                     url: "/jornada",//"{{route('jornada.store')}}"
-                    data:$('#form-inici').serialize(),
+                    data:{x : xy},
                     success: function( data ) {
                         document.getElementById("sendInici").disabled = true;                        
                         $("#alert-message-inici").text(msgIniciJornada);
@@ -61,7 +69,7 @@ window.onload = getLocation;
     };
 
     function end() {
-        translateAlerts();    
+        translateAlerts();
         console.log('sending...');
         $.ajax(
                 {

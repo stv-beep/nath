@@ -1,5 +1,11 @@
 /* comprovacio de torns per a desabilitar botons */
-window.onload = checkLastTorn;
+//window.onload = checkLastTorn;
+window.onload = onLoad;
+    
+function onLoad(){
+    checkLastTorn();
+    getLocation();    
+}
 const inic = document.getElementById("sendInici");
 const f = document.getElementById("sendFi");
 inic.disabled = true;

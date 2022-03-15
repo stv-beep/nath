@@ -219,3 +219,46 @@ a.close.disabled {
 .noClicable{
   pointer-events: none;
 }
+
+
+.loading{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  border: 6px solid #bbbbbb;
+  -webkit-animation: spin 1.5s linear infinite;
+  animation: spin 1.5s linear infinite;
+  border-top: 6px solid #555;
+  border-radius: 50%;
+  width: 17px;
+  height: 17px;
+  background-color: transparent;
+}
+
+#reports tfoot{
+  background-color:#212529;
+}
+
+#foot{
+  background-color:#212529;
+}
+
+#btn-reload{
+  cursor: pointer;
+    -moz-transition: all 0.5s linear;
+    -webkit-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+}
+
+#reports td{
+  text-align: center;
+}
+
+
+#btn-reload.down{
+  -ms-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}

@@ -65,6 +65,8 @@ Route::get('/tasques',[ComandaController::class, 'getTasques'])->name('get.tasqu
 
 //REPORTS ADMIN
 Route::get('/reports',[ReportsController::class, 'index'])->name('admin.reports');
+/* json */
+Route::get('/reporting',[ReportsController::class, 'show'])->name('reporting');
 Route::post('/consulta',[ReportsController::class, 'twoDateQuery'])->name('admin.query');
 
 Route::get('/set_language/{lang}', [App\Http\Controllers\Controller::class, 'set_language'])->name('set_language');

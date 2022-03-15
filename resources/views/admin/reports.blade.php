@@ -5,6 +5,7 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/fixedheader/3.2.2/js/dataTables.fixedHeader.min.js"></script>
 <script src="{{ asset('js/Reports.js') }}" defer></script>
 <script src="{{ asset('js/Translate.js') }}" defer></script>
 
@@ -66,13 +67,13 @@
 
                     </div></div></div>
                     <hr>
-                    {{-- <button type="button" id="btn-reload">Reload</button> --}}
+                    <abbr title="Reload table"><i id="btn-reload" class="fas fa-sync-alt"></i></abbr>
                     <p class="h4 text-center" id="titol">{{ __('messages.Working days') }}</p>
                     {{-- DATATABLE --}}
                     <table id="reports" class="display compact hover row-border responsive nowrap" style="width:100%">
                         <thead class="thead-dark">
                         <tr style="text-align: center">
-                            <th>#</th>{{-- numeracio --}}
+                            {{-- <th>#</th> --}}
                             <th scope="col">{{ __('messages.Worker') }}</th>
                             <th scope="col">{{ __('messages.Day') }}</th>
                             <th scope="col">Total (min)</th>
@@ -80,24 +81,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($dia as $d)
+                        
                         <tr style="text-align: center">
-                            <td></td>{{-- numeracio --}}
-                            <td>{{$d->name}}</td>{{-- worker name --}}
-                            <td>{{$d->dia}}{{-- {{ date('d/m/Y', strtotime($d->dia)) }} --}}</td>
-                            @if ($d->total == null || $d->total == 0)
-                            <td>0</td>
-                            @else
-                            <td>{{$d->total}}</td>
-                            @endif
-                            <td>{{$d->treballador}}</td>
+                            {{-- <td></td> --}}
+                            {{-- <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td> --}}
                             
                         </tr>
-                        @endforeach
+                        
                         </tbody>
-                        <tfoot>
+                        <tfoot id="foot">
                             <tr style="text-align: center">
-                                <td></td>{{-- numeracio --}}
+
                                 <th scope="col">{{ __('messages.Worker') }}</th>
                                 <th scope="col">{{ __('messages.Day') }}</th>
                                 <th scope="col">Total (min)</th>
@@ -105,7 +102,6 @@
                             </tr>
                         </tfoot>
                     </table>
-
                 </div>
                 
             </div>

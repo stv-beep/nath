@@ -1,15 +1,15 @@
-# Aplicació per a fitxatges Nath v0.8.7
+# Aplicació per a fitxatges Nath v0.8.8
 #### Aleix Algueró, 2022
 ## Sobre l'aplicació
 
 És una aplicació per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació. I l'administrador podrà llistar totes les jornades de tothom i fer consultes des d'una taula dinàmica.
-Ara mateix, en versió 0.8.7, sembla que té una certa estabilitat.
-### Update 0.8.7
-- Reporting amb consulta general i específica.
-- Arreglades algunes coses de traducció.
+Ara mateix, en versió 0.8.8, sembla que té una certa estabilitat.
+### Update 0.8.8
+- Reporting amb consulta general i específica, amb taula dinàmica i en possibilitat de sumar automàticament les hores.
+- Geolocalització als torns i jornades.
 
 
-### Errors i bugs (versió 0.8.7)
+### Errors i bugs (versió 0.8.8)
 - L'error principal és el canvi de dia mentre hi ha un torn obert (corrent el temps).
 Quan s'acaba el torn, es compta com si la jornada sencera fos del dia en que s'acaba el torn, i, per tant, només se suma al temps de jornada total el temps del segon dia.
 - Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.
