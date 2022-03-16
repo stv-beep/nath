@@ -43,6 +43,7 @@ return [
     /* Reports */
     'Worker'=> "Worker",
     'Exact query'=> "Exact query",
+    'Reload table' => "Reload table",
 
     'Preparació comanda' => 'Order preparation',
     'Revisió comanda' => 'Order review',

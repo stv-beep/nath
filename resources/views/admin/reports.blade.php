@@ -8,7 +8,6 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/fixedheader/3.2.2/js/dataTables.fixedHeader.min.js"></script>
 <script src="{{ asset('js/Reports.js') }}" defer></script>
 <script src="{{ asset('js/Translate.js') }}" defer></script>
-
 <script src="https://cdn.datatables.net/plug-ins/1.10.19/api/sum().js"></script>
 
 <div class="container">
@@ -27,6 +26,7 @@
                     @endif
                     
                     <div class="btn btn-dark noClicable">Total: <span id="total"></span></div>
+                    <button id="btn-reload" type="button" class="btn btn-dark">{{ __('messages.Reload table') }}  <abbr title="Reload table"><i id="icon-reload" class="fas fa-sync-alt"></i></abbr></button>
                     <button type="button" class="btn btn-info" onclick="modalForQuery();">{{ __('messages.Exact query') }}</button>
 
                     <br>
@@ -67,7 +67,6 @@
 
                     </div></div></div>
                     <hr>
-                    <abbr title="Reload table"><i id="btn-reload" class="fas fa-sync-alt"></i></abbr>
                     <p class="h4 text-center" id="titol">{{ __('messages.Working days') }}</p>
                     {{-- DATATABLE --}}
                     <table id="reports" class="display compact hover row-border responsive nowrap" style="width:100%">

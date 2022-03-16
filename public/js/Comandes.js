@@ -1,5 +1,13 @@
 /* comprovacio de tasques per a desabilitar botons */
-window.onload = checkLastTask;
+window.onload = ordersOnLoad;
+
+function ordersOnLoad(){
+    checkLastTask();
+    getLocation();
+    setInterval(function(){
+      window.location.reload(1);
+    }, 1800000);//solucio provisional a que se quedigue la mateixa geolocalitzacio encara que no estigues alli ja
+}
 
     var prepPedidoCheck = document.getElementById("Order1");
     var revPedidoCheck = document.getElementById("Order2");

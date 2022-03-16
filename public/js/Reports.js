@@ -1,91 +1,7 @@
-/* $(document).ready(function() {
-    //https://datatables.net/extensions/fixedheader/examples/options/columnFiltering.html
-    //https://datatables.net/forums/discussion/43792/column-search-second-header
-        $('#reports tfoot th').each( function () {
-        var title = $(this).text();
-        $(this).html( '<input class="searchDT" type="text" placeholder="Buscar '+title+'" />' );
-    } );
-    var table = $('#reports').DataTable( {
-        responsive: true,
-        "lengthMenu": [[10, 25, 50, 100, 300, 500, 1000, -1], [10, 25, 50, 100, 300, 500, 1000, "All"]],
-        "paging": true,
-        select: true,
-        stateSave: true,
-        'processing': true,
-        'language': {
-            'loadingRecords': '&nbsp;',
-            'processing': '<div class="loadersmall"></div>'
-        },
-        "drawCallback": function (settings) { 
-            // Here the response
-            var response = settings.json;
-            console.log(response);
-        },
-        zeroRecords: "Cargando...",
-        "pagingType": "full_numbers",
-        "order": [[ 2, "desc" ]],//ordeno per dia
-        orderCellsTop: true,
-        fixedHeader: true,
-        initComplete: function () {
-            this.api().columns().every( function () {
-                var that = this;
-                $( 'input', this.footer() ).on( 'keyup change clear', function () {
-                    if ( that.search() !== this.value ) {
-                        that
-                            .search( this.value )
-                            .draw();
-                    }
-                } );
-            } );
-        },
-        "footerCallback": function ( row, data, start, end, display ) {
-            var api = this.api();
- 
-            // Remove the formatting to get integer data for summation
-            var intVal = function ( i ) {
-                return typeof i === 'string' ?
-                    i.replace(/[\$,]/g, '')*1 :
-                    typeof i === 'number' ?
-                        i : 0;
-            };
- 
-            // Total over all pages
-            total = api
-                .column( 3 )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
- 
-            // Total over this page
-            pageTotal = api
-                .column( 3, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
- 
-            // Update total
-            $('#total').html($( api.column( 3 ).footer() ).html(
-                pageTotal.toFixed(2)+' h'
-            ));  
-        }
-        
-    } );
-    table.on( 'order.dt search.dt', function () {
-        table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-        } );
-    } ).draw();
+//https://datatables.net/extensions/fixedheader/examples/options/columnFiltering.html
+//https://datatables.net/forums/discussion/43792/column-search-second-header
 
-
-    $('#btn-reload').on('click', function(){
-        $("#reports").load(" #reports");
-    });
-
-
-} ); */
-
+/* datatable */
 $(document).ready(function() {
     $('#reports tfoot th').each( function () {
         var title = $(this).text();
@@ -112,6 +28,11 @@ $(document).ready(function() {
         },
         /* scrollX: true,
         scrollY: '80%', */
+        /* "drawCallback": function (settings) { 
+            // Here the response
+            var response = settings.json;
+            console.log(response);
+        }, */
         initComplete: function () {
             this.api().columns().every( function () {
                 var that = this;
@@ -189,7 +110,7 @@ $(document).ready(function() {
     } ).draw(); */
 
     $('#btn-reload').on('click', function(){
-        $(this).toggleClass("down");
+        $('#icon-reload').toggleClass("down");
         table.ajax.reload();
     });
 

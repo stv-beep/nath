@@ -48,6 +48,7 @@ return [
     /* Reports */
     'Worker'=> "Treballador",
     'Exact query' => "Consulta exacta entre dates",
+    'Reload table' => "Actualitzar taula",
 
 
     /* alerts */

@@ -244,21 +244,20 @@ a.close.disabled {
   background-color:#212529;
 }
 
-#btn-reload{
+#reports td{
+  text-align: center;
+}
+
+#icon-reload{
   cursor: pointer;
     -moz-transition: all 0.5s linear;
     -webkit-transition: all 0.5s linear;
     transition: all 0.5s linear;
 }
 
-#reports td{
-  text-align: center;
-}
-
-
-#btn-reload.down{
-  -ms-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  transform: rotate(180deg);
+#icon-reload.down{
+  -ms-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
 }

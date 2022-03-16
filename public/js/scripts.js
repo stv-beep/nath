@@ -1,8 +1,5 @@
 /* GEOLOCATION */
-/* window.onload = getLocation;
-    
-the onload is in Jornada.js   
-} */
+/* the onload is in Jornada.js */
 
         function getLocation() {
             if (navigator.geolocation) {
@@ -14,146 +11,36 @@ the onload is in Jornada.js
 
         function showPosition(position) {
             const coord = position.coords.latitude +" "+ position.coords.longitude;
-            document.getElementById('x').value = coord;
+            const xy = document.getElementsByClassName('xy');
+            //una altra solucio provisional per a guardar les coordenades
+            for (var i=0;i<xy.length;i++){
+                xy[i].value = coord;
+            }
             console.log(coord);
             return coord;
         }
 
-       
-
-/* SCRIPTS D'ENVIAMENT DE PETICIONS AJAX  */  
+/* SCRIPTS AJAX REQUESTS  */  
      
     /* message variables */
-    let msgIniciJornada, msgFinalJornada, msgPrepComanda, msgRevComanda, msgExpedComanda, tascaNoAcabada, 
-    jornadaNoIniciada, msgError, noJornada;
-
-    /* funcions de jornada */
-    function start() {
-        translateAlerts();
-        var xy = document.getElementById('x').value;
-        $.ajaxSetup({
-            headers:
-            { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-        });
-        console.log('sending...');
-        $.ajax(
-                {
-                    type: "POST",
-                    url: "/jornada",//"{{route('jornada.store')}}"
-                    data:{x : xy},
-                    success: function( data ) {
-                        document.getElementById("sendInici").disabled = true;                        
-                        $("#alert-message-inici").text(msgIniciJornada);
-                        init();//mostra el cronometre
-                        cronometrar();//inicia el cronometre
-                        $("#alert-success")
-                        .fadeTo(4000, 1000)
-                        .slideUp(1000, function () {
-                            $("#alert-success").slideUp(1000);
-                        });
-                            window.setTimeout(function(){
-                                window.location = "/home";//"{{route('home')}}"
-                            }, 1500);
-                    },
-                    error: function(xhr, textStatus, error){
-                        $("#alert-danger-message-inici").text(msgError);
-                        $(".cronometro").hide();
-                        $("#alert-danger")
-                        .fadeTo(4000, 1000)
-                        .slideUp(1000, function () {
-                            $("#alert-danger").slideUp(1000);
-                        });
-                    }
-                }
-            )
-    };
-
-    function end() {
-        translateAlerts();
-        console.log('sending...');
-        $.ajax(
-                {
-                    type: "POST",
-                    url: "/jornada",//"{{route('jornada.store')}}"
-                    data:$('#form-final').serialize(),
-                    success: function( response ) {
-
-                        if (response == false) {//unfinished task
-                            $("#alert-danger-message-final").text(tascaNoAcabada);
-                            $(".cronometro").hide();
-                            $("#alert-danger")
-                            .fadeTo(4000, 1000)
-                            .slideUp(1000, function () {
-                                $("#alert-danger").slideUp(1000);
-                            });
-                        } else {
-                        
-                            $("#alert-message-final").text(msgFinalJornada);
-                            $(".cronometro").hide();
-                            $("#alert-success")
-                            .fadeTo(4000, 1000)
-                            .slideUp(1000, function () {
-                                $("#alert-success").slideUp(1000);
-                            });
-                                window.setTimeout(function(){
-                                    window.location = "/home";//"{{route('home')}}"
-                                }, 1500);
-                        }
-                    },//si no s'ha trobat cap registre amb inici de jornada, retornara error amb alert
-                    error: function(xhr, textStatus, error){
-                        $("#alert-danger-message-final").text(noJornada);
-                        $(".cronometro").hide();
-                        $("#alert-danger")
-                        .fadeTo(4000, 1000)
-                        .slideUp(1000, function () {
-                            $("#alert-danger").slideUp(1000);
-                        });
-                    }
-                    
-                }
-                
-        )        
-       
-    }
-
-    //window.onload = init;
-    function init(){
-        /* document.querySelector(".start").addEventListener("click",cronometrar);
-        document.querySelector(".stop").addEventListener("click",parar);
-        document.querySelector(".reiniciar").addEventListener("click",reiniciar); */
-        h = 0;
-        m = 0;
-        s = 0;
-        document.getElementById("hms").innerHTML="00:00:00";
-    }         
-    function cronometrar(){
-        escriure();
-        id = setInterval(escriure,1000);
-       /*  document.querySelector(".start").removeEventListener("click",cronometrar); */
-    }
-    function escriure(){
-        var hAux, mAux, sAux;
-        s++;
-        if (s>59){m++;s=0;}
-        if (m>59){h++;m=0;}
-        if (h>24){h=0;}
-    
-        if (s<10){sAux="0"+s;}else{sAux=s;}
-        if (m<10){mAux="0"+m;}else{mAux=m;}
-        if (h<10){hAux="0"+h;}else{hAux=h;}
-    
-        document.getElementById("hms").innerHTML = hAux + ":" + mAux + ":" + sAux; 
-    }
+    let msgPrepComanda, msgRevComanda, msgExpedComanda, jornadaNoIniciada, noJornada;
 
     /* funcions de COMANDES */
     function startPrepComanda() {
         translateAlerts();
+        var c = document.getElementById('o1').value;
             console.log('sending...');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             $.ajax(
                     {
                         type: "POST",
                         url: "/comandes",//"{{route('comandes.store')}}"
-                        data:$('#formPrepComanda').serialize(),
+                        data:{x: c},
+                        /* $('#formPrepComanda').serialize(), */
                         success: function( response ) {
 
                             if (response == false){
@@ -197,12 +84,19 @@ the onload is in Jornada.js
 
     function startRevComanda() {
         translateAlerts();
+        var c = document.getElementById('o2').value;
                 console.log('sending...');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
                 $.ajax(
                     {
                             type: "POST",
                             url: "/comandes/revisio",
-                            data:$('#formRevComanda').serialize(),
+                            data:{x: c},
+                            //$('#formRevComanda').serialize(),
                             success: function( response ) {
 
                                 if (response == false){
@@ -242,12 +136,19 @@ the onload is in Jornada.js
 
     function startExpedComanda() {
         translateAlerts();
+        var c = document.getElementById('o3').value;
         console.log('sending...');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $.ajax(
             {
                     type: "POST",
                     url: "/comandes/expedicio",
-                    data:$('#formExpedComanda').serialize(),
+                    data:{x: c},
+                    //$('#formExpedComanda').serialize(),
                     success: function( response ) {
                         if (response == false){
                             $("#alert-danger-message-final").text(jornadaNoIniciada);
@@ -286,12 +187,19 @@ the onload is in Jornada.js
 
     function startSAFComanda() {
         translateAlerts();
+        var c = document.getElementById('o4').value;
         console.log('sending...');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $.ajax(
             {
                     type: "POST",
                     url: "/comandes/saf",
-                    data:$('#formSAFComanda').serialize(),
+                    data:{x: c},
+                    //$('#formSAFComanda').serialize(),
                     success: function( response ) {
                         if (response == false){
                             $("#alert-danger-message-final").text(jornadaNoIniciada);

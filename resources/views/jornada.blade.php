@@ -43,7 +43,7 @@
 
                         @csrf
                             
-                        <input id="x" type="hidden">
+                        <input class="xy" id="cj" type="hidden"> {{-- coordenades jornada --}}
                         <button id="sendInici" type="button" class="btn btn-lg btn-success center" onclick="start()"><i class="fas fa-hourglass-start"></i> {{ __('messages.Start') }}</button>
  
                         {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}  
@@ -55,7 +55,7 @@
 
                         @csrf        
                         @method('PATCH')
-                        <input id="x" type="hidden">
+                        <input class="xy" type="hidden"> 
                         <button id="sendFi" type="button" class="btn btn-lg btn-danger center" onclick="end()"><i class="fas fa-hourglass-end"></i> Stop</button>
                         
                         
