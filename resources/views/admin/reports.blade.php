@@ -28,8 +28,10 @@
                     <div class="btn btn-dark noClicable">Total: <span id="total"></span></div>
                     <button id="btn-reload" type="button" class="btn btn-dark">{{ __('messages.Reload table') }}  <abbr title="Reload table"><i id="icon-reload" class="fas fa-sync-alt"></i></abbr></button>
                     <button type="button" class="btn btn-info" onclick="modalForQuery();">{{ __('messages.Exact query') }}</button>
+                    <button type="button" class="btn btn-info" onclick="modalForCompleteQuery();">Consulta completa{{-- {{ __('messages.Complete query') }} --}}</button>
 
                     <br>
+                    {{-- MODAL 1 --}}
                     <div class="modal" id="modalQuery">
                         <div class='alert-position hidden alert alert-danger' id='alert-danger' role='alert'>
                             <i class="fas fa-exclamation-triangle"></i>
@@ -66,6 +68,46 @@
                             <div class="btn btn-dark noClicable"><h4><span id="total2DateQuery"></span></h4></div>
 
                     </div></div></div>
+
+                    {{-- MODAL 2 --}}
+                    <div class="modal" id="modalCompleteQuery">
+                        <div class='alert-position hidden alert alert-danger' id='alert-danger' role='alert'>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong id="alert-danger-message-inici"></strong>&nbsp;
+                            &nbsp;&nbsp;   
+                        </div>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Consulta completa{{-- {{ __('messages.Complete query') }}  --}}
+                                    <button id="closeModal2" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                            <form id="reportQuery1" action="{{route('admin.complete.query')}}" method="POST">
+                            @csrf
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Worker') }}</label>
+                                <div class="col-md-6"><input id="worker0" class="form-control" type="text" autofocus>
+                            </div></div>
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Day') }}</label>
+                                <div class="col-md-6"><input id="reportDate0" class="form-control" type="date" autofocus>
+                            </div></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-dark" onclick="completeQuery()">Consultar</button>
+                            </div>
+                            </form>
+                            <div id="completeResult"{{-- class="btn btn-dark noClicable" --}}><h4><span></span></h4></div>
+                    </div></div></div>
+
+
+
+
+                    
+                        
                     <hr>
                     <p class="h4 text-center" id="titol">{{ __('messages.Working days') }}</p>
                     {{-- DATATABLE --}}

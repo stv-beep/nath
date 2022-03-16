@@ -173,3 +173,58 @@ function modalForQuery(){
         $('#modalQuery').modal('hide');
         });
 }
+
+
+function modalForCompleteQuery(){
+    $('#modalCompleteQuery').modal('show'); 
+
+    $("#closeModal2").on('click',function(){
+        $('#modalCompleteQuery').modal('hide');
+        });
+}
+
+function completeQuery(){
+    translateAlertsQuery();
+    $.ajaxSetup({
+        headers:
+        { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+    });
+    var treballador = document.getElementById('worker0').value;
+    var data0 = document.getElementById('reportDate0').value;
+    $.ajax(
+        {
+            type: "POST",
+            url: "/consulta-completa",
+            data: { 
+                worker : treballador,
+                dia : data0,
+             },
+            success: function( response ) {
+                console.log(response[0]);
+                let res = response[0];
+                var geo = res.geolocation.split(' ');
+                $('#completeResult').html(
+                    
+                    '<table class="table table-striped">'+
+                    '<tr><th class="thead-dark">ID '+worker+': </th><td>'+res.treballador+'</td></tr>'+
+                    '<tr><th>'+worker+': </th><td>'+res.name+'</td></tr>'+
+                    '<tr><th class="thead-dark">'+day+': </th><td>'+res.dia+'</td></tr>'+
+                    '<tr><th>Total: </th><td>'+res.total+' h'+'</td></tr>'+
+                    '<tr><th class="thead-dark">'+locationString+': </th><td>'+
+                    '<a href="https://www.google.com/maps?q='+geo[0]+'+'+geo[1]+'" target="_blank">'
+                    +res.geolocation+'</a>'+'</td></tr>'+
+                    '</table>'
+
+                    );
+            },
+            error: function(xhr, textStatus, error){
+                $("#alert-danger-message-inici").text(msgErrorQuery1);
+                $("#alert-danger")
+                .fadeTo(4000, 1000)
+                .slideUp(1000, function () {
+                    $("#alert-danger").slideUp(1000);
+                });
+            }
+        });
+
+}

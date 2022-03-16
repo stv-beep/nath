@@ -60,4 +60,19 @@ class ReportsController extends Controller
             }
         return response()->json([$name, $suma]);
     }
+
+    /**
+     * @param Request $request
+     * 
+     * @return [type]
+     */
+    public function completeQuery(Request $request){
+        //SELECT * FROM `jornades` WHERE treballador=1 AND dia='2022-03-16';
+        $treballador= $request->worker;
+        $data = $request->dia;
+        $date = Carbon::parse($data)->format('Y-m-d');
+        $query = Jornada::join('users','jornades.treballador','=','users.id')->where(['treballador' => $treballador,'dia'=>$date])->get();
+
+        return response()->json($query);
+    }
 }
