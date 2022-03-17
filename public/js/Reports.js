@@ -3,6 +3,9 @@
 
 /* datatable */
 $(document).ready(function() {
+
+    $('#alert-warning').hide();//for some reason the warning alert pops up always
+
     $('#reports tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input class="searchDT" type="text" placeholder="Buscar '+title+'" />' );
@@ -123,7 +126,7 @@ $(document).ready(function() {
 //https://datatables.net/examples/advanced_init/footer_callback.html
 //http://live.datatables.net/segeriwe/368/edit
 
-var msgErrorQuery1;
+var msgErrorQuery1, msgNoResults;
 
 
 function twoDateQuery(){
@@ -133,7 +136,7 @@ function twoDateQuery(){
         { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
     console.log('func');
-    var treballador = document.getElementById('worker').value;
+    var treballador = document.getElementById('workerID').value;
     var data1 = document.getElementById('reportDate1').value;
     var data2 = document.getElementById('reportDate2').value;
     $.ajax(
@@ -149,7 +152,7 @@ function twoDateQuery(){
                 console.log(response);
                 $('#total2DateQuery').html(
                     worker+': '+ response[0]+
-                    '<br>Total: '+response[1]+' '+hours);
+                    '<br>Total: '+response[1].toFixed(2)+' '+hours);
             },
             error: function(xhr, textStatus, error){
                 $("#alert-danger-message-inici").text(msgErrorQuery1);
@@ -189,7 +192,8 @@ function completeQuery(){
         headers:
         { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
-    var treballador = document.getElementById('worker0').value;
+    console.log('func');
+    var treballador = document.getElementById('worker0id').value;
     var data0 = document.getElementById('reportDate0').value;
     $.ajax(
         {
@@ -200,31 +204,117 @@ function completeQuery(){
                 dia : data0,
              },
             success: function( response ) {
-                console.log(response[0]);
+                //console.log('1 '+response[0]);
+                if (response[0] === undefined){
+                    $("#alert-danger-message-final").text(msgNoResults);
+                    $("#alert-warning")
+                    .fadeTo(4000, 1000)
+                    .slideUp(1000, function () {
+                        $("#alert-warning").slideUp(1000);
+                    });
+                } else {
                 let res = response[0];
+                if (res.geolocation != null){
+                    //console.log('2 '+res.geolocation)
                 var geo = res.geolocation.split(' ');
                 $('#completeResult').html(
                     
                     '<table class="table table-striped">'+
                     '<tr><th class="thead-dark">ID '+worker+': </th><td>'+res.treballador+'</td></tr>'+
                     '<tr><th>'+worker+': </th><td>'+res.name+'</td></tr>'+
-                    '<tr><th class="thead-dark">'+day+': </th><td>'+res.dia+'</td></tr>'+
-                    '<tr><th>Total: </th><td>'+res.total+' h'+'</td></tr>'+
+                    '<tr><th class="thead-dark">'+day+': </th><td>'+moment(res.dia,'YYYY/MM/DD').format('DD/MM/YYYY')+'</td></tr>'+
+                    '<tr><th>Total: </th><td>'+res.total.toFixed(2)+' h'+'</td></tr>'+
                     '<tr><th class="thead-dark">'+locationString+': </th><td>'+
                     '<a href="https://www.google.com/maps?q='+geo[0]+'+'+geo[1]+'" target="_blank">'
                     +res.geolocation+'</a>'+'</td></tr>'+
                     '</table>'
 
                     );
-            },
+
+                } else{
+
+                    $('#completeResult').html(
+                    
+                        '<table class="table table-striped">'+
+                        '<tr><th class="thead-dark">ID '+worker+': </th><td>'+res.treballador+'</td></tr>'+
+                        '<tr><th>'+worker+': </th><td>'+res.name+'</td></tr>'+
+                        '<tr><th class="thead-dark">'+day+': </th><td>'+moment(res.dia,'YYYY/MM/DD').format('DD/MM/YYYY')+'</td></tr>'+
+                        '<tr><th>Total: </th><td>'+res.total.toFixed(2)+' h'+'</td></tr>'+
+                        '</table>'
+    
+                        );
+                }
+            }},
             error: function(xhr, textStatus, error){
-                $("#alert-danger-message-inici").text(msgErrorQuery1);
-                $("#alert-danger")
-                .fadeTo(4000, 1000)
-                .slideUp(1000, function () {
-                    $("#alert-danger").slideUp(1000);
-                });
+                $("#alert-danger-message-final").text(msgNoResults);
+                    $("#alert-warning")
+                    .fadeTo(4000, 1000)
+                    .slideUp(1000, function () {
+                        $("#alert-warning").slideUp(1000);
+                    });
             }
         });
 
+
 }
+
+
+/* AUTOCOMPLETE 2*/
+$(document).ready(function() {
+    src = '/employees-query';//"{{ route('admin.getEmployees') }}";
+    $("#worker0").autocomplete({
+        appendTo : ".autocompletediv",
+        select: function (event, ui) {//trigger when you click on the autocomplete item
+            //event.preventDefault();//you can prevent the default event
+            //console.log( ui.item.id);//employee id
+            //console.log( ui.item.value);//employee name
+            $('#worker0').val(ui.item.value)
+            $('#worker0id').val(ui.item.id)
+        },
+        source: function(request, response) {
+            $.ajax({
+                url: src,
+                dataType: "json",
+                data: {
+                    term : request.term
+                },
+                success: function(data) {
+                    response(data);
+
+                }
+            });
+        },
+        minLength: 1,
+
+    });
+});
+
+/* AUTOCOMPLETE 1*/
+$(document).ready(function() {
+    src = '/employees-query';//"{{ route('admin.getEmployees') }}";
+    $("#worker").autocomplete({
+        appendTo : "#autocomplete1",
+        select: function (event, ui) {//trigger when you click on the autocomplete item
+            //event.preventDefault();//you can prevent the default event
+            //console.log( ui.item.id);//employee id
+            //console.log( ui.item.value);//employee name
+            $('#worker').val(ui.item.value)
+            $('#workerID').val(ui.item.id)
+        },
+        source: function(request, response) {
+            $.ajax({
+                url: src,
+                dataType: "json",
+                data: {
+                    term : request.term
+                },
+                success: function(data) {
+                    response(data);
+
+                }
+            });
+        },
+        minLength: 1,
+
+    });
+});

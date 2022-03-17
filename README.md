@@ -4,9 +4,11 @@
 
 És una aplicació per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació. I l'administrador podrà llistar totes les jornades de tothom i fer consultes des d'una taula dinàmica.
 Ara mateix, en versió 0.8.8, sembla que té una certa estabilitat.
+
 ### Update 0.8.8
 - Reporting amb consulta general i específica, amb taula dinàmica i en possibilitat de sumar automàticament les hores.
-- Geolocalització als torns i jornades.
+- Consulta amb autocomplete del nom de l'empleat.
+- Geolocalització als torns, jornades i certes tasques.
 
 
 ### Errors i bugs (versió 0.8.8)
@@ -14,7 +16,6 @@ Ara mateix, en versió 0.8.8, sembla que té una certa estabilitat.
 Quan s'acaba el torn, es compta com si la jornada sencera fos del dia en que s'acaba el torn, i, per tant, només se suma al temps de jornada total el temps del segon dia.
 - Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.
 - Probablement, si d'alguna forma es desactiva 'la desactivació dels botons' és possible que es puguen iniciar varies tasques alhora i que el programa perdi la seva funcionalitat de sèrie.
-- Pel que fa al reporting, la taula dinàmica presenta problemes de rendiment si ha de carregar una gran quantitat de registres.
 
 
 ### Development setup
@@ -32,9 +33,9 @@ php artisan key:generate
 ```
 php artisan serve
 ```
-```
-Comprovar fitxer 'vendorstocats.txt' ja que per al login sense contrasenya s'han tingut que manipular alguns arxius allí indicats.
-```
+
+##### Comprovar fitxer 'vendorstocats.txt' ja que per al login sense contrasenya s'han tingut que manipular alguns arxius allí indicats.
+
 #### Migrar BBDD
 ```
 php artisan migrate && php artisan db:seed
@@ -44,7 +45,7 @@ php artisan migrate && php artisan db:seed
 #### Per a desplegar l'aplicació hi ha dos opcions: ip local o desplegar-lo a un servidor
 ##### Si és per ip local, només caldria descomprimir l'aplicació al servidor i iniciar el php artisan:
 ```
-php artisan serve --host=<ip del servidor> --port=8000
+php artisan serve --host=<server_ip> --port=8000
 ```
 
 ##### Per a desplegar-lo serà millor mirar documentació
@@ -60,17 +61,19 @@ APP_DEBUG=false
 #### Al directori
 ```
 npm run production
+```
+```
 composer dumpautoload
 ```
-```
-Comprimir App
-```
-```
-Descomprimir l'app al sistema d'arxius del servidor
-```
-```
-Moure els arxius de la carpeta 'public' a la 'public_html' i borrar la 'public' buida
-```
+
+##### Comprimir App
+
+
+##### Descomprimir l'app al sistema d'arxius del servidor
+
+
+##### Moure els arxius de la carpeta 'public' a la 'public_html' i borrar la 'public' buida
+
 #### Al /public_html/index.php afegir
 ```
 $app->bind('path.public', function() {
@@ -79,11 +82,11 @@ $app->bind('path.public', function() {
 ```
 #### Crear la base de dades
 
-####
-####
-####
-####
-####
+#### 
+#### 
+#### 
+#### 
+#### 
 # Readme de Laravel
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>

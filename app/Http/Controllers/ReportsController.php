@@ -75,4 +75,32 @@ class ReportsController extends Controller
 
         return response()->json($query);
     }
+
+
+    public function getEmployees(Request $request){
+
+        //$employee = User::all();
+        /* $employees = User::select('id',"name")
+        ->where("name","LIKE","%{$request->input('query')}%")
+        ->get();
+
+        return response()->json($employees); */
+
+
+        ###versio 2
+
+        $query = $request->get('term','');
+
+        $employees=User::where('name','LIKE','%'.$query.'%')->get();
+
+        $data=array();
+        foreach ($employees as $employee) {
+            $data[]=array('value'=>$employee->name,'id'=>$employee->id);
+        }
+        if(count($data))
+            return $data;
+        else
+            return ['value'=>'No Result Found','id'=>''];
+
+    }
 }

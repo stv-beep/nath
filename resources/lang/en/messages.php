@@ -41,9 +41,10 @@ return [
     'Yes' => 'Yes',
 
     /* Reports */
-    'Worker'=> "Worker",
+    'Worker'=> "Employee",
     'Exact query'=> "Exact query",
     'Reload table' => "Reload table",
+    'Complete query'=> "Complete query",
 
     'Preparació comanda' => 'Order preparation',
     'Revisió comanda' => 'Order review',

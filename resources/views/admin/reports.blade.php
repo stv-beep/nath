@@ -9,6 +9,7 @@
 <script src="{{ asset('js/Reports.js') }}" defer></script>
 <script src="{{ asset('js/Translate.js') }}" defer></script>
 <script src="https://cdn.datatables.net/plug-ins/1.10.19/api/sum().js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -51,7 +52,8 @@
                             @csrf
                             <div class="row mb-3">
                                 <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Worker') }}</label>
-                                <div class="col-md-6"><input id="worker" class="form-control" type="text" autofocus>
+                                <div class="col-md-6" id="autocomplete1"><input id="worker" class="form-control" type="text" autofocus>
+                                    <input id="workerID" class="typeahead form-control" type="hidden" autocomplete="on">
                             </div></div>
                             <div class="row mb-3">
                                 <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Day') }} 1</label>
@@ -71,15 +73,15 @@
 
                     {{-- MODAL 2 --}}
                     <div class="modal" id="modalCompleteQuery">
-                        <div class='alert-position hidden alert alert-danger' id='alert-danger' role='alert'>
+                        <div class='alert-position hidden alert alert-warning' id='alert-warning' role='alert'>
                             <i class="fas fa-exclamation-triangle"></i>
-                            <strong id="alert-danger-message-inici"></strong>&nbsp;
+                            <strong id="alert-danger-message-final"></strong>&nbsp;
                             &nbsp;&nbsp;   
                         </div>
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    Consulta completa{{-- {{ __('messages.Complete query') }}  --}}
+                                    {{ __('messages.Complete query') }} 
                                     <button id="closeModal2" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                         &times;
                                     </button>
@@ -89,7 +91,8 @@
                             @csrf
                             <div class="row mb-3">
                                 <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Worker') }}</label>
-                                <div class="col-md-6"><input id="worker0" class="form-control" type="text" autofocus>
+                                <div class="col-md-6 autocompletediv"><input id="worker0" class="typeahead form-control" type="text" autocomplete="on" autofocus>
+                                    <input id="worker0id" class="typeahead form-control" type="hidden" autocomplete="on">
                             </div></div>
                             <div class="row mb-3">
                                 <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Day') }}</label>
@@ -149,4 +152,49 @@
         </div>
     </div>
 </div>
+
+{{-- <script type="text/javascript">
+    var path = "{{ route('admin.getEmployees') }}";
+    $('input.typeahead').typeahead({
+        source:  function (query, process) {
+        return $.get(path, { query: query }, function (data) {
+                return process(data);
+            });
+        }
+    });
+</script> --}}
+
+<!-- Script -->
+<script type="text/javascript">
+
+    // CSRF Token
+    /* var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $(document).ready(function(){
+
+      $( "#worker0" ).typeahead({
+        source: function( request, response ) {
+          // Fetch data
+          $.ajax({
+            url:"{{route('admin.getEmployees')}}",
+            type: 'get',
+            dataType: "json",
+            success: function( data ) {
+               response( data );
+
+            }
+          });
+        },
+      });
+
+    }); */
+
+    </script>
+
+
+
+
+
+
+
+
 @endsection

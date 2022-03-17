@@ -42,9 +42,10 @@ return [
 
 
     /* Reports */
-    'Worker'=> "Trabajador",
+    'Worker'=> "Empleado",
     'Exact query' => "Consulta exacta entre fechas",
     'Reload table' => "Actualizar tabla",
+    'Complete query'=> "Consulta completa",
 
     'Preparació comanda' => 'Preparación pedido',
     'Revisió comanda' => 'Revisión pedido',

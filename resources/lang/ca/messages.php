@@ -49,6 +49,7 @@ return [
     'Worker'=> "Treballador",
     'Exact query' => "Consulta exacta entre dates",
     'Reload table' => "Actualitzar taula",
+    'Complete query'=> "Consulta completa",
 
 
     /* alerts */

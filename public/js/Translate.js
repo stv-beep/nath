@@ -41,20 +41,23 @@ function translateAlerts(){
 
 function translateAlertsQuery(){
     if (locale == 'ca'){
+        msgNoResults = "No s'han trobat resultats."
         msgErrorQuery1 = 'Sembla que hi ha un error a la consulta'
         worker = 'Treballador'
         hours = 'hores'
         locationString = 'Localització'
         day = 'Dia'
     } else if (locale == 'es'){
+        msgNoResults = "No se han encontrado resultados."
         msgErrorQuery1 = 'Parece que hay un error en la consulta'
-        worker = 'Trabajador'
+        worker = 'Empleado'
         hours = 'horas'
         day = 'Día'
         locationString = 'Localización'
     } else if (locale == 'en'){
+        msgNoResults = "No results found."
         msgErrorQuery1 = 'It seems there is an error in the query'
-        worker = 'Worker'
+        worker = 'Employee'
         hours = 'hours'
         locationString = 'Location'
         day = 'Day'
