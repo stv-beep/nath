@@ -70,6 +70,8 @@ Route::get('/reporting',[ReportsController::class, 'show'])->name('reporting');
 Route::post('/consulta',[ReportsController::class, 'twoDateQuery'])->name('admin.query');
 Route::post('/consulta-completa',[ReportsController::class, 'completeQuery'])->name('admin.complete.query');
 Route::get('/employees-query',[ReportsController::class, 'getEmployees'])->name('admin.getEmployees');
+Route::post('/consulta-turno',[ReportsController::class, 'shiftQuery'])->name('admin.shiftQuery');
+
 
 Route::get('/set_language/{lang}', [App\Http\Controllers\Controller::class, 'set_language'])->name('set_language');
 App::setLocale("es");

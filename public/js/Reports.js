@@ -100,6 +100,9 @@ $(document).ready(function() {
             {
               data: "treballador",
             },
+            {
+              data: "geolocation",
+            },
         ],
            
     } );
@@ -186,6 +189,14 @@ function modalForCompleteQuery(){
         });
 }
 
+function modalShiftQuery(){
+    $('#modalWorkShiftQuery').modal('show'); 
+
+    $("#closeModal3").on('click',function(){
+        $('#modalWorkShiftQuery').modal('hide');
+        });
+}
+
 function completeQuery(){
     translateAlertsQuery();
     $.ajaxSetup({
@@ -261,19 +272,16 @@ function completeQuery(){
 
 /* AUTOCOMPLETE 2*/
 $(document).ready(function() {
-    src = '/employees-query';//"{{ route('admin.getEmployees') }}";
     $("#worker0").autocomplete({
         appendTo : ".autocompletediv",
         select: function (event, ui) {//trigger when you click on the autocomplete item
             //event.preventDefault();//you can prevent the default event
-            //console.log( ui.item.id);//employee id
-            //console.log( ui.item.value);//employee name
             $('#worker0').val(ui.item.value)
             $('#worker0id').val(ui.item.id)
         },
         source: function(request, response) {
             $.ajax({
-                url: src,
+                url: '/employees-query',
                 dataType: "json",
                 data: {
                     term : request.term
@@ -318,3 +326,105 @@ $(document).ready(function() {
 
     });
 });
+
+/* AUTOCOMPLETE 3*/
+$(document).ready(function() {
+    src = '/employees-query';
+    $("#worker3").autocomplete({
+        appendTo : "#autocomplete3",
+        select: function (event, ui) {//trigger when you click on the autocomplete item
+            //event.preventDefault();//you can prevent the default event
+            $('#worker3').val(ui.item.value)
+            $('#worker3id').val(ui.item.id)
+        },
+        source: function(request, response) {
+            $.ajax({
+                url: src,
+                dataType: "json",
+                data: {
+                    term : request.term
+                },
+                success: function(data) {
+                    response(data);
+
+                }
+            });
+        },
+        minLength: 1,
+
+    });
+});
+
+
+function workShiftQuery(){
+    translateAlertsQuery();
+    $.ajaxSetup({
+        headers:
+        { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+    });
+    var treballador = document.getElementById('worker3id').value;
+    var data = document.getElementById('reportDate3').value;
+    $.ajax(
+        {
+            type: "POST",
+            url: "/consulta-turno",
+            data: { 
+                worker : treballador,
+                dia : data,
+             },
+            success: function( response ) {
+                //console.log('1 '+response[0]);
+                if (response === undefined){
+
+                } else {
+                    console.log(response);
+                    console.log('___________');
+                    console.log(response[3].iniciTorn);
+                    console.log(response[3].geolocation);
+
+                
+                for(var i=0;i<response.length;i++){
+                            
+                            
+                               console.log(response[i].iniciTorn);
+                                
+        
+                        }
+
+                        for(var i=0;i<response.length;i++){
+                    $('#shiftTable').html(
+                        
+                        
+                            '<tr><th>'+response[i].name+'</th></tr>'+
+                            '<tr><th>'+response[i].jornada+'</th></tr>'+
+                            '<tr><th>'+response[i].iniciTorn+'</th></tr>'+
+                            '<tr><th>'+response[i].fiTorn+'</th></tr>'+
+                            '<tr><th>'+response[i].total+'</th></tr>'+
+                            '<tr><th>'+response[i].geolocation+'</th></tr>'
+                        
+                    );
+                }
+
+                        /* JSON.stringify(response[0].jornada)+
+                        '<table class="table table-striped table-hover"><thead class="thead-dark"><tr>'+
+                        '<th scope="col">Nombre</th><th scope="col">Jornada</th><th scope="col">Inicio turno</th>'+
+                            '<th scope="col">Fin turno</th><th scope="col">Total</th><th scope="col">Geolocalización</th>'+
+                        '</tr></thead>') */
+                       
+                    
+                    
+
+
+            }},
+            error: function(xhr, textStatus, error){
+                /* $("#alert-danger-message-final").text(msgNoResults);
+                    $("#alert-warning")
+                    .fadeTo(4000, 1000)
+                    .slideUp(1000, function () {
+                        $("#alert-warning").slideUp(1000);
+                    }); */
+            }
+        });
+
+
+}

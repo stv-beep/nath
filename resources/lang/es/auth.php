@@ -17,4 +17,5 @@ return [
     'password' => 'La contraseña ingresada no es correcta.',
     'throttle' => 'Demasiados intentos de acceso. Por favor intente nuevamente en :seconds segundos.',
     'username' => "Codigo de usuario incorrecto.",
+    'dni' => "DNI ya existente en nuestros registros.",
 ];

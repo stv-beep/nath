@@ -50,6 +50,8 @@ return [
     'Exact query' => "Consulta exacta entre dates",
     'Reload table' => "Actualitzar taula",
     'Complete query'=> "Consulta completa",
+    'Shift query'=> "Consulta de torns",
+    'Geolocation'=> "Geolocalització",
 
 
     /* alerts */

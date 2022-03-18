@@ -29,7 +29,8 @@
                     <div class="btn btn-dark noClicable">Total: <span id="total"></span></div>
                     <button id="btn-reload" type="button" class="btn btn-dark">{{ __('messages.Reload table') }}  <abbr title="Reload table"><i id="icon-reload" class="fas fa-sync-alt"></i></abbr></button>
                     <button type="button" class="btn btn-info" onclick="modalForQuery();">{{ __('messages.Exact query') }}</button>
-                    <button type="button" class="btn btn-info" onclick="modalForCompleteQuery();">Consulta completa{{-- {{ __('messages.Complete query') }} --}}</button>
+                    <button type="button" class="btn btn-info" onclick="modalForCompleteQuery();">{{ __('messages.Complete query') }}</button>
+                    {{-- <button type="button" class="btn btn-info" onclick="modalShiftQuery();">{{ __('messages.Shift query') }}</button> --}}
 
                     <br>
                     {{-- MODAL 1 --}}
@@ -103,14 +104,40 @@
                                 <button type="button" class="btn btn-outline-dark" onclick="completeQuery()">Consultar</button>
                             </div>
                             </form>
-                            <div id="completeResult"{{-- class="btn btn-dark noClicable" --}}><h4><span></span></h4></div>
+                            <div id="completeResult"><h4><span></span></h4></div>
                     </div></div></div>
 
+                    {{-- MODAL 3 --}}
+                    {{-- <div class="modal" id="modalWorkShiftQuery">
 
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    {{ __('messages.Shift query') }}
+                                    <button id="closeModal3" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                            <form id="reportQuery1" action="{{route('admin.complete.query')}}" method="POST">
+                            @csrf
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Worker') }}</label>
+                                <div id="autocomplete3" class="col-md-6"><input id="worker3" class="typeahead form-control" type="text" autocomplete="on" autofocus>
+                                    <input id="worker3id" class="typeahead form-control" type="hidden" autocomplete="on">
+                            </div></div>
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Day') }}</label>
+                                <div class="col-md-6"><input id="reportDate3" class="form-control" type="date" autofocus>
+                            </div></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-dark" onclick="workShiftQuery()">Consultar</button>
+                            </div>
+                            </form>
+                            <table id="shiftTable"></table>
+                    </div></div></div> --}}
 
-
-                    
-                        
                     <hr>
                     <p class="h4 text-center" id="titol">{{ __('messages.Working days') }}</p>
                     {{-- DATATABLE --}}
@@ -121,7 +148,8 @@
                             <th scope="col">{{ __('messages.Worker') }}</th>
                             <th scope="col">{{ __('messages.Day') }}</th>
                             <th scope="col">Total (min)</th>
-                            <th scope="col">ID</th>
+                            <th scope="col">ID {{ __('messages.Worker') }}</th>
+                            <th scope="col">Geolocalización</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -142,7 +170,8 @@
                                 <th scope="col">{{ __('messages.Worker') }}</th>
                                 <th scope="col">{{ __('messages.Day') }}</th>
                                 <th scope="col">Total (min)</th>
-                                <th scope="col">ID</th>
+                                <th scope="col">ID {{ __('messages.Worker') }}</th>
+                                <th scope="col">{{ __('messages.Geolocation') }}</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -163,38 +192,4 @@
         }
     });
 </script> --}}
-
-<!-- Script -->
-<script type="text/javascript">
-
-    // CSRF Token
-    /* var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    $(document).ready(function(){
-
-      $( "#worker0" ).typeahead({
-        source: function( request, response ) {
-          // Fetch data
-          $.ajax({
-            url:"{{route('admin.getEmployees')}}",
-            type: 'get',
-            dataType: "json",
-            success: function( data ) {
-               response( data );
-
-            }
-          });
-        },
-      });
-
-    }); */
-
-    </script>
-
-
-
-
-
-
-
-
 @endsection

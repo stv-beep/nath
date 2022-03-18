@@ -46,6 +46,8 @@ return [
     'Exact query' => "Consulta exacta entre fechas",
     'Reload table' => "Actualizar tabla",
     'Complete query'=> "Consulta completa",
+    'Shift query'=> "Consulta de turnos",
+    'Geolocation'=> "Geolocalización",
 
     'Preparació comanda' => 'Preparación pedido',
     'Revisió comanda' => 'Revisión pedido',

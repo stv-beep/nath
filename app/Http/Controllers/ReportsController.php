@@ -71,7 +71,18 @@ class ReportsController extends Controller
         $treballador= $request->worker;
         $data = $request->dia;
         $date = Carbon::parse($data)->format('Y-m-d');
-        $query = Jornada::join('users','jornades.treballador','=','users.id')->where(['treballador' => $treballador,'dia'=>$date])->get();
+        $query = Jornada::join('users','jornades.treballador','=','users.id')
+        ->where(['treballador' => $treballador,'dia'=>$date])->get();
+
+        return response()->json($query);
+    }
+
+    public function shiftQuery(Request $request){
+        $treballador = $request->worker;
+        $data = $request->dia;
+        $date = Carbon::parse($data)->format('Y-m-d');
+        $query = Torn::join('users','torns.treballador','=','users.id')
+        ->where(['treballador' => $treballador,'jornada'=>$date])->get();
 
         return response()->json($query);
     }

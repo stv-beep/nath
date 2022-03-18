@@ -45,6 +45,8 @@ return [
     'Exact query'=> "Exact query",
     'Reload table' => "Reload table",
     'Complete query'=> "Complete query",
+    'Shift query'=> "Shift query",
+    'Geolocation'=> "Geolocation",
 
     'Preparació comanda' => 'Order preparation',
     'Revisió comanda' => 'Order review',

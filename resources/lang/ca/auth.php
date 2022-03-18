@@ -17,4 +17,5 @@ return [
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Ha superat el nombre màxim d\'intents d\'accés. Si us plau, torni a intentar-ho en :seconds segons.',
     'username' => "Codi d'usuari incorrecte.",
+    'dni' => "DNI ja existent als nostres registres.",
 ];

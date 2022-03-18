@@ -22,8 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('magatzem');// 0 or 1
             $table->boolean('administrador')->nullable();
-            /* $table->string('DNI')->unique()->nullable();
-            $table->string('NSS')->unique()->nullable(); */
+            $table->string('DNI')->unique()->nullable();
+            /* $table->string('NSS')->unique()->nullable(); */
             $table->rememberToken();
             $table->timestamps();
         });
