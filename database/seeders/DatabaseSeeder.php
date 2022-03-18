@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         User::factory(200)->create();
+         User::factory(50)->create();
 
          //task type
          $tasktype = new TaskType();
@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
          $tasca->tipusTasca = 2;
          $tasca->save();
 
-         Jornada::factory(1000)->create();
+         Jornada::factory(200)->create();
 
     }
 }
