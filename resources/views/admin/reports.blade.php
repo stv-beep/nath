@@ -30,8 +30,7 @@
                     <button id="btn-reload" type="button" class="btn btn-dark">{{ __('messages.Reload table') }}  <abbr title="Reload table"><i id="icon-reload" class="fas fa-sync-alt"></i></abbr></button>
                     <button type="button" class="btn btn-info" onclick="modalForQuery();">{{ __('messages.Exact query') }}</button>
                     <button type="button" class="btn btn-info" onclick="modalForCompleteQuery();">{{ __('messages.Complete query') }}</button>
-                    {{-- <button type="button" class="btn btn-info" onclick="modalShiftQuery();">{{ __('messages.Shift query') }}</button> --}}
-
+                    <button type="button" class="btn btn-info" onclick="modalShiftQuery();">{{ __('messages.Shift query') }}</button>
                     <br>
                     {{-- MODAL 1 --}}
                     <div class="modal" id="modalQuery">
@@ -108,9 +107,13 @@
                     </div></div></div>
 
                     {{-- MODAL 3 --}}
-                    {{-- <div class="modal" id="modalWorkShiftQuery">
-
-                        <div class="modal-dialog">
+                    <div class="modal" id="modalWorkShiftQuery">
+                        <div class='alert-position hidden alert alert-warning' id='alert-modal3' role='alert'>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong id="alert-danger-message-warning"></strong>&nbsp;
+                            &nbsp;&nbsp;   
+                        </div>
+                        <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     {{ __('messages.Shift query') }}
@@ -135,8 +138,8 @@
                                 <button type="button" class="btn btn-outline-dark" onclick="workShiftQuery()">Consultar</button>
                             </div>
                             </form>
-                            <table id="shiftTable"></table>
-                    </div></div></div> --}}
+                            <table class="table table-striped" id="shiftTable"></table>
+                    </div></div></div>
 
                     <hr>
                     <p class="h4 text-center" id="titol">{{ __('messages.Working days') }}</p>

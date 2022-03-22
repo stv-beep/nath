@@ -12,6 +12,7 @@ function translateAlerts(){
         jornadaNoIniciada = "No pots inciar una tasca si no has començat la jornada.";
         msgError = "Sembla que ha hagut un error, per favor, torna-ho a intentar."
         noJornada = "No s'ha trobat cap inici de jornada coincident amb el teu registre.";
+
         
     } else if (locale == 'es'){
         msgIniciJornada = "Jornada inciada con éxito";
@@ -21,7 +22,7 @@ function translateAlerts(){
         msgExpedComanda = "Expedición Pedido";
         tascaNoAcabada = "Tienes una tarea pendiente de acabar.";
         jornadaNoIniciada = "No puedes iniciar una tarea si no has empezado la jornada.";
-        msgError = "Ha habido un error, vuelva a intentar-lo."
+        msgError = "Ha habido un error, vuelva a intentarlo."
         noJornada = "No se ha encontrado ningún inicio de jornada coincidente con tu registro.";
 
     } else if (locale == 'en'){
@@ -47,6 +48,10 @@ function translateAlertsQuery(){
         hours = 'hores'
         locationString = 'Localització'
         day = 'Dia'
+        deviceInfo = "Info del dispositiu"
+        shiftStart = "Inici torn"
+        shiftEnd = "Fi torn"
+        notSaved = "No guardada"
     } else if (locale == 'es'){
         msgNoResults = "No se han encontrado resultados."
         msgErrorQuery1 = 'Parece que hay un error en la consulta'
@@ -54,6 +59,10 @@ function translateAlertsQuery(){
         hours = 'horas'
         day = 'Día'
         locationString = 'Localización'
+        deviceInfo = "Info del dispositivo"
+        shiftStart = "Inicio turno"
+        shiftEnd = "Fin turno"
+        notSaved = "No guardada"
     } else if (locale == 'en'){
         msgNoResults = "No results found."
         msgErrorQuery1 = 'It seems there is an error in the query'
@@ -61,5 +70,9 @@ function translateAlertsQuery(){
         hours = 'hours'
         locationString = 'Location'
         day = 'Day'
+        deviceInfo = "Device info"
+        shiftStart = "Shift start"
+        shiftEnd = "Shift end"
+        notSaved = "Not saved"
     }
 }

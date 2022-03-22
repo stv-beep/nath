@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-03-2022 a las 12:33:42
+-- Tiempo de generación: 22-03-2022 a las 12:54:07
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.1
 
@@ -35,7 +35,7 @@ CREATE TABLE `comandes` (
   `total` double(8,2) DEFAULT NULL,
   `tipusTasca` bigint(20) UNSIGNED DEFAULT NULL,
   `geolocation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `hostname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `info` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `iniciTasca` datetime DEFAULT NULL,
   `fiTasca` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -54,6 +54,7 @@ CREATE TABLE `jornades` (
   `treballador` bigint(20) UNSIGNED DEFAULT NULL,
   `total` double(8,2) DEFAULT NULL,
   `geolocation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `info` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -118,10 +119,10 @@ CREATE TABLE `tasks_type` (
 --
 
 INSERT INTO `tasks_type` (`id`, `tipus`, `created_at`, `updated_at`) VALUES
-(1, 'Pedidos', '2022-03-18 10:04:37', '2022-03-18 10:04:37'),
-(2, 'Recepcions', '2022-03-18 10:04:37', '2022-03-18 10:04:37'),
-(3, 'Reoperacions', '2022-03-18 10:04:37', '2022-03-18 10:04:37'),
-(4, 'Inventari', '2022-03-18 10:04:37', '2022-03-18 10:04:37');
+(1, 'Pedidos', '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
+(2, 'Recepcions', '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
+(3, 'Reoperacions', '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
+(4, 'Inventari', '2022-03-22 11:53:48', '2022-03-22 11:53:48');
 
 -- --------------------------------------------------------
 
@@ -142,10 +143,12 @@ CREATE TABLE `tasques` (
 --
 
 INSERT INTO `tasques` (`id`, `tasca`, `tipusTasca`, `created_at`, `updated_at`) VALUES
-(1, 'Preparació comanda', 1, '2022-03-18 10:04:37', '2022-03-18 10:04:37'),
-(2, 'Revisió comanda', 1, '2022-03-18 10:04:37', '2022-03-18 10:04:37'),
-(3, 'Expedició', 1, '2022-03-18 10:04:37', '2022-03-18 10:04:37'),
-(4, 'SAF', 1, '2022-03-18 10:04:37', '2022-03-18 10:04:37');
+(1, 'Preparació comanda', 1, '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
+(2, 'Revisió comanda', 1, '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
+(3, 'Expedició', 1, '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
+(4, 'SAF', 1, '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
+(5, 'Recepcio1', 2, '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
+(6, 'Recepcio2', 2, '2022-03-22 11:53:48', '2022-03-22 11:53:48');
 
 -- --------------------------------------------------------
 
@@ -159,7 +162,7 @@ CREATE TABLE `torns` (
   `treballador` bigint(20) UNSIGNED NOT NULL,
   `total` double(8,2) DEFAULT NULL,
   `geolocation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `hostname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `info` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `iniciTorn` datetime DEFAULT NULL,
   `fiTorn` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -267,13 +270,13 @@ ALTER TABLE `comandes`
 -- AUTO_INCREMENT de la tabla `jornades`
 --
 ALTER TABLE `jornades`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -297,13 +300,13 @@ ALTER TABLE `tasques`
 -- AUTO_INCREMENT de la tabla `torns`
 --
 ALTER TABLE `torns`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas

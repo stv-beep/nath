@@ -39,7 +39,9 @@
                     {
                         type: "POST",
                         url: "/comandes",//"{{route('comandes.store')}}"
-                        data:{x: c},
+                        data:
+                        {x: c,
+                        info: navigator.platform+', '+navigator.userAgent},
                         /* $('#formPrepComanda').serialize(), */
                         success: function( response ) {
 
@@ -95,7 +97,8 @@
                     {
                             type: "POST",
                             url: "/comandes/revisio",
-                            data:{x: c},
+                            data:{x: c,
+                                info: navigator.platform+', '+navigator.userAgent},
                             //$('#formRevComanda').serialize(),
                             success: function( response ) {
 
@@ -147,7 +150,8 @@
             {
                     type: "POST",
                     url: "/comandes/expedicio",
-                    data:{x: c},
+                    data:{x: c,
+                        info: navigator.platform+', '+navigator.userAgent},
                     //$('#formExpedComanda').serialize(),
                     success: function( response ) {
                         if (response == false){
@@ -198,7 +202,8 @@
             {
                     type: "POST",
                     url: "/comandes/saf",
-                    data:{x: c},
+                    data:{x: c,
+                        info: navigator.platform+', '+navigator.userAgent},
                     //$('#formSAFComanda').serialize(),
                     success: function( response ) {
                         if (response == false){

@@ -47,14 +47,14 @@ class TornController extends Controller
             $activitat-> jornada = now();
             $jornadaInici = now();
             $activitat-> iniciTorn = Carbon::parse($jornadaInici)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
-            //$activitat-> hostname=$_SERVER['REMOTE_ADDR'];//getting the hostname of the client
+            $activitat-> info = $request->info;//$_SERVER['REMOTE_ADDR'];//getting the hostname of the client
             $activitat-> geolocation = $request->x;
             $activitat->save();
             $activitat = Torn::all();
              
             $novaJornada = Jornada::firstOrCreate(//busco el registre concret, i si no el troba, el creo
                 ['dia'=> $diaFormat, 'treballador'=> Auth::id()],
-                ['geolocation'=> $request->x]
+                ['geolocation'=> $request->x, 'info'=> $request->info]
             );
 
         $tornTreb = Torn::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims

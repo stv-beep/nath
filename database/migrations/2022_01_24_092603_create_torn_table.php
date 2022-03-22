@@ -20,7 +20,8 @@ class CreateTornTable extends Migration
             $table->foreign('treballador')->references('id')->on('users');
             $table->float('total')->nullable();
             $table->string('geolocation')->nullable();
-            $table->string('hostname')->nullable();
+            //$table->string('ip')->nullable();
+            $table->string('info')->nullable();
             $table->datetime('iniciTorn')->nullable();
             $table->datetime('fiTorn')->nullable();
             $table->timestamps(); 

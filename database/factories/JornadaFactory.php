@@ -15,7 +15,7 @@ class JornadaFactory extends Factory
     {
         return [
             'dia'=> $this->faker->dateTimeThisDecade(),
-            'treballador'=> $this->faker->numberBetween(1, 200),
+            'treballador'=> $this->faker->numberBetween(1, 50),
             'total'=>$this->faker->randomNumber(1),
         ];
     }

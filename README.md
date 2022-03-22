@@ -1,21 +1,23 @@
-# Aplicació per a fitxatges Nath v0.8.8
+# Aplicació per a fitxatges Nath v0.8.9
 #### Aleix Algueró, 2022
 ## Sobre l'aplicació
 
 És una aplicació per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació. I l'administrador podrà llistar totes les jornades de tothom i fer consultes des d'una taula dinàmica.
-Ara mateix, en versió 0.8.8, sembla que té una certa estabilitat.
+Ara mateix, en versió 0.8.9, sembla que té una certa estabilitat.
 
-### Update 0.8.8
-- Reporting amb consulta general i específica, amb taula dinàmica i en possibilitat de sumar automàticament les hores.
-- Consulta amb autocomplete del nom de l'empleat.
+### Update 0.8.9
+- No consulta al reporting on es mostren tots els torns d'una jornada concreta de l'empleat buscat.
 - Geolocalització als torns, jornades i certes tasques.
+- Informació sobre el dispositiu (SO, navegador...) en que s'ha realitzat el fitxatge.
 
 
-### Errors i bugs (versió 0.8.8)
+### Errors i bugs (versió 0.8.9)
+- La geolocalització no funciona sense HTTPS.
 - L'error principal és el canvi de dia mentre hi ha un torn obert (corrent el temps).
 Quan s'acaba el torn, es compta com si la jornada sencera fos del dia en que s'acaba el torn, i, per tant, només se suma al temps de jornada total el temps del segon dia.
 - Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.
 - Probablement, si d'alguna forma es desactiva 'la desactivació dels botons' és possible que es puguen iniciar varies tasques alhora i que el programa perdi la seva funcionalitat de sèrie.
+- A la consulta de torns, després d'haver fet una cerca, si es torna a fer una altra, o la mateixa, sense haver sortir o refrescat la pàgina, apareixerà, a part de la nova consulta, l'anterior, inclús si està repetida.
 
 
 ### Development setup
@@ -49,7 +51,7 @@ php artisan serve --host=<server_ip> --port=8000
 ```
 
 ##### Per a desplegar-lo serà millor mirar documentació
-- [Documentació útil](https://www.nigmacode.com/laravel/subir-proyecto-laravel-a-hosting)
+- [Documentació molt útil](https://www.nigmacode.com/laravel/subir-proyecto-laravel-a-hosting)
 - [Documentation](https://platzi.com/tutoriales/2182-intro-laravel/9744-como-desplegar-una-app-hecha-en-laravel)
 - [Apache deploy Documentation](https://help.clouding.io/hc/es/articles/4406607535634-C%C3%B3mo-Desplegar-Laravel-8-con-Apache-y-Let-s-Encrypt-SSL-en-Ubuntu-20-04)
 - [Official Documentation](https://laravel.com/docs/8.x/deployment)

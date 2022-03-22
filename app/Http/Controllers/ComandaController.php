@@ -85,7 +85,8 @@ class ComandaController extends Controller
             /*nou registre*/
             $pedido1 = Comanda::firstOrNew(
                 [/* 'dia' => $diaFormat,  */'treballador'=> Auth::id()],
-                ['iniciTasca' => $horaInici,'fiTasca' => $horaFinal, 'tasca' => $idTasca, 'geolocation' => $request->x]
+                ['iniciTasca' => $horaInici,'fiTasca' => $horaFinal, 'tasca' => $idTasca, 'geolocation' => $request->x, 
+                'info' => $request->info]//device info
             );
             $pedido1->save();
         //} else {
@@ -123,7 +124,7 @@ class ComandaController extends Controller
             $pedido-> total = $min;
             $pedido-> fiTasca = $horaFinal;
             $pedido->tipusTasca=$tipus;//task type
-            //$pedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);//getting the hostname of the client
+            $pedido->info=$request->info;
             $pedido->update();
             //return $pedido;
             //echo 'tasca acabada';
@@ -133,7 +134,7 @@ class ComandaController extends Controller
             $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
             $nouPedido->tipusTasca=$tipus;//task type
-            //$nouPedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);
+            $nouPedido->info=$request->info;
             $nouPedido->geolocation=$request->x;
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
@@ -184,7 +185,8 @@ class ComandaController extends Controller
             /*nou registre*/
             $revPedido = Comanda::firstOrNew(
                 ['dia' => $diaFormat, 'treballador'=> Auth::id()],
-                ['iniciTasca' => $horaInici,'fiTasca' => $horaFinal, 'tasca' => $idTasca, 'geolocation' => $request->x]
+                ['iniciTasca' => $horaInici,'fiTasca' => $horaFinal, 'tasca' => $idTasca, 'geolocation' => $request->x,
+                'info' => $request->info]
             );
             $revPedido->save();
         //} else {
@@ -229,7 +231,7 @@ class ComandaController extends Controller
             $hores = $min/60;
             $pedido-> total = $min;
             $pedido-> fiTasca = $horaFinal;
-            //$pedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);
+            $pedido->info=$request->info;
             $pedido->update();
             //return $pedido;
             //echo 'tasca acabada';
@@ -239,7 +241,7 @@ class ComandaController extends Controller
             $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
             $nouPedido->tipusTasca=$tipus;//task type
-            //$nouPedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);
+            $nouPedido->info=$request->info;
             $nouPedido->geolocation=$request->x;
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
@@ -285,7 +287,8 @@ class ComandaController extends Controller
             /*nou registre*/
             $revPedido = Comanda::firstOrNew(
                 ['dia' => $diaFormat, 'treballador'=> Auth::id()],
-                ['iniciTasca' => $horaInici,'fiTasca' => $horaFinal, 'tasca' => $idTasca, 'geolocation' => $request->x]
+                ['iniciTasca' => $horaInici,'fiTasca' => $horaFinal, 'tasca' => $idTasca, 'geolocation' => $request->x,
+                'info' => $request->info]
             );
             $revPedido->save();
 
@@ -310,7 +313,7 @@ class ComandaController extends Controller
             $hores = $min/60;
             $pedido-> total = $min;
             $pedido-> fiTasca = $horaFinal;
-            //$pedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);
+            $pedido->info = $request->info;
             $pedido->update();
             //return $pedido;
             //echo 'tasca acabada';
@@ -320,7 +323,7 @@ class ComandaController extends Controller
             $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
             $nouPedido->tipusTasca=$tipus;//task type
-            //$nouPedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);
+            $nouPedido->info = $request->info;
             $nouPedido->geolocation=$request->x;
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;
@@ -365,7 +368,8 @@ class ComandaController extends Controller
             /*nou registre*/
             $revPedido = Comanda::firstOrNew(
                 ['dia' => $diaFormat, 'treballador'=> Auth::id()],
-                ['iniciTasca' => $horaInici,'fiTasca' => $horaFinal, 'tasca' => $idTasca, 'geolocation' => $request->x]
+                ['iniciTasca' => $horaInici,'fiTasca' => $horaFinal, 'tasca' => $idTasca, 'geolocation' => $request->x,
+                'info' => $request->info]
             );
             $revPedido->save();
 
@@ -390,7 +394,7 @@ class ComandaController extends Controller
             $hores = $min/60;
             $pedido-> total = $min;
             $pedido-> fiTasca = $horaFinal;
-            //$pedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);
+            $pedido->info = $request->info;
             $pedido->update();
             //return $pedido;
             //echo 'tasca acabada';
@@ -400,7 +404,7 @@ class ComandaController extends Controller
             $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
             $nouPedido->tipusTasca=$tipus;//task type
-            //$nouPedido->hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);
+            $nouPedido->info = $request->info;
             $nouPedido->geolocation=$request->x;
             $nouPedido->tasca=$idTasca;
             $nouPedido->dia=$diaFormat;

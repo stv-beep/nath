@@ -24,7 +24,7 @@ class CreateComandesTable extends Migration
             $table->unsignedBigInteger('tipusTasca')->nullable();
             $table->foreign('tipusTasca')->references('id')->on('tasks_type');
             $table->string('geolocation')->nullable();
-            $table->string('hostname')->nullable();
+            $table->string('info')->nullable();
             $table->datetime('iniciTasca')->nullable();
             $table->datetime('fiTasca')->nullable();
             $table->timestamps();

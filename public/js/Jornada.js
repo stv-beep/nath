@@ -3,10 +3,15 @@ window.onload = onLoad;
     
 function onLoad(){
     checkLastTorn();
-    getLocation();    
+    getLocation();   
 }
 
 let msgIniciJornada, msgFinalJornada, tascaNoAcabada, msgError;
+
+    /* console.log('appCodeName: '+navigator.appCodeName)
+    console.log('appVersion: '+navigator.appVersion)
+    console.log('platform: '+navigator.platform)
+    console.log('userAgent: '+navigator.userAgent) */
 
 /* funcions de jornada */
     function start() {
@@ -21,7 +26,10 @@ let msgIniciJornada, msgFinalJornada, tascaNoAcabada, msgError;
                 {
                     type: "POST",
                     url: "/jornada",//"{{route('jornada.store')}}"
-                    data:{x : cj},
+                    data:{
+                        x : cj,
+                        info: navigator.platform+', '+navigator.userAgent                    
+                    },
                     success: function( data ) {
                         document.getElementById("sendInici").disabled = true;                        
                         $("#alert-message-inici").text(msgIniciJornada);

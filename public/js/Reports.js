@@ -5,6 +5,7 @@
 $(document).ready(function() {
 
     $('#alert-warning').hide();//for some reason the warning alert pops up always
+    $('#alert-modal3').hide();
 
     $('#reports tfoot th').each( function () {
         var title = $(this).text();
@@ -119,7 +120,6 @@ $(document).ready(function() {
         $('#icon-reload').toggleClass("down");
         table.ajax.reload();
     });
-
 });
 
 
@@ -190,7 +190,8 @@ function modalForCompleteQuery(){
 }
 
 function modalShiftQuery(){
-    $('#modalWorkShiftQuery').modal('show'); 
+    $('#modalWorkShiftQuery').modal('show');
+    document.getElementById("shiftTable").innerHTML  = '';//cleaning the modal table to not redisplay the same info again
 
     $("#closeModal3").on('click',function(){
         $('#modalWorkShiftQuery').modal('hide');
@@ -215,18 +216,17 @@ function completeQuery(){
                 dia : data0,
              },
             success: function( response ) {
-                //console.log('1 '+response[0]);
-                if (response[0] === undefined){
+                if (response[0] === undefined){//no response or no result
                     $("#alert-danger-message-final").text(msgNoResults);
                     $("#alert-warning")
                     .fadeTo(4000, 1000)
                     .slideUp(1000, function () {
                         $("#alert-warning").slideUp(1000);
                     });
-                } else {
+                } else {//result
                 let res = response[0];
                 if (res.geolocation != null){
-                    //console.log('2 '+res.geolocation)
+                    console.log(res)
                 var geo = res.geolocation.split(' ');
                 $('#completeResult').html(
                     
@@ -238,6 +238,7 @@ function completeQuery(){
                     '<tr><th class="thead-dark">'+locationString+': </th><td>'+
                     '<a href="https://www.google.com/maps?q='+geo[0]+'+'+geo[1]+'" target="_blank">'
                     +res.geolocation+'</a>'+'</td></tr>'+
+                    '<tr><th>'+deviceInfo+': </th><td>'+res.info+'</td></tr>'+
                     '</table>'
 
                     );
@@ -251,6 +252,7 @@ function completeQuery(){
                         '<tr><th>'+worker+': </th><td>'+res.name+'</td></tr>'+
                         '<tr><th class="thead-dark">'+day+': </th><td>'+moment(res.dia,'YYYY/MM/DD').format('DD/MM/YYYY')+'</td></tr>'+
                         '<tr><th>Total: </th><td>'+res.total.toFixed(2)+' h'+'</td></tr>'+
+                        '<tr><th>'+deviceInfo+': </th><td>'+res.info+'</td></tr>'+
                         '</table>'
     
                         );
@@ -304,10 +306,8 @@ $(document).ready(function() {
         appendTo : "#autocomplete1",
         select: function (event, ui) {//trigger when you click on the autocomplete item
             //event.preventDefault();//you can prevent the default event
-            //console.log( ui.item.id);//employee id
-            //console.log( ui.item.value);//employee name
-            $('#worker').val(ui.item.value)
-            $('#workerID').val(ui.item.id)
+            $('#worker').val(ui.item.value)//employee name
+            $('#workerID').val(ui.item.id)//employee id
         },
         source: function(request, response) {
             $.ajax({
@@ -355,8 +355,10 @@ $(document).ready(function() {
     });
 });
 
+var html_data = '';
 
 function workShiftQuery(){
+    document.getElementById("shiftTable").innerHTML = ''
     translateAlertsQuery();
     $.ajaxSetup({
         headers:
@@ -371,58 +373,63 @@ function workShiftQuery(){
             data: { 
                 worker : treballador,
                 dia : data,
-             },
+            },
             success: function( response ) {
-                //console.log('1 '+response[0]);
-                if (response === undefined){
+                if (response === undefined || response.length<1){//no response or no results
+                    $("#alert-danger-message-warning").text(msgNoResults);
+                    $("#alert-modal3")
+                    .fadeTo(4000, 1000)
+                    .slideUp(1000, function () {
+                        $("#alert-modal3").slideUp(1000);
+                    });
+                } else {//results
 
-                } else {
-                    console.log(response);
-                    console.log('___________');
-                    console.log(response[3].iniciTorn);
-                    console.log(response[3].geolocation);
+                for(var i=0;i<response.length;i++){   
+                        console.log(response[i].iniciTorn);
+                }
+                    var iconTimer = '<i class="fas fa-hourglass-half fa-spin"></i>';
+                        for(var i=0;i<response.length;i++){
 
-                
-                for(var i=0;i<response.length;i++){
-                            
-                            
-                               console.log(response[i].iniciTorn);
+                            if (response[i].geolocation != null){//if geolocation saved
+                                var geo = response[i].geolocation.split(' ');
+                                if (response[i].fiTorn == null) {
+                                    response[i].fiTorn = iconTimer;
+                                    response[i].total = iconTimer;
+                                }
+
+                           html_data += 
+                           '<tr><th>Turno</th><th>'+worker+'</th><th>'+day+'</th><th>'+shiftStart+'</th><th>'+shiftEnd+'</th>'+
+                           '<th>Total (h)</th><th>'+locationString+'</th><th>'+deviceInfo+'</th></tr>'+
+                           '<tr><td>'+(i+1)+'</td><td>'+response[i].name+'</td><td>'+response[i].jornada+'</td>'+
+                           '<td>'+response[i].iniciTorn+'</td><td>'+response[i].fiTorn+'</td><td>'+response[i].total+'</td>'+
+                           '<td><a href="https://www.google.com/maps?q='+geo[0]+'+'+geo[1]+'" target="_blank">'+
+                           response[i].geolocation+'</a></td><td>'+response[i].info+'</td></tr>'
+                            } else {//no geolocation
+
+                                if (response[i].fiTorn == null) {
+                                    response[i].fiTorn = iconTimer;
+                                    response[i].total = iconTimer;
+                                }
+                           html_data += 
+                           '<tr><th>Turno</th><th>'+worker+'</th><th>'+day+'</th><th>'+shiftStart+'</th><th>'+shiftEnd+'</th>'+
+                           '<th>Total (h)</th><th>'+locationString+'</th><th>'+deviceInfo+'</th></tr>'+
+                           '<tr><td>'+(i+1)+'</td><td>'+response[i].name+'</td><td>'+response[i].jornada+'</td>'+
+                           '<td>'+response[i].iniciTorn+'</td><td>'+response[i].fiTorn+'</td><td>'+response[i].total+'</td>'+
+                           '<td>'+notSaved+'</td><td>'+response[i].info+'</td></tr>'
+                           }
                                 
-        
                         }
 
-                        for(var i=0;i<response.length;i++){
-                    $('#shiftTable').html(
-                        
-                        
-                            '<tr><th>'+response[i].name+'</th></tr>'+
-                            '<tr><th>'+response[i].jornada+'</th></tr>'+
-                            '<tr><th>'+response[i].iniciTorn+'</th></tr>'+
-                            '<tr><th>'+response[i].fiTorn+'</th></tr>'+
-                            '<tr><th>'+response[i].total+'</th></tr>'+
-                            '<tr><th>'+response[i].geolocation+'</th></tr>'
-                        
-                    );
-                }
-
-                        /* JSON.stringify(response[0].jornada)+
-                        '<table class="table table-striped table-hover"><thead class="thead-dark"><tr>'+
-                        '<th scope="col">Nombre</th><th scope="col">Jornada</th><th scope="col">Inicio turno</th>'+
-                            '<th scope="col">Fin turno</th><th scope="col">Total</th><th scope="col">Geolocalización</th>'+
-                        '</tr></thead>') */
-                       
-                    
-                    
-
+                        document.getElementById("shiftTable").innerHTML = html_data;
 
             }},
             error: function(xhr, textStatus, error){
-                /* $("#alert-danger-message-final").text(msgNoResults);
-                    $("#alert-warning")
+                $("#alert-danger-message-warning").text(msgNoResults);
+                    $("#alert-modal3")
                     .fadeTo(4000, 1000)
                     .slideUp(1000, function () {
-                        $("#alert-warning").slideUp(1000);
-                    }); */
+                        $("#alert-modal3").slideUp(1000);
+                    });
             }
         });
 

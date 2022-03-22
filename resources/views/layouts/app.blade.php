@@ -14,7 +14,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>App Nath {{-- {{ config('app.name') }} --}}</title>
+    <title>App Nath v0.8.9{{-- {{ config('app.name') }} --}}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -40,7 +40,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-light shadow-lg">
             <div class="container">
                 <a id="nom-app" class="navbar-brand" href="{{ url('/home') }}">
-                    App Nath <small id="versionText">v0.8.8</small>
+                    App Nath <small id="versionText">v0.8.9</small>
                     {{-- {{ config('app.name') }} --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -124,9 +124,6 @@
         <main class="py-4">
             @yield('content')
         </main>
-        {{-- <footer class="card-footer">
-            <em>Aleix Algueró, 2022</em>
-        </footer> --}}
     </div>
 </body>
 </html>

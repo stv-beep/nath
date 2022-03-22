@@ -1,6 +1,6 @@
 {   
     "name": "nath",
-    "version": "0.8.8",
+    "version": "0.8.9",
     "private": true,
     "scripts": {
         "dev": "npm run development",
