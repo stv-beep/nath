@@ -216,7 +216,7 @@ function completeQuery(){
                 dia : data0,
              },
             success: function( response ) {
-                if (response[0] === undefined){//no response or no result
+                if (response[0] === undefined || response[0].total == null){//no response or no result
                     $("#alert-danger-message-final").text(msgNoResults);
                     $("#alert-warning")
                     .fadeTo(4000, 1000)

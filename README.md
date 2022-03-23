@@ -6,7 +6,7 @@
 Ara mateix, en versió 0.8.9, sembla que té una certa estabilitat.
 
 ### Update 0.8.9
-- No consulta al reporting on es mostren tots els torns d'una jornada concreta de l'empleat buscat.
+- Reporting on es mostren tots els torns d'una jornada concreta de l'empleat buscat.
 - Geolocalització als torns, jornades i certes tasques.
 - Informació sobre el dispositiu (SO, navegador...) en que s'ha realitzat el fitxatge.
 
