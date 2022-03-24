@@ -28,7 +28,7 @@ class ReportsController extends Controller
         
         if ($user->administrador == true){
             return view('admin.reports',compact('user'));
-        }   
+        }
     }
 
     public function show(){
@@ -36,8 +36,8 @@ class ReportsController extends Controller
         //buscant les jornades amb els noms dels treballadors
         if ($user->administrador == true){
             $dia = Jornada::join('users','jornades.treballador','=','users.id')->get();
+            return response()->json($dia);
         }
-        return response()->json($dia);
     }
 
     public function twoDateQuery(Request $request){

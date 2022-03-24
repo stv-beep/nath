@@ -355,10 +355,8 @@ $(document).ready(function() {
     });
 });
 
-var html_data = '';
-
 function workShiftQuery(){
-    document.getElementById("shiftTable").innerHTML = ''
+    var html_data = '';//cleaning the query result
     translateAlertsQuery();
     $.ajaxSetup({
         headers:
@@ -383,7 +381,7 @@ function workShiftQuery(){
                         $("#alert-modal3").slideUp(1000);
                     });
                 } else {//results
-
+                    document.getElementById("shiftTable").innerHTML = html_data;//cleaning the query result
                 for(var i=0;i<response.length;i++){   
                         console.log(response[i].iniciTorn);
                 }

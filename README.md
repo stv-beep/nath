@@ -1,23 +1,20 @@
-# Aplicació per a fitxatges Nath v0.8.9
+# Aplicació per a fitxatges Nath v0.9.0
 #### Aleix Algueró, 2022
 ## Sobre l'aplicació
 
 És una aplicació per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació. I l'administrador podrà llistar totes les jornades de tothom i fer consultes des d'una taula dinàmica.
-Ara mateix, en versió 0.8.9, sembla que té una certa estabilitat.
+Ara mateix, en versió 0.9.0, sembla que té una certa estabilitat.
 
-### Update 0.8.9
-- Reporting on es mostren tots els torns d'una jornada concreta de l'empleat buscat.
-- Geolocalització als torns, jornades i certes tasques.
-- Informació sobre el dispositiu (SO, navegador...) en que s'ha realitzat el fitxatge.
+### Update 0.9.0
+- Solucionat l'error de canvi de dia mentre hi ha un torn obert (corrent el temps), pel que fa a torns i jornades.
+- Corregit un error d'accés al reporting.
+- Corregit un error al reporting de torns, on si es repetia una consulta, o una de nova, sense haver refrescat o sortit de la pàgina, apareixia, a part de la nova, consulta, l'anterior, inclús si estava repetida.
 
 
-### Errors i bugs (versió 0.8.9)
+### Errors i bugs (versió 0.9.0)
 - La geolocalització no funciona sense HTTPS.
-- L'error principal és el canvi de dia mentre hi ha un torn obert (corrent el temps).
-Quan s'acaba el torn, es compta com si la jornada sencera fos del dia en que s'acaba el torn, i, per tant, només se suma al temps de jornada total el temps del segon dia.
 - Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.
 - Probablement, si d'alguna forma es desactiva 'la desactivació dels botons' és possible que es puguen iniciar varies tasques alhora i que el programa perdi la seva funcionalitat de sèrie.
-- A la consulta de torns, després d'haver fet una cerca, si es torna a fer una altra, o la mateixa, sense haver sortir o refrescat la pàgina, apareixerà, a part de la nova consulta, l'anterior, inclús si està repetida.
 
 
 ### Development setup

@@ -31,7 +31,7 @@ Route::get('/',[ HomeController::class, 'index']);
 //HOME
 //Route::view('/home','inici');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
+Route::group(['middleware' => ['auth:sanctum']], function() {
 //JORNADA
 //get crear activitat
 Route::get('/jornada',[TornController::class,'create'])->name('jornada.form');
@@ -71,7 +71,7 @@ Route::post('/consulta',[ReportsController::class, 'twoDateQuery'])->name('admin
 Route::post('/consulta-completa',[ReportsController::class, 'completeQuery'])->name('admin.complete.query');
 Route::get('/employees-query',[ReportsController::class, 'getEmployees'])->name('admin.getEmployees');
 Route::post('/consulta-turno',[ReportsController::class, 'shiftQuery'])->name('admin.shiftQuery');
-
+});
 
 Route::get('/set_language/{lang}', [App\Http\Controllers\Controller::class, 'set_language'])->name('set_language');
 App::setLocale("es");

@@ -94,12 +94,15 @@ class TornController extends Controller
             $min = $resta/60;
             $hores = $min/60;
             $activitat -> total = $min;
-            //$activitat-> hostname=gethostbyaddr($_SERVER['REMOTE_ADDR']);//getting the hostname of the client
             $activitat-> update();
 
 
             /*consultes per a sumar les hores de diferents torns: de la taula TORNS a la de JORNADES*/
-            $turnos = Torn::where(['jornada' => $jorn,'treballador' => Auth::id()])->orderBy('id','desc')->get('total');
+            $finalShift = Torn::where(['treballador' => $user->id])->get('fiTorn')->last();
+            $finalString = substr($finalShift,19,2);//dia, ex: 2022-03-(24) ...
+            //select torns amb fi el mateix dia
+            $turnos = DB::select("SELECT total FROM `torns` WHERE SUBSTRING(fiTorn, CHAR_LENGTH(fiTorn)-10,2) = $finalString AND `treballador` = $user->id");
+            //$turnos = Torn::where(['jornada' => $jorn,'treballador' => Auth::id()])->orderBy('id','desc')->get('total');
 
             //suma de tots els torns de dia X
             $n = count($turnos);
