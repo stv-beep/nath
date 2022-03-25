@@ -21,16 +21,6 @@ class TornController extends Controller
         $dia = Jornada::where(['treballador' => Auth::id()])->orderBy('id','desc')->take(5)->get();
         return view('jornada', compact('user','tornTreb','dia'));
         
-        /* jaseando */
-        $id = 4;
-        $torns = Torn::where(['treballador' => $id])->orderBy('id','desc')->take(10)->get();
-        $users = User::findOrFail($id);
-        return response()->json([
-            'msg2' => 'USUARI:', 
-            $users,
-            'msg' => 'mostrant torns', 
-            $torns,
-        ]);
     }
 
     public function store(Request $request){
@@ -41,16 +31,16 @@ class TornController extends Controller
 
         $torn = Torn::where(['treballador' => Auth::id()])->latest()->first();
 
-        $activitat = new Torn();
+        $shift = new Torn();
 
-            $activitat-> treballador = $user->id;
-            $activitat-> jornada = now();
-            $jornadaInici = now();
-            $activitat-> iniciTorn = Carbon::parse($jornadaInici)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
-            $activitat-> info = $request->info;//$_SERVER['REMOTE_ADDR'];//getting the hostname of the client
-            $activitat-> geolocation = $request->x;
-            $activitat->save();
-            $activitat = Torn::all();
+            $shift-> treballador = $user->id;
+            $shift-> jornada = now();
+            $workStart = now();
+            $shift-> iniciTorn = Carbon::parse($workStart)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
+            $shift-> info = $request->info;
+            $shift-> geolocation = $request->x;
+            $shift->save();
+            $shift = Torn::all();
              
             $novaJornada = Jornada::firstOrCreate(//busco el registre concret, i si no el troba, el creo
                 ['dia'=> $diaFormat, 'treballador'=> Auth::id()],
@@ -70,17 +60,13 @@ class TornController extends Controller
         if ($checkTask == null || $checkTask->total > 0){
 
 
-            /* $activitat->update([
-                'fiTorn' => $request->input('final-Jornada'),
-            ]); */
-            //$activitat = Torn::find(3);
             $jornada = now();//"2022-02-01T09:08:09.674363Z"
             $jorn = Carbon::parse($jornada)->setTimezone('Europe/Madrid')->format('Y-m-d');//2022-02-01
             $finalFormat = Carbon::parse($jornada)->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');//2022-02-03 09:20:21
-            $activitat = Torn::where([/* 'jornada' => $jorn,  */'treballador' => $user->id])->latest()->first();
-            $activitat-> fiTorn = $finalFormat;//guardo fiTorn a la BBDD
+            $shift = Torn::where([/* 'jornada' => $jorn,  */'treballador' => $user->id])->latest()->first();
+            $shift-> fiTorn = $finalFormat;//guardo fiTorn a la BBDD
             //carbon = "2022-01-31T11:34:39.000000Z"
-            $activitat-> update();
+            $shift-> update();
             $inici = Torn::where(['treballador' => $user->id])
             ->get('iniciTorn')->last();//{"iniciTorn":"2022-02-01 10:24:10"}
             $iniciFormat = $inici->iniciTorn;//2022-02-03 09:07:48
@@ -93,14 +79,14 @@ class TornController extends Controller
             $resta = $finalSegs - $iniciSegs; #resto la quantitat de segons que han passat des del inici del temps unix
             $min = $resta/60;
             $hores = $min/60;
-            $activitat -> total = $min;
-            $activitat-> update();
+            $shift -> total = $min;
+            $shift-> update();
 
 
             /*consultes per a sumar les hores de diferents torns: de la taula TORNS a la de JORNADES*/
             $finalShift = Torn::where(['treballador' => $user->id])->get('fiTorn')->last();
             $finalString = substr($finalShift,19,2);//dia, ex: 2022-03-(24) ...
-            //select torns amb fi el mateix dia
+            //select torns amb fi el mateix dia, select 2 caracters a partir del 10 començant per detras de fiTorn = 2022-03-""23"" 10:24:10
             $turnos = DB::select("SELECT total FROM `torns` WHERE SUBSTRING(fiTorn, CHAR_LENGTH(fiTorn)-10,2) = $finalString AND `treballador` = $user->id");
             //$turnos = Torn::where(['jornada' => $jorn,'treballador' => Auth::id()])->orderBy('id','desc')->get('total');
 
@@ -124,32 +110,7 @@ class TornController extends Controller
 
         } else {
             return response()->json(false,200);//task unfinished
-        }
-        
-
-        /* PROVES */
-
-        //$fi2 = $fi->fiTorn;
-/* 
-        $iniciString = substr($inici,17,19);//2022-02-01 12:45:18
-        $ik = strtotime($iniciString); */
-       // $inici2 = date('Y-m-d H:i:s', $ik);//2022-02-01 12:45:18
-/* 
-        $fiString = substr($fi,14,19);//2022-02-01 12:45:18
-        $fj = strtotime($fiString);
-        $fi2 = date('Y-m-d H:i:s', $fj);//2022-02-01 12:45:18 */
-
-       /*  $i = strtotime(substr($inici,17,19));#1643715918
-        $f = strtotime(substr($fi,17,19));#{"fiTorn":"2022-02-01 11:55:45"}
-        $f0 = strtotime(substr($final,0));#1643789914 aixo son segons desde inici unix */
-     /* $resta = $inici2 - $final; #resto la quantitat de segons que han passat des del inici del temps unix
-        $min = $resta/60;
-        $hores = $min/60; */
-        /* $inici2 = date('Y-m-d H:i:s', $i);
-        $fi2 = date('Y-m-d H:i:s', $f0); */
-        /* $inicidata = new \DateTime($i);
-        $inicidata->format('Y-m-d H:i:s'); */
-        //$interval = $inici2->diffInMinutes($fi2);      
+        }   
        
     }
 

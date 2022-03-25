@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="{{url('favicon.ico')}}"/>
+    {{-- <link rel="shortcut icon" href="{{url('favicon.ico')}}"/> --}}
+    <link rel="icon" href="{{ asset('favicon-16x16.jpg') }}">
     <meta name="author" content="Aleix J. Algueró">
     
     {{-- saving user's language in js --}}
