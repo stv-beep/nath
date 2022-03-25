@@ -52,6 +52,9 @@ function translateAlertsQuery(){
         shiftStart = "Inici torn"
         shiftEnd = "Fi torn"
         notSaved = "No guardada"
+        task = "Tasca"
+        taskStart = "Inici tasca"
+        taskEnd = "Fi tasca"
     } else if (locale == 'es'){
         msgNoResults = "No se han encontrado resultados."
         msgErrorQuery1 = 'Parece que hay un error en la consulta'
@@ -63,6 +66,9 @@ function translateAlertsQuery(){
         shiftStart = "Inicio turno"
         shiftEnd = "Fin turno"
         notSaved = "No guardada"
+        task = "Tarea"
+        taskStart = "Inicio tarea"
+        taskEnd = "Fin tarea"
     } else if (locale == 'en'){
         msgNoResults = "No results found."
         msgErrorQuery1 = 'It seems there is an error in the query'
@@ -74,5 +80,8 @@ function translateAlertsQuery(){
         shiftStart = "Shift start"
         shiftEnd = "Shift end"
         notSaved = "Not saved"
+        task = "Task"
+        taskStart = "Start"
+        taskEnd = "End"
     }
 }

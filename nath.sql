@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-03-2022 a las 12:54:07
+-- Tiempo de generación: 25-03-2022 a las 10:55:02
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.1
 
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `comandes`
+-- Estructura de tabla para la tabla `activitats`
 --
 
-CREATE TABLE `comandes` (
+CREATE TABLE `activitats` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `treballador` bigint(20) UNSIGNED DEFAULT NULL,
   `dia` date DEFAULT NULL,
@@ -119,10 +119,10 @@ CREATE TABLE `tasks_type` (
 --
 
 INSERT INTO `tasks_type` (`id`, `tipus`, `created_at`, `updated_at`) VALUES
-(1, 'Pedidos', '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
-(2, 'Recepcions', '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
-(3, 'Reoperacions', '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
-(4, 'Inventari', '2022-03-22 11:53:48', '2022-03-22 11:53:48');
+(1, 'Pedidos', '2022-03-25 09:36:47', '2022-03-25 09:36:47'),
+(2, 'Recepcions', '2022-03-25 09:36:47', '2022-03-25 09:36:47'),
+(3, 'Reoperacions', '2022-03-25 09:36:47', '2022-03-25 09:36:47'),
+(4, 'Inventari', '2022-03-25 09:36:47', '2022-03-25 09:36:47');
 
 -- --------------------------------------------------------
 
@@ -143,12 +143,12 @@ CREATE TABLE `tasques` (
 --
 
 INSERT INTO `tasques` (`id`, `tasca`, `tipusTasca`, `created_at`, `updated_at`) VALUES
-(1, 'Preparació comanda', 1, '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
-(2, 'Revisió comanda', 1, '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
-(3, 'Expedició', 1, '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
-(4, 'SAF', 1, '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
-(5, 'Recepcio1', 2, '2022-03-22 11:53:48', '2022-03-22 11:53:48'),
-(6, 'Recepcio2', 2, '2022-03-22 11:53:48', '2022-03-22 11:53:48');
+(1, 'Preparació comanda', 1, '2022-03-25 09:36:47', '2022-03-25 09:36:47'),
+(2, 'Revisió comanda', 1, '2022-03-25 09:36:47', '2022-03-25 09:36:47'),
+(3, 'Expedició', 1, '2022-03-25 09:36:47', '2022-03-25 09:36:47'),
+(4, 'SAF', 1, '2022-03-25 09:36:47', '2022-03-25 09:36:47'),
+(5, 'Recepcio1', 2, '2022-03-25 09:36:47', '2022-03-25 09:36:47'),
+(6, 'Recepcio2', 2, '2022-03-25 09:36:47', '2022-03-25 09:36:47');
 
 -- --------------------------------------------------------
 
@@ -193,13 +193,13 @@ CREATE TABLE `users` (
 --
 
 --
--- Indices de la tabla `comandes`
+-- Indices de la tabla `activitats`
 --
-ALTER TABLE `comandes`
+ALTER TABLE `activitats`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `comandes_treballador_foreign` (`treballador`),
-  ADD KEY `comandes_tasca_foreign` (`tasca`),
-  ADD KEY `comandes_tipustasca_foreign` (`tipusTasca`);
+  ADD KEY `activitats_treballador_foreign` (`treballador`),
+  ADD KEY `activitats_tasca_foreign` (`tasca`),
+  ADD KEY `activitats_tipustasca_foreign` (`tipusTasca`);
 
 --
 -- Indices de la tabla `jornades`
@@ -261,9 +261,9 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT de la tabla `comandes`
+-- AUTO_INCREMENT de la tabla `activitats`
 --
-ALTER TABLE `comandes`
+ALTER TABLE `activitats`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -313,12 +313,12 @@ ALTER TABLE `users`
 --
 
 --
--- Filtros para la tabla `comandes`
+-- Filtros para la tabla `activitats`
 --
-ALTER TABLE `comandes`
-  ADD CONSTRAINT `comandes_tasca_foreign` FOREIGN KEY (`tasca`) REFERENCES `tasques` (`id`),
-  ADD CONSTRAINT `comandes_tipustasca_foreign` FOREIGN KEY (`tipusTasca`) REFERENCES `tasks_type` (`id`),
-  ADD CONSTRAINT `comandes_treballador_foreign` FOREIGN KEY (`treballador`) REFERENCES `users` (`id`);
+ALTER TABLE `activitats`
+  ADD CONSTRAINT `activitats_tasca_foreign` FOREIGN KEY (`tasca`) REFERENCES `tasques` (`id`),
+  ADD CONSTRAINT `activitats_tipustasca_foreign` FOREIGN KEY (`tipusTasca`) REFERENCES `tasks_type` (`id`),
+  ADD CONSTRAINT `activitats_treballador_foreign` FOREIGN KEY (`treballador`) REFERENCES `users` (`id`);
 
 --
 -- Filtros para la tabla `jornades`

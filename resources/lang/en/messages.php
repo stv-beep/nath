@@ -47,6 +47,7 @@ return [
     'Complete query'=> "Complete query",
     'Shift query'=> "Shift query",
     'Geolocation'=> "Geolocation",
+    'Task query' => "Task query",
 
     'Preparació comanda' => 'Order preparation',
     'Revisió comanda' => 'Order review',

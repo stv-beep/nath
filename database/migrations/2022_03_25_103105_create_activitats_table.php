@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateComandesTable extends Migration
+class CreateActivitatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateComandesTable extends Migration
      */
     public function up()
     {
-        Schema::create('comandes', function (Blueprint $table) {
+        Schema::create('activitats', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('treballador')->nullable();
             $table->foreign('treballador')->references('id')->on('users');
@@ -38,6 +38,6 @@ class CreateComandesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comandes');
+        Schema::dropIfExists('activitats');
     }
 }

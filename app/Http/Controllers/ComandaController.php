@@ -41,9 +41,9 @@ class ComandaController extends Controller
         $tipus = $tipus[0]->id;
 
         //inner join solucionat
-        $tasques = Comanda::join('tasques','comandes.tasca', '=','tasques.id')
+        $tasques = Comanda::join('tasques','activitats.tasca', '=','tasques.id')
                 ->where(['treballador' =>  Auth::id()])
-                ->orderBy('comandes.id','desc')->take(10)->get();
+                ->orderBy('activitats.id','desc')->take(10)->get();
 
         return view('comandes.comandes',compact('user','tasques'));
 
@@ -129,10 +129,10 @@ class ComandaController extends Controller
         }
 
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
-        /* SELECT * FROM `pedidos` INNER JOIN tasques ON comandes.tasca = tasques.id
-        where comandes.id = 127 */
-        $pedidos = Comanda::join('tasques','comandes.tasca', '=', 'tasques.id')
-        ->where(['treballador' =>  Auth::id()])->orderBy('comandes.id','desc')->take(10)->get();//agafo els 10 ultims
+        /* SELECT * FROM `pedidos` INNER JOIN tasques ON activitats.tasca = tasques.id
+        where activitats.id = 127 */
+        $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
+        ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
 
         return view('comandes.comandes',compact('user','pedidos','tasques'));
         } else {//si la jornada no esta iniciada torno false
@@ -211,8 +211,8 @@ class ComandaController extends Controller
         }
 
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
-        $pedidos = Comanda::join('tasques','comandes.tasca', '=', 'tasques.id')
-        ->where(['treballador' =>  Auth::id()])->orderBy('comandes.id','desc')->take(10)->get();//agafo els 10 ultims
+        $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
+        ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
         return view('comandes.comandes',compact('user','pedidos','tasques'));
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
@@ -291,8 +291,8 @@ class ComandaController extends Controller
         }
 
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
-        $pedidos = Comanda::join('tasques','comandes.tasca', '=', 'tasques.id')
-        ->where(['treballador' =>  Auth::id()])->orderBy('comandes.id','desc')->take(10)->get();//agafo els 10 ultims
+        $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
+        ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
         return view('comandes.comandes',compact('user','pedidos','tasques'));
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
@@ -371,8 +371,8 @@ class ComandaController extends Controller
         }
 
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
-        $pedidos = Comanda::join('tasques','comandes.tasca', '=', 'tasques.id')
-        ->where(['treballador' =>  Auth::id()])->orderBy('comandes.id','desc')->take(10)->get();//agafo els 10 ultims
+        $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
+        ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
         return view('comandes.comandes',compact('user','pedidos','tasques'));
 
         } else {//si la jornada no esta iniciada torno false
@@ -469,10 +469,10 @@ class ComandaController extends Controller
         }
 
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
-        /* SELECT * FROM `pedidos` INNER JOIN tasques ON comandes.tasca = tasques.id
-        where comandes.id = 127 */
-        $pedidos = Comanda::join('tasques','comandes.tasca', '=', 'tasques.id')
-        ->where(['treballador' =>  Auth::id()])->orderBy('comandes.id','desc')->take(10)->get();//agafo els 10 ultims
+        /* SELECT * FROM `pedidos` INNER JOIN tasques ON activitats.tasca = tasques.id
+        where activitats.id = 127 */
+        $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
+        ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
     
         return view('comandes.comandes',compact('user','pedidos','tasques'));
     }

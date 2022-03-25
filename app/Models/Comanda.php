@@ -9,5 +9,5 @@ class Comanda extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $table = "comandes";
+    protected $table = "activitats";
 }

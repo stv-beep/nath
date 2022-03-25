@@ -45,9 +45,10 @@ return [
     'Worker'=> "Empleado",
     'Exact query' => "Consulta exacta entre fechas",
     'Reload table' => "Actualizar tabla",
-    'Complete query'=> "Consulta completa",
+    'Complete query'=> "Consulta de jornada",
     'Shift query'=> "Consulta de turnos",
     'Geolocation'=> "Geolocalización",
+    'Task query' => "Consulta de tareas",
 
     'Preparació comanda' => 'Preparación pedido',
     'Revisió comanda' => 'Revisión pedido',

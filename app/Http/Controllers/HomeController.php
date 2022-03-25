@@ -39,9 +39,9 @@ class HomeController extends Controller
         $activitat = Torn::where(['treballador' => $user->id])->orderBy('id','desc')->take(10)->get();//agafo els 10 ultims
         $dia = Jornada::where(['treballador' => $user->id])->orderBy('id','desc')->take(5)->get();
         //inner join solucionat
-        $tasques = Comanda::join('tasques','comandes.tasca', '=','tasques.id')
+        $tasques = Comanda::join('tasques','activitats.tasca', '=','tasques.id')
                 ->where(['treballador' =>  Auth::id()])
-                ->orderBy('comandes.id','desc')->take(10)->get();
+                ->orderBy('activitats.id','desc')->take(10)->get();
         
         return view('home', compact('user','activitat','dia','tasques'));
     }

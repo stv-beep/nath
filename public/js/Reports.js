@@ -6,6 +6,7 @@ $(document).ready(function() {
 
     $('#alert-warning').hide();//for some reason the warning alert pops up always
     $('#alert-modal3').hide();
+    $('#alert-modal4').hide();
 
     $('#reports tfoot th').each( function () {
         var title = $(this).text();
@@ -198,6 +199,13 @@ function modalShiftQuery(){
         });
 }
 
+function modalTaskQuery(){
+    $('#modalTaskQuery').modal('show');
+    $("#closeModal4").on('click',function(){
+        $('#modalTaskQuery').modal('hide');
+        });
+}
+
 function completeQuery(){
     translateAlertsQuery();
     $.ajaxSetup({
@@ -355,6 +363,34 @@ $(document).ready(function() {
     });
 });
 
+/* AUTOCOMPLETE 4*/
+$(document).ready(function() {
+    src = '/employees-query';
+    $("#worker4").autocomplete({
+        appendTo : "#autocomplete4",
+        select: function (event, ui) {//trigger when you click on the autocomplete item
+            //event.preventDefault();//you can prevent the default event
+            $('#worker4').val(ui.item.value)
+            $('#worker4id').val(ui.item.id)
+        },
+        source: function(request, response) {
+            $.ajax({
+                url: src,
+                dataType: "json",
+                data: {
+                    term : request.term
+                },
+                success: function(data) {
+                    response(data);
+
+                }
+            });
+        },
+        minLength: 1,
+
+    });
+});
+
 function workShiftQuery(){
     var html_data = '';//cleaning the query result
     translateAlertsQuery();
@@ -427,6 +463,88 @@ function workShiftQuery(){
                     .fadeTo(4000, 1000)
                     .slideUp(1000, function () {
                         $("#alert-modal3").slideUp(1000);
+                    });
+            }
+        });
+
+
+}
+
+
+/* task query */
+
+function taskQuery(){
+    var html_data = '';//cleaning the query result
+    translateAlertsQuery();
+    $.ajaxSetup({
+        headers:
+        { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+    });
+    var treballador = document.getElementById('worker4id').value;
+    var data = document.getElementById('reportDate4').value;
+    $.ajax(
+        {
+            type: "POST",
+            url: "/consulta-activitat",
+            data: { 
+                worker : treballador,
+                dia : data,
+            },
+            success: function( response ) {
+                if (response === undefined || response.length<1){//no response or no results
+                    $("#alert-danger-message-task").text(msgNoResults);
+                    $("#alert-modal4")
+                    .fadeTo(4000, 1000)
+                    .slideUp(1000, function () {
+                        $("#alert-modal4").slideUp(1000);
+                    });
+                } else {//results
+                    document.getElementById("taskTableQuery").innerHTML = html_data;//cleaning the query result
+                    console.log(response)
+                    var iconTimer = '<i class="fas fa-hourglass-half fa-spin"></i>';
+                    for(var i=0;i<response.length;i++){
+
+                        if (response[i].geolocation != null){//if geolocation saved
+                            var geo = response[i].geolocation.split(' ');
+                            if (response[i].total == null || response[i].total == 0) {
+                                response[i].fiTasca = iconTimer;
+                                response[i].total = iconTimer;
+                            }
+
+                       html_data += 
+                       '<tr><th>Nº</th><th>'+task+'</th><th>'+taskStart+'</th><th>'+taskEnd+'</th>'+
+                       '<th>Total (min)</th><th>'+locationString+'</th><th>'+deviceInfo+'</th></tr>'+
+
+                       '<tr><td>'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+response[i].iniciTasca+'</td>'+
+                       '<td>'+response[i].fiTasca+'</td><td>'+response[i].total+'</td>'+
+                       '<td><a href="https://www.google.com/maps?q='+geo[0]+'+'+geo[1]+'" target="_blank">'+
+                       response[i].geolocation+'</a></td><td>'+response[i].info+'</td></tr>'
+                        } else {//no geolocation
+
+                            if (response[i].total == null || response[i].total == 0) {
+                                response[i].fiTasca = iconTimer;
+                                response[i].total = iconTimer;
+                            }
+                       html_data += 
+                       '<tr><th>nº Activitat</th><th>'+task+'</th><th>'+taskStart+'</th><th>'+taskEnd+'</th>'+
+                       '<th>Total (min)</th><th>'+locationString+'</th><th>'+deviceInfo+'</th></tr>'+
+
+                       '<tr><td>'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+response[i].iniciTasca+'</td>'+
+                       '<td>'+response[i].fiTasca+'</td><td>'+response[i].total+'</td>'+
+                       '<td>'+notSaved+'</td><td>'+response[i].info+'</td></tr>'
+                       }
+                            
+                    }
+
+                        document.getElementById("taskTableQuery").innerHTML = html_data;
+
+            }},
+            error: function(xhr, textStatus, error){
+                $("#alert-danger-message-task").text(msgErrorQuery1);
+                    $("#alert-modal4")
+                    .fadeTo(4000, 1000)
+                    .slideUp(1000, function () {
+                        $("#alert-modal4").slideUp(1000);
                     });
             }
         });

@@ -87,6 +87,16 @@ class ReportsController extends Controller
         return response()->json($query);
     }
 
+    public function taskQuery(Request $request){
+        $treballador = $request->worker;
+        $data = $request->dia;
+        $date = Carbon::parse($data)->format('Y-m-d');
+        $query = Comanda::join('users','activitats.treballador','=','users.id')
+        ->join('tasques','activitats.tasca', '=','tasques.id')
+        ->where(['treballador' => $treballador,'dia'=>$date])->get();
+
+        return response()->json($query);
+    }
 
     public function getEmployees(Request $request){
 

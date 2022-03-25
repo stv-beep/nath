@@ -31,6 +31,7 @@
                     <button type="button" class="btn btn-info" onclick="modalForQuery();">{{ __('messages.Exact query') }}</button>
                     <button type="button" class="btn btn-info" onclick="modalForCompleteQuery();">{{ __('messages.Complete query') }}</button>
                     <button type="button" class="btn btn-info" onclick="modalShiftQuery();">{{ __('messages.Shift query') }}</button>
+                    <button type="button" class="btn btn-info" onclick="modalTaskQuery();">{{ __('messages.Task query') }}</button>
                     <br>
                     {{-- MODAL 1 --}}
                     <div class="modal" id="modalQuery">
@@ -139,6 +140,41 @@
                             </div>
                             </form>
                             <table class="table table-striped" id="shiftTable"></table>
+                    </div></div></div>
+
+                    {{-- MODAL 4 task query --}}
+                    <div class="modal" id="modalTaskQuery">
+                        <div class='alert-position hidden alert alert-warning' id='alert-modal4' role='alert'>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong id="alert-danger-message-task"></strong>&nbsp;
+                            &nbsp;&nbsp;   
+                        </div>
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    {{ __('messages.Task query') }}
+                                    <button id="closeModal4" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                            <form action="{{route('admin.taskQuery')}}" method="POST">
+                            @csrf
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Worker') }}</label>
+                                <div id="autocomplete4" class="col-md-6"><input id="worker4" class="typeahead form-control" type="text" autocomplete="on" autofocus>
+                                    <input id="worker4id" class="typeahead form-control" type="hidden" autocomplete="on">
+                            </div></div>
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Day') }}</label>
+                                <div class="col-md-6"><input id="reportDate4" class="form-control" type="date" autofocus>
+                            </div></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-dark" onclick="taskQuery()">Consultar</button>
+                            </div>
+                            </form>
+                            <table class="table table-striped" id="taskTableQuery"></table>
                     </div></div></div>
 
                     <hr>
