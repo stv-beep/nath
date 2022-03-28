@@ -11,6 +11,8 @@ Ara mateix, en versió 0.9.1, sembla que té una certa estabilitat.
 - Corregit un error al reporting de torns, on si es repetia una consulta, o una de nova, sense haver refrescat o sortit de la pàgina, apareixia, a part de la nova, consulta, l'anterior, inclús si estava repetida.
 - Nova consulta de tasques en una jornada afegida al reporting.
 - Canvis al backend de tasques.
+- Corregit un error en el que s'iniciava i parava el torn molt ràpid, de manera que el torn havia durat 0 i llavors apareixia l'icona de torn inacabat encara.
+- Canvis de disseny de taules i navbar
 
 
 ### Errors i bugs (versió 0.9.1)

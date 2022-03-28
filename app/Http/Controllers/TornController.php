@@ -79,7 +79,7 @@ class TornController extends Controller
             $resta = $finalSegs - $iniciSegs; #resto la quantitat de segons que han passat des del inici del temps unix
             $min = $resta/60;
             $hores = $min/60;
-            $shift -> total = $min;
+            $shift -> total = $hores;
             $shift-> update();
 
 

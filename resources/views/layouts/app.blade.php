@@ -47,11 +47,18 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @if (Auth::check()) {{-- checking if user is logged, and if it is, check if works in warehouse--}}
+                        <a href="{{ route('jornada.form') }}" class="user-nav nav-link btn navbar-brand"><i class="far fa-calendar-alt"></i></a>
+                            @if($user->magatzem == true)
+                        <a href="{{ route('comandes.form') }}" class="user-nav nav-link btn navbar-brand">{{ __('messages.Orders') }}</a>
+                        <a href="" class="user-nav nav-link btn navbar-brand disabled">{{ __('messages.Receptions') }}</a>{{-- disabled --}}
+                        <a href="" class="user-nav nav-link btn navbar-brand disabled">{{ __('messages.Reoperations') }}</a>{{-- disabled --}}
+                        <a href="" class="user-nav nav-link btn navbar-brand disabled">{{ __('messages.Inventory') }}</a>{{-- disabled --}}
+                            @endif
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

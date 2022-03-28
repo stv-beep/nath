@@ -49,6 +49,7 @@ function translateAlertsQuery(){
         locationString = 'Localització'
         day = 'Dia'
         deviceInfo = "Info del dispositiu"
+        shift = "Torn"
         shiftStart = "Inici torn"
         shiftEnd = "Fi torn"
         notSaved = "No guardada"
@@ -63,6 +64,7 @@ function translateAlertsQuery(){
         day = 'Día'
         locationString = 'Localización'
         deviceInfo = "Info del dispositivo"
+        shift = "Turno"
         shiftStart = "Inicio turno"
         shiftEnd = "Fin turno"
         notSaved = "No guardada"
@@ -77,6 +79,7 @@ function translateAlertsQuery(){
         locationString = 'Location'
         day = 'Day'
         deviceInfo = "Device info"
+        shift = "Shift"
         shiftStart = "Shift start"
         shiftEnd = "Shift end"
         notSaved = "Not saved"

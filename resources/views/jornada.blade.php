@@ -69,16 +69,16 @@
                 <p class="h4 text-center" id="titol">{{ __('messages.Shifts') }}</p>
                     <table id="activitats" class="table table-striped table-hover">
                         <thead class="thead-dark">
-                        <tr>
+                        <tr class="text-center">
                             <th scope="col">{{ __('messages.Day') }}</th>
-                            <th scope="col">Total (min)</th>
+                            <th scope="col">Total (h)</th>
                         </tr>
                         </thead>
                         @foreach ($tornTreb as $a)
-                        <tr>
+                        <tr class="text-center">
                             <td>{{ date('d/m/Y', strtotime($a->jornada)) }}</td>
-                            @if ($a->total == null || $a->total == 0)
-                            <td><div class="loadersmall"></div></td>
+                            @if ($a->total === null){{--  || $a->total == 0 --}}
+                            <td><i class="fas fa-hourglass-half fa-spin"></i></td>
                             @else
                             <td>{{$a->total}}</td>
                             @endif

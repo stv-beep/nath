@@ -432,7 +432,7 @@ function workShiftQuery(){
                                 }
 
                            html_data += 
-                           '<tr><th>Turno</th><th>'+worker+'</th><th>'+day+'</th><th>'+shiftStart+'</th><th>'+shiftEnd+'</th>'+
+                           '<tr><th>'+shift+'</th><th>'+worker+'</th><th>'+day+'</th><th>'+shiftStart+'</th><th>'+shiftEnd+'</th>'+
                            '<th>Total (h)</th><th>'+locationString+'</th><th>'+deviceInfo+'</th></tr>'+
                            '<tr><td>'+(i+1)+'</td><td>'+response[i].name+'</td><td>'+response[i].jornada+'</td>'+
                            '<td>'+response[i].iniciTorn+'</td><td>'+response[i].fiTorn+'</td><td>'+response[i].total+'</td>'+
@@ -445,7 +445,7 @@ function workShiftQuery(){
                                     response[i].total = iconTimer;
                                 }
                            html_data += 
-                           '<tr><th>Turno</th><th>'+worker+'</th><th>'+day+'</th><th>'+shiftStart+'</th><th>'+shiftEnd+'</th>'+
+                           '<tr><th>'+shift+'</th><th>'+worker+'</th><th>'+day+'</th><th>'+shiftStart+'</th><th>'+shiftEnd+'</th>'+
                            '<th>Total (h)</th><th>'+locationString+'</th><th>'+deviceInfo+'</th></tr>'+
                            '<tr><td>'+(i+1)+'</td><td>'+response[i].name+'</td><td>'+response[i].jornada+'</td>'+
                            '<td>'+response[i].iniciTorn+'</td><td>'+response[i].fiTorn+'</td><td>'+response[i].total+'</td>'+
@@ -526,7 +526,7 @@ function taskQuery(){
                                 response[i].total = iconTimer;
                             }
                        html_data += 
-                       '<tr><th>nº Activitat</th><th>'+task+'</th><th>'+taskStart+'</th><th>'+taskEnd+'</th>'+
+                       '<tr><th>Nº</th><th>'+task+'</th><th>'+taskStart+'</th><th>'+taskEnd+'</th>'+
                        '<th>Total (min)</th><th>'+locationString+'</th><th>'+deviceInfo+'</th></tr>'+
 
                        '<tr><td>'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+response[i].iniciTasca+'</td>'+

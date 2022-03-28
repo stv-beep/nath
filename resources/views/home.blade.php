@@ -45,7 +45,7 @@
                         echo $newDate;
                     ?>
                 </a>
-                <br><br>
+                <br><hr><br>
                 @if ($user->magatzem == true)
                         {{-- MENU --}}
                 <div class="grid-container-home">
@@ -56,21 +56,22 @@
                 </div>                        
                     @endif
                 
-
+                <hr>
                 {{-- TAULES --}}
                 <p class="h4 text-center" id="titol">{{ __('messages.Shifts') }}</p>
                     <table id="activitats" class="table table-striped table-hover">
                         <thead class="thead-dark">
-                        <tr>
+                        <tr class="text-center">
                             <th scope="col">{{ __('messages.Day') }}</th>
-                            <th scope="col">Total (min)</th>
+                            <th scope="col">Total (h)</th>
                         </tr>
                         </thead>
                         @foreach ($activitat as $a)
-                        <tr>
+                        <tr class="text-center">
                             <td>{{ date('d/m/Y', strtotime($a->jornada)) }}</td>
-                            @if ($a->total == null || $a->total == 0)
-                            <td><div class="loadersmall"></div>{{-- &nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i> --}}</td>
+                            @if ($a->total === null){{--  || $a->total == 0 --}}
+                            <td><i class="fas fa-hourglass-half fa-spin"></i></td>
+                            {{-- &nbsp;&nbsp;<div class="loadersmall"></div> --}}{{-- &nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i> --}}
                             @else
                             <td>{{$a->total}}</td>
                             @endif
@@ -81,16 +82,16 @@
                     <p class="h4 text-center" id="titol">{{ __('messages.Working days') }}</p>
                     <table id="jornades" class="table table-striped table-hover">
                         <thead class="thead-dark">
-                        <tr>
+                        <tr class="text-center">
                             <th scope="col">{{ __('messages.Day') }}</th>
-                            <th scope="col">Total (min)</th>
+                            <th scope="col">Total (h)</th>
                         </tr>
                         </thead>
                         @foreach ($dia as $d)
-                        <tr>
+                        <tr class="text-center">
                             <td>{{ date('d/m/Y', strtotime($d->dia)) }}</td>
-                            @if ($d->total == null || $d->total == 0)
-                            <td><div class="loadersmall"></div></td>
+                            @if ($d->total === null){{--  || $d->total == 0 --}}
+                            <td><i class="fas fa-hourglass-half fa-spin"></i>{{-- <div class="loadersmall"></div> --}}</td>
                             @else
                             <td>{{$d->total}}</td>
                             @endif
@@ -103,7 +104,7 @@
                     <p class="h4 text-center" id="titol">{{ __('messages.Tasks') }}</p>
                     <table id="activitats" class="table table-striped table-hover">
                         <thead class="thead-dark">
-                        <tr>
+                        <tr class="text-center">
                             <th scope="col">{{ __('messages.Task') }}</th>
                             <th scope="col">Total (min)</th>
                             <th scope="col">{{ __('messages.Task start') }}</th>
@@ -113,11 +114,11 @@
                         </thead>
                         {{-- inner join solucionat --}}
                         @foreach ($tasques as $t)
-                        <tr>
+                        <tr class="text-center">
                             @php($tasca = $t->tasca)
                                 <td>{{ __("messages.$tasca") }}</td>
-                                    @if ($t->total == null || $t->total == 0)
-                                    <td><div class="loadersmall"></div></td>
+                                    @if ($t->total === null || $t->total == 0.00)
+                                    <td><i class="fas fa-hourglass-half fa-spin"></i>{{-- <div class="loadersmall"></div> --}}</td>
                                     @else
                                     <td><b>{{$t->total}}</b></td>
                                     @endif

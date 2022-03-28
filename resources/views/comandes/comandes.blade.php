@@ -102,7 +102,7 @@
                     <hr>
                     <table id="activitats" class="table table-striped table-hover">
                         <thead class="thead-dark">
-                        <tr>
+                        <tr class="text-center">
                             <th scope="col">{{ __('messages.Task') }}</th>
                             <th scope="col">Total (min)</th>
                             <th scope="col">{{ __('messages.Task start') }}</th>
@@ -112,11 +112,11 @@
                         </thead>
                             {{-- inner join solucionat --}}
                             @foreach ($tasques as $t)
-                            <tr>
+                            <tr class="text-center">
                                 @php($tasca = $t->tasca)
                                 <td>{{ __("messages.$tasca") }}</td>
-                                    @if ($t->total == null || $t->total < 0.01)
-                                    <td><div class="loadersmall"></div></td>
+                                    @if ($t->total === null || $t->total == 0.00)
+                                    <td>&nbsp;&nbsp;<i class="fas fa-hourglass-half fa-spin"></i></td>
                                     @else
                                     <td><b>{{$t->total}}</b></td>
                                     @endif

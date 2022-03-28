@@ -186,7 +186,7 @@
                             {{-- <th>#</th> --}}
                             <th scope="col">{{ __('messages.Worker') }}</th>
                             <th scope="col">{{ __('messages.Day') }}</th>
-                            <th scope="col">Total (min)</th>
+                            <th scope="col">Total (h)</th>
                             <th scope="col">ID {{ __('messages.Worker') }}</th>
                             <th scope="col">Geolocalización</th>
                         </tr>
@@ -208,7 +208,7 @@
 
                                 <th scope="col">{{ __('messages.Worker') }}</th>
                                 <th scope="col">{{ __('messages.Day') }}</th>
-                                <th scope="col">Total (min)</th>
+                                <th scope="col">Total (h)</th>
                                 <th scope="col">ID {{ __('messages.Worker') }}</th>
                                 <th scope="col">{{ __('messages.Geolocation') }}</th>
                             </tr>
