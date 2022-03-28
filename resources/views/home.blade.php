@@ -13,7 +13,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    {{ __('messages.Welcome') }} {{$user->name}}
+                    {{ __('messages.Welcome') }} {{$user->name}} 
+                    @if($user->administrador == true)
+                    | Administrador
+                    @endif
                     {{-- <br>
                     Connected from: 
                     {{$host = gethostname()}}
@@ -53,10 +56,9 @@
                     <a href="" class="item2 btn btn-info btn-lg disabled">{{ __('messages.Receptions') }}</a>
                     <a href="" class="item3 btn btn-info btn-lg disabled">{{ __('messages.Reoperations') }}</a>
                     <a href="" class="item4 btn btn-info btn-lg disabled">{{ __('messages.Inventory') }}</a>
-                </div>                        
+                </div><hr>                     
                     @endif
                 
-                <hr>
                 {{-- TAULES --}}
                 <p class="h4 text-center" id="titol">{{ __('messages.Shifts') }}</p>
                     <table id="activitats" class="table table-striped table-hover">

@@ -109,7 +109,9 @@ class TornController extends Controller
         return view('jornada', compact('user','tornTreb'));    
 
         } else {
-            return response()->json(false,200);//task unfinished
+            $task = Comanda::join('tasques','activitats.tasca', '=','tasques.id')
+            ->where(['treballador' => Auth::id()])->latest('activitats.updated_at')->get();
+            return response()->json([false,$task]);//task unfinished
         }   
        
     }

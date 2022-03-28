@@ -12,13 +12,16 @@ Ara mateix, en versió 0.9.1, sembla que té una certa estabilitat.
 - Nova consulta de tasques en una jornada afegida al reporting.
 - Canvis al backend de tasques.
 - Corregit un error en el que s'iniciava i parava el torn molt ràpid, de manera que el torn havia durat 0 i llavors apareixia l'icona de torn inacabat encara.
-- Canvis de disseny de taules i navbar
+- Canvis de disseny de taules i navbar.
+- Canvis als botons de reporting en versió mòbil.
+- Afegit el nom de la tasca que encara està oberta a l'avís quan intentes acabar torn/jornada.
 
 
 ### Errors i bugs (versió 0.9.1)
 - La geolocalització no funciona sense HTTPS.
 - Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.
 - Probablement, si d'alguna forma es desactiva 'la desactivació dels botons' és possible que es puguen iniciar varies tasques alhora i que el programa perdi la seva funcionalitat de sèrie.
+- La suma automàtica d'hores al reporting en versió MÒBIL no funciona.
 
 
 ### Development setup

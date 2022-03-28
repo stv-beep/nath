@@ -261,3 +261,15 @@ a.close.disabled {
   -webkit-transform: rotate(360deg);
   transform: rotate(360deg);
 }
+
+/* btns reporting */
+@media (max-width: 767.98px) {
+  #btns-reporting{
+    display:grid;
+  }
+  .btns-reporting-btn{
+    padding:5px;
+    margin:3px;
+  }
+
+}

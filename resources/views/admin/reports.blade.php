@@ -25,14 +25,14 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    
+                    <div id="btns-reporting">
                     <div class="btn btn-dark noClicable">Total: <span id="total"></span></div>
-                    <button id="btn-reload" type="button" class="btn btn-dark">{{ __('messages.Reload table') }}  <abbr title="Reload table"><i id="icon-reload" class="fas fa-sync-alt"></i></abbr></button>
-                    <button type="button" class="btn btn-info" onclick="modalForQuery();">{{ __('messages.Exact query') }}</button>
-                    <button type="button" class="btn btn-info" onclick="modalForCompleteQuery();">{{ __('messages.Complete query') }}</button>
-                    <button type="button" class="btn btn-info" onclick="modalShiftQuery();">{{ __('messages.Shift query') }}</button>
-                    <button type="button" class="btn btn-info" onclick="modalTaskQuery();">{{ __('messages.Task query') }}</button>
-                    <br>
+                    <button id="btn-reload" type="button" class="btn btn-dark btns-reporting-btn">{{ __('messages.Reload table') }}  <abbr title="Reload table"><i id="icon-reload" class="fas fa-sync-alt"></i></abbr></button>
+                    <button type="button" class="btn btn-info btns-reporting-btn" onclick="modalForQuery();">{{ __('messages.Exact query') }}</button>
+                    <button type="button" class="btn btn-info btns-reporting-btn" onclick="modalForCompleteQuery();">{{ __('messages.Complete query') }}</button>
+                    <button type="button" class="btn btn-info btns-reporting-btn" onclick="modalShiftQuery();">{{ __('messages.Shift query') }}</button>
+                    <button type="button" class="btn btn-info btns-reporting-btn" onclick="modalTaskQuery();">{{ __('messages.Task query') }}</button>
+                    </div><br>
                     {{-- MODAL 1 --}}
                     <div class="modal" id="modalQuery">
                         <div class='alert-position hidden alert alert-danger' id='alert-danger' role='alert'>

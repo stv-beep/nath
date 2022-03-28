@@ -116,7 +116,7 @@
                                 @php($tasca = $t->tasca)
                                 <td>{{ __("messages.$tasca") }}</td>
                                     @if ($t->total === null || $t->total == 0.00)
-                                    <td>&nbsp;&nbsp;<i class="fas fa-hourglass-half fa-spin"></i></td>
+                                    <td>{{-- &nbsp;&nbsp; --}}<i class="fas fa-hourglass-half fa-spin"></i></td>
                                     @else
                                     <td><b>{{$t->total}}</b></td>
                                     @endif

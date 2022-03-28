@@ -62,13 +62,14 @@ let msgIniciJornada, msgFinalJornada, tascaNoAcabada, msgError;
         console.log('sending...');
         $.ajax(
                 {
-                    type: "POST",
+                    type: "PATCH",
                     url: "/jornada",//"{{route('jornada.store')}}"
                     data:$('#form-final').serialize(),
                     success: function( response ) {
-
-                        if (response == false) {//unfinished task
-                            $("#alert-danger-message-final").text(tascaNoAcabada);
+                        //console.log(response[0])
+                        //console.log(response[1][0].tasca)
+                        if (response[0] == false) {//unfinished task
+                            $("#alert-danger-message-final").text(tascaNoAcabada+' = '+response[1][0].tasca);
                             $(".cronometro").hide();
                             $("#alert-danger")
                             .fadeTo(4000, 1000)
