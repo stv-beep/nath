@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\RecepcioController;
+use App\Http\Controllers\ReoperacionsController;
+use App\Http\Controllers\InventariController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +34,7 @@ Route::get('/',[ HomeController::class, 'index']);
 //HOME
 //Route::view('/home','inici');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::group(['middleware' => ['auth:sanctum']], function() {
+Route::group(['middleware' => ['auth:sanctum','verified']], function() {
 //JORNADA
 //get crear activitat
 Route::get('/jornada',[TornController::class,'create'])->name('jornada.form');
@@ -61,7 +64,10 @@ Route::get('/tasques',[ComandaController::class, 'getTasques'])->name('get.tasqu
 
 
 //RECEPCIONS
-//Route::get('/recepcions',[]);
+Route::get('/recepcions',[RecepcioController::class,'index'])->name('recepcions.form');
+Route::post('/recepcio1',[RecepcioController::class,'storeRecep1'])->name('recepcions.store');
+Route::post('/recepcio2',[RecepcioController::class,'storeRecep2'])->name('recepcions2.store');
+
 
 //REPORTS ADMIN
 Route::get('/reports',[ReportsController::class, 'index'])->name('admin.reports');

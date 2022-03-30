@@ -45,7 +45,7 @@ class ComandaController extends Controller
                 ->where(['treballador' =>  Auth::id()])
                 ->orderBy('activitats.id','desc')->take(10)->get();
 
-        return view('comandes.comandes',compact('user','tasques'));
+        return view('activities.comandes',compact('user','tasques'));
 
         /* jaseando */
         $tot = Comanda::all();
@@ -69,7 +69,7 @@ class ComandaController extends Controller
         $tornComprovacio = Torn::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
         if (!($tornComprovacio == null)){//si la jornada no esta acabada
 
-        $nomTasca = Tasca::where(['tasca' => 'Preparació comanda'])->get();
+        $nomTasca = Tasca::where(['tasca' => 'Preparación pedido'])->get();
 
         $idTasca = $nomTasca[0]->id;//Preparació pedido
 
@@ -128,13 +128,13 @@ class ComandaController extends Controller
             //task started
         }
 
-        $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
+        $tasques = Tasca::all();//inner join per a mostrar el nom de la tasca i no la id
         /* SELECT * FROM `pedidos` INNER JOIN tasques ON activitats.tasca = tasques.id
         where activitats.id = 127 */
         $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
         ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
 
-        return view('comandes.comandes',compact('user','pedidos','tasques'));
+        return view('activities.comandes',compact('user','pedidos','tasques'));
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
             
@@ -152,7 +152,7 @@ class ComandaController extends Controller
         $tornComprovacio = Torn::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
         if (!($tornComprovacio == null)){//si la jornada no esta acabada
 
-        $nomTasca = Tasca::where(['tasca' => 'Revisió comanda'])->get();
+        $nomTasca = Tasca::where(['tasca' => 'Revisión pedido'])->get();
 
         $idTasca = $nomTasca[0]->id;//revisio pedido
 
@@ -213,7 +213,7 @@ class ComandaController extends Controller
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
         $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
         ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
-        return view('comandes.comandes',compact('user','pedidos','tasques'));
+        return view('activities.comandes',compact('user','pedidos','tasques'));
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
             
@@ -230,7 +230,7 @@ class ComandaController extends Controller
         $tornComprovacio = Torn::where(['treballador'=> Auth::id(), 'total'=> null])->latest('updated_at')->first();
         if (!($tornComprovacio == null)){//si la jornada no esta acabada
 
-        $nomTasca = Tasca::where(['tasca' => 'Expedició'])->get();
+        $nomTasca = Tasca::where(['tasca' => 'Expedición'])->get();
 
         $idTasca = $nomTasca[0]->id;//Expedició
 
@@ -293,7 +293,7 @@ class ComandaController extends Controller
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
         $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
         ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
-        return view('comandes.comandes',compact('user','pedidos','tasques'));
+        return view('activities.comandes',compact('user','pedidos','tasques'));
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
             
@@ -373,7 +373,7 @@ class ComandaController extends Controller
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
         $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
         ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
-        return view('comandes.comandes',compact('user','pedidos','tasques'));
+        return view('activities.comandes',compact('user','pedidos','tasques'));
 
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
@@ -382,7 +382,7 @@ class ComandaController extends Controller
     }
 
     /**
-     * busca si hi ha una tasca (pedido) inacabada
+     * busca si hi ha una tasca inacabada, UTILITZAT per a totes les tasques (comandes, recepcions, inventari...)
      * 
      * @param Request $request
      * 
@@ -392,12 +392,19 @@ class ComandaController extends Controller
         $user = Auth::user();
         //tasca where no hi ha total i per tant no esta acabada
 
-        $taskCheck = Comanda::where(['treballador'=> Auth::id()])->latest('updated_at')->first();
+
+        $taskCheck = Comanda::join('tasques','activitats.tasca', '=','tasques.id')
+        ->where(['treballador' => Auth::id()])->latest('activitats.updated_at')->first();
+        /* $id = $taskCheck->id;
+        $task = $taskCheck->tasca; */
+
+        //$taskCheck = Comanda::where(['treballador'=> Auth::id()])->latest('updated_at')->first();
+
         //si no hi ha tasca ó ja esta acabada
         if ($taskCheck == null || $taskCheck->total > 0){
             return response()->json(0, 200);
         } else {
-            return response()->json($taskCheck->tasca,200);
+            return response()->json($taskCheck,200);
         }
 
     }
@@ -474,7 +481,7 @@ class ComandaController extends Controller
         $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
         ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
     
-        return view('comandes.comandes',compact('user','pedidos','tasques'));
+        return view('activities.comandes',compact('user','pedidos','tasques'));
     }
 
 

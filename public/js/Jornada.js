@@ -6,7 +6,7 @@ function onLoad(){
     getLocation();   
 }
 
-let msgIniciJornada, msgFinalJornada, tascaNoAcabada, msgError;
+
 
     /* console.log('appCodeName: '+navigator.appCodeName)
     console.log('appVersion: '+navigator.appVersion)
@@ -67,9 +67,8 @@ let msgIniciJornada, msgFinalJornada, tascaNoAcabada, msgError;
                     data:$('#form-final').serialize(),
                     success: function( response ) {
                         //console.log(response[0])
-                        //console.log(response[1][0].tasca)
                         if (response[0] == false) {//unfinished task
-                            $("#alert-danger-message-final").text(tascaNoAcabada+' = '+response[1][0].tasca);
+                            $("#alert-danger-message-final").text('"'+response[1][0].tasca+'" '+tascaNoAcabada);
                             $(".cronometro").hide();
                             $("#alert-danger")
                             .fadeTo(4000, 1000)

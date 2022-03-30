@@ -130,7 +130,6 @@ $(document).ready(function() {
 //https://datatables.net/examples/advanced_init/footer_callback.html
 //http://live.datatables.net/segeriwe/368/edit
 
-var msgErrorQuery1, msgNoResults;
 
 
 function twoDateQuery(){

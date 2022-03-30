@@ -1,11 +1,11 @@
-# Aplicació per a fitxatges Nath v0.9.1
+# Aplicació per a fitxatges Nath v[version]
 #### Aleix Algueró, 2022
 ## Sobre l'aplicació
 
 És una aplicació per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació. I l'administrador podrà llistar totes les jornades de tothom i fer consultes des d'una taula dinàmica.
-Ara mateix, en versió 0.9.1, sembla que té una certa estabilitat.
+Ara mateix, en versió [version], sembla que té una certa estabilitat.
 
-### Update 0.9.1
+### Update [version]
 - Solucionat l'error de canvi de dia mentre hi ha un torn obert (corrent el temps), pel que fa a torns i jornades.
 - Corregit un error d'accés al reporting.
 - Corregit un error al reporting de torns, on si es repetia una consulta, o una de nova, sense haver refrescat o sortit de la pàgina, apareixia, a part de la nova, consulta, l'anterior, inclús si estava repetida.
@@ -15,9 +15,11 @@ Ara mateix, en versió 0.9.1, sembla que té una certa estabilitat.
 - Canvis de disseny de taules i navbar.
 - Canvis als botons de reporting en versió mòbil.
 - Afegit el nom de la tasca que encara està oberta a l'avís quan intentes acabar torn/jornada.
+- Afegit un avís amb el nom de la tasca que encara està oberta quan s'accedeix a una altra activitat.
+- Afegida nova activitat "reoperacions" com a test.
 
 
-### Errors i bugs (versió 0.9.1)
+### Errors i bugs (versió [version])
 - La geolocalització no funciona sense HTTPS.
 - Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.
 - Probablement, si d'alguna forma es desactiva 'la desactivació dels botons' és possible que es puguen iniciar varies tasques alhora i que el programa perdi la seva funcionalitat de sèrie.
@@ -161,3 +163,5 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+[version]: 0.9.1

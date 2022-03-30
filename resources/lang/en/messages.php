@@ -49,9 +49,9 @@ return [
     'Geolocation'=> "Geolocation",
     'Task query' => "Task query",
 
-    'Preparació comanda' => 'Order preparation',
-    'Revisió comanda' => 'Order review',
-    'Expedició' => 'Expedition',
+    'Preparación pedido' => 'Order preparation',
+    'Revisión pedido' => 'Order review',
+    'Expedición' => 'Expedition',
     'SAF' => 'SAF',
 
     /* les traduccions dels alerts estan fetes amb JS per temes de disseny de l'aplicacio */

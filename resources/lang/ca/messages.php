@@ -33,9 +33,9 @@ return [
     'Review' => "Revisió",
     'Expedition' => "Expedició",
 
-    'Preparació comanda' => 'Preparació comanda',
-    'Revisió comanda' => 'Revisió comanda',
-    'Expedició' => 'Expedició',
+    'Preparación pedido' => 'Preparació comanda',
+    'Revisión pedido' => 'Revisió comanda',
+    'Expedición' => 'Expedició',
     'SAF' => 'SAF',
 
     /* registre */

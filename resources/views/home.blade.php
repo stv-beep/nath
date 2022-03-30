@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="{{ asset('js/Main.js') }}" defer></script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -53,7 +54,7 @@
                         {{-- MENU --}}
                 <div class="grid-container-home">
                     <a href="{{ route('comandes.form') }}" class="item1 btn btn-info btn-lg">{{ __('messages.Orders') }}</a>
-                    <a href="" class="item2 btn btn-info btn-lg disabled">{{ __('messages.Receptions') }}</a>
+                    <a href="{{ route('recepcions.form') }}" class="item2 btn btn-info btn-lg">{{ __('messages.Receptions') }}</a>
                     <a href="" class="item3 btn btn-info btn-lg disabled">{{ __('messages.Reoperations') }}</a>
                     <a href="" class="item4 btn btn-info btn-lg disabled">{{ __('messages.Inventory') }}</a>
                 </div><hr>                     

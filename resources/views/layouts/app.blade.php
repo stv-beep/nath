@@ -15,12 +15,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>App Nath v0.9.1{{-- {{ config('app.name') }} --}}</title>
+    <title>App Nath v{{Config::get('app.version')}}{{-- {{ config('app.name') }} --}}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/Translate.js') }}" defer></script>
-    <script src="{{ asset('js/scripts.js') }}" defer></script>
+    <script src="{{ asset('js/Geolocation.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -41,7 +41,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-light shadow-lg">
             <div class="container">
                 <a id="nom-app" class="navbar-brand" href="{{ url('/home') }}">
-                    App Nath <small id="versionText">v0.9.1</small>
+                    App Nath <small id="versionText">v{{Config::get('app.version')}}</small>
                     {{-- {{ config('app.name') }} --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -55,7 +55,7 @@
                             &nbsp;{{ __('messages.Shifts') }}</a>
                             @if($user->magatzem == true)
                         <a href="{{ route('comandes.form') }}" class="user-nav nav-link btn navbar-brand">{{ __('messages.Orders') }}</a>
-                        <a href="" class="user-nav nav-link btn navbar-brand disabled">{{ __('messages.Receptions') }}</a>{{-- disabled --}}
+                        <a href="{{ route('recepcions.form') }}" class="user-nav nav-link btn navbar-brand">{{ __('messages.Receptions') }}</a>{{-- disabled --}}
                         <a href="" class="user-nav nav-link btn navbar-brand disabled">{{ __('messages.Reoperations') }}</a>{{-- disabled --}}
                         <a href="" class="user-nav nav-link btn navbar-brand disabled">{{ __('messages.Inventory') }}</a>{{-- disabled --}}
                             @endif

@@ -50,9 +50,9 @@ return [
     'Geolocation'=> "Geolocalización",
     'Task query' => "Consulta de tareas",
 
-    'Preparació comanda' => 'Preparación pedido',
-    'Revisió comanda' => 'Revisión pedido',
-    'Expedició' => 'Expedición',
+    'Preparación pedido' => 'Preparación pedido',
+    'Revisión pedido' => 'Revisión pedido',
+    'Expedición' => 'Expedición',
     'SAF' => 'SAF',
 
 
