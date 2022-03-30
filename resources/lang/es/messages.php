@@ -29,6 +29,9 @@ return [
     /* pedidos */
     'You don\'t have any stock task.' => 'No tienes tareas de almacén.', //'No tens tasques de magatzem.'
     'Orders from' => "Pedidos de",
+    'Receptions from' => "Recepciones de",
+    'Reoperations from' => "Reoperaciones de",
+    'Inventory from' => "Inventario de",
     'Preparation' => "Preparación",
     'Review' => "Revisión",
     'Expedition' => "Expedición",

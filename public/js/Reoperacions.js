@@ -29,10 +29,10 @@ function ordersOnLoad(){
             return coord;
         }
 
-        var Recp5Check = document.getElementById("Recp5");
-        var Recp6Check = document.getElementById("Recp6");
-        Recp5Check.disabled = true;
-        Recp6Check.disabled = true;
+        var Reop7Check = document.getElementById("Reop7");
+        var Reop8Check = document.getElementById("Reop8");
+        Reop7Check.disabled = true;
+        Reop8Check.disabled = true;
 
         function checkLastTask(){
             translateAlerts();
@@ -41,20 +41,25 @@ function ordersOnLoad(){
                       type: "GET",
                       url: "/comandes/check",
                       success: function(response){
-                        console.log("tasca: "+response);
-                        if (response < 5 & response != 0 | response > 8){//si la tasca no es de recepcions
-                            $("#alert-danger-message-final").text('tasca inacabada!');
-                            $("#alert-danger").show();
-                        } else {
-                        
-                            if (response != 0){//si la tasca NO esta acabada
-                            document.getElementById("Recp"+response).disabled = false;
-                            document.getElementById("Recp"+response).classList.toggle('btn-danger');
-                            } else {//si la tasca esta acabada i per tant, torna 0
-                                Recp5Check.disabled = false;
-                                Recp6Check.disabled = false;
+                        if (response != 0) {
+                            console.log(response)
+                            console.log(response.id)
+                            console.log(response.tasca)
+                            var taskID = response.id;
+                            var taskName = response.tasca;
+                            if (taskID < 7){//si la tasca d'un altre tipo NO esta acabada
+                              $("#alert-danger-message-final").text('"'+taskName+'" '+tascaNoAcabada);
+                              $("#alert-danger").show();
+                                
+                            } else {//si la tasca NO esta acabada
+                              document.getElementById("Reop"+taskID).disabled = false;
+                              document.getElementById("Reop"+taskID).classList.toggle('btn-danger');
                             }
-                        }      
+        
+                          } else {//si la tasca esta acabada i per tant, torna 0
+                                Reop7Check.disabled = false;
+                                Reop8Check.disabled = false;
+                          }
                       },
                       error: function(xhr, textStatus, error){
                         $("#alert-danger-message-final").text(msgError);
@@ -68,15 +73,12 @@ function ordersOnLoad(){
                     
           }
 
-/* SCRIPTS AJAX REQUESTS  */  
-     
-    /* message variables */
-    
+/* SCRIPTS AJAX REQUESTS  */ 
 
     /* funcions de RECEPCIONS */
-    function startRecp1() {
+    function startReop1() {
         translateAlerts();
-        var c = document.getElementById('r1').value;
+        var c = document.getElementById('reop1').value;
             console.log('sending...');
             $.ajaxSetup({
                 headers: {
@@ -86,7 +88,7 @@ function ordersOnLoad(){
             $.ajax(
                     {
                         type: "POST",
-                        url: "/recepcio1",
+                        url: "/reoperacio1",
                         data:
                         {x: c,
                         info: navigator.platform+', '+navigator.userAgent},
@@ -94,7 +96,6 @@ function ordersOnLoad(){
                         success: function( response ) {
 
                             if (response == false){
-                                
                                 $("#alert-danger-message-final").text(jornadaNoIniciada);
                                         $(".cronometro").hide();
                                         $("#alert-danger")
@@ -116,64 +117,12 @@ function ordersOnLoad(){
                                 }, 1500);
                                  */
                             /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
-                            Recp5Check.classList.toggle('btn-danger');
-                            var recp6 = document.getElementById("Recp6").disabled
-                            document.getElementById("Recp6").disabled = !recp6;
+                            Reop7Check.classList.toggle('btn-danger');
+                            var reop8 = document.getElementById("Reop8").disabled
+                            document.getElementById("Reop8").disabled = !reop8;
                         }
                     }
                     }
                 )
            
         };
-
-    function startRecp2() {
-            translateAlerts();
-            var c = document.getElementById('r2').value;
-                console.log('sending...');
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax(
-                        {
-                            type: "POST",
-                            url: "/recepcio2",
-                            data:
-                            {x: c,
-                            info: navigator.platform+', '+navigator.userAgent},
-                            /* $('#formPrepComanda').serialize(), */
-                            success: function( response ) {
-    
-                                if (response == false){
-                                    
-                                    $("#alert-danger-message-final").text(jornadaNoIniciada);
-                                            $(".cronometro").hide();
-                                            $("#alert-danger")
-                                            .fadeTo(4000, 1000)
-                                            .slideUp(1000, function () {
-                                                $("#alert-danger").slideUp(1000);
-                                            });
-                                } else {
-                                                            
-                                $("#task-message-inici").text(msgPrepComanda);
-                                $("#alert-success")
-                                .fadeTo(4000, 1000)
-                                .slideUp(1000, function () {
-                                    $("#alert-success").slideUp(1000);
-                                });
-                                $("#activitats").load(" #activitats");
-                                    /* window.setTimeout(function(){
-                                        window.location = "/comandes";
-                                    }, 1500);
-                                     */
-                                /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
-                                Recp6Check.classList.toggle('btn-danger');
-                                var recp5 = document.getElementById("Recp5").disabled
-                                document.getElementById("Recp5").disabled = !recp5; 
-                            }
-                        }
-                        }
-                    )
-               
-            };

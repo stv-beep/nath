@@ -35,7 +35,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg">
-                <div class="card-header">{{-- {{ __('messages.Orders from') }} --}}Recepcions de {{$user->name}}
+                <div class="card-header">{{ __('messages.Receptions from') }} {{$user->name}}
                         <a id="icona" href="{{route('home')}}"><i class="fas fa-arrow-alt-circle-left fa-lg" style="color: #51cf66;"></i></a>
                 </div>
 

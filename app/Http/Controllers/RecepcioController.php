@@ -126,7 +126,7 @@ class RecepcioController extends Controller
                 ->where(['treballador' =>  Auth::id(), 'activitats.tipusTasca'=> $tipus])
                 ->orderBy('activitats.id','desc')->take(10)->get();
 
-        return view('activities.comandes',compact('user','tasques'));
+        return view('activities.recepcions',compact('user','tasques'));
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
             

@@ -17,6 +17,7 @@ Ara mateix, en versió 0.9.1, sembla que té una certa estabilitat.
 - Afegit el nom de la tasca que encara està oberta a l'avís quan intentes acabar torn/jornada.
 - Afegit un avís amb el nom de la tasca que encara està oberta quan s'accedeix a una altra activitat.
 - Afegida nova activitat "reoperacions" com a test.
+- Icones d'idioma.
 
 
 ### Errors i bugs (versió 0.9.1)
@@ -163,5 +164,3 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-[version]: 0.9.1

@@ -24,26 +24,26 @@ class DatabaseSeeder extends Seeder
          $tasktype->tipus = 'Pedidos';
          $tasktype->save();
          $tasktype = new TaskType();
-         $tasktype->tipus = 'Recepcions';
+         $tasktype->tipus = 'Recepciones';
          $tasktype->save();
          $tasktype = new TaskType();
-         $tasktype->tipus = 'Reoperacions';
+         $tasktype->tipus = 'Reoperaciones';
          $tasktype->save();
          $tasktype = new TaskType();
-         $tasktype->tipus = 'Inventari';
+         $tasktype->tipus = 'Inventario';
          $tasktype->save();
 
          /* comandes */
          $tasca = new Tasca();
-         $tasca->tasca ='Preparació comanda';
+         $tasca->tasca ='Preparación pedido';
          $tasca->tipusTasca = 1;
          $tasca->save();
          $tasca = new Tasca();
-         $tasca->tasca ='Revisió comanda';
+         $tasca->tasca ='Revisión pedido';
          $tasca->tipusTasca = 1;
          $tasca->save();
          $tasca = new Tasca();
-         $tasca->tasca ='Expedició';
+         $tasca->tasca ='Expedición';
          $tasca->tipusTasca = 1;
          $tasca->save();
          $tasca = new Tasca();
@@ -57,6 +57,10 @@ class DatabaseSeeder extends Seeder
          $tasca->save();
          $tasca = new Tasca();
          $tasca->tasca ='Recepcio2';
+         $tasca->tipusTasca = 2;
+         $tasca->save();
+         $tasca = new Tasca();
+         $tasca->tasca ='Reoperacio1';
          $tasca->tipusTasca = 2;
          $tasca->save();
 

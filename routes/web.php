@@ -69,6 +69,11 @@ Route::post('/recepcio1',[RecepcioController::class,'storeRecep1'])->name('recep
 Route::post('/recepcio2',[RecepcioController::class,'storeRecep2'])->name('recepcions2.store');
 
 
+//REOPERACIONS
+Route::get('/reoperacions',[ReoperacionsController::class,'index'])->name('reoperacions.form');
+Route::post('/reoperacio1',[ReoperacionsController::class,'storeReop1'])->name('reoperacions.store');
+
+
 //REPORTS ADMIN
 Route::get('/reports',[ReportsController::class, 'index'])->name('admin.reports');
 /* json */

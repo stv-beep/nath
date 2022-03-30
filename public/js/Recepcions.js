@@ -48,7 +48,7 @@ function ordersOnLoad(){
                           console.log(response.tasca)
                           var taskID = response.id;
                           var taskName = response.tasca;
-                          if (taskID < 5 || taskID > 8){//si la tasca d'un altre tipo NO esta acabada
+                          if (taskID < 5 || taskID > 6){//si la tasca d'un altre tipo NO esta acabada
                             $("#alert-danger-message-final").text('"'+taskName+'" '+tascaNoAcabada);
                             $("#alert-danger").show();
                               

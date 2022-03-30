@@ -35,8 +35,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-lg">
-                <div class="card-header">{{ __('messages.Orders from') }} {{$user->name}}
-                    <a id="icona" href="{{route('home')}}"><i class="fas fa-arrow-alt-circle-left fa-lg" style="color: #51cf66;"></i></a>
+                <div class="card-header">{{ __('messages.Reoperations from') }} {{$user->name}}
+                        <a id="icona" href="{{route('home')}}"><i class="fas fa-arrow-alt-circle-left fa-lg" style="color: #51cf66;"></i></a>
                 </div>
 
                 <div class="card-body">
@@ -49,55 +49,31 @@
                     <div class="grid-container">
                         
                             <div class="item1">
-                                <form id="formReo" action="{{route('comandes.store')}}" method="post">
+                                <form id="formReop7" action="{{route('reoperacions.store')}}" method="post">
     
                                 @csrf             
-                                <input class="xy" id="o1" type="hidden">                   
-                                <button id="Order1" type="button" class="opcio btn btn-lg btn-success ped" onclick="startPrepComanda();">{{ __('messages.Preparation') }}</button>
+                                <input class="xy" id="reop1" type="hidden">                   
+                                <button id="Reop7" type="button" class="opcio btn btn-lg btn-success ped" onclick="startReop1();">{{ __('messages.Reoperation1') }}</button>
                                 
                                 {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  --}} 
                                 </form>
                             </div>
                             <div class="item2">
-                                <form id="formRevComanda" action="{{route('revComandes.store')}}" method="post">
+                                <form id="formReop8" action="{{route('recepcions2.store')}}" method="post">
     
                                     @csrf
-                                    <input class="xy" id="o2" type="hidden">        
-                                    <button id="Order2" type="button" class="opcio btn btn-lg btn-success ped" onclick="startRevComanda();">{{ __('messages.Review') }}</button>
+                                    <input class="xy" id="reop2" type="hidden">        
+                                    <button id="Reop8" type="button" class="opcio btn btn-lg btn-success ped" onclick="startReop2();">{{ __('messages.Reoperation2') }}</button>
                                     
                                     
                                   {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
-                                </form>
-                            </div>
-                            <div class="item3">
-                                <form id="formExpedComanda" action="{{route('expedComandes.store')}}" method="post">
-                                    @csrf     
-                                    <input class="xy" id="o3" type="hidden">    
-                                    <button id="Order3" type="button" class="opcio btn btn-lg btn-success ped" onclick="startExpedComanda();">{{ __('messages.Expedition') }}</button>
-                                  {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
-                                </form>
-                            </div>  
-                            <div class="item4">
-                                <form id="formSAFComanda" action="{{route('safComandes.store')}}" method="post">
-                                    @csrf
-                                    <input class="xy" id="o4" type="hidden"> 
-                                    <button id="Order4" type="button" class="opcio btn btn-lg btn-success ped" onclick="startSAFComanda();">SAF</button>
-                                    {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
                                 </form>
                             </div>
                             
-                            {{-- <div class="item5">
-                                <form id="formStopComandes" action="{{route('stop.pedidos')}}" method="post">
-    
-                                    @csrf                          
-                                    <button id="sendStopComandes" type="button" class="opcio btn btn-lg btn-danger" onclick="stopPedidos();">Stop</button>
-                                </form>
-                            </div> --}}
-                          </div>
                           
-                          <div>
+                         
                             
-                        </div>
+                        
                     </div>
                     <hr>
                     <table id="activitats" class="table table-striped table-hover">

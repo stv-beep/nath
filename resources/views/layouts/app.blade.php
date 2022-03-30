@@ -56,7 +56,7 @@
                             @if($user->magatzem == true)
                         <a href="{{ route('comandes.form') }}" class="user-nav nav-link btn navbar-brand">{{ __('messages.Orders') }}</a>
                         <a href="{{ route('recepcions.form') }}" class="user-nav nav-link btn navbar-brand">{{ __('messages.Receptions') }}</a>{{-- disabled --}}
-                        <a href="" class="user-nav nav-link btn navbar-brand disabled">{{ __('messages.Reoperations') }}</a>{{-- disabled --}}
+                        <a href="{{ route('reoperacions.form') }}" class="user-nav nav-link btn navbar-brand">{{ __('messages.Reoperations') }}</a>{{-- disabled --}}
                         <a href="" class="user-nav nav-link btn navbar-brand disabled">{{ __('messages.Inventory') }}</a>{{-- disabled --}}
                             @endif
                             @if ($user->administrador == true) {{-- reporting in navbar --}}
@@ -85,9 +85,9 @@
                                         {{ __("messages.Choose a language") }} <i class="fas fa-language"></i>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{route('set_language', ['ca'])}}">{{ __("messages.Catalan") }}</a> 
-                                        <a class="dropdown-item" href="{{route('set_language', ['es'])}}">{{ __("messages.Spanish") }}</a>
-                                        <a class="dropdown-item" href="{{route('set_language', ['en'])}}">{{ __("messages.English") }}</a> 
+                                    <a class="dropdown-item idioma" href="{{route('set_language', ['ca'])}}">{{ __("messages.Catalan") }} <img src="{{ asset('es-ct.svg') }}" style="height:12px;width:20%"></a> 
+                                    <a class="dropdown-item idioma" href="{{route('set_language', ['es'])}}">{{ __("messages.Spanish") }} <img src="{{ asset('es.svg') }}" style="height:12px;width:20%"></a>
+                                    <a class="dropdown-item idioma" href="{{route('set_language', ['en'])}}">{{ __("messages.English") }} <img src="{{ asset('gb.svg') }}" style="height:12px;width:20%"></a> 
                                     </div>
                                 </li> 
                             @endif
@@ -99,17 +99,17 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('home') }}">
-                                        {{ __('Home') }}
+                                        &nbsp;<i class="fas fa-house-user"></i>&nbsp;{{ __('Home') }}
                                     </a>
                                     @if ($user->administrador == true)
                                     <a class="dropdown-item" href="{{ route('admin.reports') }}">
-                                        {{ __('Reports') }}
+                                        &nbsp;&nbsp;<i class="fas fa-file-invoice"></i>&nbsp;{{ __('Reports') }}
                                     </a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('messages.Logout') }}
+                                        &nbsp;<i class="fas fa-door-open"></i>&nbsp;{{ __('messages.Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -123,9 +123,9 @@
                                     {{ __("messages.Choose a language") }} <i class="fas fa-language"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item idioma" href="{{route('set_language', ['ca'])}}">{{ __("messages.Catalan") }}</a> 
-                                    <a class="dropdown-item idioma" href="{{route('set_language', ['es'])}}">{{ __("messages.Spanish") }}</a>
-                                    <a class="dropdown-item idioma" href="{{route('set_language', ['en'])}}">{{ __("messages.English") }}</a> 
+                                    <a class="dropdown-item idioma" href="{{route('set_language', ['ca'])}}">{{ __("messages.Catalan") }} <img src="{{ asset('es-ct.svg') }}" style="height:12px;width:20%"></a> 
+                                    <a class="dropdown-item idioma" href="{{route('set_language', ['es'])}}">{{ __("messages.Spanish") }} <img src="{{ asset('es.svg') }}" style="height:12px;width:20%"></a>
+                                    <a class="dropdown-item idioma" href="{{route('set_language', ['en'])}}">{{ __("messages.English") }} <img src="{{ asset('gb.svg') }}" style="height:12px;width:20%"></a>
                                 </div>
                             </li>    
                         @endguest

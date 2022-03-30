@@ -42,7 +42,7 @@ class ComandaController extends Controller
 
         //inner join solucionat
         $tasques = Comanda::join('tasques','activitats.tasca', '=','tasques.id')
-                ->where(['treballador' =>  Auth::id()])
+                ->where(['treballador' =>  Auth::id(), 'activitats.tipusTasca'=> $tipus])
                 ->orderBy('activitats.id','desc')->take(10)->get();
 
         return view('activities.comandes',compact('user','tasques'));
