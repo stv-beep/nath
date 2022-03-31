@@ -100,7 +100,7 @@
                         </div>
                     </div>
                     <hr>
-                    <table id="activitats" class="table table-striped table-hover">
+                    <table id="tableComandes" class="table table-striped table-hover">
                         <thead class="thead-dark">
                         <tr class="text-center">
                             <th scope="col">{{ __('messages.Task') }}</th>

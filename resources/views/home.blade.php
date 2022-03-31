@@ -54,7 +54,7 @@
                         {{-- MENU --}}
                 <div class="grid-container-home">
                     <a href="{{ route('comandes.form') }}" class="item1 btn btn-info btn-lg">{{ __('messages.Orders') }}</a>
-                    <a href="{{ route('recepcions.form') }}" class="item2 btn btn-info btn-lg">{{ __('messages.Receptions') }}</a>
+                    <a href="{{ route('recepcions.form') }}" class="item2 btn btn-info btn-lg disabled">{{ __('messages.Receptions') }}</a>
                     <a href="{{ route('reoperacions.form') }}" class="item3 btn btn-info btn-lg disabled">{{ __('messages.Reoperations') }}</a>
                     <a href="" class="item4 btn btn-info btn-lg disabled">{{ __('messages.Inventory') }}</a>
                 </div><hr>                     
@@ -62,16 +62,25 @@
                 
                 {{-- TAULES --}}
                 <p class="h4 text-center" id="titol">{{ __('messages.Shifts') }}</p>
+                        @if ($activitat == '[]'){{-- cap tasca --}}
+                            <p class="text-center">{{ __('messages.You have no shifts') }}</p>
+                        @else
                     <table id="activitats" class="table table-striped table-hover">
                         <thead class="thead-dark">
                         <tr class="text-center">
-                            <th scope="col">{{ __('messages.Day') }}</th>
+                            <th scope="col">{{ __('messages.Shift start') }}</th>
+                            <th scope="col">{{ __('messages.Shift end') }}</th>
                             <th scope="col">Total (h)</th>
                         </tr>
                         </thead>
                         @foreach ($activitat as $a)
                         <tr class="text-center">
-                            <td>{{ date('d/m/Y', strtotime($a->jornada)) }}</td>
+                            <td>{{ date('d/m/Y H:i', strtotime($a->iniciTorn)) }}</td>
+                            @if ($a->fiTorn === null)
+                            <td><i class="fas fa-hourglass-half fa-spin"></i></td>
+                            @else
+                            <td>{{ date('d/m/Y H:i', strtotime($a->fiTorn)) }}</td>
+                            @endif
                             @if ($a->total === null){{--  || $a->total == 0 --}}
                             <td><i class="fas fa-hourglass-half fa-spin"></i></td>
                             {{-- &nbsp;&nbsp;<div class="loadersmall"></div> --}}{{-- &nbsp;&nbsp;<i class="fas fa-solid fa-circle-notch fa-spin"></i> --}}
@@ -80,9 +89,12 @@
                             @endif
                         </tr>
                         @endforeach
-                    </table>
+                    </table>@endif {{-- cap turno --}}
                     
                     <p class="h4 text-center" id="titol">{{ __('messages.Working days') }}</p>
+                        @if ($dia == '[]'){{-- cap tasca --}}
+                            <p class="text-center">{{ __('messages.You have no work day') }}</p>
+                        @else
                     <table id="jornades" class="table table-striped table-hover">
                         <thead class="thead-dark">
                         <tr class="text-center">
@@ -100,12 +112,15 @@
                             @endif
                         </tr>
                         @endforeach
-                    </table>
+                    </table>@endif{{-- cap jornada --}}
 
                     @if ($user->magatzem == true)
                     {{-- tasques --}}
                     <p class="h4 text-center" id="titol">{{ __('messages.Tasks') }}</p>
-                    <table id="activitats" class="table table-striped table-hover">
+                        @if ($tasques == '[]'){{-- cap tasca --}}
+                            <p class="text-center">{{ __('messages.You have no tasks') }}</p>
+                        @else
+                    <table id="activitats2" class="table table-striped table-hover">
                         <thead class="thead-dark">
                         <tr class="text-center">
                             <th scope="col">{{ __('messages.Task') }}</th>
@@ -129,7 +144,7 @@
                             <td>{{ date('d/m/Y H:i', strtotime($t->fiTasca)) }}</td>
                         </tr>
                         @endforeach
-                    </table>
+                    </table>@endif
                     @endif
             </div>
         </div>

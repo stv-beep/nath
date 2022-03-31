@@ -23,6 +23,13 @@ return [
     'Task' => "Task",
     'Task start' => "Task start",
     'Task end' => "Task end",
+    'Shift start' => "Start",
+    'Shift end' => "End",
+
+    'You have no tasks' => "You have no tasks at the moment",
+    'You have no shifts' => "You have no shift registered.",
+    'You have no work day' => "You have no work day registered.",
+
     /* Jornada */
     'Working day of' => "Work day of",
     'Start' => "Start",

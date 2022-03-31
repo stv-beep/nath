@@ -55,8 +55,8 @@
                             &nbsp;{{ __('messages.Shifts') }}</a>
                             @if($user->magatzem == true)
                         <a href="{{ route('comandes.form') }}" class="user-nav nav-link btn navbar-brand">{{ __('messages.Orders') }}</a>
-                        <a href="{{ route('recepcions.form') }}" class="user-nav nav-link btn navbar-brand">{{ __('messages.Receptions') }}</a>{{-- disabled --}}
-                        <a href="{{ route('reoperacions.form') }}" class="user-nav nav-link btn navbar-brand">{{ __('messages.Reoperations') }}</a>{{-- disabled --}}
+                        <a href="{{ route('recepcions.form') }}" class="user-nav nav-link btn navbar-brand disabled">{{ __('messages.Receptions') }}</a>{{-- disabled --}}
+                        <a href="{{ route('reoperacions.form') }}" class="user-nav nav-link btn navbar-brand disabled">{{ __('messages.Reoperations') }}</a>{{-- disabled --}}
                         <a href="" class="user-nav nav-link btn navbar-brand disabled">{{ __('messages.Inventory') }}</a>{{-- disabled --}}
                             @endif
                             @if ($user->administrador == true) {{-- reporting in navbar --}}

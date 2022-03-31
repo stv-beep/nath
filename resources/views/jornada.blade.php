@@ -67,16 +67,25 @@
                 </div>
                 <hr>
                 <p class="h4 text-center" id="titol">{{ __('messages.Shifts') }}</p>
+                        @if ($tornTreb == '[]'){{-- cap tasca --}}
+                            <p class="text-center">{{ __('messages.You have no shifts') }}</p>
+                        @else
                     <table id="activitats" class="table table-striped table-hover">
                         <thead class="thead-dark">
                         <tr class="text-center">
-                            <th scope="col">{{ __('messages.Day') }}</th>
+                            <th scope="col">{{ __('messages.Shift start') }}</th>
+                            <th scope="col">{{ __('messages.Shift end') }}</th>
                             <th scope="col">Total (h)</th>
                         </tr>
                         </thead>
                         @foreach ($tornTreb as $a)
                         <tr class="text-center">
-                            <td>{{ date('d/m/Y', strtotime($a->jornada)) }}</td>
+                            <td>{{ date('d/m/Y H:i', strtotime($a->iniciTorn)) }}</td>
+                            @if ($a->fiTorn === null)
+                            <td><i class="fas fa-hourglass-half fa-spin"></i></td>
+                            @else
+                            <td>{{ date('d/m/Y H:i', strtotime($a->fiTorn)) }}</td>
+                            @endif
                             @if ($a->total === null){{--  || $a->total == 0 --}}
                             <td><i class="fas fa-hourglass-half fa-spin"></i></td>
                             @else
@@ -84,7 +93,7 @@
                             @endif
                         </tr>
                         @endforeach
-                    </table>
+                    </table>@endif
                 </div>
 
             </div>

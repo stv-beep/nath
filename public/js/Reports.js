@@ -431,12 +431,14 @@ function workShiftQuery(){
                                 }
 
                            html_data += 
-                           '<tr><th>'+shift+'</th><th>'+worker+'</th><th>'+day+'</th><th>'+shiftStart+'</th><th>'+shiftEnd+'</th>'+
-                           '<th>Total (h)</th><th>'+locationString+'</th><th>'+deviceInfo+'</th></tr>'+
-                           '<tr><td>'+(i+1)+'</td><td>'+response[i].name+'</td><td>'+response[i].jornada+'</td>'+
-                           '<td>'+response[i].iniciTorn+'</td><td>'+response[i].fiTorn+'</td><td>'+response[i].total+'</td>'+
+                           '<tr><th class="ocultable1">'+shift+'</th><th class="ocultable1">'+worker+'</th><th class="ocultable1">'+day+'</th><th>'+shiftStart+'</th><th>'+shiftEnd+'</th>'+
+                           '<th>Total (h)</th><th>'+locationString+'</th><th class="ocultable1">'+deviceInfo+'</th></tr>'+
+                           '<tr><td class="ocultable1">'+(i+1)+'</td><td class="ocultable1">'+response[i].name+'</td><td class="ocultable1">'+
+                           moment(response[i].jornada,'YYYY/MM/DD').format('DD/MM/YYYY')+'</td>'+
+                           '<td>'+moment(response[i].iniciTorn,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+
+                           '</td><td>'+moment(response[i].fiTorn,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+'</td><td>'+response[i].total+'</td>'+
                            '<td><a href="https://www.google.com/maps?q='+geo[0]+'+'+geo[1]+'" target="_blank">'+
-                           response[i].geolocation+'</a></td><td>'+response[i].info+'</td></tr>'
+                           response[i].geolocation+'</a></td><td class="ocultable1">'+response[i].info+'</td></tr>'
                             } else {//no geolocation
 
                                 if (response[i].fiTorn == null) {
@@ -444,11 +446,13 @@ function workShiftQuery(){
                                     response[i].total = iconTimer;
                                 }
                            html_data += 
-                           '<tr><th>'+shift+'</th><th>'+worker+'</th><th>'+day+'</th><th>'+shiftStart+'</th><th>'+shiftEnd+'</th>'+
-                           '<th>Total (h)</th><th>'+locationString+'</th><th>'+deviceInfo+'</th></tr>'+
-                           '<tr><td>'+(i+1)+'</td><td>'+response[i].name+'</td><td>'+response[i].jornada+'</td>'+
-                           '<td>'+response[i].iniciTorn+'</td><td>'+response[i].fiTorn+'</td><td>'+response[i].total+'</td>'+
-                           '<td>'+notSaved+'</td><td>'+response[i].info+'</td></tr>'
+                           '<tr><th class="ocultable1">'+shift+'</th><th class="ocultable1">'+worker+'</th><th class="ocultable1">'+day+'</th><th>'+shiftStart+'</th><th>'+shiftEnd+'</th>'+
+                           '<th>Total (h)</th><th class="ocultable1">'+locationString+'</th><th>'+deviceInfo+'</th></tr>'+
+                           '<tr><td class="ocultable1">'+(i+1)+'</td><td class="ocultable1">'+response[i].name+'</td><td class="ocultable1">'+
+                           moment(response[i].jornada,'YYYY/MM/DD').format('DD/MM/YYYY')+'</td>'+
+                           '<td>'+moment(response[i].iniciTorn,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+
+                           '</td><td>'+moment(response[i].fiTorn,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+'</td><td>'+response[i].total+'</td>'+
+                           '<td class="ocultable1">'+notSaved+'</td><td>'+response[i].info+'</td></tr>'
                            }
                                 
                         }
@@ -512,25 +516,25 @@ function taskQuery(){
 
                        html_data += 
                        '<tr><th>Nº</th><th>'+task+'</th><th>'+taskStart+'</th><th>'+taskEnd+'</th>'+
-                       '<th>Total (min)</th><th>'+locationString+'</th><th>'+deviceInfo+'</th></tr>'+
+                       '<th>Total (min)</th><th class="ocultable1">'+locationString+'</th><th class="ocultable1">'+deviceInfo+'</th></tr>'+
 
-                       '<tr><td>'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+response[i].iniciTasca+'</td>'+
-                       '<td>'+response[i].fiTasca+'</td><td>'+response[i].total+'</td>'+
-                       '<td><a href="https://www.google.com/maps?q='+geo[0]+'+'+geo[1]+'" target="_blank">'+
-                       response[i].geolocation+'</a></td><td>'+response[i].info+'</td></tr>'
+                       '<tr><td>'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+moment(response[i].iniciTasca,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+'</td>'+
+                       '<td>'+moment(response[i].fiTasca,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+'</td><td>'+response[i].total+'</td>'+
+                       '<td class="ocultable1"><a href="https://www.google.com/maps?q='+geo[0]+'+'+geo[1]+'" target="_blank">'+
+                       response[i].geolocation+'</a></td><td class="ocultable1">'+response[i].info+'</td></tr>'
                         } else {//no geolocation
 
-                            if (response[i].total == null || response[i].total == 0) {
+                            if (response[i].total == null || response[i].total == 0) {//if task unfinished
                                 response[i].fiTasca = iconTimer;
                                 response[i].total = iconTimer;
                             }
                        html_data += 
                        '<tr><th>Nº</th><th>'+task+'</th><th>'+taskStart+'</th><th>'+taskEnd+'</th>'+
-                       '<th>Total (min)</th><th>'+locationString+'</th><th>'+deviceInfo+'</th></tr>'+
+                       '<th>Total (min)</th><th class="ocultable1">'+locationString+'</th><th class="ocultable1">'+deviceInfo+'</th></tr>'+
 
-                       '<tr><td>'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+response[i].iniciTasca+'</td>'+
-                       '<td>'+response[i].fiTasca+'</td><td>'+response[i].total+'</td>'+
-                       '<td>'+notSaved+'</td><td>'+response[i].info+'</td></tr>'
+                       '<tr><td>'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+moment(response[i].iniciTasca,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+'</td>'+
+                       '<td>'+moment(response[i].fiTasca,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+'</td><td>'+response[i].total+'</td>'+
+                       '<td class="ocultable1">'+notSaved+'</td><td class="ocultable1">'+response[i].info+'</td></tr>'
                        }
                             
                     }

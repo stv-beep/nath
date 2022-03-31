@@ -23,6 +23,13 @@ return [
     'Task' => "Tarea",
     'Task start' => "Inicio tarea",
     'Task end' => "Fin tarea",
+    'Shift start' => "Inicio",
+    'Shift end' => "Fin",
+
+    'You have no tasks' => "No tienes ninguna tarea en este momento.",
+    'You have no shifts' => "No tienes ningún turno registrado.",
+    'You have no work day' => "No tienes ninguna jornada registrada.",
+
     /* Jornada */
     'Working day of' => "Jornada de",
     'Start' => "Iniciar",

@@ -125,7 +125,6 @@ function ordersOnLoad(){
                       info: navigator.platform+', '+navigator.userAgent},
                       /* $('#formPrepComanda').serialize(), */
                       success: function( response ) {
-
                           if (response == false){
                               
                               $("#alert-danger-message-final").text(jornadaNoIniciada);
@@ -136,14 +135,13 @@ function ordersOnLoad(){
                                           $("#alert-danger").slideUp(1000);
                                       });
                           } else {
-                                                      
-                          $("#task-message-inici").text(msgPrepComanda);
+                          $("#task-message-inici").text(msgPrepComanda);//response[0].tasca
                           $("#alert-success")
                           .fadeTo(4000, 1000)
                           .slideUp(1000, function () {
                               $("#alert-success").slideUp(1000);
                           });
-                          $("#activitats").load(" #activitats");
+                          $("#tableComandes").load(" #tableComandes");
                               /* window.setTimeout(function(){
                                   window.location = "/comandes";
                               }, 1500);
@@ -199,7 +197,7 @@ function ordersOnLoad(){
                               .slideUp(1000, function () {
                                   $("#alert-success").slideUp(1000);
                               });
-                              $("#activitats").load(" #activitats");
+                              $("#tableComandes").load(" #tableComandes");
                                   /* window.setTimeout(function(){
                                       window.location = "/comandes";
                                   }, 1500); */
@@ -251,7 +249,7 @@ function ordersOnLoad(){
                       .slideUp(1000, function () {
                           $("#alert-success").slideUp(1000);
                       });
-                      $("#activitats").load(" #activitats");
+                      $("#tableComandes").load(" #tableComandes");
                           /* window.setTimeout(function(){
                               window.location = "/comandes";
                           }, 1500); */
@@ -302,7 +300,7 @@ function ordersOnLoad(){
                       .slideUp(1000, function () {
                           $("#alert-success").slideUp(1000);
                       });
-                      $("#activitats").load(" #activitats");
+                      $("#tableComandes").load(" #tableComandes");
                           /* window.setTimeout(function(){
                               window.location = "/comandes";
                           }, 1500); */
@@ -343,7 +341,7 @@ function ordersOnLoad(){
                               .slideUp(1000, function () {
                                   $("#alert-success").slideUp(1000);
                               });
-                              $("#activitats").load(" #activitats");
+                              $("#tableComandes").load(" #tableComandes");
                                   window.setTimeout(function(){
                                       window.location = "/comandes";
                                   }, 1500);

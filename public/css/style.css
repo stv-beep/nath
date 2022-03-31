@@ -262,7 +262,7 @@ a.close.disabled {
   transform: rotate(360deg);
 }
 
-/* btns reporting */
+/* btns reporting & display reporting results */
 @media (max-width: 767.98px) {
   #btns-reporting{
     display:grid;
@@ -272,4 +272,16 @@ a.close.disabled {
     margin:3px;
   }
 
+  /* reporting results */
+  .ocultable1{
+    display:none;
+  }
+
+}
+
+/* destacant l'ultima jornada a la taula */
+#activitats td:last-child {
+  background-color: lightcyan;
+  color:#000;
+  font-weight: bold;
 }

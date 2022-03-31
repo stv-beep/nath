@@ -134,6 +134,7 @@ class ComandaController extends Controller
         $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
         ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
 
+        return response()->json($nomTasca);
         return view('activities.comandes',compact('user','pedidos','tasques'));
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
@@ -213,6 +214,7 @@ class ComandaController extends Controller
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
         $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
         ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
+        return response()->json($nomTasca);
         return view('activities.comandes',compact('user','pedidos','tasques'));
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
@@ -293,6 +295,7 @@ class ComandaController extends Controller
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
         $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
         ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
+        return response()->json($nomTasca);
         return view('activities.comandes',compact('user','pedidos','tasques'));
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
@@ -373,8 +376,8 @@ class ComandaController extends Controller
         $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
         $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
         ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
+        return response()->json($nomTasca);
         return view('activities.comandes',compact('user','pedidos','tasques'));
-
         } else {//si la jornada no esta iniciada torno false
             return response()->json(false, 200);
             
