@@ -2,6 +2,9 @@
 
 let msgPrepComanda, msgRevComanda, msgExpedComanda, jornadaNoIniciada, noJornada;
 let msgIniciJornada, msgFinalJornada, tascaNoAcabada, msgError, msgErrorQuery1, msgNoResults;
+let msgRecepDescarga, msgRecepEntrada, msgRecepControl, msgRecepUbicar;
+let msgReopLectura, msgReopEmbolsar, msgReopEtiquetar, msgReopOtros;
+let msgInvCompactar, msgInventariar;
 
 function translateAlerts(){   
     
@@ -11,6 +14,19 @@ function translateAlerts(){
         msgPrepComanda = "Preparació Comanda";
         msgRevComanda = "Revisió Comanda";
         msgExpedComanda = "Expedició Comanda";
+        //recepcions
+        msgRecepDescarga = "Descàrrega camió";
+        msgRecepEntrada = "Lectura entrada";
+        msgRecepControl = "Control de qualitat";
+        msgRecepUbicar = "Ubicar producte";
+        //reoperaciones
+        msgReopLectura = "Lectura producte"
+        msgReopEmbolsar = "Embolsar"
+        msgReopEtiquetar = "Etiquetar"
+        msgReopOtros = "Atres (Reoperacions)"
+        //inventario
+        msgInvCompactar = "Compactar"
+        msgInventariar = "Inventariar"
         tascaNoAcabada = "pendent de ser acabada";//"Tens una tasca pendent de ser acabada";
         jornadaNoIniciada = "No pots inciar una tasca si no has començat la jornada.";
         msgError = "Sembla que ha hagut un error, per favor, torna-ho a intentar."
@@ -23,6 +39,19 @@ function translateAlerts(){
         msgPrepComanda = "Preparación Pedido";
         msgRevComanda = "Revisión Pedido";
         msgExpedComanda = "Expedición Pedido";
+        //recepciones
+        msgRecepDescarga = "Descarga camión";
+        msgRecepEntrada = "Lectura entrada";
+        msgRecepControl = "Control de calidad";
+        msgRecepUbicar = "Ubicar producto";
+        //reoperaciones
+        msgReopLectura = "Lectura producto"
+        msgReopEmbolsar = "Embolsar"
+        msgReopEtiquetar = "Etiquetar"
+        msgReopOtros = "Otros (Reoperaciones)"
+        //inventario
+        msgInvCompactar = "Compactar"
+        msgInventariar = "Inventariar"
         tascaNoAcabada = "pendiente de acabar";//"Tienes una tarea pendiente de acabar";
         jornadaNoIniciada = "No puedes iniciar una tarea si no has empezado la jornada.";
         msgError = "Ha habido un error, vuelva a intentarlo."
@@ -34,6 +63,19 @@ function translateAlerts(){
         msgPrepComanda = "Order preparation";
         msgRevComanda = "Order review";
         msgExpedComanda = "Order expedition";
+        //receptions
+        msgRecepDescarga = "Unload truck";
+        msgRecepEntrada = "Entry reading";
+        msgRecepControl = "Quality control";
+        msgRecepUbicar = "Locate product";
+        //reoperaciones
+        msgReopLectura = "Product reading"
+        msgReopEmbolsar = "To bag"
+        msgReopEtiquetar = "To tag"
+        msgReopOtros = "Others (Reoperations)"
+        //inventario
+        msgInvCompactar = "Compact"
+        msgInventariar = "Inventory"
         tascaNoAcabada = "unfinished"//"You have an unfinished task";
         jornadaNoIniciada = "You can not start a task if you did not started the shift.";
         msgError = "An error occurred, try again."

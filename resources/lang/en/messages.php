@@ -43,6 +43,22 @@ return [
     'Review' => "Review",
     'Expedition' => "Expedition",
 
+    /* recepciones */
+    'Descarga camión' => 'Unload truck',
+    'Lectura entrada' => 'Entry reading',
+    'Control de calidad' => 'Quality control',
+    'Ubicar producto' => 'Locate product',
+
+    /* reoperaciones */
+    'Lectura producto' => 'Product reading',
+    'Embolsar' => 'To bag',
+    'Etiquetar' => 'To tag',
+    'Otros' => 'Others',
+
+    /* inventario */
+    'Compactar' => 'Compact',
+    'Inventariar' => 'Inventory',
+
     /* registre */
     'Name' => "Name and surname",
     'Username' => "Username",

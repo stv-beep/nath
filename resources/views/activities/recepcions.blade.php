@@ -49,21 +49,43 @@
                     <div class="grid-container">
                         
                             <div class="item1">
-                                <form id="formRecp5" action="{{route('recepcions.store')}}" method="post">
+                                <form id="formRecp5" action="{{route('recepcions.descarga')}}" method="post">
     
                                 @csrf             
                                 <input class="xy" id="r1" type="hidden">                   
-                                <button id="Recp5" type="button" class="opcio btn btn-lg btn-success ped" onclick="startRecp1();">{{ __('messages.Reception1') }}</button>
+                                <button id="Recp5" type="button" class="opcio btn btn-lg btn-success ped" onclick="startDescarga();">{{ __('messages.Descarga camión') }}</button>
                                 
                                 {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  --}} 
                                 </form>
                             </div>
                             <div class="item2">
-                                <form id="formRecp6" action="{{route('recepcions2.store')}}" method="post">
+                                <form id="formRecp6" action="{{route('recepcions.entrada')}}" method="post">
     
                                     @csrf
                                     <input class="xy" id="r2" type="hidden">        
-                                    <button id="Recp6" type="button" class="opcio btn btn-lg btn-success ped" onclick="startRecp2();">{{ __('messages.Reception2') }}</button>
+                                    <button id="Recp6" type="button" class="opcio btn btn-lg btn-success ped" onclick="startEntrada();">{{ __('messages.Lectura entrada') }}</button>
+                                    
+                                    
+                                  {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
+                                </form>
+                            </div>
+                            <div class="item3">
+                                <form id="formRecp7" action="{{route('recepcions.calidad')}}" method="post">
+    
+                                    @csrf
+                                    <input class="xy" id="r3" type="hidden">        
+                                    <button id="Recp7" type="button" class="opcio btn btn-lg btn-success ped" onclick="startControlCalidad();">{{ __('messages.Control de calidad') }}</button>
+                                    
+                                    
+                                  {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
+                                </form>
+                            </div>
+                            <div class="item4">
+                                <form id="formRecp8" action="{{route('recepcions.ubicar')}}" method="post">
+    
+                                    @csrf
+                                    <input class="xy" id="r4" type="hidden">        
+                                    <button id="Recp8" type="button" class="opcio btn btn-lg btn-success ped" onclick="startUbicar();">{{ __('messages.Ubicar producto') }}</button>
                                     
                                     
                                   {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
@@ -76,7 +98,10 @@
                         
                     </div>
                     <hr>
-                    <table id="activitats" class="table table-striped table-hover">
+                    <table id="tableRecep" class="table table-striped table-hover">
+                        @if ($tasques == '[]'){{-- cap tasca --}}
+                            <p class="text-center msgNoTask">{{ __('messages.You have no tasks') }}</p>
+                        @else
                         <thead class="thead-dark">
                         <tr class="text-center">
                             <th scope="col">{{ __('messages.Task') }}</th>
@@ -100,6 +125,7 @@
                                     <td>{{ date('d/m/Y H:i:s', strtotime($t->fiTasca)) }}</td>
                             </tr>
                             @endforeach
+                            @endif
                     </table>
                     
                 </div> 

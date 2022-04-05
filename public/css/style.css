@@ -96,8 +96,8 @@
 
 .btn-orange {
   color: #212529;
-  background-color: #fcad05;
-  border-color: #ff9c05;
+  background-color: #ffe09e;
+  /* border-color: #ff9c05; */
 }
 .btn-outline-orange {
   color: #ff9c05;
@@ -275,6 +275,10 @@ a.close.disabled {
   /* reporting results */
   .ocultable1{
     display:none;
+  }
+
+  .navbar-brand {
+    margin-right: 0rem; /* navbar movil aliniada */
   }
 
 }

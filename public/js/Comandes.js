@@ -141,7 +141,11 @@ function ordersOnLoad(){
                           .slideUp(1000, function () {
                               $("#alert-success").slideUp(1000);
                           });
-                          $("#tableComandes").load(" #tableComandes");
+                          //not showing the "no tasks" msg
+                            if($('.msgNoTask')[0] !=undefined){
+                            $('.msgNoTask')[0].innerHTML= '';
+                            }
+                            $("#tableComandes").load(" #tableComandes");
                               /* window.setTimeout(function(){
                                   window.location = "/comandes";
                               }, 1500);
@@ -197,7 +201,11 @@ function ordersOnLoad(){
                               .slideUp(1000, function () {
                                   $("#alert-success").slideUp(1000);
                               });
-                              $("#tableComandes").load(" #tableComandes");
+                              //not showing the "no tasks" msg
+                            if($('.msgNoTask')[0] !=undefined){
+                                $('.msgNoTask')[0].innerHTML= '';
+                            }
+                            $("#tableComandes").load(" #tableComandes");
                                   /* window.setTimeout(function(){
                                       window.location = "/comandes";
                                   }, 1500); */
@@ -249,7 +257,11 @@ function ordersOnLoad(){
                       .slideUp(1000, function () {
                           $("#alert-success").slideUp(1000);
                       });
-                      $("#tableComandes").load(" #tableComandes");
+                      //not showing the "no tasks" msg
+                        if($('.msgNoTask')[0] !=undefined){
+                        $('.msgNoTask')[0].innerHTML= '';
+                        }
+                        $("#tableComandes").load(" #tableComandes");
                           /* window.setTimeout(function(){
                               window.location = "/comandes";
                           }, 1500); */
@@ -300,7 +312,11 @@ function ordersOnLoad(){
                       .slideUp(1000, function () {
                           $("#alert-success").slideUp(1000);
                       });
-                      $("#tableComandes").load(" #tableComandes");
+                      //not showing the "no tasks" msg
+                      if($('.msgNoTask')[0] !=undefined){
+                        $('.msgNoTask')[0].innerHTML= '';
+                        }
+                        $("#tableComandes").load(" #tableComandes");
                           /* window.setTimeout(function(){
                               window.location = "/comandes";
                           }, 1500); */

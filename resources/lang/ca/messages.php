@@ -48,6 +48,22 @@ return [
     'Expedición' => 'Expedició',
     'SAF' => 'SAF',
 
+    /* recepciones */
+    'Descarga camión' => 'Descàrrega camió',
+    'Lectura entrada' => 'Lectura entrada',
+    'Control de calidad' => 'Control de qualitat',
+    'Ubicar producto' => 'Ubicar producte',
+
+    /* reoperaciones */
+    'Lectura producto' => 'Lectura producte',
+    'Embolsar' => 'Embolsar',
+    'Etiquetar' => 'Etiquetar',
+    'Otros' => 'Altres',
+
+    /* inventario */
+    'Compactar' => 'Compactar',
+    'Inventariar' => 'Inventariar',
+    
     /* registre */
     'Name' => "Nom i cognoms",
     'Username' => "Codi",

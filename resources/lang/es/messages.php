@@ -42,7 +42,23 @@ return [
     'Preparation' => "Preparación",
     'Review' => "Revisión",
     'Expedition' => "Expedición",
-    
+
+    /* recepciones */
+    'Descarga camión' => 'Descarga camión',
+    'Lectura entrada' => 'Lectura entrada',
+    'Control de calidad' => 'Control de calidad',
+    'Ubicar producto' => 'Ubicar producto',
+
+    /* reoperaciones */
+    'Lectura producto' => 'Lectura producto',
+    'Embolsar' => 'Embolsar',
+    'Etiquetar' => 'Etiquetar',
+    'Otros' => 'Otros',
+
+    /* inventario */
+    'Compactar' => 'Compactar',
+    'Inventariar' => 'Inventariar',
+        
     /* registre */
     'Name' => "Nombre y apellidos",
     'Username' => "Código",

@@ -36,7 +36,7 @@
         <div class="col-md-8">
             <div class="card shadow-lg">
                 <div class="card-header">{{ __('messages.Inventory from') }} {{$user->name}}
-                        <a id="icona" href="{{route('home')}}"><i class="fas fa-arrow-alt-circle-left fa-lg" style="color: #51cf66;"></i></a>
+                    <a id="icona" href="{{route('home')}}"><i class="fas fa-arrow-alt-circle-left fa-lg" style="color: #51cf66;"></i></a>
                 </div>
 
                 <div class="card-body">
@@ -49,34 +49,30 @@
                     <div class="grid-container">
                         
                             <div class="item1">
-                                <form id="formInv7" action="{{route('reoperacions.store')}}" method="post">
+                                <form id="formInv13" method="post">
     
                                 @csrf             
                                 <input class="xy" id="inv1" type="hidden">                   
-                                <button id="Inv9" type="button" class="opcio btn btn-lg btn-success ped" onclick="startReop1();">{{ __('messages.Inventory1') }}</button>
-                                
-                                {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  --}} 
+                                <button id="Inv13" type="button" class="opcio btn btn-lg btn-success ped" 
+                                onclick="startCompactar()">{{ __('messages.Compactar') }}</button> 
                                 </form>
                             </div>
                             <div class="item2">
-                                <form id="formReop8" action="{{route('recepcions2.store')}}" method="post">
+                                <form id="formReop14" method="post">
     
                                     @csrf
                                     <input class="xy" id="inv2" type="hidden">        
-                                    <button id="Inv10" type="button" class="opcio btn btn-lg btn-success ped" onclick="startReop2();">{{ __('messages.Inventory2') }}</button>
-                                    
-                                    
-                                  {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
+                                    <button id="Inv14" type="button" class="opcio btn btn-lg btn-success ped" 
+                                    onclick="startInventariar()">{{ __('messages.Inventariar') }}</button>
                                 </form>
                             </div>
                             
-                          
-                         
-                            
-                        
                     </div>
                     <hr>
-                    <table id="activitats" class="table table-striped table-hover">
+                    <table id="tableInv" class="table table-striped table-hover">
+                        @if ($tasques == '[]'){{-- cap tasca --}}
+                            <p class="text-center msgNoTask">{{ __('messages.You have no tasks') }}</p>
+                        @else
                         <thead class="thead-dark">
                         <tr class="text-center">
                             <th scope="col">{{ __('messages.Task') }}</th>
@@ -92,7 +88,7 @@
                                 @php($tasca = $t->tasca)
                                 <td>{{ __("messages.$tasca") }}</td>
                                     @if ($t->total === null || $t->total == 0.00)
-                                    <td>{{-- &nbsp;&nbsp; --}}<i class="fas fa-hourglass-half fa-spin"></i></td>
+                                    <td><i class="fas fa-hourglass-half fa-spin"></i></td>
                                     @else
                                     <td><b>{{$t->total}}</b></td>
                                     @endif
@@ -100,6 +96,7 @@
                                     <td>{{ date('d/m/Y H:i:s', strtotime($t->fiTasca)) }}</td>
                             </tr>
                             @endforeach
+                            @endif
                     </table>
                     
                 </div> 

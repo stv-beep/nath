@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
          $tasktype->tipus = 'Inventario';
          $tasktype->save();
 
-         /* comandes */
+         //pedidos
          $tasca = new Tasca();
          $tasca->tasca ='Preparación pedido';
          $tasca->tipusTasca = 1;
@@ -50,18 +50,48 @@ class DatabaseSeeder extends Seeder
          $tasca->tasca ='SAF';
          $tasca->tipusTasca = 1;
          $tasca->save();
-         //recepcions
+         //recepciones
          $tasca = new Tasca();
-         $tasca->tasca ='Recepcio1';
+         $tasca->tasca ='Descarga camión';
          $tasca->tipusTasca = 2;
          $tasca->save();
          $tasca = new Tasca();
-         $tasca->tasca ='Recepcio2';
+         $tasca->tasca ='Lectura entrada';
          $tasca->tipusTasca = 2;
          $tasca->save();
          $tasca = new Tasca();
-         $tasca->tasca ='Reoperacio1';
+         $tasca->tasca ='Control de calidad';
          $tasca->tipusTasca = 2;
+         $tasca->save();
+         $tasca = new Tasca();
+         $tasca->tasca ='Ubicar producto';
+         $tasca->tipusTasca = 2;
+         $tasca->save();
+         //reoperaciones
+         $tasca = new Tasca();
+         $tasca->tasca ='Lectura producto';
+         $tasca->tipusTasca = 3;
+         $tasca->save();
+         $tasca = new Tasca();
+         $tasca->tasca ='Embolsar';
+         $tasca->tipusTasca = 3;
+         $tasca->save();
+         $tasca = new Tasca();
+         $tasca->tasca ='Etiquetar';
+         $tasca->tipusTasca = 3;
+         $tasca->save();
+         $tasca = new Tasca();
+         $tasca->tasca ='Otros';
+         $tasca->tipusTasca = 3;
+         $tasca->save();
+         //Inventario
+         $tasca = new Tasca();
+         $tasca->tasca ='Compactar';
+         $tasca->tipusTasca = 4;
+         $tasca->save();
+         $tasca = new Tasca();
+         $tasca->tasca ='Inventariar';
+         $tasca->tipusTasca = 4;
          $tasca->save();
 
          Jornada::factory(200)->create();

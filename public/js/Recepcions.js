@@ -29,10 +29,14 @@ function ordersOnLoad(){
             return coord;
         }
 
-        var Recp5Check = document.getElementById("Recp5");
-        var Recp6Check = document.getElementById("Recp6");
-        Recp5Check.disabled = true;
-        Recp6Check.disabled = true;
+        let descargaCheck = document.getElementById("Recp5");
+        let entradaCheck = document.getElementById("Recp6");
+        let calidadCheck = document.getElementById("Recp7");
+        let ubicarCheck = document.getElementById("Recp8");
+        descargaCheck.disabled = true;
+        entradaCheck.disabled = true;
+        calidadCheck.disabled = true;
+        ubicarCheck.disabled = true;
 
         function checkLastTask(){
             translateAlerts();
@@ -48,7 +52,7 @@ function ordersOnLoad(){
                           console.log(response.tasca)
                           var taskID = response.id;
                           var taskName = response.tasca;
-                          if (taskID < 5 || taskID > 6){//si la tasca d'un altre tipo NO esta acabada
+                          if (taskID < 5 || taskID > 8){//si la tasca d'un altre tipo NO esta acabada (recep = 4 tasques)
                             $("#alert-danger-message-final").text('"'+taskName+'" '+tascaNoAcabada);
                             $("#alert-danger").show();
                               
@@ -58,8 +62,10 @@ function ordersOnLoad(){
                           }
       
                         } else {//si la tasca esta acabada i per tant, torna 0
-                            Recp5Check.disabled = false;
-                            Recp6Check.disabled = false;
+                            descargaCheck.disabled = false;
+                            entradaCheck.disabled = false;
+                            calidadCheck.disabled = false;
+                            ubicarCheck.disabled = false;
                         }   
                       },
                       error: function(xhr, textStatus, error){
@@ -77,7 +83,7 @@ function ordersOnLoad(){
 /* SCRIPTS AJAX REQUESTS  */      
 
     /* funcions de RECEPCIONS */
-    function startRecp1() {
+    function startDescarga() {
         translateAlerts();
         var c = document.getElementById('r1').value;
             console.log('sending...');
@@ -89,7 +95,7 @@ function ordersOnLoad(){
             $.ajax(
                     {
                         type: "POST",
-                        url: "/recepcio1",
+                        url: "/recepcio/descarga",
                         data:
                         {x: c,
                         info: navigator.platform+', '+navigator.userAgent},
@@ -107,21 +113,30 @@ function ordersOnLoad(){
                                         });
                             } else {
                                                         
-                            $("#task-message-inici").text(msgPrepComanda);
+                            $("#task-message-inici").text(msgRecepDescarga);
                             $("#alert-success")
                             .fadeTo(4000, 1000)
                             .slideUp(1000, function () {
                                 $("#alert-success").slideUp(1000);
                             });
-                            $("#activitats").load(" #activitats");
+                            //not showing the "no tasks" msg
+                            if($('.msgNoTask')[0] !=undefined){
+                                $('.msgNoTask')[0].innerHTML= '';
+                            }
+                            $("#tableRecep").load(" #tableRecep");
                                 /* window.setTimeout(function(){
                                     window.location = "/comandes";
                                 }, 1500);
                                  */
                             /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
-                            Recp5Check.classList.toggle('btn-danger');
-                            var recp6 = document.getElementById("Recp6").disabled
-                            document.getElementById("Recp6").disabled = !recp6;
+                            descargaCheck.classList.toggle('btn-danger');
+                            var entrada = document.getElementById("Recp6").disabled
+                            var control = document.getElementById("Recp7").disabled
+                            var ubicar = document.getElementById("Recp8").disabled
+
+                            document.getElementById("Recp6").disabled = !entrada;
+                            document.getElementById("Recp7").disabled = !control;
+                            document.getElementById("Recp8").disabled = !ubicar;
                         }
                     }
                     }
@@ -129,7 +144,7 @@ function ordersOnLoad(){
            
         };
 
-    function startRecp2() {
+    function startEntrada() {
             translateAlerts();
             var c = document.getElementById('r2').value;
                 console.log('sending...');
@@ -141,7 +156,7 @@ function ordersOnLoad(){
                 $.ajax(
                         {
                             type: "POST",
-                            url: "/recepcio2",
+                            url: "/recepcio/entrada",
                             data:
                             {x: c,
                             info: navigator.platform+', '+navigator.userAgent},
@@ -159,24 +174,161 @@ function ordersOnLoad(){
                                             });
                                 } else {
                                                             
-                                $("#task-message-inici").text(msgPrepComanda);
+                                $("#task-message-inici").text(msgRecepEntrada);
                                 $("#alert-success")
                                 .fadeTo(4000, 1000)
                                 .slideUp(1000, function () {
                                     $("#alert-success").slideUp(1000);
                                 });
-                                $("#activitats").load(" #activitats");
+                                //not showing the "no tasks" msg
+                                if($('.msgNoTask')[0] !=undefined){
+                                    $('.msgNoTask')[0].innerHTML= '';
+                                }
+                                $("#tableRecep").load(" #tableRecep");
                                     /* window.setTimeout(function(){
                                         window.location = "/comandes";
                                     }, 1500);
                                      */
                                 /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
-                                Recp6Check.classList.toggle('btn-danger');
-                                var recp5 = document.getElementById("Recp5").disabled
-                                document.getElementById("Recp5").disabled = !recp5; 
+                                entradaCheck.classList.toggle('btn-danger');
+                                var descarga = document.getElementById("Recp5").disabled
+                                var control = document.getElementById("Recp7").disabled
+                                var ubicar = document.getElementById("Recp8").disabled
+
+                                document.getElementById("Recp5").disabled = !descarga;
+                                document.getElementById("Recp7").disabled = !control;
+                                document.getElementById("Recp8").disabled = !ubicar;
                             }
                         }
                         }
                     )
                
             };
+
+
+function startControlCalidad() {
+    translateAlerts();
+    var c = document.getElementById('r3').value;
+    console.log('sending...');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax(
+        {
+            type: "POST",
+            url: "/recepcio/calidad",
+            data:
+            {
+                x: c,
+                info: navigator.platform + ', ' + navigator.userAgent
+            },
+            /* $('#formPrepComanda').serialize(), */
+            success: function (response) {
+
+                if (response == false) {
+
+                    $("#alert-danger-message-final").text(jornadaNoIniciada);
+                    $(".cronometro").hide();
+                    $("#alert-danger")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-danger").slideUp(1000);
+                        });
+                } else {
+
+                    $("#task-message-inici").text(msgRecepControl);
+                    $("#alert-success")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-success").slideUp(1000);
+                        });
+                    //not showing the "no tasks" msg
+                    if($('.msgNoTask')[0] !=undefined){
+                        $('.msgNoTask')[0].innerHTML= '';
+                    }
+                    $("#tableRecep").load(" #tableRecep");
+                    /* window.setTimeout(function(){
+                        window.location = "/comandes";
+                    }, 1500);
+                     */
+                    /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
+                    calidadCheck.classList.toggle('btn-danger');
+                    var descarga = document.getElementById("Recp5").disabled
+                    var entrada = document.getElementById("Recp6").disabled
+                    var ubicar = document.getElementById("Recp8").disabled
+
+                    document.getElementById("Recp5").disabled = !descarga;
+                    document.getElementById("Recp6").disabled = !entrada;
+                    document.getElementById("Recp8").disabled = !ubicar;
+                }
+            }
+        }
+    )
+
+};
+
+
+function startUbicar() {
+    translateAlerts();
+    var c = document.getElementById('r4').value;
+    console.log('sending...');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax(
+        {
+            type: "POST",
+            url: "/recepcio/ubicar",
+            data:
+            {
+                x: c,
+                info: navigator.platform + ', ' + navigator.userAgent
+            },
+            /* $('#formPrepComanda').serialize(), */
+            success: function (response) {
+
+                if (response == false) {
+
+                    $("#alert-danger-message-final").text(jornadaNoIniciada);
+                    $(".cronometro").hide();
+                    $("#alert-danger")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-danger").slideUp(1000);
+                        });
+                } else {
+
+                    $("#task-message-inici").text(msgRecepUbicar);
+                    $("#alert-success")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-success").slideUp(1000);
+                        });
+                    //not showing the "no tasks" msg
+                    if($('.msgNoTask')[0] !=undefined){
+                        $('.msgNoTask')[0].innerHTML= '';
+                    }
+                    $("#tableRecep").load(" #tableRecep");
+                    /* window.setTimeout(function(){
+                        window.location = "/comandes";
+                    }, 1500);
+                     */
+                    /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
+                    ubicarCheck.classList.toggle('btn-danger');
+                    var descarga = document.getElementById("Recp5").disabled
+                    var entrada = document.getElementById("Recp6").disabled
+                    var control = document.getElementById("Recp7").disabled
+
+                    document.getElementById("Recp5").disabled = !descarga;
+                    document.getElementById("Recp6").disabled = !entrada;
+                    document.getElementById("Recp7").disabled = !control;
+                }
+            }
+        }
+    )
+
+};

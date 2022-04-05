@@ -1,10 +1,15 @@
-# Aplicació per a fitxatges Nath v0.9.2
+# Aplicació per a fitxatges Nath v0.9.3
 #### Aleix Algueró, 2022
 ## Sobre l'aplicació
 
 És una aplicació per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació. I l'administrador podrà llistar totes les jornades de tothom i fer consultes des d'una taula dinàmica.
-Ara mateix, en versió 0.9.2, sembla que té una certa estabilitat.
+Ara mateix, en versió 0.9.3, sembla que té una certa estabilitat.
 
+
+### Update 0.9.3
+- Afegit "recepcions", "reoperacions" i "inventari" i les seves activitats.
+- Canvis en detalls de la navbar.
+- Si no hi ha tasques d'un tipus concret, mostra un avís.
 
 ### Update 0.9.2
 - Fix al display de les consultes de torns i tasques al reporting des de mòbil, que no cabien a la pantalla.
@@ -26,10 +31,10 @@ Ara mateix, en versió 0.9.2, sembla que té una certa estabilitat.
 - Icones d'idioma.
 
 
-### Errors i bugs (versió 0.9.2)
+### Errors i bugs (versió 0.9.3)
 - La geolocalització no funciona sense HTTPS.
 - Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.
-- Probablement, si d'alguna forma es desactiva 'la desactivació dels botons' és possible que es puguen iniciar varies tasques alhora i que el programa perdi la seva funcionalitat de sèrie.
+- Probablement, si d'alguna forma es desactiva el javascript/'la desactivació dels botons' és possible que es puguen iniciar varies tasques alhora i que el programa perdi la seva funcionalitat de sèrie.
 - La suma automàtica d'hores al reporting en versió MÒBIL no funciona.
 
 

@@ -49,21 +49,42 @@
                     <div class="grid-container">
                         
                             <div class="item1">
-                                <form id="formReop7" action="{{route('reoperacions.store')}}" method="post">
+                                <form id="formReop9" action="{{route('reoperacions.prod')}}" method="post">
     
                                 @csrf             
                                 <input class="xy" id="reop1" type="hidden">                   
-                                <button id="Reop7" type="button" class="opcio btn btn-lg btn-success ped" onclick="startReop1();">{{ __('messages.Reoperation1') }}</button>
+                                <button id="Reop9" type="button" class="opcio btn btn-lg btn-success ped" onclick="startLectura();">{{ __('messages.Lectura producto') }}</button>
                                 
                                 {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  --}} 
                                 </form>
                             </div>
                             <div class="item2">
-                                <form id="formReop8" action="{{route('recepcions2.store')}}" method="post">
+                                <form id="formReop10" {{-- action="{{route('recepcions2.store')}}" --}} method="post">
     
                                     @csrf
                                     <input class="xy" id="reop2" type="hidden">        
-                                    <button id="Reop8" type="button" class="opcio btn btn-lg btn-success ped" onclick="startReop2();">{{ __('messages.Reoperation2') }}</button>
+                                    <button id="Reop10" type="button" class="opcio btn btn-lg btn-success ped" onclick="startEmbolso()">{{ __('messages.Embolsar') }}</button>
+                                    
+                                    
+                                  {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
+                                </form>
+                            </div>
+                            <div class="item3">
+                                <form id="formReop11" {{-- action="{{route('reoperacions.prod')}}" --}} method="post">
+    
+                                @csrf             
+                                <input class="xy" id="reop3" type="hidden">                   
+                                <button id="Reop11" type="button" class="opcio btn btn-lg btn-success ped" onclick="startEtiq()">{{ __('messages.Etiquetar') }}</button>
+                                
+                                {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button>  --}} 
+                                </form>
+                            </div>
+                            <div class="item4">
+                                <form id="formReop12" {{-- action="{{route('recepcions2.store')}}" --}} method="post">
+    
+                                    @csrf
+                                    <input class="xy" id="reop4" type="hidden">        
+                                    <button id="Reop12" type="button" class="opcio btn btn-lg btn-success ped" onclick="startOtrosReop()">{{ __('messages.Otros') }}</button>
                                     
                                     
                                   {{-- <button type="submit" id="send" value="Enviar" class="btn btn-success btn-block">Enviar</button> --}}
@@ -76,7 +97,10 @@
                         
                     </div>
                     <hr>
-                    <table id="activitats" class="table table-striped table-hover">
+                    <table id="tableReop" class="table table-striped table-hover">
+                        @if ($tasques == '[]'){{-- cap tasca --}}
+                            <p class="text-center msgNoTask">{{ __('messages.You have no tasks') }}</p>
+                        @else
                         <thead class="thead-dark">
                         <tr class="text-center">
                             <th scope="col">{{ __('messages.Task') }}</th>
@@ -100,6 +124,7 @@
                                     <td>{{ date('d/m/Y H:i:s', strtotime($t->fiTasca)) }}</td>
                             </tr>
                             @endforeach
+                            @endif
                     </table>
                     
                 </div> 

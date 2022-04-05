@@ -62,17 +62,24 @@ Route::get('/jornada/check',[TornController::class,'checkTorn'])->name('check.to
 //llistar totes les tasques disponibles
 Route::get('/tasques',[ComandaController::class, 'getTasques'])->name('get.tasques');
 
-
 //RECEPCIONS
 Route::get('/recepcions',[RecepcioController::class,'index'])->name('recepcions.form');
-Route::post('/recepcio1',[RecepcioController::class,'storeRecep1'])->name('recepcions.store');
-Route::post('/recepcio2',[RecepcioController::class,'storeRecep2'])->name('recepcions2.store');
-
+Route::post('/recepcio/descarga',[RecepcioController::class,'storeDescarga'])->name('recepcions.descarga');
+Route::post('/recepcio/entrada',[RecepcioController::class,'storeEntrada'])->name('recepcions.entrada');
+Route::post('/recepcio/calidad',[RecepcioController::class,'storeControlCalidad'])->name('recepcions.calidad');
+Route::post('/recepcio/ubicar',[RecepcioController::class,'storeUbicarProducto'])->name('recepcions.ubicar');
 
 //REOPERACIONS
 Route::get('/reoperacions',[ReoperacionsController::class,'index'])->name('reoperacions.form');
-Route::post('/reoperacio1',[ReoperacionsController::class,'storeReop1'])->name('reoperacions.store');
+Route::post('/reoperacions/lectura',[ReoperacionsController::class,'storeLecturaProd'])->name('reoperacions.prod');
+Route::post('/reoperacions/embolsar',[ReoperacionsController::class,'storeEmbolsar'])->name('reoperacions.embolsar');
+Route::post('/reoperacions/etiquetar',[ReoperacionsController::class,'storeEtiquetar'])->name('reoperacions.etiq');
+Route::post('/reoperacions/otros',[ReoperacionsController::class,'storeOtros'])->name('reoperacions.otros');
 
+//INVENTARI
+Route::get('/inventari',[InventariController::class,'index'])->name('inventari.form');
+Route::post('/inventari/compactar',[InventariController::class,'storeCompactar'])->name('inventari.compact');
+Route::post('/inventari/inventariar',[InventariController::class,'storeInventariar'])->name('inventari.inv');
 
 //REPORTS ADMIN
 Route::get('/reports',[ReportsController::class, 'index'])->name('admin.reports');

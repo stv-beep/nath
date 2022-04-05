@@ -101,6 +101,9 @@
                     </div>
                     <hr>
                     <table id="tableComandes" class="table table-striped table-hover">
+                        @if ($tasques == '[]'){{-- cap tasca --}}
+                            <p class="text-center msgNoTask">{{ __('messages.You have no tasks') }}</p>
+                        @else
                         <thead class="thead-dark">
                         <tr class="text-center">
                             <th scope="col">{{ __('messages.Task') }}</th>
@@ -124,6 +127,7 @@
                                     <td>{{ date('d/m/Y H:i:s', strtotime($t->fiTasca)) }}</td>
                             </tr>
                             @endforeach
+                            @endif
                     </table>
                     
                 </div> 

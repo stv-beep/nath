@@ -29,10 +29,10 @@ function ordersOnLoad(){
             return coord;
         }
 
-        var Reop7Check = document.getElementById("Reop7");
-        var Reop8Check = document.getElementById("Reop8");
-        Reop7Check.disabled = true;
-        Reop8Check.disabled = true;
+        let compactarCheck = document.getElementById("Inv13");
+        let inventariarCheck = document.getElementById("Inv14");
+        compactarCheck.disabled = true;
+        inventariarCheck.disabled = true;
 
         function checkLastTask(){
             translateAlerts();
@@ -47,18 +47,18 @@ function ordersOnLoad(){
                             console.log(response.tasca)
                             var taskID = response.id;
                             var taskName = response.tasca;
-                            if (taskID < 7){//si la tasca d'un altre tipo NO esta acabada
+                            if (taskID < 13 || taskID > 14){//si la tasca d'un altre tipo NO esta acabada
                               $("#alert-danger-message-final").text('"'+taskName+'" '+tascaNoAcabada);
                               $("#alert-danger").show();
                                 
                             } else {//si la tasca NO esta acabada
-                              document.getElementById("Reop"+taskID).disabled = false;
-                              document.getElementById("Reop"+taskID).classList.toggle('btn-danger');
+                              document.getElementById("Inv"+taskID).disabled = false;
+                              document.getElementById("Inv"+taskID).classList.toggle('btn-danger');
                             }
         
                           } else {//si la tasca esta acabada i per tant, torna 0
-                                Reop7Check.disabled = false;
-                                Reop8Check.disabled = false;
+                            compactarCheck.disabled = false;
+                            inventariarCheck.disabled = false;
                           }
                       },
                       error: function(xhr, textStatus, error){
@@ -75,10 +75,10 @@ function ordersOnLoad(){
 
 /* SCRIPTS AJAX REQUESTS  */ 
 
-    /* funcions de RECEPCIONS */
-    function startReop1() {
+    /* funcions de INVENTARI */
+    function startCompactar() {
         translateAlerts();
-        var c = document.getElementById('reop1').value;
+        var c = document.getElementById('inv1').value;
             console.log('sending...');
             $.ajaxSetup({
                 headers: {
@@ -88,7 +88,7 @@ function ordersOnLoad(){
             $.ajax(
                     {
                         type: "POST",
-                        url: "/reoperacio1",
+                        url: "/inventari/compactar",
                         data:
                         {x: c,
                         info: navigator.platform+', '+navigator.userAgent},
@@ -105,24 +105,85 @@ function ordersOnLoad(){
                                         });
                             } else {
                                                         
-                            $("#task-message-inici").text(msgPrepComanda);
+                            $("#task-message-inici").text(msgInvCompactar);
                             $("#alert-success")
                             .fadeTo(4000, 1000)
                             .slideUp(1000, function () {
                                 $("#alert-success").slideUp(1000);
                             });
-                            $("#activitats").load(" #activitats");
+                            //not showing the "no tasks" msg
+                            if($('.msgNoTask')[0] !=undefined){
+                                $('.msgNoTask')[0].innerHTML= '';
+                            }
+                            $("#tableInv").load(" #tableInv");
                                 /* window.setTimeout(function(){
                                     window.location = "/comandes";
                                 }, 1500);
                                  */
                             /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
-                            Reop7Check.classList.toggle('btn-danger');
-                            var reop8 = document.getElementById("Reop8").disabled
-                            document.getElementById("Reop8").disabled = !reop8;
+                            compactarCheck.classList.toggle('btn-danger');
+                            var inventariar = document.getElementById("Inv14").disabled
+                            document.getElementById("Inv14").disabled = !inventariar;
                         }
                     }
                     }
                 )
            
         };
+
+function startInventariar() {
+    translateAlerts();
+    var c = document.getElementById('inv2').value;
+    console.log('sending...');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax(
+        {
+            type: "POST",
+            url: "/inventari/inventariar",
+            data:
+            {
+                x: c,
+                info: navigator.platform + ', ' + navigator.userAgent
+            },
+            /* $('#formPrepComanda').serialize(), */
+            success: function (response) {
+
+                if (response == false) {
+                    $("#alert-danger-message-final").text(jornadaNoIniciada);
+                    $(".cronometro").hide();
+                    $("#alert-danger")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-danger").slideUp(1000);
+                        });
+                } else {
+
+                    $("#task-message-inici").text(msgInventariar);
+                    $("#alert-success")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-success").slideUp(1000);
+                        });
+                    //not showing the "no tasks" msg
+                    if($('.msgNoTask')[0] !=undefined){
+                        $('.msgNoTask')[0].innerHTML= '';
+                    }
+                    $("#tableInv").load(" #tableInv");
+                    /* window.setTimeout(function(){
+                        window.location = "/comandes";
+                    }, 1500);
+                     */
+                    /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
+                    inventariarCheck.classList.toggle('btn-danger');
+                    var compactar = document.getElementById("Inv13").disabled
+                    document.getElementById("Inv13").disabled = !compactar;
+                }
+            }
+        }
+    )
+
+};

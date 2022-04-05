@@ -49,18 +49,18 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav ms-auto">
                         @if (Auth::check()) {{-- checking if user is logged, and if it is, check if works in warehouse--}}
                         <a href="{{ route('jornada.form') }}" class="user-nav nav-link btn navbar-brand"><i class="far fa-calendar-alt"></i>
                             &nbsp;{{ __('messages.Shifts') }}</a>
                             @if($user->magatzem == true)
                         <a href="{{ route('comandes.form') }}" class="user-nav nav-link btn navbar-brand">{{ __('messages.Orders') }}</a>
-                        <a href="{{ route('recepcions.form') }}" class="user-nav nav-link btn navbar-brand disabled">{{ __('messages.Receptions') }}</a>{{-- disabled --}}
-                        <a href="{{ route('reoperacions.form') }}" class="user-nav nav-link btn navbar-brand disabled">{{ __('messages.Reoperations') }}</a>{{-- disabled --}}
-                        <a href="" class="user-nav nav-link btn navbar-brand disabled">{{ __('messages.Inventory') }}</a>{{-- disabled --}}
+                        <a href="{{ route('recepcions.form') }}" class="user-nav nav-link btn navbar-brand">{{ __('messages.Receptions') }}</a>
+                        <a href="{{ route('reoperacions.form') }}" class="user-nav nav-link btn navbar-brand">{{ __('messages.Reoperations') }}</a>
+                        <a href="{{ route('inventari.form') }}" class="user-nav nav-link btn navbar-brand">{{ __('messages.Inventory') }}</a>
                             @endif
                             @if ($user->administrador == true) {{-- reporting in navbar --}}
-                            <a href="{{ route('admin.reports') }}" class="user-nav nav-link btn navbar-brand">
+                            <a href="{{ route('admin.reports') }}" class="user-nav nav-link btn navbar-brand btn-orange nav-item dropdown">
                                 {{ __('Reporting') }}</a>
                             @endif
                         @endif
