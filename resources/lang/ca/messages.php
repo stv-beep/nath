@@ -80,6 +80,10 @@ return [
     'Geolocation'=> "Geolocalització",
     'Task query' => "Consulta de tasques",
 
+    /* Usuarios */
+    'Users' => "Usuaris",
+    'Admin' => "Administrador",
+    'Edit' => "Editar",
 
     /* alerts */
     'Working day started' => "Jornada inciada amb èxit",

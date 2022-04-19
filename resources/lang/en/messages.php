@@ -75,6 +75,11 @@ return [
     'Geolocation'=> "Geolocation",
     'Task query' => "Task query",
 
+    /* Usuarios */
+    'Users' => "Users",
+    'Admin' => "Administrator",
+    'Edit' => "Edit",
+
     'Preparación pedido' => 'Order preparation',
     'Revisión pedido' => 'Order review',
     'Expedición' => 'Expedition',

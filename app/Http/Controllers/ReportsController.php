@@ -124,4 +124,45 @@ class ReportsController extends Controller
             return ['value'=>'No Result Found','id'=>''];
 
     }
+
+
+    /* EDIT USERS */
+    /**
+     * index users
+     * @return [type]
+     */
+    public function indexUsers(){
+        $user = Auth::user();
+        
+        if ($user->administrador == true){
+            $users = User::all();
+            return view('admin.usuaris',compact('user','users'));
+        }
+    }
+
+    public function showUsers(){
+        $users = User::all();
+        return response()->json($users);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\task  $task
+     * @return \Illuminate\Http\Response
+     */
+    public function editUser($usuari)
+    {
+        $u = User::findOrFail($usuari);
+        return response()->json($u);
+    }
+
+    public function updateUser(Request $request, User $usuari){
+        $usuari->id_odoo_nath = $request->id_nath;
+        $usuari->id_odoo_tuctuc = $request->id_tuctuc;
+        $usuari->administrador = $request->admin;
+        $usuari->magatzem = $request->magatzem;
+        $usuari->update();
+        
+    }
 }

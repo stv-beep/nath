@@ -22,6 +22,9 @@ class UserFactory extends Factory
             //'email_verified_at' => now(),
             'magatzem' => $this->faker->boolean(),
             'administrador' => $this->faker->boolean(),
+            'DNI' => $this->faker->dni(),
+            'id_odoo_nath' => $this->faker->unique()->numberBetween(1,999),
+            'id_odoo_tuctuc' => $this->faker->unique()->numberBetween(1,999),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             //'password' => $this->faker->password(),//Hash::make($data['password']),
             'remember_token' => Str::random(10),

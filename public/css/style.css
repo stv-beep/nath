@@ -289,3 +289,8 @@ a.close.disabled {
   color:#000;
   font-weight: bold;
 }
+
+#icons-underline {
+  text-decoration: none;
+  cursor: pointer;
+}

@@ -62,6 +62,8 @@
                             @if ($user->administrador == true) {{-- reporting in navbar --}}
                             <a href="{{ route('admin.reports') }}" class="user-nav nav-link btn navbar-brand btn-orange nav-item dropdown">
                                 {{ __('Reporting') }}</a>
+                            <a href="{{ route('admin.users') }}" class="user-nav nav-link btn navbar-brand btn-orange nav-item dropdown">
+                                {{ __('messages.Users') }}</a>
                             @endif
                         @endif
                     </ul>
@@ -102,8 +104,11 @@
                                         &nbsp;<i class="fas fa-house-user"></i>&nbsp;{{ __('Home') }}
                                     </a>
                                     @if ($user->administrador == true)
-                                    <a class="dropdown-item" href="{{ route('admin.reports') }}">
-                                        &nbsp;&nbsp;<i class="fas fa-file-invoice"></i>&nbsp;{{ __('Reports') }}
+                                    <a class="dropdown-item" href="{{ route('admin.users') }}">
+                                        &nbsp;<i class="fas fa-file-invoice"></i>&nbsp;{{ __('Reports') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{-- {{ route('admin.reports') }} --}}">
+                                        &nbsp;<i class="fas fa-user-check"></i>{{ __('messages.Users') }}
                                     </a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"

@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->boolean('administrador')->nullable();
             $table->string('DNI')->unique()->nullable();
             /* $table->string('NSS')->unique()->nullable(); */
+            $table->integer('id_odoo_nath')->nullable();
+            $table->integer('id_odoo_tuctuc')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -92,6 +92,19 @@ Route::post('/consulta-turno',[ReportsController::class, 'shiftQuery'])->name('a
 Route::post('/consulta-activitat',[ReportsController::class, 'taskQuery'])->name('admin.taskQuery');
 });
 
+//GESTIO ADMIN USERS
+Route::get('/usuarios',[ReportsController::class, 'indexUsers'])->name('admin.users');
+//edit user form
+Route::get('/usuarios/edit/{usuari}', [ReportsController::class, 'editUser'])->name('user.edit');
+//update user
+Route::put('/updateUser/{usuari}',[ReportsController::class, 'updateUser'])->name('user.update');
+//show all users
+Route::get('/userslist',[ReportsController::class, 'showUsers'])->name('show.users');
+
+
+//activities
+Route::post('/activity/store',[ActivityController::class,'storeActivity'])->name('activity.store');
+
 Route::get('/set_language/{lang}', [App\Http\Controllers\Controller::class, 'set_language'])->name('set_language');
 App::setLocale("es");
 

@@ -13,6 +13,10 @@ $(document).ready(function() {
         $(this).html( '<input class="searchDT" type="text" placeholder="Buscar '+title+'" />' );
     } );
     var table = $('#reports').DataTable( {
+        dom: 'lBfrtip', //https://datatables.net/examples/basic_init/dom.html
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         responsive: true,
         "lengthMenu": [[5, 10, 25, 50, 100, 250, 500, 1000, -1], [5, 10, 25, 50, 100, 250, 500, 1000, "All"]],
         "paging": true,
@@ -121,6 +125,8 @@ $(document).ready(function() {
         $('#icon-reload').toggleClass("down");
         table.ajax.reload();
     });
+
+    $('#reports tfoot tr').appendTo('#reports thead');//append search to table head
 });
 
 
@@ -435,8 +441,8 @@ function workShiftQuery(){
                            '<th>Total (h)</th><th>'+locationString+'</th><th class="ocultable1">'+deviceInfo+'</th></tr>'+
                            '<tr><td class="ocultable1">'+(i+1)+'</td><td class="ocultable1">'+response[i].name+'</td><td class="ocultable1">'+
                            moment(response[i].jornada,'YYYY/MM/DD').format('DD/MM/YYYY')+'</td>'+
-                           '<td>'+moment(response[i].iniciTorn,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+
-                           '</td><td>'+moment(response[i].fiTorn,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+'</td><td>'+response[i].total+'</td>'+
+                           '<td>'+moment(response[i].iniciTorn,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY HH:mm')+
+                           '</td><td>'+moment(response[i].fiTorn,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY HH:mm')+'</td><td>'+response[i].total+'</td>'+
                            '<td><a href="https://www.google.com/maps?q='+geo[0]+'+'+geo[1]+'" target="_blank">'+
                            response[i].geolocation+'</a></td><td class="ocultable1">'+response[i].info+'</td></tr>'
                             } else {//no geolocation
@@ -450,8 +456,8 @@ function workShiftQuery(){
                            '<th>Total (h)</th><th class="ocultable1">'+locationString+'</th><th>'+deviceInfo+'</th></tr>'+
                            '<tr><td class="ocultable1">'+(i+1)+'</td><td class="ocultable1">'+response[i].name+'</td><td class="ocultable1">'+
                            moment(response[i].jornada,'YYYY/MM/DD').format('DD/MM/YYYY')+'</td>'+
-                           '<td>'+moment(response[i].iniciTorn,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+
-                           '</td><td>'+moment(response[i].fiTorn,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+'</td><td>'+response[i].total+'</td>'+
+                           '<td>'+moment(response[i].iniciTorn,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY HH:mm')+
+                           '</td><td>'+moment(response[i].fiTorn,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY HH:mm')+'</td><td>'+response[i].total+'</td>'+
                            '<td class="ocultable1">'+notSaved+'</td><td>'+response[i].info+'</td></tr>'
                            }
                                 
@@ -518,8 +524,8 @@ function taskQuery(){
                        '<tr><th>Nº</th><th>'+task+'</th><th>'+taskStart+'</th><th>'+taskEnd+'</th>'+
                        '<th>Total (min)</th><th class="ocultable1">'+locationString+'</th><th class="ocultable1">'+deviceInfo+'</th></tr>'+
 
-                       '<tr><td>'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+moment(response[i].iniciTasca,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+'</td>'+
-                       '<td>'+moment(response[i].fiTasca,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+'</td><td>'+response[i].total+'</td>'+
+                       '<tr><td>'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+moment(response[i].iniciTasca).format('DD/MM/YYYY HH:mm')+'</td>'+
+                       '<td>'+moment(response[i].fiTasca).format('DD/MM/YYYY HH:mm')+'</td><td>'+response[i].total+'</td>'+
                        '<td class="ocultable1"><a href="https://www.google.com/maps?q='+geo[0]+'+'+geo[1]+'" target="_blank">'+
                        response[i].geolocation+'</a></td><td class="ocultable1">'+response[i].info+'</td></tr>'
                         } else {//no geolocation
@@ -532,8 +538,8 @@ function taskQuery(){
                        '<tr><th>Nº</th><th>'+task+'</th><th>'+taskStart+'</th><th>'+taskEnd+'</th>'+
                        '<th>Total (min)</th><th class="ocultable1">'+locationString+'</th><th class="ocultable1">'+deviceInfo+'</th></tr>'+
 
-                       '<tr><td>'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+moment(response[i].iniciTasca,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+'</td>'+
-                       '<td>'+moment(response[i].fiTasca,'YYYY/MM/DD hh:mm').format('DD/MM/YYYY hh:mm')+'</td><td>'+response[i].total+'</td>'+
+                       '<tr><td>'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+moment(response[i].iniciTasca).format('DD/MM/YYYY HH:mm')+'</td>'+
+                       '<td>'+moment(response[i].fiTasca).format('DD/MM/YYYY HH:mm')+'</td><td>'+response[i].total+'</td>'+
                        '<td class="ocultable1">'+notSaved+'</td><td class="ocultable1">'+response[i].info+'</td></tr>'
                        }
                             

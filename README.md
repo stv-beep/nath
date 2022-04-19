@@ -1,10 +1,15 @@
-# Aplicació per a fitxatges Nath v0.9.3
+# Aplicació per a fitxatges Nath v0.9.4
 #### Aleix Algueró, 2022
 ## Sobre l'aplicació
 
 És una aplicació per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació. I l'administrador podrà llistar totes les jornades de tothom i fer consultes des d'una taula dinàmica.
 Ara mateix, en versió 0.9.3, sembla que té una certa estabilitat.
 
+### Update 0.9.4
+- Afegits dos nous camps als usuaris per a vincular-los a l'Odoo: ID d'Odoo de Nath i ID d'Odoo de TucTuc.
+- Afegits botons de copiar, descarregar amb csv, excel, pdf o imprmir per al reporting d'hores.
+- Afegit un nou apartat anomenat "Usuaris" on els administradors podran editar certs aspectes dels usuaris com el seu ID d'Odoo de Nath, de TucTuc, si són administradors o no o si estan a magatzem o no.
+- Corregit un error al mostrar les hores d'inici i de final al reporting on les hores es mostraven en format 12h sense indicar si eren abans o després del migdia. Ara es mostra en format 24h.
 
 ### Update 0.9.3
 - Afegit "recepcions", "reoperacions" i "inventari" i les seves activitats.
@@ -31,11 +36,12 @@ Ara mateix, en versió 0.9.3, sembla que té una certa estabilitat.
 - Icones d'idioma.
 
 
-### Errors i bugs (versió 0.9.3)
+### Errors i bugs (versió 0.9.4)
 - La geolocalització no funciona sense HTTPS.
 - Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.
 - Probablement, si d'alguna forma es desactiva el javascript/'la desactivació dels botons' és possible que es puguen iniciar varies tasques alhora i que el programa perdi la seva funcionalitat de sèrie.
 - La suma automàtica d'hores al reporting en versió MÒBIL no funciona.
+- El scroll al reporting en versió mòbil no funciona bé i es queda bloquejat.
 
 
 ### Development setup
