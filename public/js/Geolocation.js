@@ -9,10 +9,10 @@ function getLocation() {
 function showPosition(position) {
     const coord = position.coords.latitude +" "+ position.coords.longitude;
     const xy = document.getElementsByClassName('xy');
-    //una altra solucio provisional per a guardar les coordenades
+    //provisional solution to save the coords, in each input
     for (var i=0;i<xy.length;i++){
         xy[i].value = coord;
     }
-    console.log(coord);
+    
     return coord;
 }

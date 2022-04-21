@@ -29,9 +29,6 @@ function ordersOnLoad(){
 
                   console.log(response)
                   if (response != 0) {
-                    //console.log(response[0])
-                    console.log(response.id)
-                    console.log(response.tasca)
                     var taskID = response.id;
                     var taskName = response.tasca;
                     if (taskID > 4){//si la tasca d'un altre tipo NO esta acabada
@@ -110,7 +107,7 @@ function ordersOnLoad(){
     function startPrepComanda() {
       translateAlerts();
       var c = document.getElementById('o1').value;
-          console.log('sending...');
+          
           $.ajaxSetup({
               headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -170,7 +167,7 @@ function ordersOnLoad(){
   function startRevComanda() {
       translateAlerts();
       var c = document.getElementById('o2').value;
-              console.log('sending...');
+              
               $.ajaxSetup({
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -227,7 +224,7 @@ function ordersOnLoad(){
   function startExpedComanda() {
       translateAlerts();
       var c = document.getElementById('o3').value;
-      console.log('sending...');
+      
       $.ajaxSetup({
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -283,7 +280,7 @@ function ordersOnLoad(){
   function startSAFComanda() {
       translateAlerts();
       var c = document.getElementById('o4').value;
-      console.log('sending...');
+      
       $.ajaxSetup({
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -342,7 +339,7 @@ function ordersOnLoad(){
    * @return [type]
    */
   function stopComandes(){
-      console.log('sending...');
+      
               $.ajax(
                   {
                           type: "POST",

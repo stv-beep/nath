@@ -11,6 +11,10 @@
 <script src="https://cdn.datatables.net/plug-ins/1.10.19/api/sum().js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 
+{{-- spinner loader --}}
+<div id="ContenedorSpinnerCrear" class="ContenedorSpinnerCrear">
+    <div id="SpinnerCrear" class="SpinnerCrear"></div>
+</div>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -116,9 +120,10 @@
                             <th scope="col">ID Odoo Nath</th>
                             <th scope="col">ID Odoo TucTuc</th>
                             <th scope="col">{{ __('messages.Warehouse') }}</th>
+                            <th scope="col">{{ __('messages.Edit') }}</th>
                             <th scope="col">{{ __('messages.Admin') }}</th>
                             <th scope="col">DNI</th>
-                            <th scope="col">{{ __('messages.Edit') }}</th>
+                            
                         </tr>
                         </thead>
                         <tbody>
@@ -133,13 +138,15 @@
                             @else
                             <td>No</td>
                             @endif
+                            <td><a onclick="modalEditUser({{$u}})" class="fas fa-user-edit center" id="icons-underline"></a></td>
                             @if($u->administrador == 1)
                             <td>{{ __('messages.Yes') }}</td>
                             @else
                             <td>No</td>
                             @endif
                             <td>{{$u->DNI}}</td>
-                            <td><a onclick="modalEditUser({{$u}})" class="fas fa-user-edit center" id="icons-underline"></a></td>
+
+                            
                         </tr>
                         @endforeach
                         </tbody>
@@ -150,9 +157,10 @@
                                 <th scope="col">ID Odoo Nath</th>
                                 <th scope="col">ID Odoo TucTuc</th>
                                 <th scope="col">{{ __('messages.Warehouse') }}</th>
+                                <th scope="col">{{ __('messages.Edit') }}</th>
                                 <th scope="col">{{ __('messages.Admin') }}</th>
                                 <th scope="col">DNI</th>
-                                <th scope="col">{{ __('messages.Edit') }}</th>
+                                
                             </tr>
                         </tfoot>
                     </table>

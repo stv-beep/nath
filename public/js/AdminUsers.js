@@ -1,16 +1,36 @@
+/* $(window).load(function() {
+    $(".fa fa-spinner fa-pulse fa-3x fa-fw").fadeOut("slow");
+    $('#users').html('<center> <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></center>')
+}); */
+
+window.onload = function () {
+    var contenedor = document.getElementById('ContenedorSpinnerCrear');
+    contenedor.style.visibility = 'hidden';
+    contenedor.style.opacity = '0';
+}
+
+  
 $(document).ready( function () {
     $('#users tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input class="searchDT" type="text" placeholder="Buscar '+title+'" />' );
     } );
+    
     var table = $('#users').DataTable({
         "lengthMenu": [[5, 10, 25, 50, 100, 250, 500, 1000, -1], [5, 10, 25, 50, 100, 250, 500, 1000, "All"]],
         "paging": true,
-        responsive: true,
+        select: true,
+        stateSave: true,
         'processing': true,
         'language': {
             'loadingRecords': '&nbsp;',
-            'processing': '<div class="loading"></div>'
+            'processing': '<div class="loading"></div>',
+            "zeroRecords": "No se encontraron coincidencias",
+        },
+        orderCellsTop: true,
+        fixedHeader: {
+            header: true,
+            //footer: true
         },
         zeroRecords: "<div class='loading'></div>",
         "pagingType": "full_numbers",
@@ -28,7 +48,6 @@ $(document).ready( function () {
                 } );
             } );
         }
-
     });
     $('#users tfoot tr').appendTo('#users thead');//append search to table head
 } );
@@ -118,16 +137,23 @@ function modalEditUser(user){
                 var magatzemRadios = document.getElementsByName('magatzem');
                     for (i = 0; i < magatzemRadios.length; i++) {
                         if (magatzemRadios[i].value == response.magatzem) {
+                            //console.log(response.magatzem)
+                            //console.log(magatzemRadios[i].value)
                             magatzemRadios[i].checked = true;
-                        }
+                        } 
                 }
                 //checking if 1 or 0 for radio check
                 var adminRadios = document.getElementsByName('admin');
+                    //per alguna rao si ho faig com al de magatzem, em funciona en local pero no en producció, 
+                    //així que faig servir el següent:
+                    adminRadios[1].checked = true;
+					//console.log(response.administrador)
                     for (i = 0; i < adminRadios.length; i++) {
                         if (adminRadios[i].value == response.administrador) {
                             adminRadios[i].checked = true;
-                        }
+                        } 
                 }
+                console.dir()
                 
                 //var jsonData = JSON.parse(response);
                 //console.log(jsonData)
@@ -158,7 +184,7 @@ function modalEditUser(user){
                 .slideUp(1000, function () {
                     $("#alert-success").slideUp(1000);
                 });
-              }, 500)
+              }, 1000)
             
             
             //var table = $('#users').DataTable();

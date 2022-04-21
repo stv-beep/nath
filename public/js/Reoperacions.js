@@ -10,24 +10,6 @@ function ordersOnLoad(){
     }, 1800000);//solucio provisional a que se quedigue la mateixa geolocalitzacio encara que no estigues alli ja
 }
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else { 
-                console.log('geolocation not supported')
-            }
-        }
-
-        function showPosition(position) {
-            const coord = position.coords.latitude +" "+ position.coords.longitude;
-            const xy = document.getElementsByClassName('xy');
-            //una altra solucio provisional per a guardar les coordenades
-            for (var i=0;i<xy.length;i++){
-                xy[i].value = coord;
-            }
-            console.log(coord);
-            return coord;
-        }
 
         let lecturaCheck = document.getElementById("Reop9");
         let embolsarCheck = document.getElementById("Reop10");
@@ -46,9 +28,7 @@ function ordersOnLoad(){
                       url: "/comandes/check",
                       success: function(response){
                         if (response != 0) {
-                            console.log(response)
-                            console.log(response.id)
-                            console.log(response.tasca)
+                            //console.log(response)
                             var taskID = response.id;
                             var taskName = response.tasca;
                             if (taskID < 9 || taskID > 12){//si la tasca d'un altre tipo NO esta acabada
@@ -85,7 +65,7 @@ function ordersOnLoad(){
     function startLectura() {
         translateAlerts();
         var c = document.getElementById('reop1').value;
-            console.log('sending...');
+            
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -145,7 +125,7 @@ function ordersOnLoad(){
 function startEmbolso() {
     translateAlerts();
     var c = document.getElementById('reop2').value;
-    console.log('sending...');
+    
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -207,7 +187,7 @@ function startEmbolso() {
 function startEtiq() {
     translateAlerts();
     var c = document.getElementById('reop3').value;
-    console.log('sending...');
+    
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -269,7 +249,7 @@ function startEtiq() {
 function startOtrosReop() {
     translateAlerts();
     var c = document.getElementById('reop4').value;
-    console.log('sending...');
+    
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

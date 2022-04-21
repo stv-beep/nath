@@ -67,6 +67,7 @@ return [
     'Yes' => 'Yes',
 
     /* Reports */
+    'Query' => "Search",
     'Worker'=> "Employee",
     'Exact query'=> "Exact query",
     'Reload table' => "Reload table",
@@ -74,6 +75,10 @@ return [
     'Shift query'=> "Shift query",
     'Geolocation'=> "Geolocation",
     'Task query' => "Task query",
+
+    'Export to PDF' => "Export to PDF",
+    'Export to CSV' => "Export to CSV",
+    'Export to Excel' => "Export to Excel",
 
     /* Usuarios */
     'Users' => "Users",

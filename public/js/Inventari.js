@@ -10,24 +10,6 @@ function ordersOnLoad(){
     }, 1800000);//solucio provisional a que se quedigue la mateixa geolocalitzacio encara que no estigues alli ja
 }
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else { 
-                console.log('geolocation not supported')
-            }
-        }
-
-        function showPosition(position) {
-            const coord = position.coords.latitude +" "+ position.coords.longitude;
-            const xy = document.getElementsByClassName('xy');
-            //una altra solucio provisional per a guardar les coordenades
-            for (var i=0;i<xy.length;i++){
-                xy[i].value = coord;
-            }
-            console.log(coord);
-            return coord;
-        }
 
         let compactarCheck = document.getElementById("Inv13");
         let inventariarCheck = document.getElementById("Inv14");
@@ -42,9 +24,7 @@ function ordersOnLoad(){
                       url: "/comandes/check",
                       success: function(response){
                         if (response != 0) {
-                            console.log(response)
-                            console.log(response.id)
-                            console.log(response.tasca)
+                            //console.log(response)
                             var taskID = response.id;
                             var taskName = response.tasca;
                             if (taskID < 13 || taskID > 14){//si la tasca d'un altre tipo NO esta acabada
@@ -79,7 +59,7 @@ function ordersOnLoad(){
     function startCompactar() {
         translateAlerts();
         var c = document.getElementById('inv1').value;
-            console.log('sending...');
+            
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -134,7 +114,7 @@ function ordersOnLoad(){
 function startInventariar() {
     translateAlerts();
     var c = document.getElementById('inv2').value;
-    console.log('sending...');
+    
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

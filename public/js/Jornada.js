@@ -6,8 +6,6 @@ function onLoad(){
     getLocation();   
 }
 
-
-
     /* console.log('appCodeName: '+navigator.appCodeName)
     console.log('appVersion: '+navigator.appVersion)
     console.log('platform: '+navigator.platform)
@@ -21,7 +19,7 @@ function onLoad(){
             headers:
             { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
         });
-        console.log('sending...');
+        
         $.ajax(
                 {
                     type: "POST",
@@ -42,7 +40,7 @@ function onLoad(){
                         });
                             window.setTimeout(function(){
                                 window.location = "/home";//"{{route('home')}}"
-                            }, 1500);
+                            }, 200);
                     },
                     error: function(xhr, textStatus, error){
                         $("#alert-danger-message-inici").text(msgError);
@@ -59,7 +57,7 @@ function onLoad(){
 
     function end() {
         translateAlerts();
-        console.log('sending...');
+        
         $.ajax(
                 {
                     type: "PATCH",
@@ -86,7 +84,7 @@ function onLoad(){
                             });
                                 window.setTimeout(function(){
                                     window.location = "/home";//"{{route('home')}}"
-                                }, 1500);
+                                }, 400);
                         }
                     },//si no s'ha trobat cap registre amb inici de jornada, retornara error amb alert
                     error: function(xhr, textStatus, error){

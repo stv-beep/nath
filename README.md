@@ -1,9 +1,15 @@
-# Aplicació per a fitxatges Nath v0.9.4
+# Aplicació per a fitxatges Nath v0.9.5
 #### Aleix Algueró, 2022
 ## Sobre l'aplicació
 
-És una aplicació per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació. I l'administrador podrà llistar totes les jornades de tothom i fer consultes des d'una taula dinàmica.
-Ara mateix, en versió 0.9.3, sembla que té una certa estabilitat.
+App per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació. I l'administrador podrà llistar totes les jornades de tothom i fer consultes des d'una taula dinàmica.
+Ara mateix, en versió 0.9.5, sembla que té una certa estabilitat.
+
+### Update 0.9.5
+- Afegits botons per a exportar a PDF, xls i CSV a cadascuna de les consultes de reporting (a algunes consultes no està disponible el PDF).
+- Fix d'algunes traduccions.
+- Afegit un spinner loader a l'apartat de gestió d'usuaris i al de reports.
+- Correccions al backend, sobretot en logs.
 
 ### Update 0.9.4
 - Afegits dos nous camps als usuaris per a vincular-los a l'Odoo: ID d'Odoo de Nath i ID d'Odoo de TucTuc.
@@ -36,12 +42,13 @@ Ara mateix, en versió 0.9.3, sembla que té una certa estabilitat.
 - Icones d'idioma.
 
 
-### Errors i bugs (versió 0.9.4)
+### Errors i bugs (versió 0.9.5)
 - La geolocalització no funciona sense HTTPS.
 - Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.
 - Probablement, si d'alguna forma es desactiva el javascript/'la desactivació dels botons' és possible que es puguen iniciar varies tasques alhora i que el programa perdi la seva funcionalitat de sèrie.
 - La suma automàtica d'hores al reporting en versió MÒBIL no funciona.
-- El scroll al reporting en versió mòbil no funciona bé i es queda bloquejat.
+- El scroll al reporting en versió mòbil no funciona bé i es queda bloquejat (sembla que això només passa amb algun navegador concret).
+- Algunes consultes al report no tenen l'opció d'exportar a PDF ja que el resultat no és l'esperat.
 
 
 ### Development setup

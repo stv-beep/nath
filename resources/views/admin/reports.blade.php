@@ -21,6 +21,16 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+{{-- <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script> --}}
+<script src="{{ asset('js/table2csv.min.js') }}"></script>
+<script src="{{ asset('js/divtocsv.js') }}" defer></script>
+
+{{-- spinner loader --}}
+<div id="ContenedorSpinnerCrear" class="ContenedorSpinnerCrear">
+    <div id="SpinnerCrear" class="SpinnerCrear"></div>
+</div>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-12">
@@ -74,11 +84,14 @@
                                 <div class="col-md-6"><input id="reportDate2" class="form-control" type="date" autofocus>
                             </div></div></div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-dark" onclick="twoDateQuery()">Consultar</button>
+                                <button type="button" id="completeToPDF" onclick="saveDiv('totalQuery','Consulta')" 
+                                class="btn btn-outline-danger btw-dateQ">
+                                    {{ __('messages.Export to PDF') }}</button>
+                                <button type="button" class="btn btn-outline-dark" onclick="twoDateQuery()">{{ __('messages.Query') }}</button>
                             </div>
                             </form>
-                            <div class="btn btn-dark noClicable"><h4><span id="total2DateQuery"></span></h4></div>
-
+                            <div id="totalQuery" class="btn btn-dark noClicable"><h4><span id="total2DateQuery"></span></h4></div>
+                            
                     </div></div></div>
 
                     {{-- MODAL 2 --}}
@@ -110,10 +123,16 @@
                             </div></div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-dark" onclick="completeQuery()">Consultar</button>
+                                <button type="button" id="completeToPDF" onclick="saveDiv('completeResult','Consulta completa')" class="btn btn-outline-danger completeQ">
+                                    {{ __('messages.Export to PDF') }}</button>
+                                <button type="button" onclick="exportTableToExcel('completeQueryTable', 'Consulta')" class="btn btn-outline-success completeQ">
+                                    {{ __('messages.Export to Excel') }}</button>
+                                {{-- <button type="button" onclick="divtoCSV(completeResult)" class="btn btn-outline-success completeQ">  
+                                    {{ __('messages.Export to CSV') }}</button>  --}} {{-- some errors in the CSV--}}
+                                <button type="button" class="btn btn-outline-dark" onclick="completeQuery()">{{ __('messages.Query') }}</button>
                             </div>
                             </form>
-                            <div id="completeResult"><h4><span></span></h4></div>
+                            <div id="completeResult"><h4><span></span></h4></div></table>
                     </div></div></div>
 
                     {{-- MODAL 3 --}}
@@ -145,10 +164,17 @@
                             </div></div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-dark" onclick="workShiftQuery()">Consultar</button>
+                                {{-- <button type="button" id="completeToPDF" onclick="saveDiv('shiftQueryDiv','Title')" class="btn btn-outline-danger shiftQuery">
+                                    {{ __('messages.Export to PDF') }}</button> --}}
+                                <button type="button" onclick="exportTableToExcel('shiftTable', 'Consulta')" class="btn btn-outline-success shiftQuery">
+                                    {{ __('messages.Export to Excel') }}</button>
+                                <button type="button" onclick="liveexportcsv(shiftTable)" class="btn btn-outline-success shiftQuery">  
+                                    {{ __('messages.Export to CSV') }}</button>
+                                <button type="button" class="btn btn-outline-dark" onclick="workShiftQuery()">{{ __('messages.Query') }}</button>
                             </div>
                             </form>
-                            <table class="table table-striped" id="shiftTable"></table>
+                            <div id="shiftQueryDiv">
+                            <table class="table table-striped" id="shiftTable"></table></div>
                     </div></div></div>
 
                     {{-- MODAL 4 task query --}}
@@ -180,10 +206,18 @@
                             </div></div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-dark" onclick="taskQuery()">Consultar</button>
+                                {{-- <button  type="button" id="completeToPDF" onclick="saveDiv('taskquery','Title')" class="btn btn-outline-danger taskQuery">
+                                    {{ __('messages.Export to PDF') }}</button> --}}
+                                <button type="button" onclick="exportTableToExcel('taskTableQuery', 'Consulta')" class="btn btn-outline-success taskQuery">
+                                    {{ __('messages.Export to Excel') }}</button>
+                                <button type="button" onclick="liveexportcsv(taskTableQuery)" class="btn btn-outline-success taskQuery">  
+                                    {{ __('messages.Export to CSV') }}</button>                                    
+                                <button type="button" class="btn btn-outline-dark" onclick="taskQuery()">{{ __('messages.Query') }}</button>
                             </div>
                             </form>
-                            <table class="table table-striped" id="taskTableQuery"></table>
+                            <div id="taskquery">
+                            <table class="table table-striped" id="taskTableQuery"></table></div>
+                            
                     </div></div></div>
 
                     <hr>
@@ -197,7 +231,7 @@
                             <th scope="col">{{ __('messages.Day') }}</th>
                             <th scope="col">Total (h)</th>
                             <th scope="col">ID {{ __('messages.Worker') }}</th>
-                            <th scope="col">Geolocalización</th>
+                            <th scope="col">{{ __('messages.Geolocation') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -229,15 +263,4 @@
         </div>
     </div>
 </div>
-
-{{-- <script type="text/javascript">
-    var path = "{{ route('admin.getEmployees') }}";
-    $('input.typeahead').typeahead({
-        source:  function (query, process) {
-        return $.get(path, { query: query }, function (data) {
-                return process(data);
-            });
-        }
-    });
-</script> --}}
 @endsection

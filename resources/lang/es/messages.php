@@ -68,6 +68,7 @@ return [
 
 
     /* Reports */
+    'Query' => "Consultar",
     'Worker'=> "Empleado",
     'Exact query' => "Consulta exacta entre fechas",
     'Reload table' => "Actualizar tabla",
@@ -75,6 +76,10 @@ return [
     'Shift query'=> "Consulta de turnos",
     'Geolocation'=> "Geolocalización",
     'Task query' => "Consulta de tareas",
+
+    'Export to PDF' => "Exportar a PDF",
+    'Export to CSV' => "Exportar a CSV",
+    'Export to Excel' => "Exportar a Excel",
 
     /* Usuarios */
     'Users' => "Usuarios",

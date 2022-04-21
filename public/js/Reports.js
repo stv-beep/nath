@@ -1,12 +1,28 @@
 //https://datatables.net/extensions/fixedheader/examples/options/columnFiltering.html
 //https://datatables.net/forums/discussion/43792/column-search-second-header
-
+window.onload = function(){
+    var contenedor = document.getElementById('ContenedorSpinnerCrear');
+    contenedor.style.visibility = 'hidden';
+    contenedor.style.opacity = '0';
+}
 /* datatable */
 $(document).ready(function() {
 
     $('#alert-warning').hide();//for some reason the warning alert pops up always
     $('#alert-modal3').hide();
     $('#alert-modal4').hide();
+
+    //hidding modal export buttons
+    $('.btw-dateQ').hide();
+    $('.completeQ').hide();
+    $('.shiftQuery').hide();
+    $('.taskQuery').hide();
+    
+       /*  $("#reports").dxDataGrid({
+            dataSource: dia,
+            keyExpr: "id",
+        }); */
+    
 
     $('#reports tfoot th').each( function () {
         var title = $(this).text();
@@ -25,7 +41,17 @@ $(document).ready(function() {
         'processing': true,
         'language': {
             'loadingRecords': '&nbsp;',
-            'processing': '<div class="loading"></div>'
+            'processing': '<div class="loading"></div>',
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            "paginate": {
+                "first":      "Primero",
+                "last":       "Último",
+                "next":       "Siguiente",
+                "previous":   "Anterior"
+            },
+            "zeroRecords":    "No se encontraron coincidencias",
+            "search":         "Buscar:",
+            "lengthMenu":     "Mostrar _MENU_ registros",
         },
         zeroRecords: "<div class='loading'></div>",
         "pagingType": "full_numbers",
@@ -35,13 +61,6 @@ $(document).ready(function() {
             header: true,
             footer: true
         },
-        /* scrollX: true,
-        scrollY: '80%', */
-        /* "drawCallback": function (settings) { 
-            // Here the response
-            var response = settings.json;
-            console.log(response);
-        }, */
         initComplete: function () {
             this.api().columns().every( function () {
                 var that = this;
@@ -115,11 +134,6 @@ $(document).ready(function() {
 
     //new $.fn.dataTable.FixedHeader( table );
 
-    /* table.on( 'order.dt search.dt', function () {
-        table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-        } );
-    } ).draw(); */
 
     $('#btn-reload').on('click', function(){
         $('#icon-reload').toggleClass("down");
@@ -144,7 +158,7 @@ function twoDateQuery(){
         headers:
         { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
-    console.log('func');
+    
     var treballador = document.getElementById('workerID').value;
     var data1 = document.getElementById('reportDate1').value;
     var data2 = document.getElementById('reportDate2').value;
@@ -158,10 +172,11 @@ function twoDateQuery(){
                 dia2 : data2,
              },
             success: function( response ) {
-                console.log(response);
+                //console.log(response);
                 $('#total2DateQuery').html(
                     worker+': '+ response[0]+
                     '<br>Total: '+response[1].toFixed(2)+' '+hours);
+                    $('.btw-dateQ').show();//showing the buttons
             },
             error: function(xhr, textStatus, error){
                 $("#alert-danger-message-inici").text(msgErrorQuery1);
@@ -217,7 +232,7 @@ function completeQuery(){
         headers:
         { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
-    console.log('func');
+    
     var treballador = document.getElementById('worker0id').value;
     var data0 = document.getElementById('reportDate0').value;
     $.ajax(
@@ -239,11 +254,11 @@ function completeQuery(){
                 } else {//result
                 let res = response[0];
                 if (res.geolocation != null){
-                    console.log(res)
+                    //console.log(res)
                 var geo = res.geolocation.split(' ');
                 $('#completeResult').html(
                     
-                    '<table class="table table-striped">'+
+                    '<table id="completeQueryTable" class="table table-striped">'+
                     '<tr><th class="thead-dark">ID '+worker+': </th><td>'+res.treballador+'</td></tr>'+
                     '<tr><th>'+worker+': </th><td>'+res.name+'</td></tr>'+
                     '<tr><th class="thead-dark">'+day+': </th><td>'+moment(res.dia,'YYYY/MM/DD').format('DD/MM/YYYY')+'</td></tr>'+
@@ -270,6 +285,9 @@ function completeQuery(){
     
                         );
                 }
+
+                $('.completeQ').show();
+
             }},
             error: function(xhr, textStatus, error){
                 $("#alert-danger-message-final").text(msgNoResults);
@@ -424,7 +442,7 @@ function workShiftQuery(){
                 } else {//results
                     document.getElementById("shiftTable").innerHTML = html_data;//cleaning the query result
                 for(var i=0;i<response.length;i++){   
-                        console.log(response[i].iniciTorn);
+                        //console.log(response[i].iniciTorn);
                 }
                     var iconTimer = '<i class="fas fa-hourglass-half fa-spin"></i>';
                         for(var i=0;i<response.length;i++){
@@ -464,7 +482,7 @@ function workShiftQuery(){
                         }
 
                         document.getElementById("shiftTable").innerHTML = html_data;
-
+                        $('.shiftQuery').show();//showing exports buttons
             }},
             error: function(xhr, textStatus, error){
                 $("#alert-danger-message-warning").text(msgNoResults);
@@ -509,7 +527,7 @@ function taskQuery(){
                     });
                 } else {//results
                     document.getElementById("taskTableQuery").innerHTML = html_data;//cleaning the query result
-                    console.log(response)
+                    //console.log(response)
                     var iconTimer = '<i class="fas fa-hourglass-half fa-spin"></i>';
                     for(var i=0;i<response.length;i++){
 
@@ -546,7 +564,7 @@ function taskQuery(){
                     }
 
                         document.getElementById("taskTableQuery").innerHTML = html_data;
-
+                        $('.taskQuery').show();
             }},
             error: function(xhr, textStatus, error){
                 $("#alert-danger-message-task").text(msgErrorQuery1);
@@ -560,3 +578,75 @@ function taskQuery(){
 
 
 }
+
+
+/* exports */
+//a PDF
+var doc = new jsPDF();
+function saveDiv(divId, title) {
+    doc.fromHTML(`<html><head><title>${title}</title></head><body>` + document.getElementById(divId).innerHTML + `</body></html>`);
+    doc.save('consulta.pdf');
+}
+
+//DIV TO CSV
+function divtoCSV(div){
+    var csv = jQuery(div).map(function(a,i){
+        return $.trim($(this).text()).split(/\s*\n\s*/).join(",");
+      }).toArray().join("\r\n");
+
+      download(csv, "tabledata.csv", "text/csv");
+}
+
+//TABLE TO CSV
+let liveexportcsv = (div) => $(div).table2csv();
+
+//EXPORT TO EXCEL
+function exportTableToExcel(tableID, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = filename?filename+'.xls':'excel_data.xls'; //no puc guardar-lo en xlsx que seria lo ideal
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
+
+
+
+/* function html_table_to_excel(div)
+    {
+        var data = document.getElementById(div);
+
+        var file = XLSX.utils.table_to_book(data, {sheet: "sheet1"});
+
+        XLSX.write(file, { bookType: 'xlsx', bookSST: true, 'xlsx': 'base64' });
+
+        XLSX.writeFile(file, 'file.' + 'xlsx');
+    } */
+
+    /* const export_button = document.getElementById('export_button');
+
+    export_button.addEventListener('click', () =>  {
+        html_table_to_excel('xlsx',div);
+    }); */

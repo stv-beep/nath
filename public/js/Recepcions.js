@@ -10,24 +10,6 @@ function ordersOnLoad(){
     }, 1800000);//solucio provisional a que se quedigue la mateixa geolocalitzacio encara que no estigues alli ja
 }
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else { 
-                console.log('geolocation not supported')
-            }
-        }
-
-        function showPosition(position) {
-            const coord = position.coords.latitude +" "+ position.coords.longitude;
-            const xy = document.getElementsByClassName('xy');
-            //una altra solucio provisional per a guardar les coordenades
-            for (var i=0;i<xy.length;i++){
-                xy[i].value = coord;
-            }
-            console.log(coord);
-            return coord;
-        }
 
         let descargaCheck = document.getElementById("Recp5");
         let entradaCheck = document.getElementById("Recp6");
@@ -45,11 +27,8 @@ function ordersOnLoad(){
                       type: "GET",
                       url: "/comandes/check",
                       success: function(response){
-                        console.log(response)
+                        //console.log(response)
                         if (response != 0) {
-                          console.log(response)
-                          console.log(response.id)
-                          console.log(response.tasca)
                           var taskID = response.id;
                           var taskName = response.tasca;
                           if (taskID < 5 || taskID > 8){//si la tasca d'un altre tipo NO esta acabada (recep = 4 tasques)
@@ -86,7 +65,7 @@ function ordersOnLoad(){
     function startDescarga() {
         translateAlerts();
         var c = document.getElementById('r1').value;
-            console.log('sending...');
+            
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -147,7 +126,7 @@ function ordersOnLoad(){
     function startEntrada() {
             translateAlerts();
             var c = document.getElementById('r2').value;
-                console.log('sending...');
+                
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -209,7 +188,7 @@ function ordersOnLoad(){
 function startControlCalidad() {
     translateAlerts();
     var c = document.getElementById('r3').value;
-    console.log('sending...');
+    
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -273,7 +252,7 @@ function startControlCalidad() {
 function startUbicar() {
     translateAlerts();
     var c = document.getElementById('r4').value;
-    console.log('sending...');
+    
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
