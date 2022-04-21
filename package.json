@@ -2,6 +2,7 @@
     "name": "nath",
     "version": "0.9.5",
     "private": true,
+    "license" : "MIT License",
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
@@ -28,8 +29,5 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
         "moment": "^2.29.1"
-    },
-    {
-    "license" : "MIT License"
     }
 }
