@@ -104,10 +104,10 @@
                                         &nbsp;<i class="fas fa-house-user"></i>&nbsp;{{ __('Home') }}
                                     </a>
                                     @if ($user->administrador == true)
-                                    <a class="dropdown-item" href="{{ route('admin.users') }}">
+                                    <a class="dropdown-item" href="{{ route('admin.reports') }}">
                                         &nbsp;<i class="fas fa-file-invoice"></i>&nbsp;{{ __('Reports') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{-- {{ route('admin.reports') }} --}}">
+                                    <a class="dropdown-item" href="{{ route('admin.users') }}">
                                         &nbsp;<i class="fas fa-user-check"></i>{{ __('messages.Users') }}
                                     </a>
                                     @endif
