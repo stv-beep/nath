@@ -1,9 +1,9 @@
 //https://datatables.net/extensions/fixedheader/examples/options/columnFiltering.html
 //https://datatables.net/forums/discussion/43792/column-search-second-header
 window.onload = function(){
-    var contenedor = document.getElementById('ContenedorSpinnerCrear');
-    contenedor.style.visibility = 'hidden';
-    contenedor.style.opacity = '0';
+    var container = document.getElementById('ContenedorSpinnerCrear');
+    container.style.visibility = 'hidden';
+    container.style.opacity = '0';
 }
 /* datatable */
 $(document).ready(function() {
@@ -17,11 +17,6 @@ $(document).ready(function() {
     $('.completeQ').hide();
     $('.shiftQuery').hide();
     $('.taskQuery').hide();
-    
-       /*  $("#reports").dxDataGrid({
-            dataSource: dia,
-            keyExpr: "id",
-        }); */
     
 
     $('#reports tfoot th').each( function () {

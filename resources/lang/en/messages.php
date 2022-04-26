@@ -9,6 +9,7 @@ return [
     'Spanish' => "Spanish",
     'English' => "English",
     'Username' => "Username",
+    'Cancel' => "Cancel",
     /* Home */
     'Welcome' => "Welcome",
     'Working day' => "Work day",

@@ -5,6 +5,7 @@ let msgIniciJornada, msgFinalJornada, tascaNoAcabada, msgError, msgErrorQuery1, 
 let msgRecepDescarga, msgRecepEntrada, msgRecepControl, msgRecepUbicar;
 let msgReopLectura, msgReopEmbolsar, msgReopEtiquetar, msgReopOtros;
 let msgInvCompactar, msgInventariar;
+let msgUserEdited;
 
 function translateAlerts(){   
     
@@ -31,6 +32,8 @@ function translateAlerts(){
         jornadaNoIniciada = "No pots inciar una tasca si no has començat la jornada.";
         msgError = "Sembla que ha hagut un error, per favor, torna-ho a intentar."
         noJornada = "No s'ha trobat cap inici de jornada coincident amb el teu registre.";
+        //admin users
+        msgUserEdited = "Usuari editat.";
 
         
     } else if (locale == 'es'){
@@ -56,6 +59,8 @@ function translateAlerts(){
         jornadaNoIniciada = "No puedes iniciar una tarea si no has empezado la jornada.";
         msgError = "Ha habido un error, vuelva a intentarlo."
         noJornada = "No se ha encontrado ningún inicio de jornada coincidente con tu registro.";
+        //admin users
+        msgUserEdited = "Usuario editado.";
 
     } else if (locale == 'en'){
         msgIniciJornada = "Work day started succesfully";
@@ -80,6 +85,8 @@ function translateAlerts(){
         jornadaNoIniciada = "You can not start a task if you did not started the shift.";
         msgError = "An error occurred, try again."
         noJornada = "Currently there isn't any work day matching with you.";
+        //admin users
+        msgUserEdited = "User edited.";
 
     }
 

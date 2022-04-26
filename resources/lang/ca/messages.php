@@ -9,6 +9,7 @@ return [
     'Spanish' => "Espanyol",
     'English' => "Anglès",
     'Username' => "Codi d'usuari",
+    'Cancel' => "Cancel·lar",
     /* Home */
     'Welcome' => "Benvingut",
     'Working day' => "Jornada del dia",

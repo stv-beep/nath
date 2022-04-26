@@ -46,7 +46,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h6 id="name">{{ __('messages.Edit') }} </h6><h6 id="id"></h6>
+                                    <span id="name">{{ __('messages.Edit') }} </span>
                                     <button id="closeModal" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                         &times;
                                     </button>
@@ -57,6 +57,11 @@
                                 @method('put')
                                 <input type="hidden" id="identificador">
                                 <div class="row mb-3">
+                                    <label class="col-md-4 col-form-label text-md-end">ID: </label>
+                                    <label id="id" class="col-md-4 col-form-label"></label>
+                                    <div class="col-md-6">
+                                </div></div>
+                                <div class="row mb-3">
                                     <label class="col-md-4 col-form-label text-md-end">ID Odoo Nath</label>
                                     <div class="col-md-6"><input id="id_nath" name="id_nath" class="form-control" 
                                         type="text" autofocus>
@@ -66,11 +71,6 @@
                                     <div class="col-md-6"><input id="id_tuctuc" name="id_tuctuc" class="form-control" 
                                         type="text" autofocus>
                                 </div></div>
-                                {{-- <div class="row mb-3">
-                                    <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Admin') }}</label>
-                                    <div class="col-md-6"><input id="admin" name="admin" class="form-control" 
-                                        type="text" autofocus>
-                                </div></div> --}}
 
                                 <div class="row mb-3">
                                     <label for="magatzem" class="col-md-4 col-form-label text-md-end">{{ __('messages.Warehouse') }}</label>
@@ -90,15 +90,10 @@
                                             <input type="radio" id="adminNO" name="admin" value="0">
                                             <label for="magatzem">No</label><br>
                                         </div>
-                                </div>
-
-                                {{-- <div class="row mb-3">
-                                    <label class="col-md-4 col-form-label text-md-end">{{ __('messages.Warehouse') }}</label>
-                                    <div class="col-md-6"><input id="magatzem" name="magatzem" class="form-control" 
-                                        type="text" autofocus>
-                                </div></div> --}}</div>
+                                </div></div>
 
                                 <div class="modal-footer">
+                                    <button id="closeModalUpdate" type="button" class="btn btn-outline-secondary">{{ __('messages.Cancel') }}</button>
                                     <button id="updateUser" type="button" class="btn btn-outline-dark" {{-- onclick="updateUser()" --}}>{{ __('messages.Edit') }}</button>
                                 </div>
                                 </form>

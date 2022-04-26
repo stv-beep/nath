@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-04-2022 a las 11:39:35
+-- Tiempo de generación: 25-04-2022 a las 11:43:16
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.1
 
@@ -191,8 +191,8 @@ CREATE TABLE `users` (
   `magatzem` tinyint(1) NOT NULL,
   `administrador` tinyint(1) DEFAULT NULL,
   `DNI` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `id_odoo_nath` int(11) DEFAULT NULL,
-  `id_odoo_tuctuc` int(11) DEFAULT NULL,
+  `id_odoo_nath` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_odoo_tuctuc` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL

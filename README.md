@@ -2,11 +2,11 @@
 #### Aleix Algueró, 2022
 ## Sobre l'aplicació
 
-App per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació. I l'administrador podrà llistar totes les jornades de tothom i fer consultes des d'una taula dinàmica.
+App per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació. I l'administrador podrà llistar totes les jornades de tothom i fer consultes des d'una taula dinàmica. A més, l'administrador podrà canviar certs camps dels usuaris.
 Ara mateix, en versió 0.9.5, sembla que té una certa estabilitat.
 
 ### Update 0.9.5
-- Afegits botons per a exportar a PDF, xls i CSV a cadascuna de les consultes de reporting (a algunes consultes no està disponible el PDF).
+- Afegits botons per a exportar a PDF, .xls i CSV a cadascuna de les consultes de reporting (a algunes consultes no està disponible el PDF).
 - Fix d'algunes traduccions.
 - Afegit un spinner loader a l'apartat de gestió d'usuaris i al de reports.
 - Correccions al backend, sobretot en logs.
@@ -45,10 +45,11 @@ Ara mateix, en versió 0.9.5, sembla que té una certa estabilitat.
 ### Errors i bugs (versió 0.9.5)
 - La geolocalització no funciona sense HTTPS.
 - Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.
-- Probablement, si d'alguna forma es desactiva el javascript/'la desactivació dels botons' és possible que es puguen iniciar varies tasques alhora i que el programa perdi la seva funcionalitat de sèrie.
+- Desactivant el JS segurament es pot trencar el funcionament dels botons. És possible que es puguen iniciar varies tasques alhora i que el programa perdi la seva funcionalitat de sèrie.
 - La suma automàtica d'hores al reporting en versió MÒBIL no funciona.
 - El scroll al reporting en versió mòbil no funciona bé i es queda bloquejat (sembla que això només passa amb algun navegador concret).
 - Algunes consultes al report no tenen l'opció d'exportar a PDF ja que el resultat no és l'esperat.
+- Degut a un problema amb l'actualització de la taula d'usuaris per a editar-los. Quan es fa una modificació, s'actualitza la pàgina directament.
 
 
 ### Development setup
@@ -67,31 +68,23 @@ php artisan key:generate
 php artisan serve
 ```
 
-##### Comprovar fitxer 'vendorstocats.txt' ja que per al login sense contrasenya s'han tingut que manipular alguns arxius allí indicats.
-
 #### Migrar BBDD
 ```
 php artisan migrate && php artisan db:seed
 ```
 
 ### Deploy setup
-#### Per a desplegar l'aplicació hi ha dos opcions: ip local o desplegar-lo a un servidor
-##### Si és per ip local, només caldria descomprimir l'aplicació al servidor i iniciar el php artisan:
-```
-php artisan serve --host=<server_ip> --port=8000
-```
 
 ##### Per a desplegar-lo serà millor mirar documentació
-- [Documentació molt útil](https://www.nigmacode.com/laravel/subir-proyecto-laravel-a-hosting)
-- [Documentation](https://platzi.com/tutoriales/2182-intro-laravel/9744-como-desplegar-una-app-hecha-en-laravel)
-- [Apache deploy Documentation](https://help.clouding.io/hc/es/articles/4406607535634-C%C3%B3mo-Desplegar-Laravel-8-con-Apache-y-Let-s-Encrypt-SSL-en-Ubuntu-20-04)
+- [Documentació molt útil sobre deplegament a servidor](https://www.nigmacode.com/laravel/subir-proyecto-laravel-a-hosting)
+- [Més desplegament](https://platzi.com/tutoriales/2182-intro-laravel/9744-como-desplegar-una-app-hecha-en-laravel)
 - [Official Documentation](https://laravel.com/docs/8.x/deployment)
 #### Al fitxer .env
 ```
 APP_ENV=production
 APP_DEBUG=false
 ```
-#### Al directori
+#### Al directori (és possible que això doni error; si dóna, saltem aquest pas)
 ```
 npm run production
 ```
@@ -100,28 +93,27 @@ composer dumpautoload
 ```
 
 ##### Comprimir App
-
-
-##### Descomprimir l'app al sistema d'arxius del servidor
-
-
-##### Moure els arxius de la carpeta 'public' a la 'public_html' i borrar la 'public' buida
-
-#### Al /public_html/index.php afegir
+##### Descomprimir l'app al sistema d'arxius del servidor.
+##### Moure els arxius de la carpeta 'public' a l'arrel del subdomini i borrar la 'public' buida.
+##### Al fitxer 'index.php' canviar les rutes dels __DIR__ per les que hi hauran ara al moure els arxius de /public. Per exemple:
 ```
-$app->bind('path.public', function() {
-    return __DIR__;
-});
+'/../vendor/autoload.php'
 ```
-#### Crear la base de dades
+###### per
+```
+'/vendor/autoload.php'
+```
+###### ja que 'index.php' i els arxius que es referencien aquí estaran al mateix nivell al directori.
 
-#### 
-#### 
-#### 
-#### 
-#### 
-# Readme de Laravel
+##### A la function 'register' a 'app/Providers/AppServiceProvider.php' afegir el vhost del servidor:
+```
+    $this->app->bind('path.public',function(){
+		return'/ruta/absoluta/vhost/web_url';
+		});
+```
+#### Si el composer funciona, fer un migrate de la BBDD, sinó, crear-la utilitzant l'arxiu 'nath.sql'.
 
+##### Informació de Laravel
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
