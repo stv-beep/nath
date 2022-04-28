@@ -73,6 +73,8 @@ cp .env.example .env
 ```
 php artisan key:generate
 ```
+#### A l'arixiu '.env', canviar a les dades correctes de connexió a la BBDD.
+
 ```
 php artisan serve
 ```

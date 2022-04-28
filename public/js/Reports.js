@@ -534,10 +534,10 @@ function taskQuery(){
                             }
 
                        html_data += 
-                       '<tr><th>Nº</th><th>'+task+'</th><th>'+taskStart+'</th><th>'+taskEnd+'</th>'+
+                       '<tr><th class="ocultable1">Nº</th><th>'+task+'</th><th>'+taskStart+'</th><th>'+taskEnd+'</th>'+
                        '<th>Total (min)</th><th class="ocultable1">'+locationString+'</th><th class="ocultable1">'+deviceInfo+'</th></tr>'+
 
-                       '<tr><td>'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+moment(response[i].iniciTasca).format('DD/MM/YYYY HH:mm')+'</td>'+
+                       '<tr><td class="ocultable1">'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+moment(response[i].iniciTasca).format('DD/MM/YYYY HH:mm')+'</td>'+
                        '<td>'+moment(response[i].fiTasca).format('DD/MM/YYYY HH:mm')+'</td><td>'+response[i].total+'</td>'+
                        '<td class="ocultable1"><a href="https://www.google.com/maps?q='+geo[0]+'+'+geo[1]+'" target="_blank">'+
                        response[i].geolocation+'</a></td><td class="ocultable1">'+response[i].info+'</td></tr>'
@@ -548,10 +548,10 @@ function taskQuery(){
                                 response[i].total = iconTimer;
                             }
                        html_data += 
-                       '<tr><th>Nº</th><th>'+task+'</th><th>'+taskStart+'</th><th>'+taskEnd+'</th>'+
+                       '<tr><th class="ocultable1">Nº</th><th>'+task+'</th><th>'+taskStart+'</th><th>'+taskEnd+'</th>'+
                        '<th>Total (min)</th><th class="ocultable1">'+locationString+'</th><th class="ocultable1">'+deviceInfo+'</th></tr>'+
 
-                       '<tr><td>'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+moment(response[i].iniciTasca).format('DD/MM/YYYY HH:mm')+'</td>'+
+                       '<tr><td class="ocultable1">'+(i+1)+'</td><td>'+response[i].tasca+'</td><td>'+moment(response[i].iniciTasca).format('DD/MM/YYYY HH:mm')+'</td>'+
                        '<td>'+moment(response[i].fiTasca).format('DD/MM/YYYY HH:mm')+'</td><td>'+response[i].total+'</td>'+
                        '<td class="ocultable1">'+notSaved+'</td><td class="ocultable1">'+response[i].info+'</td></tr>'
                        }
