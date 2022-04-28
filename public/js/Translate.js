@@ -36,8 +36,8 @@ function translateAlerts(){
         msgUserEdited = "Usuari editat satisfactòriament.";
         msgUserCreated = "Usuari creat satisfactòriament.";
         msgUserDeleted = "Usuari eliminat satisfactòriament.";
-        msgUserCreateError = "Ha habido un error, puede que el usuario ya exista, o que haya un usuario con el mismo código o DNI."
-        msgUserDeleteAdminError = "No se puede eliminar este usuario ya que es el único administrador registrado ahora mismo."
+        msgUserCreateError = "Hi ha hagut un error, potser l'usuari ja existeix, o que hi hagi un usuari amb el mateix codi o DNI."
+        msgUserDeleteAdminError = "Aquest usuari no es pot eliminar ja que és l'únic administrador registrat ara mateix."
         
     } else if (locale == 'es'){
         msgIniciJornada = "Jornada inciada con éxito";
@@ -96,8 +96,8 @@ function translateAlerts(){
         msgUserEdited = "User edited successfuly.";
         msgUserCreated = "User created successfuly.";
         msgUserDeleted = "User deleted successfuly.";
-        msgUserCreateError = "Ha habido un error, puede que el usuario ya exista, o que haya un usuario con el mismo código o DNI."
-        msgUserDeleteAdminError = "No se puede eliminar este usuario ya que es el único administrador registrado ahora mismo."
+        msgUserCreateError = "There has been an error, the user may already exist, or there may be a user with the same username or DNI."
+        msgUserDeleteAdminError = "This user cannot be deleted since he is the only administrator registered at the moment."
 
     }
 

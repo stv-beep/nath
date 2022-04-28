@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('id_odoo_tuctuc', 50)->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

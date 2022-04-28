@@ -124,7 +124,6 @@ function modalEditUser(user){
 function updateUser(id){
     translateAlerts()
     var id = document.getElementById('identificador').value;
-    //console.log(id)
     $.ajaxSetup({
         headers:
         { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
@@ -199,15 +198,13 @@ function modalCreateUser(){
                 url: "/createUser",
                 data: $('#createUser').serialize(),
                 success: function( response ) {
-                    console.log(response)
-
+                   
                     if (response == 'OK'){
                         
                         $("#alert-message-create-user").text(msgUserCreated);
                         $("#alert-success-create")
                         .fadeTo(4000, 1000)
                         .slideUp(1000, function () {
-                            console.log('unga')
                             $("#alert-success-create").slideUp(1000);
                         });
 
@@ -216,7 +213,7 @@ function modalCreateUser(){
                     window.location.reload();
                       }, 500)
                     } else {
-                        console.log(response.message)
+                        
                         $("#alert-danger-message-create").text(msgError);
                         $("#alert-danger-create")
                         .fadeTo(4000, 1000)
@@ -227,9 +224,6 @@ function modalCreateUser(){
    
                 },
                 error: function(xhr, textStatus, error){
-                    //console.log(error)
-                    //console.log(textStatus)
-                    //console.log(xhr.responseJSON.message)
                     $("#alert-danger-message-create").text(msgUserCreateError);
                         $("#alert-danger-create")
                         .fadeTo(4000, 1000)
@@ -267,7 +261,6 @@ function modalDeleteUser(user) {
                 url: "/deleteUser/"+id,
                 data: {id: id},
                 success: function( response ) {
-                    console.log(response)
                     if (response == 'OK'){
                         $("#alert-success-delete").show
                         $("#alert-message-delete-user").text(msgUserDeleted);

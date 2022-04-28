@@ -10,6 +10,8 @@ return [
     'English' => "Anglès",
     'Username' => "Codi d'usuari",
     'Cancel' => "Cancel·lar",
+    'Type your username' => "Intodueix el teu codi d'usuari",
+
     /* Home */
     'Welcome' => "Benvingut",
     'Working day' => "Jornada del dia",
@@ -90,6 +92,13 @@ return [
     'Users' => "Usuaris",
     'Admin' => "Administrador",
     'Edit' => "Editar",
+    'Create' => "Crear",
+    'Create user' => "Crear usuari",
+    'msg Delete user' => "Estàs segur que vols eliminar a ",
+    'msg Delete user 2' => "Recordi que l'usuari no s'esborrarà definitivament 
+    de la base de dades per mantenir la informació de registre de jornades.",
+    'Delete' => "Eliminar",
+    'Not required' => "No obligatori per a crear.",
 
     /* alerts */
     'Working day started' => "Jornada inciada amb èxit",

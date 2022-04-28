@@ -10,6 +10,8 @@ return [
     'English' => "Inglés",
     'Username' => "Código de usuario",
     'Cancel' => "Cancelar",
+    'Type your username' => "Introduce tu código",
+
     /* Home */
     'Welcome' => "Bienvenido",
     'Working day' => "Jornada del dia",
@@ -88,7 +90,9 @@ return [
     'Edit' => "Editar",
     'Create' => "Crear",
     'Create user' => "Crear usuario",
-    'msg Delete user' => "Estás seguro de que quieres eliminar a ",
+    'msg Delete user' => "¿Estás seguro de que quieres eliminar a ",
+    'msg Delete user 2' => "Recuerda que el usuario no se borrará definitivamente 
+    de la base de datos para mantener su información de registro de jornadas.",
     'Delete' => "Eliminar",
     'Not required' => "No obligatorio para crear.",
 

@@ -130,6 +130,7 @@
                                 </div>
                             <div class="modal-body">
                                 <p>{{ __('messages.msg Delete user') }}<strong id="name-user"></strong>?</p>
+                                <p>{{ __('messages.msg Delete user 2') }}</p>
 
                                 <div class="modal-footer">
                                     <button id="closeModalDelete" type="button" class="btn btn-outline-secondary">{{ __('messages.Cancel') }}</button>

@@ -10,6 +10,8 @@ return [
     'English' => "English",
     'Username' => "Username",
     'Cancel' => "Cancel",
+    'Type your username' => "Type your username",
+
     /* Home */
     'Welcome' => "Welcome",
     'Working day' => "Work day",
@@ -85,6 +87,13 @@ return [
     'Users' => "Users",
     'Admin' => "Administrator",
     'Edit' => "Edit",
+    'Create' => "Create",
+    'Create user' => "Create user",
+    'msg Delete user' => "Are you sure that you want to delete ",
+    'msg Delete user 2' => "Remember that the user will not be permanently deleted from the database 
+    in order to maintain their work registration information.",
+    'Delete' => "Delete",
+    'Not required' => "Not required.",
 
     'Preparación pedido' => 'Order preparation',
     'Revisión pedido' => 'Order review',
