@@ -64,7 +64,7 @@ return [
     'Name' => "Nombre y apellidos",
     'Username' => "Código",
     'Warehouse' => "Almacén",
-    'UserCode' => "Con este código iniciarás sessión.",
+    'UserCode' => "Con este código iniciarás sesión.",
     'Yes' => 'Sí',
 
 
@@ -86,6 +86,12 @@ return [
     'Users' => "Usuarios",
     'Admin' => "Administrador",
     'Edit' => "Editar",
+    'Create' => "Crear",
+    'Create user' => "Crear usuario",
+    'msg Delete user' => "Estás seguro de que quieres eliminar a ",
+    'Delete' => "Eliminar",
+    'Not required' => "No obligatorio para crear.",
+
 
     'Preparación pedido' => 'Preparación pedido',
     'Revisión pedido' => 'Revisión pedido',

@@ -30,7 +30,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    <button type="button" class="btn btn-info btns-reporting-btn" onclick="modalCreateUser();">{{ __('messages.Create user') }}</button>
 
                     {{-- MODAL EDIT --}}
                     <div class="modal" id="modalEditUser">
@@ -46,7 +46,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <span id="name">{{ __('messages.Edit') }} </span>
+                                    <span id="nameUser">{{ __('messages.Edit') }} </span>
                                     <button id="closeModal" type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                         &times;
                                     </button>
@@ -92,9 +92,152 @@
                                         </div>
                                 </div></div>
 
+                                <div class="row mb-3">
+                                    <label class="col-md-4 col-form-label text-md-end">DNI</label>
+                                    <div class="col-md-6"><input id="dni" name="dni" class="form-control" 
+                                        type="text" autofocus>
+                                </div></div>
+
                                 <div class="modal-footer">
                                     <button id="closeModalUpdate" type="button" class="btn btn-outline-secondary">{{ __('messages.Cancel') }}</button>
                                     <button id="updateUser" type="button" class="btn btn-outline-dark" {{-- onclick="updateUser()" --}}>{{ __('messages.Edit') }}</button>
+                                </div>
+                                </form>
+                    
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {{-- MODAL DELETE --}}
+                    <div class="modal" id="modalDeleteUser">
+                        {{-- alert edit user success --}}
+                        <div class='alert-position hidden alert alert-success' id='alert-success-delete' role='alert'>
+                            <strong id="alert-message-delete-user"></strong>&nbsp;
+                        </div>
+                        <div class='alert-position hidden alert alert-danger' id='alert-danger-delete' role='alert'>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong id="alert-danger-message-delete"></strong>&nbsp;
+                            &nbsp;&nbsp;   
+                        </div>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <span id="nameUser">{{ __('messages.Delete') }} </span>
+                                    <button id="closeModalD" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                </div>
+                            <div class="modal-body">
+                                <p>{{ __('messages.msg Delete user') }}<strong id="name-user"></strong>?</p>
+
+                                <div class="modal-footer">
+                                    <button id="closeModalDelete" type="button" class="btn btn-outline-secondary">{{ __('messages.Cancel') }}</button>
+                                    <button id="deleteUserBtn" type="button" class="btn btn-outline-danger">{{ __('messages.Delete') }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div></div>
+
+
+                    {{-- MODAL CREATE USER --}}
+                    <div class="modal" id="modalCreateUser">
+                        {{-- alert create user success --}}
+                        <div class='alert-position hidden alert alert-success' id='alert-success-create' role='alert'>
+                            <strong id="alert-message-create-user"></strong>&nbsp;
+                        </div>
+                        <div class='alert-position hidden alert alert-danger' id='alert-danger-create' role='alert'>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong id="alert-danger-message-create"></strong>&nbsp;
+                            &nbsp;&nbsp;   
+                        </div>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <span>{{ __('messages.Create user') }} </span>
+                                    <button id="closeModalCreate" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                </div>
+                            <div class="modal-body">
+                                <form id="createUser" method="POST" {{-- action="{{ route('create.user') }}" --}}>
+                                @csrf
+                                
+                                <div class="row mb-3">
+                                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('messages.Name') }}</label>
+        
+                                    <div class="col-md-6">
+                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+        
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+        
+                                <div class="row mb-3">
+                                    <label for="username" class="col-md-4 col-form-label text-md-end">{{ __("messages.Username") }}</label>
+        
+                                    <div class="col-md-6">
+                                        <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                                        <small id="usernameHelp" class="form-text text-muted">{{ __("messages.UserCode") }}</small>
+                                        @error('username')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+        
+                                <div class="row mb-3">
+                                    <label for="dni" class="col-md-4 col-form-label text-md-end">{{ __('DNI') }}</label>
+        
+                                    <div class="col-md-6">
+                                        <input id="dni" type="dni" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required>
+                                        @error('dni')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+        
+                                <div class="row mb-3">
+                                    <label for="magatzem" class="col-md-4 col-form-label text-md-end">{{ __('messages.Warehouse') }}</label>
+                                        <div class="col-md-6">
+                                            <input type="radio" id="magatzem" name="magatzem" value="1">
+                                            <label for="magatzem">{{ __('messages.Yes') }}</label><br>
+                                            <input type="radio" id="magatzem" name="magatzem" value="0">
+                                            <label for="magatzem">No</label><br>
+                                        </div>
+                                </div></div>
+
+                                <div class="row mb-3">
+                                    <label for="id_odoo_nath" class="col-md-4 col-form-label text-md-end">ID Odoo Nath</label>
+        
+                                    <div class="col-md-6">
+                                        <input id="id_nathCreate" name="id_nathCreate" class="form-control" 
+                                        type="text" autofocus>
+                                        <small class="form-text text-muted">{{ __("messages.Not required") }}</small>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="id_odoo_tuctuc" class="col-md-4 col-form-label text-md-end">ID Odoo Nath</label>
+        
+                                    <div class="col-md-6">
+                                        <input id="id_tuctucCreate" name="id_tuctucCreate" class="form-control" 
+                                        type="text" autofocus>
+                                        <small class="form-text text-muted">{{ __("messages.Not required") }}</small>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button id="closeModalC" type="button" class="btn btn-outline-secondary">{{ __('messages.Cancel') }}</button>
+                                    {{-- <button type="submit" class="btn btn-primary">{{ __('messages.Create') }}</button> --}}
+                                    <button id="createUserBtn" type="button" class="btn btn-outline-dark">{{ __('messages.Create') }}</button>
                                 </div>
                                 </form>
                     
@@ -115,7 +258,7 @@
                             <th scope="col">ID Odoo Nath</th>
                             <th scope="col">ID Odoo TucTuc</th>
                             <th scope="col">{{ __('messages.Warehouse') }}</th>
-                            <th scope="col">{{ __('messages.Edit') }}</th>
+                            <th scope="col"></th>
                             <th scope="col">{{ __('messages.Admin') }}</th>
                             <th scope="col">DNI</th>
                             
@@ -133,7 +276,12 @@
                             @else
                             <td>No</td>
                             @endif
-                            <td><a onclick="modalEditUser({{$u}})" class="fas fa-user-edit center" id="icons-underline"></a></td>
+                            <td>
+                                <abbr title="{{ __('messages.Edit') }}"><a onclick="modalEditUser({{$u}})" class="fas fa-user-edit center" 
+                                    id="icons-underline"></a></abbr>
+                                <abbr title="{{ __('messages.Delete') }}"><a onclick="modalDeleteUser({{$u}})" class="fas fa-user-slash center" 
+                                    id="icons-underline"></a></abbr>
+                            </td>
                             @if($u->administrador == 1)
                             <td>{{ __('messages.Yes') }}</td>
                             @else
@@ -152,7 +300,7 @@
                                 <th scope="col">ID Odoo Nath</th>
                                 <th scope="col">ID Odoo TucTuc</th>
                                 <th scope="col">{{ __('messages.Warehouse') }}</th>
-                                <th scope="col">{{ __('messages.Edit') }}</th>
+                                <th scope="col"></th>
                                 <th scope="col">{{ __('messages.Admin') }}</th>
                                 <th scope="col">DNI</th>
                                 

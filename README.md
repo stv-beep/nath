@@ -1,9 +1,14 @@
-# Aplicació per a fitxatges Nath v0.9.5
+# Aplicació per a fitxatges Nath v0.9.6
 #### Aleix Algueró, 2022
 ## Sobre l'aplicació
-
 App per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació. I l'administrador podrà llistar totes les jornades de tothom i fer consultes des d'una taula dinàmica. A més, l'administrador podrà canviar certs camps dels usuaris.
-Ara mateix, en versió 0.9.5, sembla que té una certa estabilitat.
+Ara mateix, en versió 0.9.6, sembla que té una certa estabilitat.
+
+### Update 0.9.5
+- Afegida la creació d'usuaris des d'administració d'usuaris.
+- Afegit l'eliminació d'usuaris des d'administració d'usuaris.
+- A l'edició d'usuaris, afegida l'opció per editar el DNI.
+- Correcció d'alguns errors.
 
 ### Update 0.9.5
 - Afegits botons per a exportar a PDF, .xls i CSV a cadascuna de les consultes de reporting (a algunes consultes no està disponible el PDF).
@@ -42,7 +47,7 @@ Ara mateix, en versió 0.9.5, sembla que té una certa estabilitat.
 - Icones d'idioma.
 
 
-### Errors i bugs (versió 0.9.5)
+### Errors i bugs (versió 0.9.6)
 - La geolocalització no funciona sense HTTPS.
 - Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.
 - Desactivant el JS segurament es pot trencar el funcionament dels botons. És possible que es puguen iniciar varies tasques alhora i que el programa perdi la seva funcionalitat de sèrie.

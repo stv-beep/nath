@@ -343,3 +343,31 @@ a.close.disabled {
   from {transform: rotate(0deg);}
   to { transform: rotate(360deg);}
 }
+
+
+.fa-user-slash {
+  color: red;
+}
+.fa-user-slash:hover {
+  color: black;
+}
+
+
+
+
+/* alerts */
+#alert-success-create{
+  display: none;
+}
+
+#alert-danger-create{
+  display: none;
+}
+
+#alert-success-delete{
+  display: none;
+}
+
+#alert-danger-delete{
+  display: none;
+}

@@ -5,7 +5,7 @@ let msgIniciJornada, msgFinalJornada, tascaNoAcabada, msgError, msgErrorQuery1, 
 let msgRecepDescarga, msgRecepEntrada, msgRecepControl, msgRecepUbicar;
 let msgReopLectura, msgReopEmbolsar, msgReopEtiquetar, msgReopOtros;
 let msgInvCompactar, msgInventariar;
-let msgUserEdited;
+let msgUserEdited, msgUserCreated, msgUserDeleted, msgUserCreateError, msgUserDeleteAdminError;
 
 function translateAlerts(){   
     
@@ -33,8 +33,11 @@ function translateAlerts(){
         msgError = "Sembla que ha hagut un error, per favor, torna-ho a intentar."
         noJornada = "No s'ha trobat cap inici de jornada coincident amb el teu registre.";
         //admin users
-        msgUserEdited = "Usuari editat.";
-
+        msgUserEdited = "Usuari editat satisfactòriament.";
+        msgUserCreated = "Usuari creat satisfactòriament.";
+        msgUserDeleted = "Usuari eliminat satisfactòriament.";
+        msgUserCreateError = "Ha habido un error, puede que el usuario ya exista, o que haya un usuario con el mismo código o DNI."
+        msgUserDeleteAdminError = "No se puede eliminar este usuario ya que es el único administrador registrado ahora mismo."
         
     } else if (locale == 'es'){
         msgIniciJornada = "Jornada inciada con éxito";
@@ -60,7 +63,11 @@ function translateAlerts(){
         msgError = "Ha habido un error, vuelva a intentarlo."
         noJornada = "No se ha encontrado ningún inicio de jornada coincidente con tu registro.";
         //admin users
-        msgUserEdited = "Usuario editado.";
+        msgUserEdited = "Usuario editado satisfactoriamente.";
+        msgUserCreated = "Usuario creado satisfactoriamente.";
+        msgUserDeleted = "Usuario eliminado satisfactoriamente.";
+        msgUserCreateError = "Ha habido un error, puede que el usuario ya exista, o que haya un usuario con el mismo código o DNI."
+        msgUserDeleteAdminError = "No se puede eliminar este usuario ya que es el único administrador registrado ahora mismo."
 
     } else if (locale == 'en'){
         msgIniciJornada = "Work day started succesfully";
@@ -86,7 +93,11 @@ function translateAlerts(){
         msgError = "An error occurred, try again."
         noJornada = "Currently there isn't any work day matching with you.";
         //admin users
-        msgUserEdited = "User edited.";
+        msgUserEdited = "User edited successfuly.";
+        msgUserCreated = "User created successfuly.";
+        msgUserDeleted = "User deleted successfuly.";
+        msgUserCreateError = "Ha habido un error, puede que el usuario ya exista, o que haya un usuario con el mismo código o DNI."
+        msgUserDeleteAdminError = "No se puede eliminar este usuario ya que es el único administrador registrado ahora mismo."
 
     }
 

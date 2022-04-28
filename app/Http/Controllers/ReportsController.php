@@ -162,7 +162,48 @@ class ReportsController extends Controller
         $usuari->id_odoo_tuctuc = $request->id_tuctuc;
         $usuari->administrador = $request->admin;
         $usuari->magatzem = $request->magatzem;
+        $usuari->DNI = $request->dni;
         $usuari->update();
-        
     }
+
+    public function createUser(Request $request){
+
+        $usuari = new User();
+        $usuari->username = $request->username;
+        $usuari->name = $request->name;
+        $usuari->DNI = $request->dni;
+        $usuari->magatzem = $request->magatzem;
+        $usuari->password = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+        $usuari->id_odoo_nath = $request->id_nathCreate;
+        $usuari->id_odoo_tuctuc = $request->id_tuctucCreate;
+        $usuari->save(); 
+
+        $lastUser = User::where(['username'=> $request->username])->latest()->first();
+        if ($lastUser != NULL || $lastUser != '[]') {
+            return response()->json('OK');
+        } else {
+            return response()->json(['message' => 'error message'], 500);
+        }
+    }
+
+    public function deleteUser($user){
+        $u = User::findOrFail($user);
+
+        if ($u->administrador==1){//if administrador
+            $allUsers = User::where(['administrador'=> 1])->get();//all admins
+            if (count($allUsers)<2) {//if only 1 admin
+                return response()->json('no admins');
+            } else {
+                $u->delete(); 
+                return response()->json('OK');
+            }
+
+        } else {
+            $u->delete();
+            return response()->json('OK');
+        }
+        
+
+    }
+    
 }

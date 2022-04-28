@@ -6,6 +6,13 @@ window.onload = function () {
 
   
 $(document).ready( function () {
+
+    $('#alert-success-create').hide();
+    $('#alert-danger-create').hide();
+    $('#alert-success-delete').hide();
+    
+
+
     $('#users tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input class="searchDT" type="text" placeholder="Buscar '+title+'" />' );
@@ -51,7 +58,7 @@ $(document).ready( function () {
 /* modal */
 function modalEditUser(user){
     translateAlerts()
-    document.getElementById('name').innerHTML = user.name;
+    document.getElementById('nameUser').innerHTML = user.name;
     document.getElementById('id').innerHTML = '&nbsp;&nbsp;&nbsp;'+user.id;
     var id = user.id;
     //console.log(id)
@@ -62,12 +69,12 @@ function modalEditUser(user){
             url: "/usuarios/edit/"+id,
             data: { id: id },
             success: function( response ) {
-                console.log(response)
                 $("#identificador").val(response.id)
                 $("#id_nath").val(response.id_odoo_nath)
                 $("#id_tuctuc").val(response.id_odoo_tuctuc)
                 $("#admin").val(response.administrador)
                 $("#magatzem").val(response.magatzem)
+                $("#dni").val(response.DNI)
                 
                 //checking if 1 or 0 for radio check
                 var magatzemRadios = document.getElementsByName('magatzem');
@@ -143,6 +150,7 @@ function updateUser(id){
         magatzem = 0;
     }
 
+    var dniUser = document.getElementById('dni').value;
 
     $.ajax(
         {
@@ -152,10 +160,10 @@ function updateUser(id){
                 id_nath : id_nath,
                 id_tuctuc : id_tuctuc,
                 admin : administrador,
-                magatzem : magatzem
+                magatzem : magatzem,
+                dni : dniUser
              },
             success: function( response ) {
-                console.log(response)
                 $("#alert-message-edit-user").text(msgUserEdited);
                 $("#alert-success")
                 .fadeTo(4000, 1000)
@@ -164,7 +172,7 @@ function updateUser(id){
                 });
                 setInterval(function(){
                     window.location.reload();
-                  }, 500)
+                  }, 700)
             },
             error: function(xhr, textStatus, error){
                 $("#alert-danger-message-final").text(msgError);
@@ -175,4 +183,129 @@ function updateUser(id){
                     });
             }
         });
+}
+
+
+/* create user */
+function modalCreateUser(){
+    translateAlerts()
+    $('#modalCreateUser').modal('show'); 
+
+    $("#createUserBtn").on('click',function(){
+
+        $.ajax(
+            {
+                type: "POST",
+                url: "/createUser",
+                data: $('#createUser').serialize(),
+                success: function( response ) {
+                    console.log(response)
+
+                    if (response == 'OK'){
+                        
+                        $("#alert-message-create-user").text(msgUserCreated);
+                        $("#alert-success-create")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            console.log('unga')
+                            $("#alert-success-create").slideUp(1000);
+                        });
+
+                    //$('#modalCreateUser').modal('hide');
+                    setInterval(function(){
+                    window.location.reload();
+                      }, 500)
+                    } else {
+                        console.log(response.message)
+                        $("#alert-danger-message-create").text(msgError);
+                        $("#alert-danger-create")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-danger-create").slideUp(1000);
+                        });
+                    }
+   
+                },
+                error: function(xhr, textStatus, error){
+                    //console.log(error)
+                    //console.log(textStatus)
+                    //console.log(xhr.responseJSON.message)
+                    $("#alert-danger-message-create").text(msgUserCreateError);
+                        $("#alert-danger-create")
+                        .fadeTo(4000, 1000)
+                        .slideUp(2000, function () {
+                            $("#alert-danger-create").slideUp(2000);
+                        });
+                }
+            });
+    });
+
+
+    $("#closeModalCreate").on('click',function(){
+        $('#modalCreateUser').modal('hide');
+        });
+    $("#closeModalC").on('click',function(){
+        $('#modalCreateUser').modal('hide');
+        });
+}
+
+/* delete user */
+function modalDeleteUser(user) {
+    translateAlerts()
+    document.getElementById('name-user').innerHTML = user.name;
+    var id = user.id;
+    $('#modalDeleteUser').modal('show'); 
+
+    $("#deleteUserBtn").on('click',function(){
+        $.ajaxSetup({
+            headers:
+            { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+        });
+        $.ajax(
+            {
+                type: "DELETE",
+                url: "/deleteUser/"+id,
+                data: {id: id},
+                success: function( response ) {
+                    console.log(response)
+                    if (response == 'OK'){
+                        $("#alert-success-delete").show
+                        $("#alert-message-delete-user").text(msgUserDeleted);
+                        $("#alert-success-delete")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-success-delete").slideUp(1000);
+                        });
+
+                        //$('#modalDeleteUser').modal('hide');
+                        setInterval(function(){
+                            window.location.reload();
+                        }, 500)
+                    } else if (response == 'no admins'){
+                        $("#alert-danger-message-delete").text(msgUserDeleteAdminError);
+                        $("#alert-danger-delete")
+                        .fadeTo(4000, 1000)
+                        .slideUp(2000, function () {
+                            $("#alert-danger-delete").slideUp(2000);
+                        });
+                    }
+                },
+                error: function(xhr, textStatus, error){
+                    $("#alert-danger-message-delete").text(msgError);
+                        $("#alert-danger-delete")
+                        .fadeTo(4000, 1000)
+                        .slideUp(1000, function () {
+                            $("#alert-danger-delete").slideUp(1000);
+                        });
+                }
+            });
+    });
+
+    $("#closeModalDelete").on('click',function(){
+        $('#modalDeleteUser').modal('hide');
+        });
+    $("#closeModalD").on('click',function(){
+        $('#modalDeleteUser').modal('hide');
+        });
+    
 }

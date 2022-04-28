@@ -100,6 +100,10 @@ Route::get('/usuarios/edit/{usuari}', [ReportsController::class, 'editUser'])->n
 Route::put('/updateUser/{usuari}',[ReportsController::class, 'updateUser'])->name('user.update');
 //show all users
 Route::get('/userslist',[ReportsController::class, 'showUsers'])->name('show.users');
+//create user
+Route::post('/createUser',[ReportsController::class, 'createUser'])->name('create.user');
+//delete user
+Route::delete('/deleteUser/{user}',[ReportsController::class, 'deleteUser'])->name('delete.user');
 
 
 //activities
