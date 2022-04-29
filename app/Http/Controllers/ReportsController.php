@@ -170,7 +170,7 @@ class ReportsController extends Controller
 
         $lastUser = User::where(['username'=> $request->username])->latest()->first();
         if ($lastUser != NULL || $lastUser != '[]') {
-            return response()->json('OK');
+            return response()->json(true);
         } else {
             return response()->json(['message' => 'error message'], 500);
         }
@@ -182,15 +182,15 @@ class ReportsController extends Controller
         if ($u->administrador==1){//if administrador
             $allUsers = User::where(['administrador'=> 1])->get();//all admins
             if (count($allUsers)<2) {//if only 1 admin, its you and can't delete yourself
-                return response()->json('no admins');
+                return response()->json(false);
             } else {//if more than one, so you can delete other admin
                 $u->delete(); 
-                return response()->json('OK');
+                return response()->json(true);
             }
 
         } else {
             $u->delete();
-            return response()->json('OK');
+            return response()->json(true);
         }
         
 

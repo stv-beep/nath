@@ -203,16 +203,6 @@
                                         @enderror
                                     </div>
                                 </div>
-        
-                                <div class="row mb-3">
-                                    <label for="magatzem" class="col-md-4 col-form-label text-md-end">{{ __('messages.Warehouse') }}</label>
-                                        <div class="col-md-6">
-                                            <input type="radio" id="magatzem" name="magatzem" value="1">
-                                            <label for="magatzem">{{ __('messages.Yes') }}</label><br>
-                                            <input type="radio" id="magatzem" name="magatzem" value="0">
-                                            <label for="magatzem">No</label><br>
-                                        </div>
-                                </div></div>
 
                                 <div class="row mb-3">
                                     <label for="id_odoo_nath" class="col-md-4 col-form-label text-md-end">ID Odoo Nath</label>
@@ -233,6 +223,16 @@
                                         <small class="form-text text-muted">{{ __("messages.Not required") }}</small>
                                     </div>
                                 </div>
+
+                                <div class="row mb-3">
+                                    <label for="magatzem" class="col-md-4 col-form-label text-md-end">{{ __('messages.Warehouse') }}</label>
+                                        <div class="col-md-6">
+                                            <input type="radio" id="magatzem" name="magatzem" value="1">
+                                            <label for="magatzem">{{ __('messages.Yes') }}</label><br>
+                                            <input type="radio" id="magatzem" name="magatzem" value="0">
+                                            <label for="magatzem">No</label><br>
+                                        </div>
+                                </div></div>
 
                                 <div class="modal-footer">
                                 <small id="usernameHelp" class="form-text text-muted">{{ __("messages.msg Create admin") }}</small>

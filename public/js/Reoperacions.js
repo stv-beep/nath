@@ -102,10 +102,7 @@ function ordersOnLoad(){
                                 $('.msgNoTask')[0].innerHTML= '';
                             }
                             $("#tableReop").load(" #tableReop");
-                                /* window.setTimeout(function(){
-                                    window.location = "/comandes";
-                                }, 1500);
-                                 */
+                            
                             /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                             lecturaCheck.classList.toggle('btn-danger');
                             var embolsar = document.getElementById("Reop10").disabled
@@ -164,10 +161,7 @@ function startEmbolso() {
                         $('.msgNoTask')[0].innerHTML= '';
                     }
                     $("#tableReop").load(" #tableReop");
-                    /* window.setTimeout(function(){
-                        window.location = "/comandes";
-                    }, 1500);
-                     */
+                    
                     /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                     embolsarCheck.classList.toggle('btn-danger');
                     var lectura = document.getElementById("Reop9").disabled
@@ -226,10 +220,7 @@ function startEtiq() {
                         $('.msgNoTask')[0].innerHTML= '';
                     }
                     $("#tableReop").load(" #tableReop");
-                    /* window.setTimeout(function(){
-                        window.location = "/comandes";
-                    }, 1500);
-                     */
+                    
                     /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                     etiquetarCheck.classList.toggle('btn-danger');
                     var lectura = document.getElementById("Reop9").disabled
@@ -288,10 +279,7 @@ function startOtrosReop() {
                         $('.msgNoTask')[0].innerHTML= '';
                     }
                     $("#tableReop").load(" #tableReop");
-                    /* window.setTimeout(function(){
-                        window.location = "/comandes";
-                    }, 1500);
-                     */
+                    
                     /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                     otrosCheck.classList.toggle('btn-danger');
                     var lectura = document.getElementById("Reop9").disabled

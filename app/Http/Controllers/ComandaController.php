@@ -18,21 +18,11 @@ use App\Models\TaskType;
 class ComandaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-       
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create() /* Tenir en compte que la taula 'activitats' engloba a totes les tasques que es completen */
     {
         $user = Auth::user();
         
@@ -46,10 +36,6 @@ class ComandaController extends Controller
                 ->orderBy('activitats.id','desc')->take(10)->get();
 
         return view('activities.comandes',compact('user','tasques'));
-
-        /* jaseando */
-        $tot = Comanda::all();
-        return response()->json($tot, 200);
     }
 
     /**
@@ -58,7 +44,7 @@ class ComandaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request)//preparacion pedido
     {
         /* task type */
         $tipus = TaskType::where(['tipus' => 'Pedidos'])->get();
@@ -111,7 +97,7 @@ class ComandaController extends Controller
             $pedido->update();
             //task finished
 
-        } else {
+        } else {//si es una tasca acabada, en fem una de nova
 
             $nouPedido = new Comanda();
             $nouPedido->treballador=Auth::id();
@@ -144,7 +130,7 @@ class ComandaController extends Controller
     }
 
 
-    public function storeRevPedido(Request $request){
+    public function storeRevPedido(Request $request){//revisio pedido
         /* task type */
         $tipus = TaskType::where(['tipus' => 'Pedidos'])->get();
         $tipus = $tipus[0]->id;
@@ -395,13 +381,8 @@ class ComandaController extends Controller
         $user = Auth::user();
         //tasca where no hi ha total i per tant no esta acabada
 
-
         $taskCheck = Comanda::join('tasques','activitats.tasca', '=','tasques.id')
         ->where(['treballador' => Auth::id()])->latest('activitats.updated_at')->first();
-        /* $id = $taskCheck->id;
-        $task = $taskCheck->tasca; */
-
-        //$taskCheck = Comanda::where(['treballador'=> Auth::id()])->latest('updated_at')->first();
 
         //si no hi ha tasca ó ja esta acabada
         if ($taskCheck == null || $taskCheck->total > 0){
@@ -411,89 +392,4 @@ class ComandaController extends Controller
         }
 
     }
-
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-
-    /* ara mateix ja no s'esta utilitzant degut a que les tasques es poden parar per elles mateixes */
-    public function stopPedidos(Request $request){
-        $user = Auth::user();
-        $horaFinal = Carbon::parse(now())->setTimezone('Europe/Madrid')->format('Y-m-d H:i:s');
-        /* s'hauria de parar totes les tasques, pero millor començar per la ultima */
-        $tascaUltima = Comanda::where(['treballador'=> Auth::id()])->latest('id')->first();
-        if ($tascaUltima->iniciTasca == $tascaUltima->fiTasca){
-        $tascaUltima->fiTasca = $horaFinal;
-            $iniciSegs = strtotime($tascaUltima->iniciTasca);
-            $acabadaSegs = strtotime($tascaUltima->fiTasca);
-            $resta = $acabadaSegs - $iniciSegs;
-            $min = $resta/60;
-            $hores = $min/60;
-            $tascaUltima-> total = $min;
-            $tascaUltima-> fiTasca = $horaFinal;
-            $tascaUltima->update();
-        }
-
-        $tasques = Tasca::all();//s'hauria de fer un inner join per a mostrar el nom de la tasca i no la id
-        /* SELECT * FROM `pedidos` INNER JOIN tasques ON activitats.tasca = tasques.id
-        where activitats.id = 127 */
-        $pedidos = Comanda::join('tasques','activitats.tasca', '=', 'tasques.id')
-        ->where(['treballador' =>  Auth::id()])->orderBy('activitats.id','desc')->take(10)->get();//agafo els 10 ultims
-    
-        return view('activities.comandes',compact('user','pedidos','tasques'));
-    }
-
-
-    /* accio inutil ara mateix */
-    public function getTasques(Request $request){
-
-        $tasks = Tasca::select('id','tasca')->get();
-
-        return response()->json($tasks,200);
-    }
-
 }

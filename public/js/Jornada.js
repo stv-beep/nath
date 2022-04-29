@@ -169,19 +169,3 @@ function checkLastTorn(){
         });
                 
 }
-
-
-
-
-
-
-
-/* function checkLastTorn(){
-    if (document.getElementsByTagName('td')[1] == undefined){
-        inic.disabled = !inic;
-    } else if (document.getElementsByTagName('td')[1].innerHTML == ""){//si no s'ha acabat el torn (i no hi ha total)
-        f.disabled = !f;
-    } else if (document.getElementsByTagName('td')[1].innerText.length > 0) {
-        inic.disabled = !inic;
-    }
-} */

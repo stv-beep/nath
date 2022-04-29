@@ -62,7 +62,7 @@ function ordersOnLoad(){
     /* funcions de COMANDES */
     function startPrepComanda() {
       translateAlerts();
-      var c = document.getElementById('o1').value;
+      var c = document.getElementById('o1').value;//on es guardaran les coordenades
           
           $.ajaxSetup({
               headers: {
@@ -99,10 +99,7 @@ function ordersOnLoad(){
                             $('.msgNoTask')[0].innerHTML= '';
                             }
                             $("#tableComandes").load(" #tableComandes");
-                              /* window.setTimeout(function(){
-                                  window.location = "/comandes";
-                              }, 1500);
-                               */
+                            
                           /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                           prepPedidoCheck.classList.toggle('btn-danger');
                           var revPedido = document.getElementById("Order2").disabled;
@@ -159,9 +156,7 @@ function ordersOnLoad(){
                                 $('.msgNoTask')[0].innerHTML= '';
                             }
                             $("#tableComandes").load(" #tableComandes");
-                                  /* window.setTimeout(function(){
-                                      window.location = "/comandes";
-                                  }, 1500); */
+                            
                           /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                           revPedidoCheck.classList.toggle('btn-danger');
                           var prepPedido = document.getElementById("Order1").disabled;
@@ -215,9 +210,7 @@ function ordersOnLoad(){
                         $('.msgNoTask')[0].innerHTML= '';
                         }
                         $("#tableComandes").load(" #tableComandes");
-                          /* window.setTimeout(function(){
-                              window.location = "/comandes";
-                          }, 1500); */
+                        
                   /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                   expedPedidoCheck.classList.toggle('btn-danger');
                   var prepPedido = document.getElementById("Order1").disabled;
@@ -270,9 +263,7 @@ function ordersOnLoad(){
                         $('.msgNoTask')[0].innerHTML= '';
                         }
                         $("#tableComandes").load(" #tableComandes");
-                          /* window.setTimeout(function(){
-                              window.location = "/comandes";
-                          }, 1500); */
+                        
                       /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                       SAFPedidoCheck.classList.toggle('btn-danger');
                       var prepPedido = document.getElementById("Order1").disabled;
@@ -286,53 +277,4 @@ function ordersOnLoad(){
               }
           }
       )
-  };
-
-  /**
-   * funcio que NO S'ESTA UTILITZANT ara mateix 
-   * ja que les tasques es paren amb el mateix boto,
-   * de moment la deixo per si de cas es necessita en un futur
-   * @return [type]
-   */
-  function stopComandes(){
-      
-              $.ajax(
-                  {
-                          type: "POST",
-                          url: "/comandes/stop",
-                          data:$('#formStopComandes').serialize(),
-                          success: function( data ) {
-                              
-                              if (document.getElementsByTagName("td")[1].innerHTML.includes("circle-notch")){
-                              $("#task-message-inici").text("S'ha parat amb èxit.");
-                              $("#alert-success")
-                              .fadeTo(4000, 1000)
-                              .slideUp(1000, function () {
-                                  $("#alert-success").slideUp(1000);
-                              });
-                              $("#tableComandes").load(" #tableComandes");
-                                  window.setTimeout(function(){
-                                      window.location = "/comandes";
-                                  }, 1500);
-                              } else {
-                                  $("#alert-danger-message-final").text("No hi ha cap tasca per a parar.");
-                                  $(".cronometro").hide();
-                                  $("#alert-danger")
-                                  .fadeTo(4000, 1000)
-                                  .slideUp(1000, function () {
-                                      $("#alert-danger").slideUp(1000);
-                                  });
-                              }
-                          },//si no s'ha trobat cap registre, retornara error amb alert
-                          error: function(xhr, textStatus, error){
-                              $("#alert-danger-message-final").text("No hi ha cap tasca per a parar.");
-                              $(".cronometro").hide();
-                              $("#alert-danger")
-                              .fadeTo(4000, 1000)
-                              .slideUp(1000, function () {
-                                  $("#alert-danger").slideUp(1000);
-                              });
-                          }
-                  }
-              )
   };

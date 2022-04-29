@@ -32,7 +32,6 @@ Auth::routes();#https://linuxhint.com/laravel-new-authroutes/
 //el home redirigeix al login si no s'està loguejat
 Route::get('/',[ HomeController::class, 'index']);
 //HOME
-//Route::view('/home','inici');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth:sanctum','verified']], function() {
 //JORNADA
@@ -49,8 +48,6 @@ Route::get('/comandes', [ComandaController::class,'create'])->name('comandes.for
 Route::post('/comandes',[ComandaController::class,'store'])->name('comandes.store');
 //store Revisio pedido
 Route::post('/comandes/revisio',[ComandaController::class,'storeRevPedido'])->name('revComandes.store');
-//stop pedidos
-Route::post('/comandes/stop',[ComandaController::class,'stopPedidos'])->name('stop.pedidos');
 //store expedicio pedidos
 Route::post('/comandes/expedicio',[ComandaController::class,'storeExpedPedido'])->name('expedComandes.store');
 //store saf pedidos
@@ -59,8 +56,6 @@ Route::post('/comandes/saf',[ComandaController::class,'storeSAFPedido'])->name('
 Route::get('/comandes/check',[ComandaController::class,'checkTasques'])->name('check.comandes');
 //check torns
 Route::get('/jornada/check',[TornController::class,'checkTorn'])->name('check.torns');
-//llistar totes les tasques disponibles
-Route::get('/tasques',[ComandaController::class, 'getTasques'])->name('get.tasques');
 
 //RECEPCIONS
 Route::get('/recepcions',[RecepcioController::class,'index'])->name('recepcions.form');
@@ -105,11 +100,6 @@ Route::post('/createUser',[ReportsController::class, 'createUser'])->name('creat
 //delete user
 Route::delete('/deleteUser/{user}',[ReportsController::class, 'deleteUser'])->name('delete.user');
 
-
-//activities
-Route::post('/activity/store',[ActivityController::class,'storeActivity'])->name('activity.store');
-
+//language
 Route::get('/set_language/{lang}', [App\Http\Controllers\Controller::class, 'set_language'])->name('set_language');
 App::setLocale("es");
-
-//https://www.youtube.com/watch?v=eRYz62Cx0Wg&ab_channel=Inform%C3%A1ticaDP

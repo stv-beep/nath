@@ -96,10 +96,7 @@ function ordersOnLoad(){
                                 $('.msgNoTask')[0].innerHTML= '';
                             }
                             $("#tableInv").load(" #tableInv");
-                                /* window.setTimeout(function(){
-                                    window.location = "/comandes";
-                                }, 1500);
-                                 */
+                                
                             /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                             compactarCheck.classList.toggle('btn-danger');
                             var inventariar = document.getElementById("Inv14").disabled
@@ -153,10 +150,7 @@ function startInventariar() {
                         $('.msgNoTask')[0].innerHTML= '';
                     }
                     $("#tableInv").load(" #tableInv");
-                    /* window.setTimeout(function(){
-                        window.location = "/comandes";
-                    }, 1500);
-                     */
+                    
                     /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                     inventariarCheck.classList.toggle('btn-danger');
                     var compactar = document.getElementById("Inv13").disabled

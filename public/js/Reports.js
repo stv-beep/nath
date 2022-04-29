@@ -24,7 +24,7 @@ $(document).ready(function() {
         $(this).html( '<input class="searchDT" type="text" placeholder="Buscar '+title+'" />' );
     } );
     var table = $('#reports').DataTable( {
-        dom: 'lBfrtip', //https://datatables.net/examples/basic_init/dom.html
+        dom: 'lBfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
@@ -126,8 +126,6 @@ $(document).ready(function() {
         ],
            
     } );
-
-    //new $.fn.dataTable.FixedHeader( table );
 
 
     $('#btn-reload').on('click', function(){
@@ -626,22 +624,3 @@ function exportTableToExcel(tableID, filename = ''){
         downloadLink.click();
     }
 }
-
-
-
-/* function html_table_to_excel(div)
-    {
-        var data = document.getElementById(div);
-
-        var file = XLSX.utils.table_to_book(data, {sheet: "sheet1"});
-
-        XLSX.write(file, { bookType: 'xlsx', bookSST: true, 'xlsx': 'base64' });
-
-        XLSX.writeFile(file, 'file.' + 'xlsx');
-    } */
-
-    /* const export_button = document.getElementById('export_button');
-
-    export_button.addEventListener('click', () =>  {
-        html_table_to_excel('xlsx',div);
-    }); */

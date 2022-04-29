@@ -22,11 +22,6 @@ class ReoperacionsController extends Controller
     {
         $user = Auth::user();
 
-        /* Suposo que la taula de "comandes" hauria de canviar de nom per a englobar totes les tasques
-        i d'esta forma a cada tasca posar un camp de tipus de tasca per a aixi imprimir lo que toca a cada una.
-        Aixi, quan s'hagi de comprovar si hi ha alguna tasca inacabada, sera dins de la mateixa taula, i no se
-        tindra que mirar a cadascuna de les probables taules (comandes, recepcions, reoperacions, inventari) */
-
         /* task type */
         $tipus = TaskType::where(['tipus' => 'Reoperaciones'])->get();
         $tipus = $tipus[0]->id;
@@ -37,10 +32,6 @@ class ReoperacionsController extends Controller
                 ->orderBy('activitats.id','desc')->take(10)->get();
 
         return view('activities.reoperacions',compact('user','tasques'));
-
-        //jaseando
-        $tot = Reoperacio::all();
-        return response()->json($tot, 200);
     }
 
 

@@ -200,7 +200,7 @@ function modalCreateUser(){
                 data: $('#createUser').serialize(),
                 success: function( response ) {
                    
-                    if (response == 'OK'){
+                    if (response == true){
                         
                         $("#alert-message-create-user").text(msgUserCreated);
                         $("#alert-success-create")
@@ -262,7 +262,7 @@ function modalDeleteUser(user) {
                 url: "/deleteUser/"+id,
                 data: {id: id},
                 success: function( response ) {
-                    if (response == 'OK'){
+                    if (response == true){
                         $("#alert-message-delete-user").text(msgUserDeleted);
                         $("#alert-success-delete")
                         .fadeTo(4000, 1000)
@@ -274,7 +274,7 @@ function modalDeleteUser(user) {
                         setInterval(function(){
                             window.location.reload();
                         }, 500)
-                    } else if (response == 'no admins'){
+                    } else if (response == false){
                         $("#alert-danger-message-delete").text(msgUserDeleteAdminError);
                         $("#alert-danger-delete")
                         .fadeTo(4000, 1000)

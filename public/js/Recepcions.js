@@ -103,10 +103,7 @@ function ordersOnLoad(){
                                 $('.msgNoTask')[0].innerHTML= '';
                             }
                             $("#tableRecep").load(" #tableRecep");
-                                /* window.setTimeout(function(){
-                                    window.location = "/comandes";
-                                }, 1500);
-                                 */
+                            
                             /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                             descargaCheck.classList.toggle('btn-danger');
                             var entrada = document.getElementById("Recp6").disabled
@@ -164,10 +161,7 @@ function ordersOnLoad(){
                                     $('.msgNoTask')[0].innerHTML= '';
                                 }
                                 $("#tableRecep").load(" #tableRecep");
-                                    /* window.setTimeout(function(){
-                                        window.location = "/comandes";
-                                    }, 1500);
-                                     */
+                                
                                 /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                                 entradaCheck.classList.toggle('btn-danger');
                                 var descarga = document.getElementById("Recp5").disabled
@@ -228,10 +222,7 @@ function startControlCalidad() {
                         $('.msgNoTask')[0].innerHTML= '';
                     }
                     $("#tableRecep").load(" #tableRecep");
-                    /* window.setTimeout(function(){
-                        window.location = "/comandes";
-                    }, 1500);
-                     */
+                    
                     /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                     calidadCheck.classList.toggle('btn-danger');
                     var descarga = document.getElementById("Recp5").disabled
@@ -292,10 +283,7 @@ function startUbicar() {
                         $('.msgNoTask')[0].innerHTML= '';
                     }
                     $("#tableRecep").load(" #tableRecep");
-                    /* window.setTimeout(function(){
-                        window.location = "/comandes";
-                    }, 1500);
-                     */
+                    
                     /* comprovant si els botons estan disabled o no per a deshabilitarlos o no */
                     ubicarCheck.classList.toggle('btn-danger');
                     var descarga = document.getElementById("Recp5").disabled

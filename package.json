@@ -1,6 +1,6 @@
 {   
     "name": "nath",
-    "version": "0.9.8",
+    "version": "0.9.9",
     "private": true,
     "license" : "MIT License",
     "scripts": {
