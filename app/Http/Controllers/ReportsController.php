@@ -158,6 +158,12 @@ class ReportsController extends Controller
 
     public function createUser(Request $request){
 
+        $searchingU = User::where(['username'=> $request->username])->get();
+        $searchingDNI = User::where(['DNI'=> $request->dni])->get();
+        $u = count($searchingU);
+        $dni = count($searchingDNI);
+        if ($u < 1 & $dni < 1){//si username i dni no existeixen
+
         $usuari = new User();
         $usuari->username = $request->username;
         $usuari->name = $request->name;
@@ -169,10 +175,13 @@ class ReportsController extends Controller
         $usuari->save(); 
 
         $lastUser = User::where(['username'=> $request->username])->latest()->first();
-        if ($lastUser != NULL || $lastUser != '[]') {
-            return response()->json(true);
-        } else {
-            return response()->json(['message' => 'error message'], 500);
+            if ($lastUser != NULL || $lastUser != '[]') {
+                return response()->json(true);
+            } else {
+                return response()->json(['message' => 'error message'], 500);
+            }
+        } else {//si username i dni ja existeixen
+            return response()->json(false);
         }
     }
 

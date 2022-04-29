@@ -72,6 +72,12 @@
                                 </div></div>
 
                                 <div class="row mb-3">
+                                    <label class="col-md-4 col-form-label text-md-end">DNI</label>
+                                    <div class="col-md-6"><input id="dni" name="dni" class="form-control" 
+                                        type="text" autofocus>
+                                </div></div>
+
+                                <div class="row mb-3">
                                     <label for="magatzem" class="col-md-4 col-form-label text-md-end">{{ __('messages.Warehouse') }}</label>
                                         <div class="col-md-6">
                                             <input type="radio" id="magatzemSI" name="magatzem" value="1">
@@ -89,12 +95,6 @@
                                             <input type="radio" id="adminNO" name="admin" value="0">
                                             <label for="magatzem">No</label><br>
                                         </div>
-                                </div></div>
-
-                                <div class="row mb-3">
-                                    <label class="col-md-4 col-form-label text-md-end">DNI</label>
-                                    <div class="col-md-6"><input id="dni" name="dni" class="form-control" 
-                                        type="text" autofocus>
                                 </div></div>
 
                                 <div class="modal-footer">

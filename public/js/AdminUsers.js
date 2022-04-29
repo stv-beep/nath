@@ -199,7 +199,6 @@ function modalCreateUser(){
                 url: "/createUser",
                 data: $('#createUser').serialize(),
                 success: function( response ) {
-                   
                     if (response == true){
                         
                         $("#alert-message-create-user").text(msgUserCreated);
@@ -213,9 +212,9 @@ function modalCreateUser(){
                     setInterval(function(){
                     window.location.reload();
                       }, 500)
-                    } else {
+                    } else {//user existent o repetit
                         
-                        $("#alert-danger-message-create").text(msgError);
+                        $("#alert-danger-message-create").text(msgUserCreateError);
                         $("#alert-danger-create")
                         .fadeTo(4000, 1000)
                         .slideUp(1000, function () {
@@ -225,7 +224,7 @@ function modalCreateUser(){
    
                 },
                 error: function(xhr, textStatus, error){
-                    $("#alert-danger-message-create").text(msgUserCreateError);
+                    $("#alert-danger-message-create").text(msgError);
                         $("#alert-danger-create")
                         .fadeTo(4000, 1000)
                         .slideUp(2000, function () {
