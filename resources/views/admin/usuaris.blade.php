@@ -312,28 +312,6 @@
                         </tfoot>
                     </table>
 
-                    {{-- <p class="h4 text-center" id="titol">{{ __('messages.Users') }}</p>
-                    <table id="users" class="display compact hover row-border responsive nowrap" style="width:100%">
-                        <thead class="thead-dark">
-                        <tr style="text-align: center">
-                            <th>ID</th>
-                            <th scope="col">{{ __('messages.Worker') }}</th>
-                            <th scope="col">DNI</th>
-                            <th scope="col">ID Odoo Nath</th>
-                            <th scope="col">ID Odoo TucTuc</th>
-                            <th scope="col">{{ __('messages.Warehouse') }}</th>
-                            <th scope="col">{{ __('messages.Admin') }}</th>
-                            <th scope="col">{{ __('messages.Edit') }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        <tr style="text-align: center">
-                            
-                        </tr>
- 
-                        </tbody>
-                    </table> --}}
                 </div>
                 
             </div>

@@ -55,7 +55,7 @@ Ara mateix, en versió 0.9.8, sembla que té una certa estabilitat.
 - Icones d'idioma.
 
 
-### Errors i bugs (versió 0.9.7)
+### Errors i bugs (versió 0.9.8)
 - La geolocalització no funciona sense HTTPS.
 - Si s'inicia una tasca i es finalitza molt ràpid (cosa antinatural), es pot arribar a buguejar i deixar penjada una tasca inacabada mentres s'ha començat una de nova.
 - Desactivant el JS segurament es pot trencar el funcionament dels botons. És possible que es puguen iniciar varies tasques alhora i que el programa perdi la seva funcionalitat de sèrie.
