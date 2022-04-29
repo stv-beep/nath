@@ -99,6 +99,8 @@ return [
     de la base de dades per mantenir la informació de registre de jornades.",
     'Delete' => "Eliminar",
     'Not required' => "No obligatori per a crear.",
+    'msg Create admin' => "Si vol crear un administrador, primer heu de crear l'usuari i 
+    després editar-lo per posar-lo al rol d'administrador.",
 
     /* alerts */
     'Working day started' => "Jornada inciada amb èxit",

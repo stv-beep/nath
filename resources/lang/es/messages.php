@@ -95,6 +95,8 @@ return [
     de la base de datos para mantener su información de registro de jornadas.",
     'Delete' => "Eliminar",
     'Not required' => "No obligatorio para crear.",
+    'msg Create admin' => "Si quiere crear un administrador, deberá crear primero el usuario y 
+    luego editarlo para ponerlo en el rol de administrador.",
 
 
     'Preparación pedido' => 'Preparación pedido',

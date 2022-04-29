@@ -27,7 +27,6 @@ function ordersOnLoad(){
                 url: "/comandes/check",
                 success: function(response){
 
-                  console.log(response)
                   if (response != 0) {
                     var taskID = response.id;
                     var taskName = response.tasca;
@@ -46,28 +45,6 @@ function ordersOnLoad(){
                     expedPedidoCheck.disabled = false;
                     SAFPedidoCheck.disabled = false;
                   }
-
-                  /* no era la millor forma pero no m'avergonyeixo */
-
-                  /* if (response == 1){
-                    prepPedidoCheck.disabled = !prepPedidoCheck;
-                    prepPedidoCheck.classList.toggle('btn-danger');
-                  } else if (response == 2){
-                    revPedidoCheck.disabled = !revPedidoCheck;
-                    revPedidoCheck.classList.toggle('btn-danger');
-                  } else if (response == 3){
-                    expedPedidoCheck.disabled = !expedPedidoCheck;
-                    expedPedidoCheck.classList.toggle('btn-danger');
-                  } else if (response == 4){
-                    SAFPedidoCheck.disabled = !SAFPedidoCheck;
-                    SAFPedidoCheck.classList.toggle('btn-danger');
-                  } else {
-                    prepPedidoCheck.disabled = !prepPedidoCheck;
-                    revPedidoCheck.disabled = !revPedidoCheck;
-                    expedPedidoCheck.disabled = !expedPedidoCheck;
-                    SAFPedidoCheck.disabled = !SAFPedidoCheck;
-                  } */
-
                 },
                 error: function(xhr, textStatus, error){
                   $("#alert-danger-message-final").text(msgError);
@@ -77,29 +54,8 @@ function ordersOnLoad(){
                       $("#alert-danger").slideUp(1000);
                   });
                 }
-            });
-              
+            });     
     }
-
-    /* aixo si que no era la millor forma pero no m'avergonyeixo */
-
-    /* function checkLastTask(){
-        if (document.getElementsByTagName('td').length == 0){
-            prepPedidoCheck.disabled = !prepPedidoCheck;
-            revPedidoCheck.disabled = !revPedidoCheck;
-            expedPedidoCheck.disabled = !expedPedidoCheck;
-            SAFPedidoCheck.disabled = !SAFPedidoCheck;
-        } else if (!document.getElementsByTagName("td")[1].innerHTML.includes("circle-notch")){
-            //<i class="fas fa-solid fa-circle-notch fa-spin"></i>
-            console.log("ja esta acabat");
-            prepPedidoCheck.disabled = !prepPedidoCheck;
-            revPedidoCheck.disabled = !revPedidoCheck;
-            expedPedidoCheck.disabled = !expedPedidoCheck;
-            SAFPedidoCheck.disabled = !SAFPedidoCheck;
-        }
-    } */
-
-
 
 /* SCRIPTS AJAX REQUESTS  */  
 
@@ -379,4 +335,4 @@ function ordersOnLoad(){
                           }
                   }
               )
-  };   
+  };

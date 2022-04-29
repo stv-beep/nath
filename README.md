@@ -1,8 +1,12 @@
-# Aplicació per a fitxatges Nath v0.9.7
+# Aplicació per a fitxatges Nath v0.9.8
 #### Aleix Algueró, 2022
 ## Sobre l'aplicació
 App per a realitzar fitxatges d'inici i final de jornades i torns a l'empresa, a més de fitxatges de certes tasques concretes de magatzem. Aquests fitxatges (torns, jornades senceres i tasques) podran ser llistats pel propi treballador des de dins de l'aplicació. I l'administrador podrà llistar totes les jornades de tothom i fer consultes des d'una taula dinàmica. A més, l'administrador podrà canviar certs camps dels usuaris, crear-ne de nous i eliminar-los.
-Ara mateix, en versió 0.9.7, sembla que té una certa estabilitat.
+Ara mateix, en versió 0.9.8, sembla que té una certa estabilitat.
+
+### Update 0.9.8
+- Corregit error de momentjs.
+- Corregit error de traduccions.
 
 ### Update 0.9.7
 - Correcció de traduccions.
@@ -66,6 +70,9 @@ Ara mateix, en versió 0.9.7, sembla que té una certa estabilitat.
 #### A dins del directori del projecte
 ```
 composer install
+```
+```
+npm install
 ```
 ```
 cp .env.example .env

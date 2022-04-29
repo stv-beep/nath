@@ -7,7 +7,6 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/fixedheader/3.2.2/js/dataTables.fixedHeader.min.js"></script>
 <script src="{{ asset('js/AdminUsers.js') }}" defer></script>
-<script src="{{ asset('js/Translate.js') }}" defer></script>
 <script src="https://cdn.datatables.net/plug-ins/1.10.19/api/sum().js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 
@@ -233,6 +232,10 @@
                                         type="text" autofocus>
                                         <small class="form-text text-muted">{{ __("messages.Not required") }}</small>
                                     </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                <small id="usernameHelp" class="form-text text-muted">{{ __("messages.msg Create admin") }}</small>
                                 </div>
 
                                 <div class="modal-footer">

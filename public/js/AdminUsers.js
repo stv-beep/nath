@@ -169,6 +169,7 @@ function updateUser(id){
                 .slideUp(1000, function () {
                     $("#alert-success").slideUp(1000);
                 });
+                //no faig un modal(hide) ja que allavons no apareix l'alert
                 setInterval(function(){
                     window.location.reload();
                   }, 700)
@@ -208,7 +209,7 @@ function modalCreateUser(){
                             $("#alert-success-create").slideUp(1000);
                         });
 
-                    //$('#modalCreateUser').modal('hide');
+                    //no faig un modal(hide) ja que allavons no apareix l'alert
                     setInterval(function(){
                     window.location.reload();
                       }, 500)
@@ -262,7 +263,6 @@ function modalDeleteUser(user) {
                 data: {id: id},
                 success: function( response ) {
                     if (response == 'OK'){
-                        $("#alert-success-delete").show
                         $("#alert-message-delete-user").text(msgUserDeleted);
                         $("#alert-success-delete")
                         .fadeTo(4000, 1000)
@@ -270,7 +270,7 @@ function modalDeleteUser(user) {
                             $("#alert-success-delete").slideUp(1000);
                         });
 
-                        //$('#modalDeleteUser').modal('hide');
+                        //no faig un modal(hide) ja que allavons no apareix l'alert
                         setInterval(function(){
                             window.location.reload();
                         }, 500)

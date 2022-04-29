@@ -100,16 +100,6 @@ class ReportsController extends Controller
 
     public function getEmployees(Request $request){
 
-        //$employee = User::all();
-        /* $employees = User::select('id',"name")
-        ->where("name","LIKE","%{$request->input('query')}%")
-        ->get();
-
-        return response()->json($employees); */
-
-
-        ###versio 2
-
         $query = $request->get('term','');
 
         $employees=User::where('name','LIKE','%'.$query.'%')->get();
@@ -191,9 +181,9 @@ class ReportsController extends Controller
 
         if ($u->administrador==1){//if administrador
             $allUsers = User::where(['administrador'=> 1])->get();//all admins
-            if (count($allUsers)<2) {//if only 1 admin
+            if (count($allUsers)<2) {//if only 1 admin, its you and can't delete yourself
                 return response()->json('no admins');
-            } else {
+            } else {//if more than one, so you can delete other admin
                 $u->delete(); 
                 return response()->json('OK');
             }

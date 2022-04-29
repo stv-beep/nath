@@ -94,6 +94,8 @@ return [
     in order to maintain their work registration information.",
     'Delete' => "Delete",
     'Not required' => "Not required.",
+    'msg Create admin' => "If you want to create an admin, you will need to first create the user 
+    and then edit him to put in the admin role.",
 
     'Preparación pedido' => 'Order preparation',
     'Revisión pedido' => 'Order review',
